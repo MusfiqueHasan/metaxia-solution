@@ -6,5 +6,8 @@
     "build": "pnpm -r build",
     "test": "pnpm -r test"
   },
-  "engines": { "node": ">=20" }
+  "engines": { "node": ">=20" },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
 }
