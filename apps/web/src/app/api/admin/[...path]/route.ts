@@ -17,6 +17,9 @@ const ALLOWED_ROOTS = new Set([
 
 async function proxy(req: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
   const { path } = await params;
+  if (path.some((seg) => seg === '' || seg === '.' || seg === '..')) {
+    return NextResponse.json({ message: 'not found' }, { status: 404 });
+  }
   if (!ALLOWED_ROOTS.has(path[0])) {
     return NextResponse.json({ message: 'not found' }, { status: 404 });
   }

@@ -8,9 +8,14 @@ export const setToken = (t: string) => localStorage.setItem(KEY, t);
 export const clearToken = () => localStorage.removeItem(KEY);
 
 export async function adminFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
+  const token = getToken();
   const res = await fetch(`/api/admin${path}`, {
     ...init,
-    headers: { 'content-type': 'application/json', authorization: `Bearer ${getToken()}`, ...init.headers },
+    headers: {
+      'content-type': 'application/json',
+      ...(token ? { authorization: `Bearer ${token}` } : {}),
+      ...init.headers,
+    },
   });
   if (res.status === 401) {
     clearToken();

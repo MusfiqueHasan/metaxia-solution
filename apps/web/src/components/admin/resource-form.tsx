@@ -66,7 +66,6 @@ function serialize(fields: FieldDef[], state: FormState): Record<string, unknown
     } else if (field.kind === 'date') {
       const iso = toIsoStringOrUndefined(String(value));
       if (iso) payload[field.name] = iso;
-      else if (!field.optional) payload[field.name] = undefined;
     } else {
       payload[field.name] = value;
     }
@@ -144,15 +143,20 @@ export function ResourceForm({ def, initial }: { def: ResourceDef; initial?: Row
                 required={!field.optional}
               />
             ) : field.kind === 'date' ? (
-              <input
-                id={field.name}
-                type="datetime-local"
-                value={String(state[field.name] ?? '')}
-                onChange={(e) => setField(field.name, e.target.value)}
-                disabled={submitting}
-                className={inputClass}
-                required={!field.optional}
-              />
+              <>
+                <input
+                  id={field.name}
+                  type="datetime-local"
+                  value={String(state[field.name] ?? '')}
+                  onChange={(e) => setField(field.name, e.target.value)}
+                  disabled={submitting}
+                  className={inputClass}
+                  required={!field.optional}
+                />
+                {field.optional && isEdit ? (
+                  <p className="mt-1.5 text-xs text-ink-soft">Leave blank to keep the current value.</p>
+                ) : null}
+              </>
             ) : (
               <input
                 id={field.name}
