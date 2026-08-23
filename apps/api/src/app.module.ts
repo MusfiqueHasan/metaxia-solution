@@ -5,6 +5,7 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { AppController } from './app.controller';
 import { PrismaModule } from './prisma/prisma.module';
 import { ContentModule } from './content/content.module';
+import { InboundModule } from './inbound/inbound.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ContentModule } from './content/content.module';
     ThrottlerModule.forRoot([{ ttl: 60_000, limit: 20 }]),
     PrismaModule,
     ContentModule,
+    InboundModule,
   ],
   controllers: [AppController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
