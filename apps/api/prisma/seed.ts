@@ -44,7 +44,7 @@ async function main() {
       {
         slug: 'mobile-apps',
         title: 'Mobile Apps',
-        icon: 'smartphone',
+        icon: 'phone',
         order: 4,
         excerpt: 'Native and cross-platform mobile apps built for reliability at scale.',
         body: 'We design and build iOS and Android applications using React Native and native Swift or Kotlin when performance demands it. Every release goes through device-lab testing across a range of screen sizes, OS versions, and network conditions before it reaches your users. We set up crash reporting, analytics, and phased rollouts so issues surface early and rollbacks are painless. Our mobile practice also covers offline-first data sync and push notification infrastructure for apps that need to work anywhere.',
@@ -52,7 +52,7 @@ async function main() {
       {
         slug: 'ai-integration',
         title: 'AI Integration',
-        icon: 'sparkles',
+        icon: 'spark',
         order: 5,
         excerpt: 'Practical AI features woven into your existing product, not bolted on as a demo.',
         body: "We help teams identify where large language models and machine learning actually move the needle, then ship production-grade integrations rather than one-off prototypes. Our work spans retrieval-augmented search, document extraction, customer support copilots, and internal automation tools. We pay close attention to cost per request, latency, and evaluation pipelines so your AI features stay reliable as usage grows. Every integration ships with guardrails, logging, and a clear fallback path for when a model call fails or returns low-confidence output.",
@@ -60,7 +60,7 @@ async function main() {
       {
         slug: 'seo-optimization',
         title: 'SEO Optimization',
-        icon: 'trending-up',
+        icon: 'chart',
         order: 6,
         excerpt: 'Technical and content SEO that turns organic search into a growth channel.',
         body: 'We start with a full technical audit covering site speed, crawlability, structured data, and Core Web Vitals, then fix the issues holding your rankings back. Our content strategy pairs keyword research with a realistic publishing cadence your team can actually sustain. We track rankings, organic traffic, and conversion rate together, not vanity metrics in isolation. Most engagements include a quarterly roadmap review so your SEO investment keeps compounding instead of plateauing after the first few wins.',

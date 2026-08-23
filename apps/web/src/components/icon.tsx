@@ -1,6 +1,8 @@
+import type { ReactNode } from 'react';
+
 export type IconKey = 'cloud' | 'code' | 'shield' | 'phone' | 'spark' | 'chart';
 
-const paths: Record<IconKey, React.ReactNode> = {
+const paths: Record<IconKey, ReactNode> = {
   cloud: (
     <path
       d="M7.5 18.5h9a3.75 3.75 0 0 0 .5-7.47 5.25 5.25 0 0 0-10.13-1.9A4.25 4.25 0 0 0 7.5 18.5Z"

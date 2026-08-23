@@ -14,7 +14,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
       <div className="mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4 lg:px-8">
         {items.map((item) => (
           <figure
-            key={`${item.author}-${item.company}`}
+            key={item.id}
             className="flex w-[300px] shrink-0 snap-start flex-col justify-between rounded-3xl border border-ink/10 bg-surface-alt p-8 sm:w-[380px]"
           >
             <span aria-hidden="true" className="font-display text-4xl leading-none text-accent">
