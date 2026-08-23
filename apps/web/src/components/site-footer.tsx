@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Container } from '@/components/container';
+import { NewsletterForm } from '@/components/newsletter-form';
 import { site, footerLinks } from '@/lib/site';
 
 export function SiteFooter() {
@@ -25,26 +26,7 @@ export function SiteFooter() {
             <p className="mt-4 text-sm leading-relaxed text-white/60">
               Notes on shipping software, sent occasionally.
             </p>
-            {/* Wired up as a client component in Task 13. */}
-            <form className="mt-4 flex gap-2" aria-disabled="true">
-              <label htmlFor="newsletter-email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="newsletter-email"
-                type="email"
-                disabled
-                placeholder="you@company.com"
-                className="w-full min-w-0 rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/40 disabled:cursor-not-allowed"
-              />
-              <button
-                type="submit"
-                disabled
-                className="shrink-0 rounded-full bg-accent px-4 py-2.5 text-sm font-medium text-white disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                Sign up
-              </button>
-            </form>
+            <NewsletterForm />
           </div>
         </div>
 
