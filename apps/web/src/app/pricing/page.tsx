@@ -26,11 +26,11 @@ export default async function PricingPage() {
             <div className="grid gap-6 lg:grid-cols-3">
               {plans.map((plan) => (
                 <div
-                  key={plan.name}
-                  className={`relative flex flex-col rounded-3xl border p-8 ${
+                  key={plan.id}
+                  className={`relative flex flex-col rounded-3xl bg-surface-alt ${
                     plan.highlighted
-                      ? 'border-accent bg-surface-alt shadow-[0_0_0_1px_var(--color-accent)]'
-                      : 'border-ink/10 bg-surface-alt'
+                      ? 'border-2 border-accent p-[31px]'
+                      : 'border border-ink/10 p-8'
                   }`}
                 >
                   {plan.highlighted ? (

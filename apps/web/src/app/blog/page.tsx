@@ -40,9 +40,10 @@ export default async function BlogPage() {
                   href={`/blog/${post.slug}`}
                   className="group flex flex-col rounded-3xl border border-ink/10 bg-surface-alt p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
                 >
-                  <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.15em] text-accent">
-                    <span>{post.category}</span>
-                    <span className="h-1 w-1 rotate-45 bg-accent/50" aria-hidden="true" />
+                  <div className="flex items-center gap-3 text-xs">
+                    <span className="rounded-full bg-accent-soft px-3 py-1 font-semibold uppercase tracking-wide text-accent">
+                      {post.category}
+                    </span>
                     <time
                       dateTime={post.publishedAt}
                       className="font-normal tracking-normal text-ink-soft"

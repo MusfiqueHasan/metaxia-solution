@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getTeam } from '@/lib/api';
+import { initials } from '@/lib/format';
 import { Container } from '@/components/container';
 import { ContactCta } from '@/components/home/contact-cta';
 
@@ -9,16 +10,6 @@ export async function generateStaticParams() {
 }
 
 export const dynamicParams = true;
-
-function initials(name: string) {
-  return name
-    .split(' ')
-    .filter(Boolean)
-    .map((part) => part[0])
-    .slice(0, 2)
-    .join('')
-    .toUpperCase();
-}
 
 export default async function TeamMemberPage({
   params,

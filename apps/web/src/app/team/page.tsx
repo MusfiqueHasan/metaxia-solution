@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTeam } from '@/lib/api';
+import { initials } from '@/lib/format';
 import { PageHero } from '@/components/page-hero';
 import { Container } from '@/components/container';
 
@@ -8,16 +9,6 @@ export const metadata: Metadata = {
   title: 'Team',
   description: 'The people who scope, build, and stand behind every Metaxia engagement.',
 };
-
-function initials(name: string) {
-  return name
-    .split(' ')
-    .filter(Boolean)
-    .map((part) => part[0])
-    .slice(0, 2)
-    .join('')
-    .toUpperCase();
-}
 
 export default async function TeamPage() {
   const team = (await getTeam()).sort((a, b) => a.order - b.order);
