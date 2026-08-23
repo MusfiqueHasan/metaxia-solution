@@ -49,12 +49,12 @@ export default async function JobDetailPage({
     '@context': 'https://schema.org',
     '@type': 'JobPosting',
     title: job.title,
+    description: job.body,
     datePosted: job.createdAt,
     employmentType: job.type,
     hiringOrganization: {
       '@type': 'Organization',
       name: site.name,
-      sameAs: site.url,
     },
     ...(job.location === 'Remote'
       ? { jobLocationType: 'TELECOMMUTE' }

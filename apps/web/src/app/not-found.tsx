@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Container } from '@/components/container';
 import { Button } from '@/components/button';
+
+export const metadata: Metadata = {
+  title: 'Not found',
+  robots: { index: false },
+};
 
 export default function NotFound() {
   return (
