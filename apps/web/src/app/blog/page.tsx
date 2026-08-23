@@ -1,0 +1,73 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { getPosts } from '@/lib/api';
+import { PageHero } from '@/components/page-hero';
+import { Container } from '@/components/container';
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description: 'Notes on shipping software, from the engineers and strategists at Metaxia Solutions.',
+};
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+export default async function BlogPage() {
+  const posts = (await getPosts()).sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+  );
+
+  return (
+    <main>
+      <PageHero
+        eyebrow="Field Notes"
+        title="Writing from the team."
+        lede="Practical notes on the systems we build, the vendors we evaluate, and the decisions that come up on every engagement."
+      />
+
+      <section className="bg-surface py-24 lg:py-28">
+        <Container>
+          {posts.length > 0 ? (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {posts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group flex flex-col rounded-3xl border border-ink/10 bg-surface-alt p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
+                >
+                  <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.15em] text-accent">
+                    <span>{post.category}</span>
+                    <span className="h-1 w-1 rotate-45 bg-accent/50" aria-hidden="true" />
+                    <time
+                      dateTime={post.publishedAt}
+                      className="font-normal tracking-normal text-ink-soft"
+                    >
+                      {formatDate(post.publishedAt)}
+                    </time>
+                  </div>
+                  <h2 className="mt-4 font-display text-lg font-medium tracking-tight text-ink">
+                    {post.title}
+                  </h2>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-soft">{post.excerpt}</p>
+                  <span className="mt-auto flex items-center gap-2 pt-6 text-sm font-medium text-accent">
+                    Read the post
+                    <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-ink-soft">Posts are temporarily unavailable.</p>
+          )}
+        </Container>
+      </section>
+    </main>
+  );
+}
