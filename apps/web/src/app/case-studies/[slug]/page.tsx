@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getCaseStudies, getCaseStudy } from '@/lib/api';
+import { getCaseStudies } from '@/lib/api';
 import { Container } from '@/components/container';
 import { Markdown } from '@/components/markdown';
 import { ContactCta } from '@/components/home/contact-cta';
@@ -18,11 +18,11 @@ export default async function CaseStudyDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const caseStudy = await getCaseStudy(slug);
-  if (!caseStudy) notFound();
-
   const allCaseStudies = (await getCaseStudies()).sort((a, b) => a.order - b.order);
   const index = allCaseStudies.findIndex((item) => item.slug === slug);
+  const caseStudy = index >= 0 ? allCaseStudies[index] : undefined;
+  if (!caseStudy) notFound();
+
   const prev = index > 0 ? allCaseStudies[index - 1] : null;
   const next = index >= 0 && index < allCaseStudies.length - 1 ? allCaseStudies[index + 1] : null;
 
@@ -46,8 +46,10 @@ export default async function CaseStudyDetailPage({
       </section>
 
       <section className="bg-surface py-24 lg:py-28">
-        <Container className="max-w-3xl">
-          <Markdown body={caseStudy.body} />
+        <Container>
+          <div className="max-w-3xl">
+            <Markdown body={caseStudy.body} />
+          </div>
         </Container>
       </section>
 

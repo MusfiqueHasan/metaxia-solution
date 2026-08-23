@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getServices, getService } from '@/lib/api';
+import { getServices } from '@/lib/api';
 import { PageHero } from '@/components/page-hero';
 import { Container } from '@/components/container';
 import { Markdown } from '@/components/markdown';
@@ -20,10 +20,10 @@ export default async function ServiceDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const service = await getService(slug);
+  const allServices = await getServices();
+  const service = allServices.find((item) => item.slug === slug);
   if (!service) notFound();
 
-  const allServices = await getServices();
   const otherServices = allServices.filter((item) => item.slug !== slug).slice(0, 3);
 
   return (
@@ -31,8 +31,10 @@ export default async function ServiceDetailPage({
       <PageHero eyebrow="Service" title={service.title} lede={service.excerpt} />
 
       <section className="bg-surface py-24 lg:py-28">
-        <Container className="max-w-3xl">
-          <Markdown body={service.body} />
+        <Container>
+          <div className="max-w-3xl">
+            <Markdown body={service.body} />
+          </div>
         </Container>
       </section>
 
