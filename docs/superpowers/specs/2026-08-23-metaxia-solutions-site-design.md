@@ -97,6 +97,23 @@ metaxia-solutions/
 - `newsletter` — `POST /newsletter` accepting email. Validated, rate-limited,
   deduplicated. Persists to `NewsletterSubscriber`.
 
+### Admin (dynamic content management)
+
+Content (projects/case studies, blog posts, services, team, jobs, pricing,
+FAQ, testimonials) is managed dynamically through an admin panel. ISR means
+published changes appear on the site within ~60 seconds.
+
+- `auth` module: JWT login (`POST /auth/login`). Single admin user, credentials
+  seeded from environment variables. Passwords hashed with bcrypt.
+- Every content module gains protected CRUD endpoints: `POST /<resource>`,
+  `PATCH /<resource>/:id`, `DELETE /<resource>/:id`, guarded by a JWT
+  `AuthGuard`. Public `GET` routes stay open.
+- Admin UI lives in the Next.js app under `/admin`: login page, per-resource
+  tables, and create/edit forms. Functional and minimal — plain fields,
+  textarea for body content (markdown), no rich text editor in v1.
+- `/admin` is excluded from the sitemap, disallowed in `robots.ts`, and marked
+  `noindex`.
+
 ### Cross-cutting
 
 - Global `ValidationPipe` (whitelist, transform)
@@ -149,17 +166,19 @@ stock photos, no template assets.
 
 1. Scaffold monorepo (pnpm workspaces, shared package)
 2. Shared types package
-3. API: Prisma schema, seed, content endpoints, write endpoints, tests
+3. API: Prisma schema, seed, content endpoints, write endpoints, auth + admin
+   CRUD, tests
 4. Web foundations: layout, header/footer, design tokens, typography
 5. Landing page
 6. Inner pages
-7. SEO layer (metadata, sitemap, JSON-LD, OG images)
-8. Polish + full verification
+7. Admin panel (`/admin` login, tables, forms)
+8. SEO layer (metadata, sitemap, JSON-LD, OG images)
+9. Polish + full verification
 
 ## Out of scope (v1)
 
-- Admin panel / CMS UI (content edited via seed data or DB directly)
-- Authentication
+- Rich text editor, image upload, draft/publish workflow, multiple admin
+  users/roles (admin panel phase 2)
 - i18n / multi-language
 - E-commerce ("Shop" page from the reference template)
 - Search
