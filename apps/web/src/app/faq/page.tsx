@@ -2,17 +2,37 @@ import type { Metadata } from 'next';
 import { getFaq } from '@/lib/api';
 import { PageHero } from '@/components/page-hero';
 import { Container } from '@/components/container';
+import { JsonLd } from '@/components/json-ld';
 
 export const metadata: Metadata = {
   title: 'FAQ',
   description: 'Answers to the questions we hear most often from prospective clients.',
+  alternates: { canonical: '/faq' },
+  openGraph: {
+    title: 'FAQ',
+    description: 'Answers to the questions we hear most often from prospective clients.',
+  },
 };
 
 export default async function FaqPage() {
   const faq = (await getFaq()).sort((a, b) => a.order - b.order);
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <main>
+      <JsonLd data={faqJsonLd} />
       <PageHero
         eyebrow="FAQ"
         title="Questions we hear a lot."

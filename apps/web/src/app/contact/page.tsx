@@ -8,6 +8,11 @@ import { ContactForm } from '@/components/contact-form';
 export const metadata: Metadata = {
   title: 'Contact',
   description: 'Get in touch with Metaxia Solutions to talk about your next project.',
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    title: 'Contact',
+    description: 'Get in touch with Metaxia Solutions to talk about your next project.',
+  },
 };
 
 export default function ContactPage() {

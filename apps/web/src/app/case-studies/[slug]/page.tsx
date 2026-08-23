@@ -1,9 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getCaseStudies } from '@/lib/api';
+import { site } from '@/lib/site';
 import { Container } from '@/components/container';
 import { Markdown } from '@/components/markdown';
 import { ContactCta } from '@/components/home/contact-cta';
+import { JsonLd } from '@/components/json-ld';
 
 export async function generateStaticParams() {
   const caseStudies = await getCaseStudies();
@@ -11,6 +14,27 @@ export async function generateStaticParams() {
 }
 
 export const dynamicParams = true;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const caseStudies = await getCaseStudies();
+  const caseStudy = caseStudies.find((item) => item.slug === slug);
+  if (!caseStudy) return { title: 'Not found' };
+
+  return {
+    title: caseStudy.title,
+    description: caseStudy.excerpt,
+    alternates: { canonical: `/case-studies/${caseStudy.slug}` },
+    openGraph: {
+      title: caseStudy.title,
+      description: caseStudy.excerpt,
+    },
+  };
+}
 
 export default async function CaseStudyDetailPage({
   params,
@@ -26,8 +50,19 @@ export default async function CaseStudyDetailPage({
   const prev = index > 0 ? allCaseStudies[index - 1] : null;
   const next = index >= 0 && index < allCaseStudies.length - 1 ? allCaseStudies[index + 1] : null;
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      { '@type': 'ListItem', position: 2, name: 'Case Studies', item: `${site.url}/case-studies` },
+      { '@type': 'ListItem', position: 3, name: caseStudy.title, item: `${site.url}/case-studies/${caseStudy.slug}` },
+    ],
+  };
+
   return (
     <main>
+      <JsonLd data={breadcrumbJsonLd} />
       <section
         className="relative overflow-hidden text-white"
         style={{ background: caseStudy.coverGradient }}

@@ -7,6 +7,11 @@ import { Button } from '@/components/button';
 export const metadata: Metadata = {
   title: 'Pricing',
   description: 'Straightforward monthly plans for engaging Metaxia Solutions.',
+  alternates: { canonical: '/pricing' },
+  openGraph: {
+    title: 'Pricing',
+    description: 'Straightforward monthly plans for engaging Metaxia Solutions.',
+  },
 };
 
 export default async function PricingPage() {

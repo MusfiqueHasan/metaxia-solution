@@ -5,6 +5,11 @@ import { Container } from '@/components/container';
 export const metadata: Metadata = {
   title: 'Terms of Service',
   description: 'The terms that govern use of the Metaxia Solutions website and services.',
+  alternates: { canonical: '/terms' },
+  openGraph: {
+    title: 'Terms of Service',
+    description: 'The terms that govern use of the Metaxia Solutions website and services.',
+  },
 };
 
 const sections = [

@@ -7,6 +7,11 @@ import { Container } from '@/components/container';
 export const metadata: Metadata = {
   title: 'Careers',
   description: 'Open roles at Metaxia Solutions, across engineering, design, and delivery.',
+  alternates: { canonical: '/careers' },
+  openGraph: {
+    title: 'Careers',
+    description: 'Open roles at Metaxia Solutions, across engineering, design, and delivery.',
+  },
 };
 
 export default async function CareersPage() {

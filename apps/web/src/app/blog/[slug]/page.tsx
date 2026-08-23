@@ -1,9 +1,12 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPosts } from '@/lib/api';
+import { site } from '@/lib/site';
 import { Container } from '@/components/container';
 import { Markdown } from '@/components/markdown';
 import { ContactCta } from '@/components/home/contact-cta';
+import { JsonLd } from '@/components/json-ld';
 
 export async function generateStaticParams() {
   const posts = await getPosts();
@@ -20,6 +23,29 @@ function formatDate(iso: string) {
   });
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const posts = await getPosts();
+  const post = posts.find((item) => item.slug === slug);
+  if (!post) return { title: 'Not found' };
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      publishedTime: post.publishedAt,
+    },
+  };
+}
+
 export default async function BlogPostPage({
   params,
 }: {
@@ -32,8 +58,33 @@ export default async function BlogPostPage({
 
   const morePosts = allPosts.filter((item) => item.slug !== slug).slice(0, 3);
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt,
+    author: {
+      '@type': 'Organization',
+      name: site.name,
+    },
+    url: `${site.url}/blog/${post.slug}`,
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${site.url}/blog` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `${site.url}/blog/${post.slug}` },
+    ],
+  };
+
   return (
     <main>
+      <JsonLd data={articleJsonLd} />
+      <JsonLd data={breadcrumbJsonLd} />
       <section className="grid-signature relative overflow-hidden bg-ink text-white">
         <Container className="pt-24 pb-20 lg:pt-28 lg:pb-24">
           <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.15em] text-accent">

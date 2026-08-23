@@ -5,6 +5,11 @@ import { Container } from '@/components/container';
 export const metadata: Metadata = {
   title: 'Privacy Policy',
   description: 'How Metaxia Solutions collects, uses, and protects information.',
+  alternates: { canonical: '/privacy' },
+  openGraph: {
+    title: 'Privacy Policy',
+    description: 'How Metaxia Solutions collects, uses, and protects information.',
+  },
 };
 
 const sections = [

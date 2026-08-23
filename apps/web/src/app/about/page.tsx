@@ -8,6 +8,11 @@ import { Approach } from '@/components/home/approach';
 export const metadata: Metadata = {
   title: 'About',
   description: 'The team and thinking behind Metaxia Solutions.',
+  alternates: { canonical: '/about' },
+  openGraph: {
+    title: 'About',
+    description: 'The team and thinking behind Metaxia Solutions.',
+  },
 };
 
 const stats = [

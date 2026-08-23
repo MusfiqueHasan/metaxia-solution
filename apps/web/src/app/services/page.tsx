@@ -8,6 +8,11 @@ import { Icon } from '@/components/icon';
 export const metadata: Metadata = {
   title: 'Services',
   description: 'Six practice areas covering cloud, product, security, and AI engineering.',
+  alternates: { canonical: '/services' },
+  openGraph: {
+    title: 'Services',
+    description: 'Six practice areas covering cloud, product, security, and AI engineering.',
+  },
 };
 
 export default async function ServicesPage() {

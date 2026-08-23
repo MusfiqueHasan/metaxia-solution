@@ -1,8 +1,11 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTeam } from '@/lib/api';
 import { initials } from '@/lib/format';
+import { site } from '@/lib/site';
 import { Container } from '@/components/container';
 import { ContactCta } from '@/components/home/contact-cta';
+import { JsonLd } from '@/components/json-ld';
 
 export async function generateStaticParams() {
   const team = await getTeam();
@@ -10,6 +13,27 @@ export async function generateStaticParams() {
 }
 
 export const dynamicParams = true;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const team = await getTeam();
+  const member = team.find((item) => item.slug === slug);
+  if (!member) return { title: 'Not found' };
+
+  return {
+    title: member.name,
+    description: `${member.name}, ${member.role} at Metaxia Solutions.`,
+    alternates: { canonical: `/team/${member.slug}` },
+    openGraph: {
+      title: member.name,
+      description: `${member.name}, ${member.role} at Metaxia Solutions.`,
+    },
+  };
+}
 
 export default async function TeamMemberPage({
   params,
@@ -23,8 +47,19 @@ export default async function TeamMemberPage({
 
   const bioParagraphs = member.bio.split(/\n\n+/);
 
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      { '@type': 'ListItem', position: 2, name: 'Team', item: `${site.url}/team` },
+      { '@type': 'ListItem', position: 3, name: member.name, item: `${site.url}/team/${member.slug}` },
+    ],
+  };
+
   return (
     <main>
+      <JsonLd data={breadcrumbJsonLd} />
       <section className="grid-signature relative overflow-hidden bg-ink text-white">
         <Container className="flex flex-col items-start gap-6 pt-24 pb-20 lg:pt-28 lg:pb-24">
           <span className="flex h-20 w-20 items-center justify-center rounded-full bg-accent-soft font-display text-2xl font-medium text-accent">

@@ -1,4 +1,6 @@
+import type { Metadata } from 'next';
 import { getServices, getCaseStudies, getPosts, getTestimonials } from '@/lib/api';
+import { site } from '@/lib/site';
 import { Hero } from '@/components/home/hero';
 import { FeaturedServices } from '@/components/home/featured-services';
 import { LogoStrip } from '@/components/home/logo-strip';
@@ -9,6 +11,15 @@ import { Skills } from '@/components/home/skills';
 import { BlogPreview } from '@/components/home/blog-preview';
 import { Testimonials } from '@/components/home/testimonials';
 import { ContactCta } from '@/components/home/contact-cta';
+
+export const metadata: Metadata = {
+  description: site.description,
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'Metaxia Solutions — Technology & IT Solutions',
+    description: site.description,
+  },
+};
 
 export default async function Home() {
   const [services, caseStudies, posts, testimonials] = await Promise.all([

@@ -7,6 +7,11 @@ import { Container } from '@/components/container';
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Notes on shipping software, from the engineers and strategists at Metaxia Solutions.',
+  alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'Blog',
+    description: 'Notes on shipping software, from the engineers and strategists at Metaxia Solutions.',
+  },
 };
 
 function formatDate(iso: string) {

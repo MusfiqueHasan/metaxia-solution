@@ -7,6 +7,11 @@ import { Container } from '@/components/container';
 export const metadata: Metadata = {
   title: 'Case Studies',
   description: 'Systems Metaxia has designed, shipped, and scaled for clients across industries.',
+  alternates: { canonical: '/case-studies' },
+  openGraph: {
+    title: 'Case Studies',
+    description: 'Systems Metaxia has designed, shipped, and scaled for clients across industries.',
+  },
 };
 
 export default async function CaseStudiesPage() {

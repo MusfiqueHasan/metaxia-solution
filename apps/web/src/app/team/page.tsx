@@ -8,6 +8,11 @@ import { Container } from '@/components/container';
 export const metadata: Metadata = {
   title: 'Team',
   description: 'The people who scope, build, and stand behind every Metaxia engagement.',
+  alternates: { canonical: '/team' },
+  openGraph: {
+    title: 'Team',
+    description: 'The people who scope, build, and stand behind every Metaxia engagement.',
+  },
 };
 
 export default async function TeamPage() {
