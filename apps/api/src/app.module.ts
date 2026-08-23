@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { PrismaModule } from './prisma/prisma.module';
 import { ContentModule } from './content/content.module';
 import { InboundModule } from './inbound/inbound.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { InboundModule } from './inbound/inbound.module';
     PrismaModule,
     ContentModule,
     InboundModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
