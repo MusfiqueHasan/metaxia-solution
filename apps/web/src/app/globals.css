@@ -7,6 +7,7 @@
   --color-surface-alt: #ffffff;
   --color-accent: #4f46e5;
   --color-accent-soft: #eef2ff;
+  --color-accent-strong: color-mix(in srgb, var(--color-accent) 85%, black);
   --font-display: var(--font-space-grotesk);
   --font-body: var(--font-inter);
 }
