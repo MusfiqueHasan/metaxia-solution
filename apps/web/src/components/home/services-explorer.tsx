@@ -52,9 +52,29 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
       }
     }, CYCLE_MS);
 
+    // Scroll progress (0..1 across the section's pass through the viewport)
+    // feeds the --sp CSS variable; backdrop layers derive their transforms
+    // from it, so the background rotates/parallaxes with scroll while the
+    // content animations stay untouched.
+    let frame = 0;
+    const onScroll = () => {
+      if (frame || !section) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        const rect = section.getBoundingClientRect();
+        const total = rect.height + window.innerHeight;
+        const progress = Math.min(1, Math.max(0, (window.innerHeight - rect.top) / total));
+        section.style.setProperty('--sp', progress.toFixed(4));
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
     return () => {
       clearInterval(interval);
       observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      if (frame) cancelAnimationFrame(frame);
     };
   }, [count]);
 
@@ -63,6 +83,63 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
   return (
     <section ref={sectionRef} className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
       <SectionBackdrop glow="right" variant="ceiling" />
+
+      {/* Scroll-driven 3D layer: everything below derives its transform from
+          --sp (0..1 scroll progress set on the section), so the background
+          tumbles and parallaxes as the visitor scrolls through. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 select-none">
+        {/* Wireframe cube tumbling with scroll */}
+        <div
+          className="absolute right-[8%] top-[30%] hidden h-28 w-28 lg:block"
+          style={{ perspective: '800px' }}
+        >
+          <div
+            className="relative h-full w-full"
+            style={{
+              transformStyle: 'preserve-3d',
+              transform:
+                'translateY(calc(var(--sp, 0) * -9rem)) rotateX(calc(var(--sp, 0) * 220deg)) rotateY(calc(var(--sp, 0) * 300deg))',
+            }}
+          >
+            {[
+              'rotateY(0deg) translateZ(3.5rem)',
+              'rotateY(90deg) translateZ(3.5rem)',
+              'rotateY(180deg) translateZ(3.5rem)',
+              'rotateY(270deg) translateZ(3.5rem)',
+              'rotateX(90deg) translateZ(3.5rem)',
+              'rotateX(-90deg) translateZ(3.5rem)',
+            ].map((transform) => (
+              <div key={transform} className="cube-face" style={{ transform }} />
+            ))}
+          </div>
+        </div>
+
+        {/* Orbit ring drifting the other way */}
+        <div
+          className="absolute bottom-[12%] left-[3%] hidden h-36 w-36 lg:block"
+          style={{
+            transform:
+              'translateY(calc(var(--sp, 0) * 7rem)) rotateX(calc(64deg + var(--sp, 0) * 30deg)) rotateZ(calc(var(--sp, 0) * 160deg))',
+          }}
+        >
+          <div className="h-full w-full rounded-full border border-accent/30" />
+        </div>
+
+        {/* Concentric rings expanding behind the preview panel */}
+        <div className="absolute right-[10%] top-1/2 hidden -translate-y-1/2 lg:block">
+          {[22, 32, 42].map((size, i) => (
+            <div
+              key={size}
+              className="absolute left-1/2 top-1/2 rounded-full border border-fg/[0.05]"
+              style={{
+                width: `${size}rem`,
+                height: `${size}rem`,
+                transform: `translate(-50%, -50%) scale(calc(0.75 + var(--sp, 0) * ${0.5 + i * 0.18}))`,
+              }}
+            />
+          ))}
+        </div>
+      </div>
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
