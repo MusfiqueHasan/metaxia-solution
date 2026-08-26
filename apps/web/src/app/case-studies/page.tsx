@@ -62,12 +62,20 @@ export default async function CaseStudiesPage() {
     // behind every case row, not just the opening section.
     <main className="grain relative overflow-hidden bg-ink">
       <Starfield />
-      {/* Hero — kicker, serif thesis, lead, stat row, scroll cue */}
-      <section className="relative border-b border-line">
+      {/* Hero — same ambient treatment as the other page heroes: its own
+          dense starfield (with meteors), dot field, aurora, and glow. */}
+      <section className="relative overflow-clip border-b border-line">
+        <Starfield />
+        <div aria-hidden="true" className="bg-dots absolute inset-0" />
+        <div aria-hidden="true" className="aurora aurora--a" />
+        <div
+          aria-hidden="true"
+          className="absolute -top-32 right-[-12%] h-[26rem] w-[26rem] rounded-full bg-accent/[0.08] blur-[110px]"
+        />
         <Container className="relative pb-24 pt-40 lg:pb-28 lg:pt-48">
           <Reveal>
-            <p className="reveal-fade flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.3em] text-fg-soft">
-              <span className="inline-block h-px w-6 bg-line-strong" aria-hidden="true" />
+            <p className="reveal-fade flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.3em] text-accent">
+              <span className="inline-block h-px w-6 bg-accent" aria-hidden="true" />
               Selected work · 2024–2026
             </p>
 
@@ -100,6 +108,12 @@ export default async function CaseStudiesPage() {
                 </div>
               ))}
             </div>
+
+            <span
+              aria-hidden="true"
+              className="reveal-draw-x mt-10 block h-px w-40 bg-gradient-to-r from-accent to-transparent"
+              style={{ ['--reveal-delay' as string]: '0.7s' }}
+            />
           </Reveal>
         </Container>
 
