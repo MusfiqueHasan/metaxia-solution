@@ -29,8 +29,8 @@ const steps = [
  */
 export function Approach() {
   return (
-    <section className="grain relative overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
-      <SectionBackdrop mark="03" glow="right" />
+    <section className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
+      <SectionBackdrop mark="03" glow="right" variant="orbs" />
       <Container>
         <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
           <div className="lg:sticky lg:top-32 lg:self-start">

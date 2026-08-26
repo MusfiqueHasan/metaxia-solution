@@ -15,8 +15,8 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
   if (items.length === 0) return null;
 
   return (
-    <section className="grain relative overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
-      <SectionBackdrop mark="02" glow="left" />
+    <section className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
+      <SectionBackdrop mark="02" glow="left" variant="floor" />
       <Container className="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading
           index="02" eyebrow="Selected work"
