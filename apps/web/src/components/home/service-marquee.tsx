@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import type { Service } from '@metaxia/shared';
 import { SectionBackdrop } from '@/components/section-backdrop';
-import { ParticleOrb } from '@/components/motion/particle-orb';
 
 /**
  * The services, on loop: an infinite marquee of the six disciplines right
@@ -14,13 +13,12 @@ export function ServiceMarquee({ services }: { services: Service[] }) {
   return (
     <section className="relative overflow-clip border-y border-line bg-ink py-10" aria-label="Services">
       <SectionBackdrop glow="center" variant="plain" />
-      {/* The globe, rising behind the strip — clipped to a band by the section. */}
+      {/* Lit sphere anchored to the right edge, drifting slowly — the strip
+          clips it to a warm horizon rising behind the scrolling titles. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 opacity-70"
-      >
-        <ParticleOrb className="h-full w-full" />
-      </div>
+        className="orb-3d drift-slow pointer-events-none absolute -top-1/2 right-[-4%] h-[22rem] w-[22rem]"
+      />
       <p className="mb-8 text-center font-mono text-[11px] uppercase tracking-[0.28em] text-fg-soft/70">
         Six disciplines · one accountable team
       </p>
