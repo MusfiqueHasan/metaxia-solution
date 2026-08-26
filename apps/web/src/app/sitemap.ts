@@ -1,13 +1,13 @@
 import type { MetadataRoute } from 'next';
-import { getServices, getCaseStudies, getPosts, getTeam, getJobs } from '@/lib/api';
+import { getServices, getCaseStudies, getPosts, getTeam } from '@/lib/api';
 import { site } from '@/lib/site';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [services, cases, posts, team, jobs] = await Promise.all([
-    getServices(), getCaseStudies(), getPosts(), getTeam(), getJobs(),
+  const [services, cases, posts, team] = await Promise.all([
+    getServices(), getCaseStudies(), getPosts(), getTeam(),
   ]);
   const statics = ['', '/about', '/services', '/case-studies', '/blog', '/team',
-    '/careers', '/pricing', '/faq', '/contact', '/privacy', '/terms']
+    '/faq', '/contact', '/privacy', '/terms']
     .map((p) => ({ url: `${site.url}${p}` }));
   return [
     ...statics,
@@ -15,6 +15,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...cases.map((c) => ({ url: `${site.url}/case-studies/${c.slug}` })),
     ...posts.map((p) => ({ url: `${site.url}/blog/${p.slug}` })),
     ...team.map((t) => ({ url: `${site.url}/team/${t.slug}` })),
-    ...jobs.map((j) => ({ url: `${site.url}/careers/${j.slug}` })),
   ];
 }

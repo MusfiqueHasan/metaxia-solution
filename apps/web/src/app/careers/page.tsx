@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getJobs } from '@/lib/api';
 import { PageHero } from '@/components/page-hero';
@@ -15,6 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default async function CareersPage() {
+  // Page hidden per business decision — content and API stay intact.
+  notFound();
   const jobs = await getJobs();
 
   return (

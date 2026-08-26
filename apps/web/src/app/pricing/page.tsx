@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { getPricing } from '@/lib/api';
 import { PageHero } from '@/components/page-hero';
 import { Container } from '@/components/container';
@@ -15,6 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default async function PricingPage() {
+  // Page hidden per business decision — content and API stay intact.
+  notFound();
   const plans = (await getPricing()).sort((a, b) => a.order - b.order);
 
   return (

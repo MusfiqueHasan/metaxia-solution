@@ -19,7 +19,7 @@ export function ContactCta() {
       <Container className="relative">
         <Reveal className="flex flex-col items-center gap-10 text-center">
           <p className="reveal-fade font-mono text-[11px] font-medium uppercase tracking-[0.32em] text-fg-soft">
-            07 — Next step
+            06 — Next step
           </p>
           <h2 className="max-w-4xl font-display text-[clamp(2.75rem,7vw,6rem)] leading-[1.02] tracking-[-0.01em] text-fg">
             <SplitWords text="Tell us what your business" />
