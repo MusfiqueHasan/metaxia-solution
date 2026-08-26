@@ -13,7 +13,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
 
   return (
     <section className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
-      <SectionBackdrop mark="06" glow="center" variant="orbs" />
+      <SectionBackdrop glow="center" variant="orbs" />
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading index="06" eyebrow="Client voices" title="What it's like to work with us." />

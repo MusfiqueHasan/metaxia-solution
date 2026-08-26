@@ -19,7 +19,7 @@ const capabilities = [
 export function Skills() {
   return (
     <section className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
-      <SectionBackdrop mark="04" glow="left" variant="floor" />
+      <SectionBackdrop glow="left" variant="sweep" side="right" />
       <Container>
         <SectionHeading
           index="04" eyebrow="Capability index"

@@ -62,7 +62,7 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
 
   return (
     <section ref={sectionRef} className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
-      <SectionBackdrop mark="01" glow="right" variant="ceiling" />
+      <SectionBackdrop glow="right" variant="ceiling" />
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading

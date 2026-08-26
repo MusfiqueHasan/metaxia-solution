@@ -17,7 +17,7 @@ export function BlogPreview({ posts }: { posts: Post[] }) {
 
   return (
     <section className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
-      <SectionBackdrop mark="05" glow="right" variant="ceiling" />
+      <SectionBackdrop glow="right" variant="cube" side="right" />
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading index="05" eyebrow="Writing" title="Notes from the build." />

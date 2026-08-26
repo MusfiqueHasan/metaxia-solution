@@ -12,7 +12,7 @@ export function ServiceMarquee({ services }: { services: Service[] }) {
 
   return (
     <section className="relative overflow-clip border-y border-line bg-ink py-10" aria-label="Services">
-      <SectionBackdrop glow="center" />
+      <SectionBackdrop glow="center" variant="floor" />
       <p className="mb-8 text-center font-mono text-[11px] uppercase tracking-[0.28em] text-fg-soft/70">
         Six disciplines · one accountable team
       </p>
