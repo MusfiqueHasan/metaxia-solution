@@ -203,7 +203,11 @@ body {
 }
 
 .page-enter {
-  animation: page-enter 0.8s var(--ease-out-expo) 0.15s both;
+  /* `backwards`, never `both`/`forwards`: a retained animated transform —
+     even the identity matrix — makes this element the containing block for
+     position:fixed descendants (back-to-top button). backwards holds the
+     hidden frame through the delay, then releases every property. */
+  animation: page-enter 0.8s var(--ease-out-expo) 0.15s backwards;
 }
 
 @keyframes page-veil {
