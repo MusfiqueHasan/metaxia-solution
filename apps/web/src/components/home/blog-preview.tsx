@@ -3,6 +3,7 @@ import type { Post } from '@metaxia/shared';
 import { Container } from '@/components/container';
 import { SectionHeading } from '@/components/section-heading';
 import { Reveal } from '@/components/motion/reveal';
+import { SectionBackdrop } from '@/components/section-backdrop';
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -15,7 +16,8 @@ export function BlogPreview({ posts }: { posts: Post[] }) {
   if (posts.length === 0) return null;
 
   return (
-    <section className="border-t border-line bg-ink py-28 lg:py-36">
+    <section className="grain relative overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
+      <SectionBackdrop mark="05" glow="right" />
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading index="05" eyebrow="Writing" title="Notes from the build." />

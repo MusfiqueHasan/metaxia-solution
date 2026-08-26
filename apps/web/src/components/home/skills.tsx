@@ -1,6 +1,7 @@
 import { Container } from '@/components/container';
 import { SectionHeading } from '@/components/section-heading';
 import { Reveal } from '@/components/motion/reveal';
+import { SectionBackdrop } from '@/components/section-backdrop';
 
 const capabilities = [
   { label: 'Web Development', value: 90 },
@@ -17,7 +18,8 @@ const capabilities = [
  */
 export function Skills() {
   return (
-    <section className="border-t border-line bg-ink py-28 lg:py-36">
+    <section className="grain relative overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
+      <SectionBackdrop mark="04" glow="left" />
       <Container>
         <SectionHeading
           index="04" eyebrow="Capability index"

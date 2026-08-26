@@ -4,6 +4,7 @@ import { Container } from '@/components/container';
 import { SectionHeading } from '@/components/section-heading';
 import { Reveal } from '@/components/motion/reveal';
 import { Tilt } from '@/components/motion/tilt';
+import { SectionBackdrop } from '@/components/section-backdrop';
 
 /**
  * Selected work as an edge-bleeding horizontal strip of gradient plates.
@@ -14,7 +15,8 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
   if (items.length === 0) return null;
 
   return (
-    <section className="overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
+    <section className="grain relative overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
+      <SectionBackdrop mark="02" glow="left" />
       <Container className="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading
           index="02" eyebrow="Selected work"

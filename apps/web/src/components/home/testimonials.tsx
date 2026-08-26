@@ -2,6 +2,7 @@ import type { Testimonial } from '@metaxia/shared';
 import { Container } from '@/components/container';
 import { SectionHeading } from '@/components/section-heading';
 import { Reveal } from '@/components/motion/reveal';
+import { SectionBackdrop } from '@/components/section-backdrop';
 
 /**
  * One voice at a time, at reading-lectern scale. Native scroll-snap turns
@@ -11,7 +12,8 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
   if (items.length === 0) return null;
 
   return (
-    <section className="overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
+    <section className="grain relative overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
+      <SectionBackdrop mark="06" glow="center" />
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading index="06" eyebrow="Client voices" title="What it's like to work with us." />

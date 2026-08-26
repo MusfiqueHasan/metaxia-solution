@@ -7,6 +7,7 @@ import { Container } from '@/components/container';
 import { SectionHeading } from '@/components/section-heading';
 import { Reveal } from '@/components/motion/reveal';
 import { Icon, type IconKey } from '@/components/icon';
+import { SectionBackdrop } from '@/components/section-backdrop';
 
 const washes = [
   'radial-gradient(120% 120% at 20% 10%, rgba(229,121,58,0.30), transparent 60%)',
@@ -60,7 +61,8 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
   if (count === 0) return null;
 
   return (
-    <section ref={sectionRef} className="relative border-t border-line bg-ink py-28 lg:py-36">
+    <section ref={sectionRef} className="grain relative overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
+      <SectionBackdrop mark="01" glow="right" />
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading

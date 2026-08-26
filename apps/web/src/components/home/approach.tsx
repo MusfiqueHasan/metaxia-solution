@@ -1,6 +1,7 @@
 import { Container } from '@/components/container';
 import { SectionHeading } from '@/components/section-heading';
 import { Reveal } from '@/components/motion/reveal';
+import { SectionBackdrop } from '@/components/section-backdrop';
 
 const steps = [
   {
@@ -28,7 +29,8 @@ const steps = [
  */
 export function Approach() {
   return (
-    <section className="relative border-t border-line bg-ink py-28 lg:py-36">
+    <section className="grain relative overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
+      <SectionBackdrop mark="03" glow="right" />
       <Container>
         <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
           <div className="lg:sticky lg:top-32 lg:self-start">

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Service } from '@metaxia/shared';
+import { SectionBackdrop } from '@/components/section-backdrop';
 
 /**
  * The services, on loop: an infinite marquee of the six disciplines right
@@ -10,7 +11,8 @@ export function ServiceMarquee({ services }: { services: Service[] }) {
   if (services.length === 0) return null;
 
   return (
-    <section className="border-y border-line bg-ink py-10" aria-label="Services">
+    <section className="relative overflow-hidden border-y border-line bg-ink py-10" aria-label="Services">
+      <SectionBackdrop glow="center" />
       <p className="mb-8 text-center font-mono text-[11px] uppercase tracking-[0.28em] text-fg-soft/70">
         Six disciplines · one accountable team
       </p>
