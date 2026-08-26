@@ -1,5 +1,5 @@
 export interface Service { id: string; slug: string; title: string; excerpt: string; body: string; icon: string; order: number; }
-export interface CaseStudy { id: string; slug: string; title: string; category: string; excerpt: string; body: string; coverGradient: string; order: number; }
+export interface CaseStudy { id: string; slug: string; title: string; category: string; excerpt: string; body: string; coverGradient: string; websiteUrl: string | null; previewImage: string | null; order: number; }
 export interface Post { id: string; slug: string; title: string; category: string; excerpt: string; body: string; publishedAt: string; }
 export interface TeamMember { id: string; slug: string; name: string; role: string; bio: string; linkedinUrl: string | null; order: number; }
 export interface Job { id: string; slug: string; title: string; location: string; type: string; body: string; createdAt: string; }

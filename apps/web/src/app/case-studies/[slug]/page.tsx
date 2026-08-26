@@ -124,12 +124,16 @@ export default async function CaseStudyDetailPage({
     ],
   };
 
+  const domain = caseStudy.websiteUrl ? new URL(caseStudy.websiteUrl).hostname : null;
+
   const facts = [
     { k: 'Client', v: 'Confidential · reference on request' },
     { k: 'Sector', v: caseStudy.category },
     { k: 'Timeline', v: timeline },
-    { k: 'Status', v: 'In production' },
-  ];
+    domain
+      ? { k: 'Live', v: domain, href: caseStudy.websiteUrl as string }
+      : { k: 'Status', v: 'In production' },
+  ] as { k: string; v: string; href?: string }[];
 
   return (
     <main className="grain relative overflow-hidden bg-ink">
@@ -180,13 +184,79 @@ export default async function CaseStudyDetailPage({
                   <dt className="font-mono text-[10px] uppercase tracking-[0.22em] text-fg-soft/70">
                     {fact.k}
                   </dt>
-                  <dd className="mt-2 text-sm text-fg">{fact.v}</dd>
+                  <dd className="mt-2 text-sm text-fg">
+                    {fact.href ? (
+                      <a
+                        href={fact.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link-rule transition-colors hover:text-accent-strong"
+                      >
+                        {fact.v} <span aria-hidden="true">↗</span>
+                      </a>
+                    ) : (
+                      fact.v
+                    )}
+                  </dd>
                 </div>
               ))}
             </dl>
+
+            {caseStudy.websiteUrl ? (
+              <div className="reveal-rise mt-10" style={{ ['--reveal-delay' as string]: '0.6s' }}>
+                <a
+                  href={caseStudy.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="Visit"
+                  className="group inline-flex items-center gap-2.5 rounded-full border border-line-strong px-6 py-3 text-sm font-medium text-fg transition-colors duration-300 hover:border-fg/40 hover:bg-fg/5"
+                >
+                  Visit website
+                  <span
+                    aria-hidden="true"
+                    className="text-xs transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  >
+                    ↗
+                  </span>
+                  {domain ? (
+                    <span className="font-mono text-[11px] text-fg-soft">{domain}</span>
+                  ) : null}
+                </a>
+              </div>
+            ) : null}
           </Reveal>
         </Container>
       </section>
+
+      {/* Website preview — the live site's hero, framed */}
+      {caseStudy.previewImage ? (
+        <section className="relative border-b border-line">
+          <Container className="py-16 lg:py-24">
+            <Reveal>
+              <a
+                href={caseStudy.websiteUrl ?? `/case-studies/${caseStudy.slug}`}
+                target={caseStudy.websiteUrl ? '_blank' : undefined}
+                rel={caseStudy.websiteUrl ? 'noopener noreferrer' : undefined}
+                data-cursor={caseStudy.websiteUrl ? 'Visit' : undefined}
+                className="reveal-scale group block overflow-hidden rounded-3xl border border-line"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={caseStudy.previewImage}
+                  alt={`${caseStudy.title} — website hero preview`}
+                  className="w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.015]"
+                  loading="lazy"
+                />
+              </a>
+              {domain ? (
+                <p className="reveal-fade mt-4 text-center font-mono text-[11px] uppercase tracking-[0.2em] text-fg-soft/70">
+                  {domain} — live hero
+                </p>
+              ) : null}
+            </Reveal>
+          </Container>
+        </section>
+      ) : null}
 
       {/* (01) The challenge */}
       <CaseSection n="01" title="The challenge">

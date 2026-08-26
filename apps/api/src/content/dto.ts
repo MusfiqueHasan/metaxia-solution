@@ -26,6 +26,8 @@ export class CreateCaseStudyDto {
   @IsString() @IsNotEmpty() excerpt: string;
   @IsString() @IsNotEmpty() body: string;
   @IsString() @IsNotEmpty() coverGradient: string;
+  @IsOptional() @IsString() websiteUrl?: string;
+  @IsOptional() @IsString() previewImage?: string;
   @IsInt() order: number;
 }
 export class UpdateCaseStudyDto extends PartialType(CreateCaseStudyDto) {}

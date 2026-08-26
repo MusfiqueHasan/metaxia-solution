@@ -215,6 +215,8 @@ Buy links, spin AI content at volume, or chase algorithm loopholes with a shelf 
         category: 'Software',
         order: 1,
         coverGradient: 'linear-gradient(135deg,#0ea5e9,#6366f1)',
+        websiteUrl: 'https://ledgerline-demo.example.com',
+        previewImage: '/previews/fintech-ledger-modernization.svg',
         excerpt: 'We replaced a decade-old batch ledger with an event-sourced platform that now settles transactions in real time.',
         body: `A payments scale-up was running its entire business on a ledger designed a decade earlier for a fraction of the volume — and one currency.
 
@@ -243,6 +245,8 @@ The new ledger ran in parallel with the legacy system for six weeks, with automa
         category: 'Software',
         order: 2,
         coverGradient: 'linear-gradient(135deg,#f97316,#ec4899)',
+        websiteUrl: 'https://freightmatch-demo.example.com',
+        previewImage: '/previews/logistics-marketplace-rebuild.svg',
         excerpt: 'A legacy PHP monolith was replaced with a modular TypeScript platform, cutting page load times by 70 percent.',
         body: `A freight-matching marketplace had outgrown the PHP monolith it was founded on — and peak shipping season kept proving it.
 
@@ -271,6 +275,8 @@ The business never paused. Each migrated feature ran behind a flag with traffic 
         category: 'Design',
         order: 3,
         coverGradient: 'linear-gradient(135deg,#a855f7,#f43f5e)',
+        websiteUrl: 'https://fivefold-demo.example.com',
+        previewImage: '/previews/design-system-unification.svg',
         excerpt: 'We consolidated five inconsistent product UIs into a single token-based design system used by every squad.',
         body: `Five product teams, five component libraries, one brand — and no two screens that looked like they came from the same company.
 
@@ -299,6 +305,8 @@ Product by product, behind a compatibility layer that let old and new components
         category: 'Design',
         order: 4,
         coverGradient: 'linear-gradient(135deg,#22c55e,#0ea5e9)',
+        websiteUrl: 'https://carebridge-demo.example.com',
+        previewImage: '/previews/healthtech-onboarding-redesign.svg',
         excerpt: 'A confusing five-step signup flow was redesigned around patient needs, lifting completion rates by 34 percent.',
         body: `A telehealth platform was losing patients before they ever saw a clinician — the signup flow was doing the losing.
 
@@ -327,6 +335,8 @@ The new flow went through moderated usability tests, then a phased production ro
         category: 'Cloud',
         order: 5,
         coverGradient: 'linear-gradient(135deg,#0891b2,#4f46e5)',
+        websiteUrl: 'https://northcart-demo.example.com',
+        previewImage: '/previews/ecommerce-multi-region-migration.svg',
         excerpt: "We moved a single-region deployment onto a multi-region architecture to survive Black Friday traffic without downtime.",
         body: `Two Black Fridays in a row had nearly taken the store down. The third one was ten weeks away when we started.
 
@@ -355,6 +365,8 @@ We load-tested at ten times historical peak before scheduling anything, then cut
         category: 'Cloud',
         order: 6,
         coverGradient: 'linear-gradient(135deg,#f59e0b,#ef4444)',
+        websiteUrl: 'https://streamforge-demo.example.com',
+        previewImage: '/previews/streaming-cost-optimization.svg',
         excerpt: 'A detailed infrastructure audit uncovered idle resources and inefficient storage tiers, cutting monthly cloud spend nearly in half.',
         body: `The cloud bill had tripled in a year. Usage hadn't. Nobody had the bandwidth to find out where the money was going.
 
@@ -383,6 +395,8 @@ Changes shipped in order of savings-per-risk: storage lifecycle first (reversibl
         category: 'AI',
         order: 7,
         coverGradient: 'linear-gradient(135deg,#8b5cf6,#06b6d4)',
+        websiteUrl: 'https://helpgrid-demo.example.com',
+        previewImage: '/previews/b2b-support-copilot.svg',
         excerpt: 'A retrieval-augmented assistant now resolves a third of support tickets before they reach a human agent.',
         body: `The support queue was full of questions the documentation already answered — the team just couldn't search it fast enough at ticket volume.
 
@@ -411,6 +425,8 @@ Two weeks in shadow mode drafting silently against live tickets while agents gra
         category: 'AI',
         order: 8,
         coverGradient: 'linear-gradient(135deg,#ec4899,#f97316)',
+        websiteUrl: 'https://claimsight-demo.example.com',
+        previewImage: '/previews/insurance-document-intelligence.svg',
         excerpt: 'An AI-powered extraction pipeline now processes claims documents that used to take adjusters hours to review manually.',
         body: `Adjusters were paid to make judgment calls. They were spending their days transcribing scanned PDFs instead.
 

@@ -183,7 +183,7 @@ export default async function CaseStudiesPage() {
                         </div>
 
                         <div
-                          className="reveal-rise mt-8"
+                          className="reveal-rise mt-8 flex flex-wrap items-center gap-x-8 gap-y-3"
                           style={{ ['--reveal-delay' as string]: '0.25s' }}
                         >
                           <Link
@@ -199,6 +199,26 @@ export default async function CaseStudiesPage() {
                               →
                             </span>
                           </Link>
+                          {item.websiteUrl ? (
+                            <a
+                              href={item.websiteUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              data-cursor="Visit"
+                              className="group inline-flex items-center gap-2 text-sm text-fg-soft transition-colors hover:text-fg"
+                            >
+                              Visit website
+                              <span
+                                aria-hidden="true"
+                                className="text-xs transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                              >
+                                ↗
+                              </span>
+                              <span className="font-mono text-[11px] text-fg-soft/60">
+                                {new URL(item.websiteUrl).hostname}
+                              </span>
+                            </a>
+                          ) : null}
                         </div>
                       </div>
 
@@ -211,15 +231,28 @@ export default async function CaseStudiesPage() {
                           className="group relative block overflow-hidden rounded-3xl border border-line"
                         >
                           <div
-                            className="grain relative flex aspect-[4/3] items-end justify-between p-7 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
+                            className="grain relative aspect-[4/3] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
                             style={{ background: item.coverGradient }}
                           >
-                            <span className="rounded-full border border-white/25 bg-black/25 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-white backdrop-blur">
-                              {item.category}
-                            </span>
-                            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/80">
-                              metaxia.io/{item.slug.split('-')[0]}
-                            </span>
+                            {item.previewImage ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={item.previewImage}
+                                alt={`${item.title} — website preview`}
+                                className="absolute inset-0 h-full w-full object-cover"
+                                loading="lazy"
+                              />
+                            ) : null}
+                            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-black/45 to-transparent p-7">
+                              <span className="rounded-full border border-white/25 bg-black/25 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-white backdrop-blur">
+                                {item.category}
+                              </span>
+                              {item.websiteUrl ? (
+                                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/80">
+                                  {new URL(item.websiteUrl).hostname}
+                                </span>
+                              ) : null}
+                            </div>
                           </div>
                         </Link>
                       </Tilt>

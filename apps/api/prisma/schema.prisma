@@ -27,6 +27,8 @@ model CaseStudy {
   excerpt       String
   body          String
   coverGradient String
+  websiteUrl    String?
+  previewImage  String?
   order         Int      @default(0)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt

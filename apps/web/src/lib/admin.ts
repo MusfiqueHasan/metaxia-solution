@@ -71,6 +71,8 @@ export const RESOURCES: ResourceDef[] = [
       { name: 'excerpt', label: 'Excerpt', kind: 'textarea' },
       { name: 'body', label: 'Body (markdown)', kind: 'textarea' },
       { name: 'coverGradient', label: 'Cover gradient', kind: 'text' },
+      { name: 'websiteUrl', label: 'Website URL', kind: 'text', optional: true },
+      { name: 'previewImage', label: 'Preview image path', kind: 'text', optional: true },
       { name: 'order', label: 'Order', kind: 'number' },
     ],
   },
