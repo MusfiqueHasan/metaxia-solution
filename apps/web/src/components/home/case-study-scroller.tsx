@@ -53,31 +53,50 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
     <section className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
       <SectionBackdrop glow="left" variant="floor" />
 
-      {/* Orbital system cresting the section's top-center */}
-      <div
+      {/* Constellation across the section's top: a network of nodes joined
+          by hairlines, pulsing in sequence — systems, mapped. */}
+      <svg
         aria-hidden="true"
-        className="pointer-events-none absolute -top-44 left-1/2 hidden h-[26rem] w-[26rem] -translate-x-1/2 select-none lg:block"
+        viewBox="0 0 1000 200"
+        className="pointer-events-none absolute left-1/2 top-6 hidden w-[68rem] max-w-none -translate-x-1/2 select-none lg:block"
       >
-        <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.18] blur-2xl" />
-        <div className="orb-3d absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2" />
+        <g stroke="rgba(242,241,236,0.10)" strokeWidth="1">
+          <path d="M120 140 L265 70 L410 118 L560 48 L700 104 L855 62" fill="none" />
+          <path d="M265 70 L340 160 L560 48" fill="none" />
+          <path d="M560 48 L640 158 L855 62" fill="none" />
+        </g>
         {[
-          { inset: 'inset-0', duration: '14s', direction: 'normal', dot: 'h-2 w-2 bg-accent' },
-          { inset: 'inset-10', duration: '9s', direction: 'reverse', dot: 'h-1.5 w-1.5 bg-accent-strong' },
-          { inset: 'inset-20', duration: '6s', direction: 'normal', dot: 'h-1 w-1 bg-fg/70' },
-        ].map((orbit) => (
-          <div key={orbit.inset} className={`absolute ${orbit.inset}`}>
-            <div className="absolute inset-0 rounded-full border border-line-strong" />
-            <div
-              className="viz-orbit absolute inset-0"
-              style={{ animationDuration: orbit.duration, animationDirection: orbit.direction }}
-            >
-              <span
-                className={`absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-[0_0_10px_var(--color-accent)] ${orbit.dot}`}
+          { x: 120, y: 140, r: 3, accent: false, delay: '0s' },
+          { x: 265, y: 70, r: 4, accent: true, delay: '0.4s' },
+          { x: 340, y: 160, r: 2.5, accent: false, delay: '0.8s' },
+          { x: 410, y: 118, r: 3, accent: false, delay: '1.2s' },
+          { x: 560, y: 48, r: 4.5, accent: true, delay: '1.6s' },
+          { x: 640, y: 158, r: 2.5, accent: false, delay: '2s' },
+          { x: 700, y: 104, r: 3, accent: false, delay: '2.4s' },
+          { x: 855, y: 62, r: 4, accent: true, delay: '2.8s' },
+        ].map((node) => (
+          <g key={`${node.x}-${node.y}`}>
+            {node.accent ? (
+              <circle
+                cx={node.x}
+                cy={node.y}
+                r={node.r * 3.2}
+                fill="rgba(229,121,58,0.10)"
+                className="viz-blink"
+                style={{ animationDelay: node.delay }}
               />
-            </div>
-          </div>
+            ) : null}
+            <circle
+              cx={node.x}
+              cy={node.y}
+              r={node.r}
+              fill={node.accent ? 'rgba(229,121,58,0.85)' : 'rgba(242,241,236,0.45)'}
+              className="viz-blink"
+              style={{ animationDelay: node.delay }}
+            />
+          </g>
         ))}
-      </div>
+      </svg>
 
       <Container className="relative">
         <Reveal>
