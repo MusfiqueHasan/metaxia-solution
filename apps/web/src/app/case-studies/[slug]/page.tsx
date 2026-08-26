@@ -1,11 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { CaseStudy } from '@metaxia/shared';
 import { getCaseStudies } from '@/lib/api';
 import { site } from '@/lib/site';
 import { Container } from '@/components/container';
-import { Markdown } from '@/components/markdown';
-import { ContactCta } from '@/components/home/contact-cta';
+import { Button } from '@/components/button';
+import { Reveal } from '@/components/motion/reveal';
+import { SplitWords } from '@/components/motion/split-words';
+import { Starfield } from '@/components/motion/starfield';
 import { JsonLd } from '@/components/json-ld';
 
 export async function generateStaticParams() {
@@ -36,6 +39,62 @@ export async function generateMetadata({
   };
 }
 
+/* ------------------------------------------------------------------ */
+/* Body parsing: the seeded markdown follows intro / ## The challenge  */
+/* / ## What we built / ## The rollout / ## Results. We split it into  */
+/* those sections so each can get its own numbered layout.             */
+/* ------------------------------------------------------------------ */
+
+interface Sections {
+  intro: string;
+  challenge: string[];
+  built: string[];
+  rollout: string[];
+  results: string[];
+}
+
+function parseBody(body: string): Sections {
+  const sections: Sections = { intro: '', challenge: [], built: [], rollout: [], results: [] };
+  let current: keyof Sections | null = null;
+
+  for (const block of body.split(/\n\n+/)) {
+    if (block.startsWith('## ')) {
+      const heading = block.slice(3).toLowerCase();
+      if (heading.includes('challenge')) current = 'challenge';
+      else if (heading.includes('built')) current = 'built';
+      else if (heading.includes('rollout')) current = 'rollout';
+      else if (heading.includes('result')) current = 'results';
+      else current = null;
+      continue;
+    }
+    if (current === null) {
+      sections.intro = sections.intro ? `${sections.intro}\n\n${block}` : block;
+    } else {
+      sections[current].push(block);
+    }
+  }
+  return sections;
+}
+
+const bullets = (blocks: string[]) =>
+  blocks.flatMap((block) =>
+    block
+      .split('\n')
+      .filter((line) => line.startsWith('- '))
+      .map((line) => line.slice(2)),
+  );
+
+const prose = (blocks: string[]) => blocks.filter((block) => !block.startsWith('- '));
+
+/* Presentational dummy facts, deterministic per category (no schema change). */
+const TIMELINES = ['8 weeks', '12 weeks', '6 weeks', '10 weeks'];
+const STACKS: Record<string, string[]> = {
+  Software: ['TypeScript', 'Event sourcing', 'Postgres', 'CI/CD', 'Observability'],
+  Design: ['Design tokens', 'Figma + React', 'Storybook', 'Usability testing'],
+  Cloud: ['AWS', 'Terraform', 'Multi-region', 'Load testing', 'FinOps'],
+  AI: ['RAG pipeline', 'Eval harness', 'Confidence gating', 'Dashboards'],
+};
+
 export default async function CaseStudyDetailPage({
   params,
 }: {
@@ -44,11 +103,16 @@ export default async function CaseStudyDetailPage({
   const { slug } = await params;
   const allCaseStudies = (await getCaseStudies()).sort((a, b) => a.order - b.order);
   const index = allCaseStudies.findIndex((item) => item.slug === slug);
-  const caseStudy = index >= 0 ? allCaseStudies[index] : undefined;
+  const caseStudy: CaseStudy | undefined = index >= 0 ? allCaseStudies[index] : undefined;
   if (!caseStudy) notFound();
 
-  const prev = index > 0 ? allCaseStudies[index - 1] : null;
-  const next = index >= 0 && index < allCaseStudies.length - 1 ? allCaseStudies[index + 1] : null;
+  const next = index < allCaseStudies.length - 1 ? allCaseStudies[index + 1] : allCaseStudies[0];
+  const sections = parseBody(caseStudy.body);
+  const builtBullets = bullets(sections.built);
+  const resultBullets = bullets(sections.results);
+  const timeline = TIMELINES[index % TIMELINES.length];
+  const stack = STACKS[caseStudy.category] ?? ['TypeScript', 'Postgres', 'CI/CD'];
+  const year = String(2024 + ((index + 1) % 3));
 
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
@@ -60,76 +124,199 @@ export default async function CaseStudyDetailPage({
     ],
   };
 
+  const facts = [
+    { k: 'Client', v: 'Confidential · reference on request' },
+    { k: 'Sector', v: caseStudy.category },
+    { k: 'Timeline', v: timeline },
+    { k: 'Status', v: 'In production' },
+  ];
+
   return (
-    <main>
+    <main className="grain relative overflow-hidden bg-ink">
+      <Starfield />
       <JsonLd data={breadcrumbJsonLd} />
-      <section
-        className="relative overflow-hidden text-white"
-        style={{ background: caseStudy.coverGradient }}
-      >
-        <Container className="pt-36 pb-20 lg:pt-44 lg:pb-24">
-          <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-white backdrop-blur">
-            {caseStudy.category}
-          </span>
-          <h1 className="mt-6 max-w-3xl font-display text-4xl leading-[1.1] tracking-[-0.01em] sm:text-5xl lg:text-6xl">
-            {caseStudy.title}
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80">
-            {caseStudy.excerpt}
+
+      {/* Hero: back link, kicker + meta, serif title, lead, facts grid */}
+      <section className="relative border-b border-line">
+        <Container className="relative pb-16 pt-36 lg:pb-20 lg:pt-44">
+          <Reveal>
+            <Link
+              href="/case-studies"
+              className="reveal-fade inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.24em] text-fg-soft transition-colors hover:text-fg"
+            >
+              <span aria-hidden="true">←</span> All case studies
+            </Link>
+
+            <p className="reveal-fade mt-10 flex flex-wrap items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.26em] text-fg-soft">
+              <span className="text-accent">Case study</span>
+              <span className="text-fg-soft/50">·</span>
+              {year} · {caseStudy.category}
+            </p>
+
+            <h1 className="mt-7 max-w-4xl font-display text-[clamp(2.5rem,6vw,5rem)] leading-[1.02] tracking-[-0.01em] text-fg">
+              <SplitWords text={caseStudy.title} from={0.08} />
+            </h1>
+
+            <p
+              className="reveal-rise mt-7 max-w-2xl text-lg leading-relaxed text-fg-soft"
+              style={{ ['--reveal-delay' as string]: '0.35s' }}
+            >
+              {caseStudy.excerpt}
+            </p>
+
+            {/* The case's gradient survives as its identity stripe. */}
+            <div
+              aria-hidden="true"
+              className="reveal-scale mt-10 h-1.5 w-40 rounded-full"
+              style={{ background: caseStudy.coverGradient, ['--reveal-delay' as string]: '0.45s' }}
+            />
+
+            <dl
+              className="reveal-fade mt-12 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-line pt-8 sm:grid-cols-4"
+              style={{ ['--reveal-delay' as string]: '0.5s' }}
+            >
+              {facts.map((fact) => (
+                <div key={fact.k}>
+                  <dt className="font-mono text-[10px] uppercase tracking-[0.22em] text-fg-soft/70">
+                    {fact.k}
+                  </dt>
+                  <dd className="mt-2 text-sm text-fg">{fact.v}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+        </Container>
+      </section>
+
+      {/* (01) The challenge */}
+      <CaseSection n="01" title="The challenge">
+        {sections.intro ? (
+          <p className="font-display text-2xl leading-snug tracking-[-0.01em] text-fg sm:text-3xl">
+            {sections.intro}
           </p>
-        </Container>
-      </section>
+        ) : null}
+        {prose(sections.challenge).map((block, i) => (
+          <p key={i} className="mt-6 max-w-2xl text-[1.0625rem] leading-[1.85] text-fg-soft">
+            {block}
+          </p>
+        ))}
+      </CaseSection>
 
-      <section className="bg-ink py-24 lg:py-28">
-        <Container>
-          <div className="max-w-3xl">
-            <Markdown body={caseStudy.body} />
-          </div>
-        </Container>
-      </section>
+      {/* (02) What Metaxia built */}
+      <CaseSection n="02" title="What Metaxia built">
+        {prose(sections.built).map((block, i) => (
+          <p key={i} className="max-w-2xl text-[1.0625rem] leading-[1.85] text-fg-soft">
+            {block}
+          </p>
+        ))}
+        {builtBullets.length > 0 ? (
+          <ul className="mt-8 space-y-4">
+            {builtBullets.map((item, i) => (
+              <li key={i} className="flex items-start gap-4 text-[1.0625rem] leading-[1.7] text-fg-soft">
+                <span aria-hidden="true" className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rotate-45 bg-accent" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </CaseSection>
 
-      {prev || next ? (
-        <section className="border-t border-line bg-ink-raised py-10">
-          <Container className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            {prev ? (
-              <Link
-                href={`/case-studies/${prev.slug}`}
-                className="group flex items-center gap-3 text-sm font-medium text-fg-soft hover:text-fg"
+      {/* (03) Delivery */}
+      <CaseSection n="03" title="Delivery">
+        {prose(sections.rollout).map((block, i) => (
+          <p key={i} className="max-w-2xl text-[1.0625rem] leading-[1.85] text-fg-soft">
+            {block}
+          </p>
+        ))}
+        <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.2em] text-fg-soft/70">
+          Timeline: {timeline} · one accountable team
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {stack.map((item) => (
+            <span key={item} className="rounded-full border border-line px-3 py-1 text-xs text-fg-soft">
+              {item}
+            </span>
+          ))}
+        </div>
+      </CaseSection>
+
+      {/* (04) What changed — results as stat cards */}
+      {resultBullets.length > 0 ? (
+        <CaseSection n="04" title="What changed">
+          <div className="grid gap-5 sm:grid-cols-2">
+            {resultBullets.map((item, i) => (
+              <div
+                key={i}
+                className="reveal-rise rounded-3xl border border-line bg-ink-raised/70 p-7 backdrop-blur-sm"
+                style={{ ['--reveal-delay' as string]: `${i * 0.08}s` }}
               >
-                <span aria-hidden="true" className="transition-transform group-hover:-translate-x-1">
-                  ←
+                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-accent">
+                  Result {String(i + 1).padStart(2, '0')}
                 </span>
-                <span>
-                  <span className="block text-xs uppercase tracking-[0.15em] text-fg-soft/70">
-                    Previous
-                  </span>
-                  {prev.title}
-                </span>
-              </Link>
-            ) : (
-              <span />
-            )}
-            {next ? (
+                <p className="mt-3 font-display text-xl leading-snug tracking-[-0.01em] text-fg">
+                  {item}
+                </p>
+              </div>
+            ))}
+          </div>
+        </CaseSection>
+      ) : null}
+
+      {/* Closing: build-something-similar band + next case */}
+      <section className="relative border-t border-line">
+        <Container className="py-24 text-center lg:py-32">
+          <Reveal className="flex flex-col items-center gap-8">
+            <p className="reveal-fade font-mono text-[11px] uppercase tracking-[0.3em] text-fg-soft">
+              Building something similar?
+            </p>
+            <h2 className="max-w-3xl font-display text-4xl leading-[1.05] tracking-[-0.01em] text-fg sm:text-5xl">
+              <SplitWords text="Scoped plan and a" />{' '}
+              <em className="text-accent-strong">
+                <SplitWords text="fixed quote," from={0.2} />
+              </em>{' '}
+              <SplitWords text="before you commit." from={0.3} />
+            </h2>
+            <div
+              className="reveal-rise flex flex-wrap items-center justify-center gap-4"
+              style={{ ['--reveal-delay' as string]: '0.4s' }}
+            >
+              <Button href="/contact" size="lg" magnetic>
+                Start a project
+              </Button>
               <Link
                 href={`/case-studies/${next.slug}`}
-                className="group flex items-center gap-3 text-right text-sm font-medium text-fg-soft hover:text-fg sm:ml-auto"
+                data-cursor="Next"
+                className="group inline-flex items-center gap-2.5 px-4 text-sm font-medium text-fg-soft transition-colors hover:text-fg"
               >
-                <span>
-                  <span className="block text-xs uppercase tracking-[0.15em] text-fg-soft/70">
-                    Next
-                  </span>
-                  {next.title}
-                </span>
-                <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+                Next case: {next.title.length > 38 ? `${next.title.slice(0, 38)}…` : next.title}
+                <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
                   →
                 </span>
               </Link>
-            ) : null}
-          </Container>
-        </section>
-      ) : null}
-
-      <ContactCta />
+            </div>
+          </Reveal>
+        </Container>
+      </section>
     </main>
+  );
+}
+
+function CaseSection({ n, title, children }: { n: string; title: string; children: React.ReactNode }) {
+  return (
+    <section className="relative border-b border-line last:border-b-0">
+      <Container className="py-16 lg:py-24">
+        <Reveal>
+          <div className="grid gap-8 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
+            <div className="reveal-fade">
+              <p className="font-mono text-sm text-accent">({n})</p>
+              <h2 className="mt-2 font-display text-2xl tracking-[-0.01em] text-fg">{title}</h2>
+            </div>
+            <div className="reveal-rise" style={{ ['--reveal-delay' as string]: '0.1s' }}>
+              {children}
+            </div>
+          </div>
+        </Reveal>
+      </Container>
+    </section>
   );
 }

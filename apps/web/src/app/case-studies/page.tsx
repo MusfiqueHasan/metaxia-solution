@@ -58,10 +58,12 @@ export default async function CaseStudiesPage() {
   ];
 
   return (
-    <main>
+    // One continuous observatory backdrop: the hero's starfield + grain run
+    // behind every case row, not just the opening section.
+    <main className="grain relative overflow-hidden bg-ink">
+      <Starfield />
       {/* Hero — kicker, serif thesis, lead, stat row, scroll cue */}
-      <section className="grain relative overflow-hidden border-b border-line bg-ink">
-        <Starfield />
+      <section className="relative border-b border-line">
         <Container className="relative pb-24 pt-40 lg:pb-28 lg:pt-48">
           <Reveal>
             <p className="reveal-fade flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.3em] text-fg-soft">
@@ -113,7 +115,7 @@ export default async function CaseStudiesPage() {
       </section>
 
       {/* Case index — alternating full-width editorial rows */}
-      <section className="bg-ink">
+      <section className="relative">
         {caseStudies.length > 0 ? (
           caseStudies.map((item, index) => {
             const { year, scope, pills } = extras(item, index);
