@@ -568,6 +568,30 @@ body {
   transform: none;
 }
 
+/* Vertical line that draws downward on reveal */
+.reveal-draw-y {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 1.2s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.is-revealed .reveal-draw-y {
+  transform: scaleY(1);
+}
+
+/* Horizontal rule that draws across on reveal */
+.reveal-draw-x {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.3s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.is-revealed .reveal-draw-x {
+  transform: scaleX(1);
+}
+
 /* Word-by-word hero reveal */
 .word-mask {
   display: inline-block;

@@ -230,7 +230,7 @@ export default async function CaseStudyDetailPage({
 
       {/* Website preview — the live site's hero, framed */}
       {caseStudy.previewImage ? (
-        <section className="relative border-b border-line">
+        <section className="relative">
           <Container className="py-16 lg:py-24">
             <Reveal>
               <a
@@ -373,15 +373,31 @@ export default async function CaseStudyDetailPage({
 
 function CaseSection({ n, title, children }: { n: string; title: string; children: React.ReactNode }) {
   return (
-    <section className="relative border-b border-line last:border-b-0">
+    <section className="relative">
       <Container className="py-16 lg:py-24">
-        <Reveal>
+        <Reveal threshold={0.3}>
+          {/* Rule that draws itself across as the section arrives */}
+          <span aria-hidden="true" className="reveal-draw-x mb-14 block h-px w-full bg-line-strong" />
+
           <div className="grid gap-8 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
-            <div className="reveal-fade">
-              <p className="font-mono text-sm text-accent">({n})</p>
-              <h2 className="mt-2 font-display text-2xl tracking-[-0.01em] text-fg">{title}</h2>
+            <div className="relative lg:pl-6">
+              {/* Ink line tracing down the marker column */}
+              <span
+                aria-hidden="true"
+                className="reveal-draw-y absolute left-0 top-1 hidden h-full w-px bg-gradient-to-b from-accent via-line-strong to-transparent lg:block"
+                style={{ ['--reveal-delay' as string]: '0.15s' }}
+              />
+              <p
+                className="reveal-rise font-mono text-sm text-accent"
+                style={{ ['--reveal-delay' as string]: '0.1s' }}
+              >
+                ({n})
+              </p>
+              <h2 className="mt-2 font-display text-2xl tracking-[-0.01em] text-fg">
+                <SplitWords text={title} from={0.2} step={0.07} />
+              </h2>
             </div>
-            <div className="reveal-rise" style={{ ['--reveal-delay' as string]: '0.1s' }}>
+            <div className="reveal-rise" style={{ ['--reveal-delay' as string]: '0.3s' }}>
               {children}
             </div>
           </div>
