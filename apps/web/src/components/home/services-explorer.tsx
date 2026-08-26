@@ -237,35 +237,59 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
           <Reveal className="hidden lg:block">
             <div className="reveal-scale sticky top-28">
               <div className="relative min-h-[26rem] overflow-hidden rounded-3xl border border-line bg-ink-raised">
-                {services.map((service, index) => (
-                  <div
-                    key={service.id}
-                    aria-hidden={index !== active}
-                    className="absolute inset-0 flex flex-col justify-between p-10 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                    style={{
-                      opacity: index === active ? 1 : 0,
-                      transform: index === active ? 'scale(1)' : 'scale(1.035)',
-                      background: washes[index % washes.length],
-                    }}
-                  >
-                    <div className="flex items-start justify-between">
-                      <span className="flex h-14 w-14 items-center justify-center rounded-2xl border border-line-strong bg-ink/60 text-accent">
-                        <Icon name={service.icon as IconKey} className="h-6 w-6" />
-                      </span>
-                      <span className="font-mono text-xs text-fg-soft">
-                        {String(index + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
-                      </span>
+                {services.map((service, index) => {
+                  const on = index === active;
+                  // Entering elements stagger up; exiting ones vanish instantly
+                  // (no delay, short duration) so slides never ghost over each
+                  // other mid-crossfade.
+                  const step = (order: number) =>
+                    ({
+                      opacity: on ? 1 : 0,
+                      transform: on ? 'translateY(0)' : 'translateY(0.8rem)',
+                      transitionProperty: 'opacity, transform',
+                      transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                      transitionDuration: on ? '600ms' : '180ms',
+                      transitionDelay: on ? `${120 + order * 90}ms` : '0ms',
+                    }) as const;
+
+                  return (
+                    <div
+                      key={service.id}
+                      aria-hidden={!on}
+                      className="absolute inset-0 flex flex-col justify-between p-10 transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                      style={{
+                        opacity: on ? 1 : 0,
+                        background: washes[index % washes.length],
+                      }}
+                    >
+                      <div className="flex items-start justify-between">
+                        <span
+                          className="flex h-14 w-14 items-center justify-center rounded-2xl border border-line-strong bg-ink/60 text-accent"
+                          style={{
+                            ...step(0),
+                            transform: on ? 'scale(1) translateY(0)' : 'scale(0.75) translateY(0.4rem)',
+                          }}
+                        >
+                          <Icon name={service.icon as IconKey} className="h-6 w-6" />
+                        </span>
+                        <span className="font-mono text-xs text-fg-soft" style={step(1)}>
+                          {String(index + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
+                        </span>
+                      </div>
+                      <div>
+                        <p className="font-display text-2xl tracking-[-0.01em] text-fg" style={step(2)}>
+                          {service.title}
+                        </p>
+                        <p
+                          className="mt-3 max-w-sm text-sm leading-relaxed text-fg-soft"
+                          style={step(3)}
+                        >
+                          {service.excerpt}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-display text-2xl tracking-[-0.01em] text-fg">
-                        {service.title}
-                      </p>
-                      <p className="mt-3 max-w-sm text-sm leading-relaxed text-fg-soft">
-                        {service.excerpt}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
 
                 {/* Cycle progress: one tick per service, the active one fills */}
                 <div className="absolute inset-x-10 bottom-4 flex gap-1.5" aria-hidden="true">
