@@ -41,7 +41,7 @@ export function Starfield({ className }: { className?: string }) {
       life: number;
     }
     let meteor: Meteor | null = null;
-    let nextMeteorAt = 3000 + Math.random() * 4000;
+    let nextMeteorAt = 800 + Math.random() * 1500;
 
     const seed = () => {
       const count = Math.min(240, Math.floor((width * height) / 6000));
@@ -93,7 +93,7 @@ export function Starfield({ className }: { className?: string }) {
           meteor.life -= 0.02;
           if (meteor.life <= 0 || meteor.x > width + 60 || meteor.y > height + 60) {
             meteor = null;
-            nextMeteorAt = t + 6000 + Math.random() * 4000;
+            nextMeteorAt = t + 1500 + Math.random() * 2500;
           } else {
             const tail = 14;
             const gradient = ctx.createLinearGradient(

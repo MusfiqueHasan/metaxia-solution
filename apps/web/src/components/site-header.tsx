@@ -14,7 +14,7 @@ export function SiteHeader() {
   const onAdmin = pathname.startsWith('/admin');
 
   useEffect(() => {
-    const onScroll = () => setRaised(window.scrollY > 24);
+    const onScroll = () => setRaised(window.scrollY > 40);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -29,39 +29,44 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  const pill = (raised || onAdmin) && !open;
+
   return (
-    // NOTE: backdrop-blur is deliberately dropped while the overlay menu is
-    // open — a backdrop-filtered ancestor becomes the containing block for
-    // fixed descendants, which would clamp the full-screen menu to the
-    // header's own height.
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color] duration-500 ${
-        open
-          ? 'border-b border-line bg-ink'
-          : raised || onAdmin
-            ? 'border-b border-line bg-ink/85 backdrop-blur-xl'
-            : 'border-b border-transparent bg-transparent'
-      }`}
-    >
-      <Container className="flex h-[4.5rem] items-center justify-between">
+    // The header morphs: full-width and transparent at the top of the page,
+    // shrinking into a centered floating pill once scrolling starts. The
+    // overlay menu lives OUTSIDE the pill (a backdrop-filtered element would
+    // otherwise become the containing block for the fixed overlay).
+    <header className="fixed inset-x-0 top-0 z-50 px-4">
+      <div
+        className={`mx-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          pill
+            ? 'mt-3 h-14 max-w-fit gap-6 rounded-full border border-line-strong bg-ink/85 px-5 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.8)] backdrop-blur-xl lg:gap-8 lg:px-6'
+            : 'h-[4.5rem] w-full max-w-6xl rounded-none border border-transparent bg-transparent px-2 lg:px-4'
+        }`}
+      >
         <Link
           href="/"
-          className="relative z-50 flex items-center gap-2 font-display text-xl tracking-[-0.01em] text-fg"
+          className={`relative z-50 flex items-center gap-2 font-display tracking-tight text-fg transition-all duration-500 ${
+            pill ? 'text-lg' : 'text-xl'
+          }`}
         >
           Metaxia
           <span className="h-1.5 w-1.5 rotate-45 bg-accent" aria-hidden="true" />
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+        <nav
+          className={`hidden items-center lg:flex ${pill ? 'gap-6' : 'gap-8'}`}
+          aria-label="Primary"
+        >
           {navLinks.map((link) => {
             const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`link-rule text-sm font-medium transition-colors duration-300 ${
-                  active ? 'text-fg' : 'text-fg-soft hover:text-fg'
-                }`}
+                className={`link-rule font-medium transition-colors duration-300 ${
+                  pill ? 'text-[13px]' : 'text-sm'
+                } ${active ? 'text-fg' : 'text-fg-soft hover:text-fg'}`}
                 aria-current={active ? 'page' : undefined}
               >
                 {link.label}
@@ -71,7 +76,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden lg:block">
-          <Button href="/contact" magnetic>
+          <Button href="/contact" magnetic className={pill ? '!px-5 !py-2 !text-[13px]' : ''}>
             Let&rsquo;s Talk
           </Button>
         </div>
@@ -102,7 +107,7 @@ export function SiteHeader() {
             />
           </span>
         </button>
-      </Container>
+      </div>
 
       {/* Full-screen overlay menu (mobile / tablet) */}
       <div

@@ -9,6 +9,7 @@ import { Approach } from '@/components/home/approach';
 import { Skills } from '@/components/home/skills';
 import { BlogPreview } from '@/components/home/blog-preview';
 import { ContactCta } from '@/components/home/contact-cta';
+import { ScrollTop } from '@/components/motion/scroll-top';
 
 export const metadata: Metadata = {
   description: site.description,
@@ -41,6 +42,7 @@ export default async function Home() {
       <Skills />
       <BlogPreview posts={posts.slice(0, 3)} />
       <ContactCta />
+      <ScrollTop />
     </main>
   );
 }
