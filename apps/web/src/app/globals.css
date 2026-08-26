@@ -412,6 +412,17 @@ body {
   will-change: transform;
 }
 
+/* Outlined ghost display text — strokes only, for background typography. */
+.text-outline {
+  -webkit-text-stroke: 1px rgba(242, 241, 236, 0.16);
+  color: transparent;
+}
+
+.text-outline--accent {
+  -webkit-text-stroke: 1px rgba(229, 121, 58, 0.45);
+  color: transparent;
+}
+
 /* Service mini-visualizations (preview panel centerpieces). */
 @keyframes viz-pulse {
   0% {
