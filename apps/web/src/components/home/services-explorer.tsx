@@ -17,7 +17,7 @@ const washes = [
   'radial-gradient(120% 120% at 85% 45%, rgba(240,140,90,0.26), transparent 60%)',
 ];
 
-const CYCLE_MS = 3200;
+const CYCLE_MS = 1800;
 
 /**
  * The services section is a switchboard: a list of disciplines on the left,
