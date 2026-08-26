@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import type { CaseStudy } from '@metaxia/shared';
 import { Container } from '@/components/container';
+import { Button } from '@/components/button';
 import { Reveal } from '@/components/motion/reveal';
 import { SectionBackdrop } from '@/components/section-backdrop';
 
@@ -16,6 +17,7 @@ const YEARS = ['2025', '2026', '2024'];
  * the edge arrows and the 01/08 counter read and drive scrollLeft.
  */
 export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
+  const shown = items.slice(0, 4);
   const trackRef = useRef<HTMLDivElement>(null);
   const [current, setCurrent] = useState(0);
 
@@ -30,7 +32,7 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
         const card = track.firstElementChild as HTMLElement | null;
         if (!card) return;
         const step = card.offsetWidth + 32; // card + gap
-        setCurrent(Math.min(items.length - 1, Math.round(track.scrollLeft / step)));
+        setCurrent(Math.min(shown.length - 1, Math.round(track.scrollLeft / step)));
       });
     };
     track.addEventListener('scroll', onScroll, { passive: true });
@@ -38,7 +40,7 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
       track.removeEventListener('scroll', onScroll);
       if (frame) cancelAnimationFrame(frame);
     };
-  }, [items.length]);
+  }, [shown.length]);
 
   const scrollBy = (direction: 1 | -1) => {
     const track = trackRef.current;
@@ -117,7 +119,7 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
             </h2>
             <p className="reveal-fade font-mono text-sm tabular-nums text-fg-soft">
               <span className="text-accent">{String(current + 1).padStart(2, '0')}</span> /{' '}
-              {String(items.length).padStart(2, '0')}
+              {String(shown.length).padStart(2, '0')}
             </p>
           </div>
         </Reveal>
@@ -133,7 +135,7 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
           // flooring at the mobile gutter on narrow screens.
           style={{ paddingInlineStart: 'max(1.5rem, calc((100vw - 72rem) / 2 + 2rem))' }}
         >
-          {items.map((item, index) => {
+          {shown.map((item, index) => {
             const domain = item.websiteUrl ? new URL(item.websiteUrl).hostname : null;
             const year = YEARS[(index + 1) % YEARS.length];
             return (
@@ -235,6 +237,13 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
         >
           <span aria-hidden="true">→</span>
         </button>
+
+        {/* View all */}
+        <div className="mt-14 flex justify-center">
+          <Button href="/case-studies" size="lg" variant="ghost" magnetic>
+            View all case studies ({String(items.length).padStart(2, '0')})
+          </Button>
+        </div>
       </Reveal>
     </section>
   );
