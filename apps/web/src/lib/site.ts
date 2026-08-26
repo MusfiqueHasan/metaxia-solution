@@ -9,7 +9,6 @@ export const navLinks = [
   { label: 'Work', href: '/case-studies' },
   { label: 'About', href: '/about' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '/contact' },
 ];
 
 export const footerLinks = {
@@ -21,6 +20,5 @@ export const footerLinks = {
   resources: [
     { label: 'Blog', href: '/blog' },
     { label: 'Case Studies', href: '/case-studies' },
-    { label: 'Contact', href: '/contact' },
-  ],
+    ],
 };

@@ -42,7 +42,7 @@ export function SiteHeader() {
       <div
         className={`mx-auto flex w-full items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           pill
-            ? 'mt-3 h-14 max-w-[46rem] rounded-full border border-line-strong bg-ink/85 px-6 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.8)] backdrop-blur-xl'
+            ? 'mt-3 h-14 max-w-[36rem] rounded-full border border-line-strong bg-ink/85 px-6 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.8)] backdrop-blur-xl'
             : 'mt-0 h-[4.5rem] max-w-6xl rounded-[2rem] border border-transparent bg-transparent px-2 shadow-none lg:px-4'
         }`}
       >
