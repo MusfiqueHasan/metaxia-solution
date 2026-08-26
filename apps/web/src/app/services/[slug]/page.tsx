@@ -5,6 +5,7 @@ import { getServices } from '@/lib/api';
 import { site } from '@/lib/site';
 import { PageHero } from '@/components/page-hero';
 import { Container } from '@/components/container';
+import { Button } from '@/components/button';
 import { Markdown } from '@/components/markdown';
 import { Icon } from '@/components/icon';
 import { ContactCta } from '@/components/home/contact-cta';
@@ -81,8 +82,55 @@ export default async function ServiceDetailPage({
 
       <section className="bg-ink py-24 lg:py-28">
         <Container>
-          <div className="max-w-3xl">
-            <Markdown body={service.body} />
+          <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-20">
+            <div className="max-w-3xl">
+              <Markdown body={service.body} />
+            </div>
+
+            <aside className="order-first lg:order-none">
+              <div className="rounded-3xl border border-line bg-ink-raised p-8 lg:sticky lg:top-28">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-line bg-ink text-accent">
+                  <Icon name={service.icon} className="h-5 w-5" />
+                </span>
+                <h2 className="mt-6 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-fg-soft">
+                  At a glance
+                </h2>
+                <dl className="mt-5 space-y-5">
+                  <div>
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft/70">
+                      Practice
+                    </dt>
+                    <dd className="mt-1 text-sm text-fg">
+                      {String(allServices.findIndex((s) => s.slug === service.slug) + 1).padStart(2, '0')}{' '}
+                      / {String(allServices.length).padStart(2, '0')} — {service.title}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft/70">
+                      Typical engagement
+                    </dt>
+                    <dd className="mt-1 text-sm text-fg">6–16 weeks, weekly releases</dd>
+                  </div>
+                  <div>
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft/70">
+                      Team shape
+                    </dt>
+                    <dd className="mt-1 text-sm text-fg">2–4 engineers + a lead you talk to daily</dd>
+                  </div>
+                  <div>
+                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft/70">
+                      Starts with
+                    </dt>
+                    <dd className="mt-1 text-sm text-fg">A scoping call and a written plan — free</dd>
+                  </div>
+                </dl>
+                <div className="mt-8">
+                  <Button href="/contact" className="w-full">
+                    Scope this work
+                  </Button>
+                </div>
+              </div>
+            </aside>
           </div>
         </Container>
       </section>
@@ -90,8 +138,8 @@ export default async function ServiceDetailPage({
       {otherServices.length > 0 ? (
         <section className="bg-ink-raised py-24 lg:py-28">
           <Container>
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-              <span className="h-2 w-2 rotate-45 bg-accent" aria-hidden="true" />
+            <div className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-accent">
+              <span className="inline-block h-px w-6 bg-accent" aria-hidden="true" />
               Other Services
             </div>
             <h2 className="mt-4 font-display text-3xl font-medium tracking-tight text-fg sm:text-4xl">

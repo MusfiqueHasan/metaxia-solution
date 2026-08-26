@@ -23,7 +23,30 @@ async function main() {
         icon: 'cloud',
         order: 1,
         excerpt: 'Design and migration of resilient, cost-aware cloud platforms.',
-        body: 'We assess your current infrastructure, design a target architecture on AWS, GCP, or Azure, and run the migration with zero-downtime cutover strategies. Our engagements cover landing zones, IaC baselines, and FinOps guardrails so your platform stays fast and affordable as it grows.',
+        body: `We assess your current infrastructure, design a target architecture on AWS, GCP, or Azure, and run the migration with zero-downtime cutover strategies. Our engagements cover landing zones, IaC baselines, and FinOps guardrails so your platform stays fast and affordable as it grows.
+
+## What we deliver
+
+- A target architecture document with a costed migration path, reviewed with your engineering leads
+- Landing zones with account structure, network topology, and identity boundaries set up as code
+- Infrastructure-as-code baselines in Terraform or Pulumi, wired into your CI pipeline
+- Zero-downtime cutover runbooks, rehearsed against staging before anything touches production
+- FinOps guardrails: budgets, tagging standards, and per-team cost dashboards
+
+## How the engagement runs
+
+The first two weeks are discovery: we read your existing infrastructure, interview the people who operate it, and map every dependency that could complicate a move. From there we design the target state and sequence the migration into increments that each leave you in a working, reversible position. Nothing cuts over until the rehearsal runs clean twice.
+
+## Where this fits
+
+Most teams bring us in at one of three moments: an expiring data-center contract, a platform that has outgrown a single region, or a cloud bill that nobody can explain anymore. All three are good times to talk.
+
+## Outcomes you can expect
+
+- Cutovers measured in minutes of read-only mode, not weekends of downtime
+- Infrastructure any engineer can rebuild from the repository, not from memory
+- A monthly bill your finance team can trace to products and teams
+- An on-call rotation that pages less because the platform degrades gracefully`,
       },
       {
         slug: 'web-development',
@@ -31,7 +54,30 @@ async function main() {
         icon: 'code',
         order: 2,
         excerpt: 'Product-grade web applications built with modern frameworks.',
-        body: 'Our engineering teams build fast, accessible web applications using React, Next.js, and Node.js, backed by strong typing and automated test coverage. We favor component-driven design systems that let your product team ship new screens without waiting on engineering for every layout change. Performance budgets, Core Web Vitals monitoring, and progressive enhancement are baked into every sprint rather than bolted on at the end. From marketing sites to complex internal tools, we deliver codebases that new engineers can understand within a day of joining.',
+        body: `Our engineering teams build fast, accessible web applications using React, Next.js, and Node.js, backed by strong typing and automated test coverage. From marketing sites to complex internal tools, we deliver codebases that new engineers can understand within a day of joining.
+
+## What we deliver
+
+- Production applications in React, Next.js, and Node.js with strict TypeScript throughout
+- A component-driven design system so product teams ship new screens without waiting on engineering
+- Automated test coverage at the unit, integration, and end-to-end levels
+- Performance budgets and Core Web Vitals monitoring wired into CI, not bolted on at the end
+- Documentation and onboarding notes written for the next engineer, not the current one
+
+## How the engagement runs
+
+We start with a one-week technical discovery: current codebase, deployment story, and the product roadmap the code has to serve. Work then runs in weekly releases against a shared board — you see the application grow in production, not in screenshots. Every pull request carries tests and a preview deployment.
+
+## Stack we reach for
+
+Next.js on the front, NestJS or plain Node services behind it, Postgres by default, and infrastructure as code from day one. When your existing stack differs, we meet it where it is — rewrites are a last resort, not a sales pitch.
+
+## Outcomes you can expect
+
+- First production deploy inside the first two weeks
+- Page loads under budget on real devices, verified in CI on every merge
+- A codebase your own hires can extend without a handover call
+- Accessibility to WCAG AA as a default, not a change request`,
       },
       {
         slug: 'data-security',
@@ -39,7 +85,30 @@ async function main() {
         icon: 'shield',
         order: 3,
         excerpt: 'Security assessments and hardening for applications, infrastructure, and data pipelines.',
-        body: 'We run threat modeling workshops, penetration tests, and infrastructure audits to find gaps before attackers do. Our team implements encryption at rest and in transit, secrets management, and least-privilege access controls across your cloud accounts. We help you reach compliance milestones such as SOC 2 and ISO 27001 without freezing your roadmap. Ongoing monitoring and incident-response runbooks keep your team prepared long after the initial engagement ends.',
+        body: `We run threat modeling workshops, penetration tests, and infrastructure audits to find gaps before attackers do — then close them without freezing your roadmap.
+
+## What we deliver
+
+- A threat model of your product and infrastructure, built with your team so it survives the engagement
+- Penetration testing of applications and cloud accounts with reproduction steps for every finding
+- Encryption at rest and in transit, secrets management, and least-privilege access implemented, not just recommended
+- Compliance groundwork for SOC 2 and ISO 27001 mapped to controls you already run
+- Incident-response runbooks and tabletop exercises so the first real page is not the first rehearsal
+
+## How the engagement runs
+
+Week one is the threat-modeling workshop and scoping. Weeks two through four are assessment: application testing, cloud configuration review, and dependency audit. Everything we find lands in your tracker ranked by exploitability and blast radius, and we stay on to fix the top of that list with your engineers rather than leaving a PDF behind.
+
+## Where this fits
+
+Typical triggers: a security questionnaire from your biggest prospect, a SOC 2 deadline, or the quiet realization that every engineer has production access and nobody remembers why.
+
+## Outcomes you can expect
+
+- Findings ranked by real exploitability, with the critical list fixed before we leave
+- Audit evidence your compliance platform can consume directly
+- Access boundaries that survive employee offboarding
+- A team that has rehearsed its worst day once before having it`,
       },
       {
         slug: 'mobile-apps',
@@ -47,7 +116,30 @@ async function main() {
         icon: 'phone',
         order: 4,
         excerpt: 'Native and cross-platform mobile apps built for reliability at scale.',
-        body: 'We design and build iOS and Android applications using React Native and native Swift or Kotlin when performance demands it. Every release goes through device-lab testing across a range of screen sizes, OS versions, and network conditions before it reaches your users. We set up crash reporting, analytics, and phased rollouts so issues surface early and rollbacks are painless. Our mobile practice also covers offline-first data sync and push notification infrastructure for apps that need to work anywhere.',
+        body: `We design and build iOS and Android applications using React Native, and native Swift or Kotlin when performance demands it — apps built to survive bad networks, old devices, and app-store review.
+
+## What we deliver
+
+- iOS and Android apps from one React Native codebase, with native modules where they earn their keep
+- Offline-first data sync so the app works on the subway, not just in the demo
+- Push notification infrastructure with segmentation and quiet-hours handling
+- Crash reporting, analytics, and phased rollouts configured before the first release
+- App Store and Play Store submission handled end to end, including review-rejection triage
+
+## How the engagement runs
+
+We prototype the two or three screens that carry your app's core loop first and put them on real devices in week two. Every release after that goes through device-lab testing across screen sizes, OS versions, and throttled network conditions before your users ever see it. Phased rollouts mean a bad build reaches 5 percent of users, not all of them.
+
+## Where this fits
+
+Teams usually come to us with a web product that needs a real mobile presence, an agency-built app that has stopped scaling, or a native codebase their last mobile engineer took with them.
+
+## Outcomes you can expect
+
+- A first TestFlight or internal-track build within three weeks
+- Crash-free session rates above 99.5 percent as a standing bar
+- Rollbacks that take one click because releases are phased by default
+- One codebase your web engineers can contribute to`,
       },
       {
         slug: 'ai-integration',
@@ -55,7 +147,30 @@ async function main() {
         icon: 'spark',
         order: 5,
         excerpt: 'Practical AI features woven into your existing product, not bolted on as a demo.',
-        body: "We help teams identify where large language models and machine learning actually move the needle, then ship production-grade integrations rather than one-off prototypes. Our work spans retrieval-augmented search, document extraction, customer support copilots, and internal automation tools. We pay close attention to cost per request, latency, and evaluation pipelines so your AI features stay reliable as usage grows. Every integration ships with guardrails, logging, and a clear fallback path for when a model call fails or returns low-confidence output.",
+        body: `We help teams identify where large language models actually move the needle, then ship production-grade integrations rather than one-off prototypes.
+
+## What we deliver
+
+- Retrieval-augmented search and question answering over your own documents and data
+- Document extraction pipelines that turn PDFs and scans into structured, validated fields
+- Customer support copilots that draft grounded responses for human review
+- Internal automation for the repetitive judgment calls that eat your team's week
+- Evaluation pipelines, guardrails, and logging shipped with every integration
+
+## How the engagement runs
+
+We start with a two-week feasibility sprint: real samples of your data, a working prototype against them, and honest numbers on accuracy, latency, and cost per request. If the numbers hold, we productionize — evals in CI, confidence thresholds with human-review routing, and a fallback path for every model call that fails or comes back uncertain. If they don't hold, you've spent two weeks learning that, not two quarters.
+
+## What we watch that demos ignore
+
+Cost per request at your real volume, p95 latency under load, drift when the underlying model version changes, and what happens to the user experience when the model is wrong. Every one of those has killed a promising AI feature somewhere; none of them show up in a keynote demo.
+
+## Outcomes you can expect
+
+- A working prototype on your data inside two weeks
+- Accuracy and cost numbers you can defend to your board
+- AI features with a measured failure mode instead of a surprising one
+- A team that can tune prompts and retrieval without calling us back`,
       },
       {
         slug: 'seo-optimization',
@@ -63,7 +178,30 @@ async function main() {
         icon: 'chart',
         order: 6,
         excerpt: 'Technical and content SEO that turns organic search into a growth channel.',
-        body: 'We start with a full technical audit covering site speed, crawlability, structured data, and Core Web Vitals, then fix the issues holding your rankings back. Our content strategy pairs keyword research with a realistic publishing cadence your team can actually sustain. We track rankings, organic traffic, and conversion rate together, not vanity metrics in isolation. Most engagements include a quarterly roadmap review so your SEO investment keeps compounding instead of plateauing after the first few wins.',
+        body: `We treat organic search as an engineering problem first and a content problem second — and we fix both sides, not just the one that produces slide decks.
+
+## What we deliver
+
+- A full technical audit: site speed, crawlability, indexation, structured data, and Core Web Vitals
+- The fixes themselves — rendering strategy, sitemap hygiene, canonical structure — shipped as pull requests
+- Schema.org structured data for the page types that earn rich results in your category
+- A content plan paired with keyword research and a publishing cadence your team can actually sustain
+- Rank, traffic, and conversion tracking in one dashboard, so wins are measured in revenue
+
+## How the engagement runs
+
+The first month is the technical pass: we audit, then fix, in the same sprint — most sites carry two or three structural issues that cap everything else. From month two the work shifts to content and authority: briefs your team can write against, internal-link architecture, and a quarterly roadmap review so the investment compounds instead of plateauing.
+
+## What we refuse to do
+
+Buy links, spin AI content at volume, or chase algorithm loopholes with a shelf life. Rankings built that way are borrowed, not owned, and they come with a penalty attached.
+
+## Outcomes you can expect
+
+- Core Web Vitals in the green on real-user data, not lab runs
+- Indexation coverage you can see moving in Search Console within the first month
+- Content that ranks because it answers the query better, not because it is longer
+- A quarterly report your CFO reads past the first page`,
       },
     ],
   });
@@ -78,7 +216,26 @@ async function main() {
         order: 1,
         coverGradient: 'linear-gradient(135deg,#0ea5e9,#6366f1)',
         excerpt: 'We replaced a decade-old batch ledger with an event-sourced platform that now settles transactions in real time.',
-        body: "The client's ledger ran nightly batch jobs that delayed reconciliation by up to 18 hours and made multi-currency support brittle. We re-architected the system around event sourcing and CQRS, giving finance teams a real-time view of balances across 12 currencies. The migration ran in parallel with the legacy system for six weeks, with automated reconciliation checks catching every discrepancy before cutover. Post-launch, transaction processing time dropped from minutes to under 200 milliseconds, and the finance team closed month-end books three days faster. The new architecture has since scaled to 40 million transactions a month without a single unplanned outage.",
+        body: `A payments scale-up was running its entire business on a ledger designed a decade earlier for a fraction of the volume — and one currency.
+
+## The challenge
+
+The ledger ran nightly batch jobs that delayed reconciliation by up to 18 hours, and multi-currency support had been retrofitted so many times that finance treated certain reports as unreliable by default. Every new market the company entered made the batch window longer. Engineering wanted to rebuild; finance couldn't afford a single day of broken books during the transition.
+
+## What we built
+
+We re-architected the system around event sourcing and CQRS. Every financial event is now an immutable record, and balances across 12 currencies are projections that can be rebuilt from the log at any time. Read models serve the finance team's real-time views; the write path clears individual transactions in under 200 milliseconds.
+
+## The rollout
+
+The new ledger ran in parallel with the legacy system for six weeks, with automated reconciliation comparing every balance across both systems nightly. Discrepancies — there were 14, all traced to legacy rounding bugs — were resolved before cutover, not after. The final switch was a configuration change, rehearsed twice.
+
+## Results
+
+- Transaction processing time down from minutes to under 200 ms
+- Month-end close finishing three days faster
+- 12 currencies with a single, provable source of truth
+- 40 million transactions a month since launch, zero unplanned outages`,
       },
       {
         slug: 'logistics-marketplace-rebuild',
@@ -87,7 +244,26 @@ async function main() {
         order: 2,
         coverGradient: 'linear-gradient(135deg,#f97316,#ec4899)',
         excerpt: 'A legacy PHP monolith was replaced with a modular TypeScript platform, cutting page load times by 70 percent.',
-        body: "The client's freight-matching marketplace had grown past what its original PHP monolith could support, with deploys taking hours and outages spiking during peak shipping season. We split the platform into a set of well-bounded services behind a GraphQL gateway, migrating features incrementally so the business never paused operations. Automated end-to-end tests replaced a manual QA process that previously took two days per release. Average page load time fell from 4.2 seconds to 1.1 seconds, and the engineering team went from monthly releases to shipping several times a week. Carrier onboarding, previously a two-week manual process, is now largely self-serve.",
+        body: `A freight-matching marketplace had outgrown the PHP monolith it was founded on — and peak shipping season kept proving it.
+
+## The challenge
+
+Deploys took hours and required a maintenance window nobody wanted to schedule. Outages clustered exactly when the business could least afford them: peak season, when carriers and shippers were both online. A manual QA pass took two days per release, so releases happened monthly and each one carried a month of risk.
+
+## What we built
+
+We split the platform into a set of well-bounded TypeScript services behind a GraphQL gateway — matching, pricing, carrier onboarding, and billing each own their data and deploy independently. An automated end-to-end suite replaced the manual QA process, and the strangler-fig migration meant features moved one at a time while the monolith kept serving everything not yet migrated.
+
+## The rollout
+
+The business never paused. Each migrated feature ran behind a flag with traffic ramped gradually, and the monolith shrank release by release over five months until it was serving only static pages — then nothing.
+
+## Results
+
+- Average page load down from 4.2 s to 1.1 s
+- Monthly releases became several per week
+- Two-day manual QA replaced by a 25-minute automated suite
+- Carrier onboarding, previously a two-week manual process, now largely self-serve`,
       },
       {
         slug: 'design-system-unification',
@@ -96,7 +272,26 @@ async function main() {
         order: 3,
         coverGradient: 'linear-gradient(135deg,#a855f7,#f43f5e)',
         excerpt: 'We consolidated five inconsistent product UIs into a single token-based design system used by every squad.',
-        body: 'Five product teams had each built their own component libraries over the years, leading to visual drift and duplicated engineering effort. We audited every screen across the suite, extracted a shared set of design tokens, and rebuilt the core component library in Figma and React side by side. Rollout was staged product by product, with a compatibility layer so teams could adopt new components without a big-bang rewrite. Within four months, all five products shared one visual language, and new-component development time dropped by roughly half. Design and engineering now review changes from a single source of truth instead of five diverging ones.',
+        body: `Five product teams, five component libraries, one brand — and no two screens that looked like they came from the same company.
+
+## The challenge
+
+Years of team autonomy had produced five diverging UI stacks. The same button existed in five widths, four blues, and three focus behaviors. Every new feature paid a duplication tax, and the design team spent review cycles policing drift instead of designing.
+
+## What we built
+
+We audited every screen across the suite and extracted a single set of design tokens — color, type, spacing, radius, motion — as the contract between design and code. The core component library was rebuilt in Figma and React side by side, so the thing designers place and the thing engineers import are verifiably the same component.
+
+## The rollout
+
+Product by product, behind a compatibility layer that let old and new components coexist on the same screen. No team was asked to stop shipping for a rewrite; they adopted components as they touched screens. A weekly drift report kept the long tail visible until it hit zero.
+
+## Results
+
+- All five products on one visual language within four months
+- New-component development time down roughly half
+- Design review moved from policing drift to actual design
+- One source of truth for tokens, consumed by both Figma and CI`,
       },
       {
         slug: 'healthtech-onboarding-redesign',
@@ -105,7 +300,26 @@ async function main() {
         order: 4,
         coverGradient: 'linear-gradient(135deg,#22c55e,#0ea5e9)',
         excerpt: 'A confusing five-step signup flow was redesigned around patient needs, lifting completion rates by 34 percent.',
-        body: "New patients were abandoning the telehealth app's onboarding flow at a rate that alarmed the clinical operations team. We ran contextual interviews with recent drop-offs, mapped every friction point, and redesigned the flow around the three pieces of information patients actually needed to provide up front. Insurance verification and medical history collection were moved later in the journey and handled asynchronously instead of blocking access to care. We validated the new flow with a series of usability tests before a phased rollout to production. Completion rates rose by 34 percent within the first month, and support tickets related to signup fell by more than half.",
+        body: `A telehealth platform was losing patients before they ever saw a clinician — the signup flow was doing the losing.
+
+## The challenge
+
+New patients abandoned the five-step onboarding at a rate that alarmed clinical operations. The flow demanded insurance details, full medical history, and identity verification up front — before a patient could even see appointment availability. People seeking care were being handed paperwork instead.
+
+## What we built
+
+We ran contextual interviews with recent drop-offs and mapped every friction point against what the platform actually needed at each moment. The redesigned flow asks for exactly three things up front. Insurance verification and medical history moved later in the journey, handled asynchronously while the patient is already booked — access to care stopped being gated on back-office processes.
+
+## The rollout
+
+The new flow went through moderated usability tests, then a phased production rollout with both flows running side by side and assignment randomized. The experiment framework measured completion, time-to-booked, and downstream cancellation rates before the new flow took 100 percent of traffic.
+
+## Results
+
+- Onboarding completion up 34 percent in the first month
+- Signup-related support tickets down more than half
+- Median time from landing to booked appointment: under four minutes
+- No increase in downstream cancellations or failed verifications`,
       },
       {
         slug: 'ecommerce-multi-region-migration',
@@ -114,7 +328,26 @@ async function main() {
         order: 5,
         coverGradient: 'linear-gradient(135deg,#0891b2,#4f46e5)',
         excerpt: "We moved a single-region deployment onto a multi-region architecture to survive Black Friday traffic without downtime.",
-        body: "The client's single-region infrastructure had come dangerously close to falling over during the previous two Black Friday sales. We designed a multi-region active-active architecture on AWS, with database replication and a global load balancer routing traffic to the healthiest region. Load testing simulated ten times the client's historical peak traffic before we scheduled the cutover during a low-traffic maintenance window. The following Black Friday, the platform handled a new traffic record with zero downtime and page response times under 300 milliseconds throughout the day. The client's infrastructure spend also dropped 18 percent thanks to better instance right-sizing and reserved capacity planning.",
+        body: `Two Black Fridays in a row had nearly taken the store down. The third one was ten weeks away when we started.
+
+## The challenge
+
+The entire platform ran in one region. Database, cache, checkout — one failure domain, sized for average traffic and prayed over during peaks. The previous two Black Friday sales had produced brownouts, abandoned carts, and an engineering team that spent the biggest revenue day of the year watching dashboards instead of celebrating.
+
+## What we built
+
+A multi-region active-active architecture on AWS: replicated Postgres with automated failover, region-local caches, and a global load balancer routing customers to the healthiest region. Checkout was made region-agnostic so a regional failure loses capacity, not orders. Everything defined as code, including the failover itself.
+
+## The rollout
+
+We load-tested at ten times historical peak before scheduling anything, then cut over during a low-traffic maintenance window with a rehearsed rollback that was never needed. The final pre-season game day deliberately killed a region in production — checkout kept converting.
+
+## Results
+
+- A record Black Friday with zero downtime
+- Page responses under 300 ms throughout the peak
+- Infrastructure spend down 18 percent from right-sizing and reserved capacity
+- Regional failure demoted from existential threat to routine game-day drill`,
       },
       {
         slug: 'streaming-cost-optimization',
@@ -123,7 +356,26 @@ async function main() {
         order: 6,
         coverGradient: 'linear-gradient(135deg,#f59e0b,#ef4444)',
         excerpt: 'A detailed infrastructure audit uncovered idle resources and inefficient storage tiers, cutting monthly cloud spend nearly in half.',
-        body: "The client's cloud bill had tripled in a year without a corresponding increase in usage, and no one on the team had bandwidth to investigate why. We audited every service, compute instance, and storage bucket, and found significant waste in over-provisioned transcoding servers and infrequently accessed video stored on premium-tier disks. We introduced auto-scaling for transcoding workloads tied to actual upload volume and moved cold content to lower-cost archival storage with lifecycle policies. A tagging and budgeting system now gives engineering leads visibility into spend by feature team. Monthly cloud costs dropped 42 percent within the first quarter, freeing up budget the client redirected into hiring.",
+        body: `The cloud bill had tripled in a year. Usage hadn't. Nobody had the bandwidth to find out where the money was going.
+
+## The challenge
+
+A streaming startup's infrastructure spend was compounding faster than its audience. Transcoding fleets sized for launch-day peaks ran around the clock, years-old videos nobody watched sat on premium-tier disks, and the bill arrived as one undifferentiated number no engineering lead could act on.
+
+## What we built
+
+A full audit of every service, instance, and storage bucket produced a ranked list of waste. We tied transcoding capacity to actual upload volume with auto-scaling, moved cold content to archival storage with lifecycle policies that age media automatically, and introduced a tagging and budgeting system that attributes every dollar to a feature team.
+
+## The rollout
+
+Changes shipped in order of savings-per-risk: storage lifecycle first (reversible, immediate), auto-scaling second (canaried against a week of real traffic), reserved-capacity purchases last, once the new baseline was proven stable.
+
+## Results
+
+- Monthly cloud costs down 42 percent within the first quarter
+- Transcoding fleet utilization up from 19 percent to 71 percent
+- Spend visible per feature team, with budget alerts leads actually receive
+- Savings redirected into three engineering hires`,
       },
       {
         slug: 'b2b-support-copilot',
@@ -132,7 +384,26 @@ async function main() {
         order: 7,
         coverGradient: 'linear-gradient(135deg,#8b5cf6,#06b6d4)',
         excerpt: 'A retrieval-augmented assistant now resolves a third of support tickets before they reach a human agent.',
-        body: "The client's support team was buried under repetitive tickets that mostly required searching the same handful of documentation pages. We built a retrieval-augmented copilot that indexes the knowledge base, past resolved tickets, and product changelog, then drafts responses grounded in that material for agent review. Confidence scoring routes uncertain answers straight to a human rather than risking an incorrect response reaching a customer. We instrumented the system with detailed evaluation dashboards so the support team could tune prompts and retrieval settings without engineering involvement. Within two months, the copilot was fully resolving 31 percent of incoming tickets and cutting average handling time on the rest by nearly a third.",
+        body: `The support queue was full of questions the documentation already answered — the team just couldn't search it fast enough at ticket volume.
+
+## The challenge
+
+Agents at a B2B SaaS platform spent most of each shift re-answering the same questions, hunting through the same handful of documentation pages. Headcount scaled linearly with customers; morale went the other direction. Leadership wanted AI in the loop but refused to let a hallucinated answer reach a paying customer.
+
+## What we built
+
+A retrieval-augmented copilot indexing the knowledge base, past resolved tickets, and the product changelog. For every incoming ticket it drafts a response grounded in retrieved sources, cited inline for agent review. Confidence scoring is the safety valve: uncertain answers route straight to a human with the retrieval context attached, so even a "miss" saves the agent the search.
+
+## The rollout
+
+Two weeks in shadow mode drafting silently against live tickets while agents graded outputs. The grades tuned retrieval and thresholds before the copilot wrote a single customer-visible word. Evaluation dashboards let the support team adjust prompts and retrieval settings without engineering involvement.
+
+## Results
+
+- 31 percent of incoming tickets fully resolved by the copilot within two months
+- Average handling time on remaining tickets down nearly a third
+- Zero hallucinated answers reaching customers, by design of the confidence gate
+- Support team tunes the system themselves — no standing engineering dependency`,
       },
       {
         slug: 'insurance-document-intelligence',
@@ -141,7 +412,26 @@ async function main() {
         order: 8,
         coverGradient: 'linear-gradient(135deg,#ec4899,#f97316)',
         excerpt: 'An AI-powered extraction pipeline now processes claims documents that used to take adjusters hours to review manually.',
-        body: 'Claims adjusters were spending the bulk of each day manually reading scanned PDFs to pull out policy numbers, damage estimates, and dates. We built a document intelligence pipeline combining OCR, layout-aware extraction models, and a validation layer that flags low-confidence fields for human review instead of guessing. The system integrates directly with the client\'s existing claims management software, so adjusters see extracted data pre-filled the moment a document arrives. We ran the pipeline in shadow mode against six months of historical claims to validate accuracy before go-live. Average document review time fell from 22 minutes to under 3 minutes, letting the adjuster team handle a 40 percent higher claims volume without adding headcount.',
+        body: `Adjusters were paid to make judgment calls. They were spending their days transcribing scanned PDFs instead.
+
+## The challenge
+
+Every claim arrived as a stack of scanned documents — policy numbers, damage estimates, dates — that an adjuster read and re-keyed by hand into the claims system. Twenty-two minutes per document, thousands of documents a month, and a growing backlog that was becoming a customer-satisfaction problem.
+
+## What we built
+
+A document intelligence pipeline combining OCR, layout-aware extraction models, and a validation layer with one strict rule: never guess. Fields extracted below the confidence threshold are flagged for human review with the source region of the document highlighted. Extracted data lands pre-filled in the existing claims software the moment a document arrives — adjusters verify instead of transcribe.
+
+## The rollout
+
+The pipeline ran in shadow mode against six months of historical claims, its output scored against what adjusters had actually entered. Field-level accuracy was published internally before go-live, and the confidence threshold was set from that data, not from optimism.
+
+## Results
+
+- Average document review time down from 22 minutes to under 3
+- 40 percent higher claims volume handled with the same headcount
+- Low-confidence fields flagged for review rather than guessed — every error caught is visible, not silent
+- Backlog cleared within the first six weeks of production use`,
       },
     ],
   });
