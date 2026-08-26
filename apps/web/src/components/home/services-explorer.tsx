@@ -106,10 +106,12 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
                       data-cursor="Open"
                       onPointerEnter={() => setActive(index)}
                       onFocus={() => setActive(index)}
-                      className="group flex items-baseline gap-5 py-6 transition-colors duration-300 lg:py-7"
+                      className={`group flex items-baseline gap-5 py-6 will-change-transform transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] lg:py-7 ${
+                        isActive ? 'translate-x-4 lg:translate-x-7' : 'translate-x-0'
+                      }`}
                     >
                       <span
-                        className={`font-mono text-xs transition-colors duration-300 ${
+                        className={`font-mono text-xs transition-colors duration-500 ${
                           isActive ? 'text-accent' : 'text-fg-soft/60'
                         }`}
                       >
@@ -117,8 +119,8 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
                       </span>
                       <span className="flex-1">
                         <span
-                          className={`font-display text-2xl tracking-[-0.01em] transition-colors duration-300 sm:text-3xl ${
-                            isActive ? 'text-fg' : 'text-fg-soft group-hover:text-fg'
+                          className={`font-display text-2xl tracking-[-0.01em] transition-colors duration-500 sm:text-3xl ${
+                            isActive ? 'text-accent-strong' : 'text-fg-soft group-hover:text-fg'
                           }`}
                         >
                           {service.title}
@@ -131,10 +133,10 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
                         aria-hidden="true"
                         viewBox="0 0 16 16"
                         fill="none"
-                        className={`h-4 w-4 shrink-0 self-center transition-all duration-300 ${
+                        className={`h-4 w-4 shrink-0 self-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                           isActive
                             ? 'translate-x-0 text-accent opacity-100'
-                            : '-translate-x-2 text-fg-soft opacity-0'
+                            : '-translate-x-3 text-fg-soft opacity-0'
                         }`}
                       >
                         <path
@@ -160,9 +162,10 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
                   <div
                     key={service.id}
                     aria-hidden={index !== active}
-                    className="absolute inset-0 flex flex-col justify-between p-10 transition-opacity duration-500"
+                    className="absolute inset-0 flex flex-col justify-between p-10 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
                     style={{
                       opacity: index === active ? 1 : 0,
+                      transform: index === active ? 'scale(1)' : 'scale(1.035)',
                       background: washes[index % washes.length],
                     }}
                   >
