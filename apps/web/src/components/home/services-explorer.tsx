@@ -21,6 +21,128 @@ const washes = [
 const CYCLE_MS = 1800;
 
 /**
+ * A small living diagram per discipline, filling the preview panel's middle.
+ * Pure CSS keyframes; `animate` gates the loops so only the visible slide
+ * spends GPU time.
+ */
+function ServiceVisual({ kind, animate }: { kind: IconKey; animate: boolean }) {
+  const play = animate ? '' : '[animation-play-state:paused]';
+
+  if (kind === 'cloud') {
+    // Server racks reporting status beneath an arc of coverage.
+    return (
+      <div className="flex w-56 flex-col gap-3">
+        {[0, 1, 2].map((row) => (
+          <div
+            key={row}
+            className="flex items-center gap-3 rounded-lg border border-line-strong bg-ink/50 px-4 py-2.5"
+          >
+            <span
+              className={`viz-blink h-1.5 w-1.5 rounded-full bg-accent ${play}`}
+              style={{ animationDelay: `${row * 0.5}s` }}
+            />
+            <span className="h-1 flex-1 rounded bg-fg/10" />
+            <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-fg-soft/70">
+              {['eu-west', 'us-east', 'ap-south'][row]}
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (kind === 'code') {
+    // Lines of code typing themselves in a loop.
+    const widths = ['62%', '84%', '48%', '72%', '38%'];
+    return (
+      <div className="w-56 rounded-xl border border-line-strong bg-ink/50 p-5">
+        <div className="mb-3 flex gap-1.5">
+          {[0, 1, 2].map((dot) => (
+            <span key={dot} className="h-1.5 w-1.5 rounded-full bg-fg/15" />
+          ))}
+        </div>
+        <div className="flex flex-col gap-2.5">
+          {widths.map((width, line) => (
+            <span
+              key={line}
+              className={`viz-type h-1.5 rounded ${line % 3 === 0 ? 'bg-accent/60' : 'bg-fg/15'} ${play}`}
+              style={{ width, animationDelay: `${line * 0.35}s` }}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (kind === 'shield') {
+    // Pulses radiating from a guarded core.
+    return (
+      <div className="relative flex h-40 w-40 items-center justify-center">
+        {[0, 1, 2].map((ring) => (
+          <span
+            key={ring}
+            className={`viz-pulse absolute inset-0 rounded-full border border-accent/40 ${play}`}
+            style={{ animationDelay: `${ring * 0.8}s` }}
+          />
+        ))}
+        <span className="relative h-3 w-3 rotate-45 bg-accent" />
+      </div>
+    );
+  }
+
+  if (kind === 'phone') {
+    // A device receiving notifications.
+    return (
+      <div className="relative h-40 w-24 rounded-2xl border border-line-strong bg-ink/50 p-3">
+        <span className="absolute left-1/2 top-1.5 h-1 w-8 -translate-x-1/2 rounded bg-fg/15" />
+        <div className="mt-4 flex flex-col gap-2">
+          {[0, 1, 2].map((notification) => (
+            <span
+              key={notification}
+              className={`viz-type h-6 rounded-lg border border-line bg-fg/[0.06] ${play}`}
+              style={{ animationDelay: `${notification * 0.6}s` }}
+            />
+          ))}
+        </div>
+        <span
+          className={`viz-blink absolute bottom-3 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-accent ${play}`}
+        />
+      </div>
+    );
+  }
+
+  if (kind === 'spark') {
+    // A node constellation thinking: orbiting satellites around a core.
+    return (
+      <div className="relative flex h-40 w-40 items-center justify-center">
+        <span className="absolute inset-6 rounded-full border border-line-strong" />
+        <span className="absolute inset-0 rounded-full border border-line" />
+        <div className={`viz-orbit absolute inset-0 ${play}`}>
+          <span className="absolute left-1/2 top-0 h-2 w-2 -translate-x-1/2 rounded-full bg-accent" />
+        </div>
+        <div className={`viz-orbit absolute inset-6 ${play}`} style={{ animationDirection: 'reverse', animationDuration: '7s' }}>
+          <span className="absolute left-1/2 top-0 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-accent-strong" />
+        </div>
+        <span className={`viz-blink h-3 w-3 rounded-full bg-accent ${play}`} />
+      </div>
+    );
+  }
+
+  // chart — bars climbing in a loop.
+  return (
+    <div className="flex h-36 w-56 items-end justify-center gap-3">
+      {[40, 62, 50, 78, 96].map((height, bar) => (
+        <span
+          key={bar}
+          className={`viz-grow w-6 rounded-t ${bar === 4 ? 'bg-accent/70' : 'bg-fg/12'} ${play}`}
+          style={{ height: `${height}%`, animationDelay: `${bar * 0.25}s` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/**
  * The services section is a switchboard: a list of disciplines on the left,
  * a preview panel on the right. The panel cycles through the services on its
  * own while the section is on screen; hovering (or focusing) the list takes
@@ -276,13 +398,18 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
                           {String(index + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
                         </span>
                       </div>
+                      {/* Living diagram filling the panel's middle */}
+                      <div className="flex flex-1 items-center justify-center py-4" style={step(2)}>
+                        <ServiceVisual kind={service.icon as IconKey} animate={on} />
+                      </div>
+
                       <div>
-                        <p className="font-display text-2xl tracking-[-0.01em] text-fg" style={step(2)}>
+                        <p className="font-display text-2xl tracking-[-0.01em] text-fg" style={step(3)}>
                           {service.title}
                         </p>
                         <p
                           className="mt-3 max-w-sm text-sm leading-relaxed text-fg-soft"
-                          style={step(3)}
+                          style={step(4)}
                         >
                           {service.excerpt}
                         </p>
