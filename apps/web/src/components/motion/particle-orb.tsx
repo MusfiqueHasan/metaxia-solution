@@ -80,7 +80,7 @@ export function ParticleOrb({ className }: { className?: string }) {
         const dotR = 0.5 + depth * 1.2;
 
         ctx.globalAlpha = 0.12 + depth * 0.75;
-        ctx.fillStyle = depth > 0.82 ? '#a49dff' : '#f2f1ec';
+        ctx.fillStyle = depth > 0.82 ? '#f2a06b' : '#f2f1ec';
         ctx.beginPath();
         ctx.arc(px, py, dotR, 0, Math.PI * 2);
         ctx.fill();

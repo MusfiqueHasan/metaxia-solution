@@ -14,9 +14,9 @@
   --color-surface-alt: #ffffff;
   --color-ink-soft: #4b5163;
 
-  /* Brand accent — electric indigo, lifted for dark backgrounds */
-  --color-accent: #6d64ff;
-  --color-accent-soft: rgba(109, 100, 255, 0.14);
+  /* Brand accent — copper ember, warm against the deep canvas */
+  --color-accent: #e5793a;
+  --color-accent-soft: rgba(229, 121, 58, 0.14);
   --color-accent-strong: color-mix(in srgb, var(--color-accent) 78%, white);
 
   --font-display: var(--font-instrument-serif);

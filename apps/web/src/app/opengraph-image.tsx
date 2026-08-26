@@ -20,7 +20,7 @@ export default async function Image() {
           fontFamily: 'sans-serif',
         }}
       >
-        <div style={{ width: 72, height: 8, background: '#4f46e5', borderRadius: 4, display: 'flex' }} />
+        <div style={{ width: 72, height: 8, background: '#e5793a', borderRadius: 4, display: 'flex' }} />
         <div style={{ marginTop: 40, fontSize: 88, fontWeight: 600, letterSpacing: '-0.02em', display: 'flex' }}>
           Metaxia
         </div>

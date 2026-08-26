@@ -24,7 +24,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           fontFamily: 'sans-serif',
         }}
       >
-        <div style={{ width: 72, height: 8, background: '#4f46e5', borderRadius: 4, display: 'flex' }} />
+        <div style={{ width: 72, height: 8, background: '#e5793a', borderRadius: 4, display: 'flex' }} />
         {post ? (
           <>
             <div
@@ -34,7 +34,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
                 fontWeight: 600,
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
-                color: '#4f46e5',
+                color: '#e5793a',
                 display: 'flex',
               }}
             >
