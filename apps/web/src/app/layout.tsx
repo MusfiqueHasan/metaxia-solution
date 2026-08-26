@@ -3,6 +3,7 @@ import { Instrument_Serif, Inter, IBM_Plex_Mono } from 'next/font/google';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
 import { CustomCursor } from '@/components/motion/custom-cursor';
+import { IntroLoader } from '@/components/motion/intro-loader';
 import { JsonLd } from '@/components/json-ld';
 import { site } from '@/lib/site';
 import './globals.css';
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={websiteJsonLd} />
+        <IntroLoader />
         <CustomCursor />
         <SiteHeader />
         {children}

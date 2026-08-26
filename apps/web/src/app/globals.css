@@ -142,6 +142,106 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
+/* First-visit intro: an ink curtain carrying the wordmark, lifted     */
+/* once the page is ready. JS drives the sequence; the failsafe        */
+/* animation guarantees the curtain clears even if JS never runs.      */
+/* ------------------------------------------------------------------ */
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-ink);
+  transition: transform 0.9s var(--ease-inout-soft), visibility 0s 0.9s;
+  animation: intro-failsafe 4.5s step-end forwards;
+}
+
+.intro-overlay.is-done {
+  transform: translateY(-100%);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@keyframes intro-failsafe {
+  to {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+.intro-line {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.1s var(--ease-out-expo) 0.35s;
+}
+
+.intro-overlay.is-armed .intro-line {
+  transform: scaleX(1);
+}
+
+/* ------------------------------------------------------------------ */
+/* Route transitions: every navigation re-mounts app/template.tsx,     */
+/* which sweeps an ink veil off the screen and rises the new page in.  */
+/* ------------------------------------------------------------------ */
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-enter {
+  animation: page-enter 0.8s var(--ease-out-expo) 0.15s both;
+}
+
+@keyframes page-veil {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-101%);
+    visibility: hidden;
+  }
+}
+
+.page-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  background: linear-gradient(to top, transparent, var(--color-ink) 12%);
+  animation: page-veil 0.7s var(--ease-inout-soft) forwards;
+}
+
+.page-veil::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-overlay,
+  .page-veil {
+    display: none;
+  }
+
+  .page-enter {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* Section backdrops: full-bleed dot field, perspective grid planes,   */
 /* and dimensional spheres. Decorative layers only — they never touch  */
 /* content animation or sticky/scroll behavior (sections use           */

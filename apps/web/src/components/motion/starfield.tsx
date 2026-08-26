@@ -32,6 +32,17 @@ export function Starfield({ className }: { className?: string }) {
     }
     let stars: Star[] = [];
 
+    // Occasional shooting star: one streak every ~6–10s, ~0.8s of life.
+    interface Meteor {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      life: number;
+    }
+    let meteor: Meteor | null = null;
+    let nextMeteorAt = 3000 + Math.random() * 4000;
+
     const seed = () => {
       const count = Math.min(240, Math.floor((width * height) / 6000));
       stars = Array.from({ length: count }, () => ({
@@ -64,6 +75,44 @@ export function Starfield({ className }: { className?: string }) {
         ctx.fill();
       }
       ctx.globalAlpha = 1;
+
+      if (!reducedMotion) {
+        if (!meteor && t > nextMeteorAt) {
+          const fromLeft = Math.random() > 0.5;
+          meteor = {
+            x: fromLeft ? -40 : width * (0.3 + Math.random() * 0.6),
+            y: Math.random() * height * 0.4,
+            vx: 9 + Math.random() * 5,
+            vy: 3.5 + Math.random() * 2.5,
+            life: 1,
+          };
+        }
+        if (meteor) {
+          meteor.x += meteor.vx;
+          meteor.y += meteor.vy;
+          meteor.life -= 0.02;
+          if (meteor.life <= 0 || meteor.x > width + 60 || meteor.y > height + 60) {
+            meteor = null;
+            nextMeteorAt = t + 6000 + Math.random() * 4000;
+          } else {
+            const tail = 14;
+            const gradient = ctx.createLinearGradient(
+              meteor.x,
+              meteor.y,
+              meteor.x - meteor.vx * tail,
+              meteor.y - meteor.vy * tail,
+            );
+            gradient.addColorStop(0, `rgba(242, 160, 107, ${0.85 * meteor.life})`);
+            gradient.addColorStop(1, 'rgba(242, 160, 107, 0)');
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.moveTo(meteor.x, meteor.y);
+            ctx.lineTo(meteor.x - meteor.vx * tail, meteor.y - meteor.vy * tail);
+            ctx.stroke();
+          }
+        }
+      }
     };
 
     const loop = (t: number) => {
