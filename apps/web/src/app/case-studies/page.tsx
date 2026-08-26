@@ -25,7 +25,7 @@ export default async function CaseStudiesPage() {
         lede="A sample of the systems we've shipped for clients across industries — and what changed once they were live."
       />
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           {caseStudies.length > 0 ? (
             <div className="grid gap-8 sm:grid-cols-2">
@@ -33,7 +33,7 @@ export default async function CaseStudiesPage() {
                 <Link
                   key={item.slug}
                   href={`/case-studies/${item.slug}`}
-                  className="group flex flex-col overflow-hidden rounded-3xl border border-ink/10 bg-surface-alt"
+                  className="group flex flex-col overflow-hidden rounded-3xl border border-line bg-ink-raised"
                 >
                   <div className="flex h-48 items-end p-6" style={{ background: item.coverGradient }}>
                     <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-white backdrop-blur">
@@ -41,10 +41,10 @@ export default async function CaseStudiesPage() {
                     </span>
                   </div>
                   <div className="flex flex-1 flex-col p-8">
-                    <h2 className="font-display text-xl font-medium tracking-tight text-ink">
+                    <h2 className="font-display text-xl font-medium tracking-tight text-fg">
                       {item.title}
                     </h2>
-                    <p className="mt-3 text-sm leading-relaxed text-ink-soft">{item.excerpt}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-fg-soft">{item.excerpt}</p>
                     <span className="mt-auto flex items-center gap-2 pt-6 text-sm font-medium text-accent">
                       Read the case study
                       <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
@@ -56,7 +56,7 @@ export default async function CaseStudiesPage() {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-ink-soft">Case studies are temporarily unavailable.</p>
+            <p className="text-sm text-fg-soft">Case studies are temporarily unavailable.</p>
           )}
         </Container>
       </section>

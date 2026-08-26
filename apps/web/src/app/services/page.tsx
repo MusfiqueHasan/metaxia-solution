@@ -26,7 +26,7 @@ export default async function ServicesPage() {
         lede="Engage us for a single capability or the whole system — every practice is staffed by people who ship, not just advise."
       />
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           {services.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -34,16 +34,16 @@ export default async function ServicesPage() {
                 <Link
                   key={service.slug}
                   href={`/services/${service.slug}`}
-                  className="group flex flex-col gap-6 rounded-3xl border border-ink/10 bg-surface-alt p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
+                  className="group flex flex-col gap-6 rounded-3xl border border-line bg-ink-raised p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
                 >
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
                     <Icon name={service.icon} />
                   </span>
                   <div>
-                    <h2 className="font-display text-xl font-medium tracking-tight text-ink">
+                    <h2 className="font-display text-xl font-medium tracking-tight text-fg">
                       {service.title}
                     </h2>
-                    <p className="mt-3 text-sm leading-relaxed text-ink-soft">{service.excerpt}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-fg-soft">{service.excerpt}</p>
                   </div>
                   <span className="mt-auto flex items-center gap-2 text-sm font-medium text-accent">
                     Learn more
@@ -55,7 +55,7 @@ export default async function ServicesPage() {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-ink-soft">Services are temporarily unavailable.</p>
+            <p className="text-sm text-fg-soft">Services are temporarily unavailable.</p>
           )}
         </Container>
       </section>

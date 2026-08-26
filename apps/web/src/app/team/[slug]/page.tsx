@@ -60,8 +60,8 @@ export default async function TeamMemberPage({
   return (
     <main>
       <JsonLd data={breadcrumbJsonLd} />
-      <section className="grid-signature relative overflow-hidden bg-ink text-white">
-        <Container className="flex flex-col items-start gap-6 pt-24 pb-20 lg:pt-28 lg:pb-24">
+      <section className="blueprint relative overflow-hidden bg-ink text-white">
+        <Container className="flex flex-col items-start gap-6 pt-36 pb-20 lg:pt-44 lg:pb-24">
           <span className="flex h-20 w-20 items-center justify-center rounded-full bg-accent-soft font-display text-2xl font-medium text-accent">
             {initials(member.name)}
           </span>
@@ -74,11 +74,11 @@ export default async function TeamMemberPage({
         </Container>
       </section>
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           <div className="max-w-3xl space-y-5">
             {bioParagraphs.map((paragraph, index) => (
-              <p key={index} className="text-base leading-relaxed text-ink-soft">
+              <p key={index} className="text-base leading-relaxed text-fg-soft">
                 {paragraph}
               </p>
             ))}

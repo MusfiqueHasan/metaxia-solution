@@ -24,7 +24,7 @@ export default function ContactPage() {
         lede="Tell us where you are and where you're headed. A real person on the team reads every message and replies with next steps, not a form letter."
       />
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           <div className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
             <div>
@@ -34,15 +34,15 @@ export default function ContactPage() {
                 lede="Prefer email or want to send a deck ahead of a call? Use the details below — the form works too."
               />
 
-              <dl className="mt-10 space-y-8 border-t border-ink/10 pt-8">
+              <dl className="mt-10 space-y-8 border-t border-line pt-8">
                 <div>
-                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-soft">
+                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-fg-soft">
                     Email
                   </dt>
                   <dd className="mt-2">
                     <a
                       href="mailto:hello@metaxia.io"
-                      className="font-display text-xl font-medium tracking-tight text-ink transition-colors hover:text-accent"
+                      className="font-display text-xl font-medium tracking-tight text-fg transition-colors hover:text-accent"
                     >
                       hello@metaxia.io
                     </a>
@@ -50,10 +50,10 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-soft">
+                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-fg-soft">
                     Headquarters
                   </dt>
-                  <dd className="mt-2 text-base leading-relaxed text-ink-soft">
+                  <dd className="mt-2 text-base leading-relaxed text-fg-soft">
                     480 Folsom Street, Suite 700
                     <br />
                     San Francisco, CA 94105
@@ -61,10 +61,10 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-ink-soft">
+                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-fg-soft">
                     Response Time
                   </dt>
-                  <dd className="mt-2 text-base leading-relaxed text-ink-soft">
+                  <dd className="mt-2 text-base leading-relaxed text-fg-soft">
                     We reply to every message within one business day, Monday through Friday.
                   </dd>
                 </div>
@@ -76,18 +76,18 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section className="border-t border-ink/10 bg-surface-alt py-20 lg:py-24">
+      <section className="border-t border-line bg-ink-raised py-20 lg:py-24">
         <Container className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
           <div>
-            <h2 className="font-display text-2xl font-medium tracking-tight text-ink sm:text-3xl">
+            <h2 className="font-display text-2xl font-medium tracking-tight text-fg sm:text-3xl">
               Have a quick question first?
             </h2>
-            <p className="mt-3 max-w-md text-base leading-relaxed text-ink-soft">
+            <p className="mt-3 max-w-md text-base leading-relaxed text-fg-soft">
               Check the FAQ — it covers engagement models, timelines, and how we scope work before
               anything else.
             </p>
           </div>
-          <Button href="/faq" variant="ghost" data-on-light="true" className="shrink-0">
+          <Button href="/faq" variant="ghost" className="shrink-0">
             Read the FAQ
           </Button>
         </Container>

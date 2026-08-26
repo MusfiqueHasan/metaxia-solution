@@ -85,12 +85,13 @@ export default async function BlogPostPage({
     <main>
       <JsonLd data={articleJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
-      <section className="grid-signature relative overflow-hidden bg-ink text-white">
-        <Container className="pt-24 pb-20 lg:pt-28 lg:pb-24">
-          <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.15em] text-accent">
+      <section className="blueprint relative overflow-hidden bg-ink text-white">
+        <Container className="pt-36 pb-20 lg:pt-44 lg:pb-24">
+          <div className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-accent">
+            <span className="inline-block h-px w-6 bg-accent" aria-hidden="true" />
             <span>{post.category}</span>
             <span className="h-1 w-1 rotate-45 bg-accent/50" aria-hidden="true" />
-            <time dateTime={post.publishedAt} className="font-normal tracking-normal text-white/60">
+            <time dateTime={post.publishedAt} className="text-fg-soft">
               {formatDate(post.publishedAt)}
             </time>
           </div>
@@ -100,7 +101,7 @@ export default async function BlogPostPage({
         </Container>
       </section>
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           <div className="max-w-3xl">
             <Markdown body={post.body} />
@@ -109,13 +110,13 @@ export default async function BlogPostPage({
       </section>
 
       {morePosts.length > 0 ? (
-        <section className="bg-surface-alt py-24 lg:py-28">
+        <section className="bg-ink-raised py-24 lg:py-28">
           <Container>
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               <span className="h-2 w-2 rotate-45 bg-accent" aria-hidden="true" />
               More From the Blog
             </div>
-            <h2 className="mt-4 font-display text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+            <h2 className="mt-4 font-display text-3xl font-medium tracking-tight text-fg sm:text-4xl">
               Keep reading
             </h2>
 
@@ -124,19 +125,19 @@ export default async function BlogPostPage({
                 <Link
                   key={item.slug}
                   href={`/blog/${item.slug}`}
-                  className="group flex flex-col rounded-3xl border border-ink/10 bg-surface p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
+                  className="group flex flex-col rounded-3xl border border-line bg-ink p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
                 >
                   <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.15em] text-accent">
                     <span>{item.category}</span>
                     <span className="h-1 w-1 rotate-45 bg-accent/50" aria-hidden="true" />
-                    <time dateTime={item.publishedAt} className="font-normal tracking-normal text-ink-soft">
+                    <time dateTime={item.publishedAt} className="font-normal tracking-normal text-fg-soft">
                       {formatDate(item.publishedAt)}
                     </time>
                   </div>
-                  <h3 className="mt-4 font-display text-lg font-medium tracking-tight text-ink">
+                  <h3 className="mt-4 font-display text-lg font-medium tracking-tight text-fg">
                     {item.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-soft">{item.excerpt}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-fg-soft">{item.excerpt}</p>
                   <span className="mt-auto flex items-center gap-2 pt-6 text-sm font-medium text-accent">
                     Read the post
                     <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">

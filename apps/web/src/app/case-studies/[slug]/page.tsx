@@ -67,7 +67,7 @@ export default async function CaseStudyDetailPage({
         className="relative overflow-hidden text-white"
         style={{ background: caseStudy.coverGradient }}
       >
-        <Container className="pt-24 pb-20 lg:pt-28 lg:pb-24">
+        <Container className="pt-36 pb-20 lg:pt-44 lg:pb-24">
           <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-white backdrop-blur">
             {caseStudy.category}
           </span>
@@ -80,7 +80,7 @@ export default async function CaseStudyDetailPage({
         </Container>
       </section>
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           <div className="max-w-3xl">
             <Markdown body={caseStudy.body} />
@@ -89,18 +89,18 @@ export default async function CaseStudyDetailPage({
       </section>
 
       {prev || next ? (
-        <section className="border-t border-ink/10 bg-surface-alt py-10">
+        <section className="border-t border-line bg-ink-raised py-10">
           <Container className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             {prev ? (
               <Link
                 href={`/case-studies/${prev.slug}`}
-                className="group flex items-center gap-3 text-sm font-medium text-ink-soft hover:text-ink"
+                className="group flex items-center gap-3 text-sm font-medium text-fg-soft hover:text-fg"
               >
                 <span aria-hidden="true" className="transition-transform group-hover:-translate-x-1">
                   ←
                 </span>
                 <span>
-                  <span className="block text-xs uppercase tracking-[0.15em] text-ink-soft/70">
+                  <span className="block text-xs uppercase tracking-[0.15em] text-fg-soft/70">
                     Previous
                   </span>
                   {prev.title}
@@ -112,10 +112,10 @@ export default async function CaseStudyDetailPage({
             {next ? (
               <Link
                 href={`/case-studies/${next.slug}`}
-                className="group flex items-center gap-3 text-right text-sm font-medium text-ink-soft hover:text-ink sm:ml-auto"
+                className="group flex items-center gap-3 text-right text-sm font-medium text-fg-soft hover:text-fg sm:ml-auto"
               >
                 <span>
-                  <span className="block text-xs uppercase tracking-[0.15em] text-ink-soft/70">
+                  <span className="block text-xs uppercase tracking-[0.15em] text-fg-soft/70">
                     Next
                   </span>
                   {next.title}

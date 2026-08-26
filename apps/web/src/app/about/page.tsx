@@ -54,11 +54,11 @@ export default function AboutPage() {
         lede="We started Metaxia because too many enterprise builds ended at launch. We stay for the decade after."
       />
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           <div className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]">
             <SectionHeading eyebrow="Our Story" title="Founded on a simple complaint" />
-            <div className="space-y-6 text-base leading-relaxed text-ink-soft">
+            <div className="space-y-6 text-base leading-relaxed text-fg-soft">
               <p>
                 Metaxia Solutions was founded by engineers who kept watching the same thing
                 happen: a vendor would ship an ambitious system, collect the final invoice, and
@@ -81,20 +81,20 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="mt-16 grid grid-cols-2 gap-10 border-y border-ink/10 py-10 sm:grid-cols-4 sm:divide-x sm:divide-ink/10">
+          <div className="mt-16 grid grid-cols-2 gap-10 border-y border-line py-10 sm:grid-cols-4 sm:divide-x sm:divide-line">
             {stats.map((stat) => (
               <div key={stat.label} className="sm:px-8 sm:first:pl-0">
-                <span className="font-display text-4xl font-medium tabular-nums text-ink">
+                <span className="font-display text-4xl font-medium tabular-nums text-fg">
                   {stat.value}
                 </span>
-                <p className="mt-2 text-sm text-ink-soft">{stat.label}</p>
+                <p className="mt-2 text-sm text-fg-soft">{stat.label}</p>
               </div>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="bg-surface-alt py-24 lg:py-28">
+      <section className="bg-ink-raised py-24 lg:py-28">
         <Container>
           <SectionHeading
             eyebrow="What We Value"
@@ -105,16 +105,16 @@ export default function AboutPage() {
             {values.map((value) => (
               <div
                 key={value.title}
-                className="flex items-start gap-6 rounded-3xl border border-ink/10 bg-surface p-8"
+                className="flex items-start gap-6 rounded-3xl border border-line bg-ink p-8"
               >
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
                   <Icon name={value.icon} />
                 </span>
                 <div>
-                  <h3 className="font-display text-lg font-medium tracking-tight text-ink">
+                  <h3 className="font-display text-lg font-medium tracking-tight text-fg">
                     {value.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-soft">{value.body}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-fg-soft">{value.body}</p>
                 </div>
               </div>
             ))}

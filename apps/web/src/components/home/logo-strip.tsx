@@ -1,5 +1,3 @@
-import { Container } from '@/components/container';
-
 const clients = [
   'Northwind Labs',
   'Helios Bank',
@@ -9,39 +7,34 @@ const clients = [
   'Ironclad Insurance',
 ];
 
+function Wordmark({ name }: { name: string }) {
+  return (
+    <span className="flex shrink-0 items-center gap-3 px-10">
+      <span className="h-1.5 w-1.5 rotate-45 bg-fg-soft/40" aria-hidden="true" />
+      <span className="whitespace-nowrap font-display text-lg font-medium tracking-tight text-fg-soft/50 transition-colors duration-300 hover:text-fg">
+        {name}
+      </span>
+    </span>
+  );
+}
+
 export function LogoStrip() {
   return (
-    <section className="border-y border-ink/10 bg-surface-alt py-14">
-      <Container>
-        <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-ink-soft">
-          Trusted by teams shipping at enterprise scale
-        </p>
-
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
-          {clients.map((name) => (
-            <svg
-              key={name}
-              viewBox={`0 0 ${16 + name.length * 9} 24`}
-              role="img"
-              aria-label={name}
-              className="h-5 w-auto text-ink/35 grayscale transition-colors duration-150 hover:text-ink"
-            >
-              <rect x="0" y="8" width="8" height="8" transform="rotate(45 4 12)" fill="currentColor" />
-              <text
-                x="16"
-                y="18"
-                fontFamily="var(--font-display)"
-                fontSize="16"
-                fontWeight="500"
-                letterSpacing="0.01em"
-                fill="currentColor"
-              >
-                {name}
-              </text>
-            </svg>
+    <section className="border-y border-line bg-ink py-10" aria-label="Clients">
+      <p className="mb-8 text-center font-mono text-[11px] uppercase tracking-[0.28em] text-fg-soft/70">
+        Trusted by teams shipping at enterprise scale
+      </p>
+      <div className="marquee overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]">
+        <div className="marquee-track flex w-max">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex" aria-hidden={copy === 1}>
+              {clients.map((name) => (
+                <Wordmark key={`${copy}-${name}`} name={name} />
+              ))}
+            </div>
           ))}
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

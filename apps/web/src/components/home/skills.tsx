@@ -1,7 +1,8 @@
 import { Container } from '@/components/container';
 import { SectionHeading } from '@/components/section-heading';
+import { Reveal } from '@/components/motion/reveal';
 
-const skills = [
+const capabilities = [
   { label: 'Web Development', value: 90 },
   { label: 'Cloud', value: 85 },
   { label: 'Security', value: 80 },
@@ -10,37 +11,59 @@ const skills = [
   { label: 'Design', value: 65 },
 ];
 
+/**
+ * The capability index: an instrument readout, not a chart. Each meter fills
+ * once on reveal; the value reads in mono like telemetry.
+ */
 export function Skills() {
   return (
-    <section className="bg-surface py-24 lg:py-28">
+    <section className="border-t border-line bg-ink py-28 lg:py-36">
       <Container>
-        <SectionHeading eyebrow="Capabilities" title="Where the team is strongest" />
+        <SectionHeading
+          eyebrow="Capability index"
+          title="Where our depth actually is."
+          lede="Self-assessed, argued over quarterly, and honest — a partner should tell you what they're best at."
+        />
 
-        <div className="mt-14 grid max-w-3xl gap-8">
-          {skills.map((skill) => (
-            <div key={skill.label}>
-              <div className="flex items-baseline justify-between">
-                <span className="text-sm font-medium text-ink">{skill.label}</span>
-                <span className="font-display text-sm font-medium tabular-nums text-ink-soft">
-                  {skill.value}%
-                </span>
-              </div>
+        <Reveal className="mt-16">
+          <dl className="grid gap-x-16 gap-y-10 lg:grid-cols-2">
+            {capabilities.map((capability, index) => (
               <div
-                role="progressbar"
-                aria-label={skill.label}
-                aria-valuenow={skill.value}
-                aria-valuemin={0}
-                aria-valuemax={100}
-                className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-accent-soft"
+                key={capability.label}
+                className="reveal-rise"
+                style={{ ['--reveal-delay' as string]: `${index * 0.07}s` }}
               >
-                <div
-                  className="h-full rounded-full bg-accent"
-                  style={{ width: `${skill.value}%` }}
-                />
+                <dt className="flex items-baseline justify-between gap-4">
+                  <span className="font-display text-xl font-medium tracking-tight text-fg">
+                    {capability.label}
+                  </span>
+                  <span className="font-mono text-sm tabular-nums text-fg-soft">
+                    {capability.value}
+                    <span className="text-fg-soft/60">/100</span>
+                  </span>
+                </dt>
+                <dd className="mt-4">
+                  <div
+                    role="progressbar"
+                    aria-valuenow={capability.value}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={`${capability.label} capability`}
+                    className="h-px w-full bg-line-strong"
+                  >
+                    <div
+                      className="meter-fill h-px bg-accent shadow-[0_0_12px_0_var(--color-accent)]"
+                      style={{
+                        ['--meter-value' as string]: capability.value / 100,
+                        ['--reveal-delay' as string]: `${0.2 + index * 0.07}s`,
+                      }}
+                    />
+                  </div>
+                </dd>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </dl>
+        </Reveal>
       </Container>
     </section>
   );

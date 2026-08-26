@@ -48,15 +48,15 @@ export default function PrivacyPage() {
         lede="This is a general, placeholder overview of how we approach privacy — it is not a substitute for a policy reviewed by counsel."
       />
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           <div className="max-w-3xl space-y-10">
             {sections.map((section) => (
               <div key={section.heading}>
-                <h2 className="font-display text-2xl font-medium tracking-tight text-ink">
+                <h2 className="font-display text-2xl font-medium tracking-tight text-fg">
                   {section.heading}
                 </h2>
-                <p className="mt-4 text-base leading-relaxed text-ink-soft">{section.body}</p>
+                <p className="mt-4 text-base leading-relaxed text-fg-soft">{section.body}</p>
               </div>
             ))}
           </div>

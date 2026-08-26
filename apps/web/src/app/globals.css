@@ -1,33 +1,239 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0b0f1a;
-  --color-ink-soft: #4b5163;
+  /* Dark canvas — marketing surfaces */
+  --color-ink: #070a12;
+  --color-ink-raised: #0d1220;
+  --color-fg: #eef0f8;
+  --color-fg-soft: #99a1b3;
+  --color-line: rgba(238, 240, 248, 0.08);
+  --color-line-strong: rgba(238, 240, 248, 0.16);
+
+  /* Light surfaces — admin + forms on paper */
   --color-surface: #f7f8fb;
   --color-surface-alt: #ffffff;
-  --color-accent: #4f46e5;
-  --color-accent-soft: #eef2ff;
-  --color-accent-strong: color-mix(in srgb, var(--color-accent) 85%, black);
+  --color-ink-soft: #4b5163;
+
+  /* Brand accent — electric indigo, lifted for dark backgrounds */
+  --color-accent: #5e56f5;
+  --color-accent-soft: rgba(94, 86, 245, 0.14);
+  --color-accent-strong: color-mix(in srgb, var(--color-accent) 82%, white);
+
   --font-display: var(--font-space-grotesk);
   --font-body: var(--font-inter);
+  --font-mono: var(--font-plex-mono);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout-soft: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 body {
-  background: var(--color-surface);
-  color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-fg);
   font-family: var(--font-body);
 }
 
-/* Signature ambient texture: a faint coordinate/axis dot-grid, used only on
-   ink (near-black) surfaces — header and footer — to nod at "Metaxia" as a
-   connective, systems-level partner without becoming decorative noise. */
-.grid-signature {
-  background-image: radial-gradient(
-    color-mix(in srgb, var(--color-accent) 55%, transparent) 1px,
-    transparent 1px
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Signature: the beacon.                                              */
+/* A fine blueprint grid lives on every dark panel, but stays almost   */
+/* invisible until the cursor's light passes over it. The grid is the  */
+/* company's subject — systems — and the light is attention.           */
+/* ------------------------------------------------------------------ */
+
+.blueprint {
+  position: relative;
+}
+
+.blueprint::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.35;
+  -webkit-mask-image: radial-gradient(
+    420px circle at var(--beacon-x, 50%) var(--beacon-y, 20%),
+    black 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    transparent 78%
   );
-  background-size: 24px 24px;
-  background-position: -11px -11px;
+  mask-image: radial-gradient(
+    420px circle at var(--beacon-x, 50%) var(--beacon-y, 20%),
+    black 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    transparent 78%
+  );
+}
+
+.beacon-light {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(
+    560px circle at var(--beacon-px, -600px) var(--beacon-py, -600px),
+    rgba(94, 86, 245, 0.07),
+    transparent 70%
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Reveal system — driven by IntersectionObserver adding .is-revealed  */
+/* ------------------------------------------------------------------ */
+
+.reveal-rise,
+.reveal-fade,
+.reveal-line,
+.reveal-scale {
+  transition-timing-function: var(--ease-out-expo);
+  transition-duration: 0.9s;
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: transform, opacity;
+}
+
+.reveal-rise {
+  opacity: 0;
+  transform: translateY(2.5rem);
+  transition-property: opacity, transform;
+}
+
+.reveal-fade {
+  opacity: 0;
+  transition-property: opacity;
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition-property: opacity, transform;
+}
+
+.reveal-line {
+  opacity: 0;
+  transform: translateY(110%);
+  transition-property: opacity, transform;
+}
+
+.is-revealed .reveal-rise,
+.is-revealed.reveal-rise,
+.is-revealed .reveal-fade,
+.is-revealed.reveal-fade,
+.is-revealed .reveal-scale,
+.is-revealed.reveal-scale,
+.is-revealed .reveal-line,
+.is-revealed.reveal-line {
+  opacity: 1;
+  transform: none;
+}
+
+/* Word-by-word hero reveal */
+.word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.word-mask > span {
+  display: inline-block;
+  transform: translateY(112%);
+  transition: transform 1s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: transform;
+}
+
+.is-revealed .word-mask > span {
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------------ */
+/* Ambient motion                                                      */
+/* ------------------------------------------------------------------ */
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 36s linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0);
+  }
+}
+
+.drift {
+  animation: drift 9s var(--ease-inout-soft) infinite;
+}
+
+.drift-slow {
+  animation: drift 14s var(--ease-inout-soft) infinite;
+}
+
+/* Meter fill — width set via --meter-value when revealed */
+.meter-fill {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.4s var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.is-revealed .meter-fill {
+  transform: scaleX(var(--meter-value, 1));
+}
+
+/* Animated underline for editorial links */
+.link-rule {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  transition: background-size 0.5s var(--ease-out-expo);
+}
+
+.link-rule:hover,
+a:hover .link-rule {
+  background-size: 100% 1px;
+}
+
+/* Horizontal scroll strips: hide scrollbars but keep scrollability */
+.strip-scroll {
+  scrollbar-width: none;
+}
+
+.strip-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -38,5 +244,19 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .reveal-rise,
+  .reveal-fade,
+  .reveal-line,
+  .reveal-scale,
+  .word-mask > span,
+  .meter-fill {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .beacon-light {
+    display: none;
   }
 }

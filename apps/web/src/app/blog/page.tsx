@@ -35,7 +35,7 @@ export default async function BlogPage() {
         lede="Practical notes on the systems we build, the vendors we evaluate, and the decisions that come up on every engagement."
       />
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           {posts.length > 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -43,7 +43,7 @@ export default async function BlogPage() {
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="group flex flex-col rounded-3xl border border-ink/10 bg-surface-alt p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
+                  className="group flex flex-col rounded-3xl border border-line bg-ink-raised p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
                 >
                   <div className="flex items-center gap-3 text-xs">
                     <span className="rounded-full bg-accent-soft px-3 py-1 font-semibold uppercase tracking-wide text-accent">
@@ -51,15 +51,15 @@ export default async function BlogPage() {
                     </span>
                     <time
                       dateTime={post.publishedAt}
-                      className="font-normal tracking-normal text-ink-soft"
+                      className="font-normal tracking-normal text-fg-soft"
                     >
                       {formatDate(post.publishedAt)}
                     </time>
                   </div>
-                  <h2 className="mt-4 font-display text-lg font-medium tracking-tight text-ink">
+                  <h2 className="mt-4 font-display text-lg font-medium tracking-tight text-fg">
                     {post.title}
                   </h2>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-soft">{post.excerpt}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-fg-soft">{post.excerpt}</p>
                   <span className="mt-auto flex items-center gap-2 pt-6 text-sm font-medium text-accent">
                     Read the post
                     <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
@@ -70,7 +70,7 @@ export default async function BlogPage() {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-ink-soft">Posts are temporarily unavailable.</p>
+            <p className="text-sm text-fg-soft">Posts are temporarily unavailable.</p>
           )}
         </Container>
       </section>

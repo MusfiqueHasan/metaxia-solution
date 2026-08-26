@@ -1,26 +1,59 @@
 import Link from 'next/link';
-import type { AnchorHTMLAttributes } from 'react';
+import type { ReactNode } from 'react';
+import { Magnetic } from '@/components/motion/magnetic';
 
-type ButtonVariant = 'primary' | 'ghost';
-
-interface ButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+interface ButtonProps {
   href: string;
-  variant?: ButtonVariant;
+  children: ReactNode;
+  variant?: 'primary' | 'ghost';
+  size?: 'md' | 'lg';
+  /** Adds the magnetic cursor pull. Reserve for primary calls to action. */
+  magnetic?: boolean;
+  className?: string;
 }
 
-const base =
-  'inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium tracking-tight transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
-
-const variants: Record<ButtonVariant, string> = {
-  primary: 'bg-accent text-white hover:bg-accent-strong',
+const variants = {
+  primary:
+    'bg-accent text-white hover:bg-accent-strong shadow-[0_0_32px_-12px_var(--color-accent)]',
   ghost:
-    'border border-white/20 text-white hover:border-white/40 hover:bg-white/5 data-[on-light=true]:border-ink/15 data-[on-light=true]:text-ink data-[on-light=true]:hover:bg-ink/5',
-};
+    'border border-line-strong text-fg hover:border-fg/40 hover:bg-fg/5',
+} as const;
 
-export function Button({ href, variant = 'primary', className = '', children, ...rest }: ButtonProps) {
-  return (
-    <Link href={href} className={`${base} ${variants[variant]} ${className}`} {...rest}>
-      {children}
+const sizes = {
+  md: 'px-6 py-3 text-sm',
+  lg: 'px-8 py-4 text-base',
+} as const;
+
+export function Button({
+  href,
+  children,
+  variant = 'primary',
+  size = 'md',
+  magnetic = false,
+  className = '',
+}: ButtonProps) {
+  const link = (
+    <Link
+      href={href}
+      className={`group inline-flex items-center gap-2.5 rounded-full font-medium tracking-tight transition-colors duration-300 ${variants[variant]} ${sizes[size]} ${className}`}
+    >
+      <span>{children}</span>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 16 16"
+        fill="none"
+        className="h-3.5 w-3.5 -translate-x-0.5 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+      >
+        <path
+          d="M2 8h11M9 3.5 13.5 8 9 12.5"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
     </Link>
   );
+
+  return magnetic ? <Magnetic>{link}</Magnetic> : link;
 }

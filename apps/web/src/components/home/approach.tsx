@@ -1,40 +1,68 @@
 import { Container } from '@/components/container';
 import { SectionHeading } from '@/components/section-heading';
+import { Reveal } from '@/components/motion/reveal';
 
-const principles = [
+const steps = [
   {
-    title: 'Think Big',
-    body: "We start with the outcome that matters in three years, not three sprints. Every recommendation is stress-tested against where your business is headed.",
+    title: 'Think big',
+    body: 'Every engagement starts from the business outcome, not the backlog. We map the system you actually need before anyone opens an editor.',
   },
   {
-    title: 'Start Small',
-    body: 'The first release is scoped to prove the idea, not showcase every feature. Small, shippable slices reduce risk and surface real feedback fast.',
+    title: 'Start small',
+    body: 'The first release is deliberately narrow: one workflow, in production, carrying real traffic. Proof beats projection.',
   },
   {
-    title: 'Ship Fast',
-    body: 'Momentum compounds, so we favor weekly releases over quarterly milestones. Tight feedback loops mean problems surface in days, not months.',
+    title: 'Ship fast',
+    body: 'Weekly releases with observability wired in from day one. You watch the system grow instead of waiting for a reveal.',
   },
   {
-    title: 'Scale Smart',
-    body: "Architecture decisions are made for the load you'll have, not the load you have today. We build the seams in before you need to cut along them.",
+    title: 'Scale smart',
+    body: 'Once the system earns its load, we harden it — performance budgets, cost guardrails, and a team that knows every failure mode.',
   },
 ];
 
+/**
+ * Sticky storytelling: the section's thesis holds on the left while the four
+ * stages of an engagement pass on the right. Numbering is real sequence here —
+ * this is how a project actually unfolds.
+ */
 export function Approach() {
   return (
-    <section className="bg-surface-alt py-24 lg:py-28">
+    <section className="blueprint relative border-t border-line bg-ink py-28 lg:py-36">
       <Container>
-        <SectionHeading eyebrow="How We Work" title="A method built for momentum" />
+        <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <SectionHeading
+              eyebrow="How we work"
+              title="A method that survives contact with production."
+              lede="Four stages, in order, every time. The order is the method — each stage earns the next."
+            />
+          </div>
 
-        <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:divide-x lg:divide-ink/10">
-          {principles.map((item) => (
-            <div key={item.title} className="lg:px-8 lg:first:pl-0">
-              <h3 className="font-display text-lg font-medium tracking-tight text-ink">
-                {item.title}
-              </h3>
-              <p className="mt-4 text-sm leading-relaxed text-ink-soft">{item.body}</p>
-            </div>
-          ))}
+          <ol className="flex flex-col">
+            {steps.map((step, index) => (
+              <li key={step.title} className="border-b border-line first:border-t">
+                <Reveal threshold={0.4}>
+                  <div className="grid grid-cols-[auto_1fr] gap-6 py-10 lg:gap-10 lg:py-14">
+                    <span className="reveal-fade font-mono text-sm text-accent">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <div>
+                      <h3 className="reveal-rise font-display text-3xl font-medium tracking-tight text-fg lg:text-4xl">
+                        {step.title}
+                      </h3>
+                      <p
+                        className="reveal-rise mt-4 max-w-md text-base leading-relaxed text-fg-soft"
+                        style={{ ['--reveal-delay' as string]: '0.1s' }}
+                      >
+                        {step.body}
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
         </div>
       </Container>
     </section>

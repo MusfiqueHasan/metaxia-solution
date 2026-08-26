@@ -25,17 +25,17 @@ export default async function PricingPage() {
         lede="Every plan includes direct access to the engineers on your project. Pick the level of capacity that matches where you are."
       />
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           {plans.length > 0 ? (
             <div className="grid gap-6 lg:grid-cols-3">
               {plans.map((plan) => (
                 <div
                   key={plan.id}
-                  className={`relative flex flex-col rounded-3xl bg-surface-alt ${
+                  className={`relative flex flex-col rounded-3xl bg-ink-raised ${
                     plan.highlighted
                       ? 'border-2 border-accent p-[31px]'
-                      : 'border border-ink/10 p-8'
+                      : 'border border-line p-8'
                   }`}
                 >
                   {plan.highlighted ? (
@@ -44,21 +44,21 @@ export default async function PricingPage() {
                     </span>
                   ) : null}
 
-                  <h2 className="font-display text-xl font-medium tracking-tight text-ink">
+                  <h2 className="font-display text-xl font-medium tracking-tight text-fg">
                     {plan.name}
                   </h2>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-soft">{plan.description}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-fg-soft">{plan.description}</p>
 
                   <div className="mt-6 flex items-baseline gap-2">
-                    <span className="font-display text-4xl font-medium tabular-nums text-ink">
+                    <span className="font-display text-4xl font-medium tabular-nums text-fg">
                       ${plan.price.toLocaleString('en-US')}
                     </span>
-                    <span className="text-sm text-ink-soft">{plan.period}</span>
+                    <span className="text-sm text-fg-soft">{plan.period}</span>
                   </div>
 
                   <ul className="mt-8 flex flex-1 flex-col gap-3">
                     {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-3 text-sm text-ink-soft">
+                      <li key={feature} className="flex items-start gap-3 text-sm text-fg-soft">
                         <span
                           aria-hidden="true"
                           className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent"
@@ -82,7 +82,7 @@ export default async function PricingPage() {
                     <Button
                       href="/contact"
                       variant={plan.highlighted ? 'primary' : 'ghost'}
-                      data-on-light="true"
+                     
                       className="w-full"
                     >
                       Get Started
@@ -92,7 +92,7 @@ export default async function PricingPage() {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-ink-soft">Pricing is temporarily unavailable.</p>
+            <p className="text-sm text-fg-soft">Pricing is temporarily unavailable.</p>
           )}
         </Container>
       </section>

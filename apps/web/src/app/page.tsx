@@ -2,9 +2,8 @@ import type { Metadata } from 'next';
 import { getServices, getCaseStudies, getPosts, getTestimonials } from '@/lib/api';
 import { site } from '@/lib/site';
 import { Hero } from '@/components/home/hero';
-import { FeaturedServices } from '@/components/home/featured-services';
 import { LogoStrip } from '@/components/home/logo-strip';
-import { ServiceGroups } from '@/components/home/service-groups';
+import { ServicesExplorer } from '@/components/home/services-explorer';
 import { CaseStudyScroller } from '@/components/home/case-study-scroller';
 import { Approach } from '@/components/home/approach';
 import { Skills } from '@/components/home/skills';
@@ -38,9 +37,8 @@ export default async function Home() {
   return (
     <main>
       <Hero stats={stats} />
-      <FeaturedServices services={services.slice(0, 3)} />
       <LogoStrip />
-      <ServiceGroups services={services.slice(3)} />
+      <ServicesExplorer services={services} />
       <CaseStudyScroller items={caseStudies} />
       <Approach />
       <Skills />

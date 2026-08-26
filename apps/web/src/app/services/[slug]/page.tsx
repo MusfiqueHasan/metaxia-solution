@@ -79,7 +79,7 @@ export default async function ServiceDetailPage({
       <JsonLd data={breadcrumbJsonLd} />
       <PageHero eyebrow="Service" title={service.title} lede={service.excerpt} />
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           <div className="max-w-3xl">
             <Markdown body={service.body} />
@@ -88,13 +88,13 @@ export default async function ServiceDetailPage({
       </section>
 
       {otherServices.length > 0 ? (
-        <section className="bg-surface-alt py-24 lg:py-28">
+        <section className="bg-ink-raised py-24 lg:py-28">
           <Container>
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               <span className="h-2 w-2 rotate-45 bg-accent" aria-hidden="true" />
               Other Services
             </div>
-            <h2 className="mt-4 font-display text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+            <h2 className="mt-4 font-display text-3xl font-medium tracking-tight text-fg sm:text-4xl">
               Explore the rest of the practice
             </h2>
 
@@ -103,16 +103,16 @@ export default async function ServiceDetailPage({
                 <Link
                   key={item.slug}
                   href={`/services/${item.slug}`}
-                  className="group flex flex-col gap-6 rounded-3xl border border-ink/10 bg-surface p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
+                  className="group flex flex-col gap-6 rounded-3xl border border-line bg-ink p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
                 >
                   <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
                     <Icon name={item.icon} />
                   </span>
                   <div>
-                    <h3 className="font-display text-lg font-medium tracking-tight text-ink">
+                    <h3 className="font-display text-lg font-medium tracking-tight text-fg">
                       {item.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-ink-soft">{item.excerpt}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-fg-soft">{item.excerpt}</p>
                   </div>
                   <span className="mt-auto flex items-center gap-2 text-sm font-medium text-accent">
                     Learn more

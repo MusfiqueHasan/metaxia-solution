@@ -1,34 +1,56 @@
 import type { Testimonial } from '@metaxia/shared';
 import { Container } from '@/components/container';
 import { SectionHeading } from '@/components/section-heading';
+import { Reveal } from '@/components/motion/reveal';
 
+/**
+ * One voice at a time, at reading-lectern scale. Native scroll-snap turns
+ * the quotes into slides without a carousel library.
+ */
 export function Testimonials({ items }: { items: Testimonial[] }) {
   if (items.length === 0) return null;
 
   return (
-    <section className="bg-surface py-24 lg:py-28">
+    <section className="overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
       <Container>
-        <SectionHeading eyebrow="Client Voices" title="What partners say" />
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <SectionHeading eyebrow="Client voices" title="What it's like to work with us." />
+          <Reveal className="hidden lg:block">
+            <p className="reveal-fade font-mono text-[11px] uppercase tracking-[0.25em] text-fg-soft">
+              {String(items.length).padStart(2, '0')} voices · scroll →
+            </p>
+          </Reveal>
+        </div>
       </Container>
 
-      <div className="mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4 lg:px-8">
-        {items.map((item) => (
-          <figure
-            key={item.id}
-            className="flex w-[300px] shrink-0 snap-start flex-col justify-between rounded-3xl border border-ink/10 bg-surface-alt p-8 sm:w-[380px]"
-          >
-            <span aria-hidden="true" className="font-display text-4xl leading-none text-accent">
-              &ldquo;
-            </span>
-            <blockquote className="mt-4 flex-1 font-display text-lg font-medium leading-snug tracking-tight text-ink">
-              {item.quote}
-            </blockquote>
-            <figcaption className="mt-6 text-sm text-ink-soft">
-              <span className="font-medium text-ink">{item.author}</span> &mdash; {item.company}
-            </figcaption>
-          </figure>
-        ))}
-      </div>
+      <Reveal>
+        <div className="reveal-fade strip-scroll mt-14 flex snap-x snap-mandatory gap-8 overflow-x-auto px-6 lg:px-[max(2rem,calc((100vw-72rem)/2+2rem))]">
+          {items.map((item, index) => (
+            <figure
+              key={item.id}
+              className="w-[85vw] shrink-0 snap-center rounded-3xl border border-line bg-ink-raised p-10 sm:w-[38rem] lg:p-14"
+            >
+              <span aria-hidden="true" className="font-display text-6xl leading-none text-accent">
+                &ldquo;
+              </span>
+              <blockquote className="mt-4 font-display text-2xl font-medium leading-snug tracking-tight text-fg lg:text-3xl">
+                {item.quote}
+              </blockquote>
+              <figcaption className="mt-8 flex items-baseline justify-between gap-4">
+                <span>
+                  <span className="block text-sm font-medium text-fg">{item.author}</span>
+                  <span className="mt-1 block font-mono text-[11px] uppercase tracking-[0.18em] text-fg-soft">
+                    {item.company}
+                  </span>
+                </span>
+                <span className="font-mono text-xs text-fg-soft/60">
+                  {String(index + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </Reveal>
     </section>
   );
 }

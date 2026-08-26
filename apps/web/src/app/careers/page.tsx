@@ -25,10 +25,10 @@ export default async function CareersPage() {
         lede="We're a small team working on real client systems, not internal tools nobody uses. Here's what's currently open."
       />
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           <div className="max-w-2xl">
-            <p className="text-base leading-relaxed text-ink-soft">
+            <p className="text-base leading-relaxed text-fg-soft">
               Every role here works directly on client engagements from day one. We hire for
               strong fundamentals and clear communication over years of experience alone, and we
               keep the team small enough that everyone's work is visible.
@@ -36,7 +36,7 @@ export default async function CareersPage() {
           </div>
 
           {jobs.length > 0 ? (
-            <div className="mt-14 divide-y divide-ink/10 border-y border-ink/10">
+            <div className="mt-14 divide-y divide-line border-y border-line">
               {jobs.map((job) => (
                 <Link
                   key={job.slug}
@@ -44,14 +44,14 @@ export default async function CareersPage() {
                   className="group flex flex-col gap-3 py-7 transition-colors hover:bg-accent-soft sm:flex-row sm:items-center sm:justify-between sm:gap-6"
                 >
                   <div>
-                    <h2 className="font-display text-lg font-medium tracking-tight text-ink">
+                    <h2 className="font-display text-lg font-medium tracking-tight text-fg">
                       {job.title}
                     </h2>
                     <div className="mt-2 flex flex-wrap items-center gap-2">
-                      <span className="rounded-full bg-ink/5 px-3 py-1 text-xs font-medium text-ink-soft">
+                      <span className="rounded-full bg-fg/5 px-3 py-1 text-xs font-medium text-fg-soft">
                         {job.location}
                       </span>
-                      <span className="rounded-full bg-ink/5 px-3 py-1 text-xs font-medium text-ink-soft">
+                      <span className="rounded-full bg-fg/5 px-3 py-1 text-xs font-medium text-fg-soft">
                         {job.type}
                       </span>
                     </div>
@@ -66,7 +66,7 @@ export default async function CareersPage() {
               ))}
             </div>
           ) : (
-            <p className="mt-14 text-sm text-ink-soft">
+            <p className="mt-14 text-sm text-fg-soft">
               We don't have any open roles right now — check back soon.
             </p>
           )}

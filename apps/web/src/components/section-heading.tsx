@@ -1,3 +1,5 @@
+import { Reveal } from '@/components/motion/reveal';
+
 interface SectionHeadingProps {
   eyebrow: string;
   title: string;
@@ -7,19 +9,26 @@ interface SectionHeadingProps {
 
 export function SectionHeading({ eyebrow, title, lede, align = 'left' }: SectionHeadingProps) {
   return (
-    <div className={`max-w-2xl ${align === 'center' ? 'mx-auto text-center' : ''}`}>
+    <Reveal className={`max-w-2xl ${align === 'center' ? 'mx-auto text-center' : ''}`}>
       <div
-        className={`flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent ${
+        className={`reveal-fade flex items-baseline gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-accent ${
           align === 'center' ? 'justify-center' : ''
         }`}
       >
-        <span className="h-2 w-2 rotate-45 bg-accent" aria-hidden="true" />
+        <span className="inline-block h-px w-6 self-center bg-accent" aria-hidden="true" />
         {eyebrow}
       </div>
-      <h2 className="mt-4 font-display text-3xl font-medium tracking-tight text-ink sm:text-4xl">
+      <h2 className="reveal-rise mt-5 font-display text-4xl font-medium leading-[1.04] tracking-tight text-fg sm:text-5xl">
         {title}
       </h2>
-      {lede ? <p className="mt-4 text-base leading-relaxed text-ink-soft">{lede}</p> : null}
-    </div>
+      {lede ? (
+        <p
+          className="reveal-rise mt-5 text-base leading-relaxed text-fg-soft"
+          style={{ ['--reveal-delay' as string]: '0.12s' }}
+        >
+          {lede}
+        </p>
+      ) : null}
+    </Reveal>
   );
 }

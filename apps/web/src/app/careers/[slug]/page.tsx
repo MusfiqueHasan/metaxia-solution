@@ -83,8 +83,8 @@ export default async function JobDetailPage({
     <main>
       <JsonLd data={jobPostingJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
-      <section className="grid-signature relative overflow-hidden bg-ink text-white">
-        <Container className="pt-24 pb-20 lg:pt-28 lg:pb-24">
+      <section className="blueprint relative overflow-hidden bg-ink text-white">
+        <Container className="pt-36 pb-20 lg:pt-44 lg:pb-24">
           <h1 className="max-w-3xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
             {job.title}
           </h1>
@@ -99,7 +99,7 @@ export default async function JobDetailPage({
         </Container>
       </section>
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           <div className="max-w-3xl">
             <Markdown body={job.body} />

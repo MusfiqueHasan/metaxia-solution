@@ -39,13 +39,13 @@ export default async function FaqPage() {
         lede="If your question isn't answered here, the fastest way to get a direct answer is to reach out."
       />
 
-      <section className="bg-surface py-24 lg:py-28">
+      <section className="bg-ink py-24 lg:py-28">
         <Container>
           {faq.length > 0 ? (
-            <div className="max-w-3xl divide-y divide-ink/10 border-y border-ink/10">
+            <div className="max-w-3xl divide-y divide-line border-y border-line">
               {faq.map((item) => (
                 <details key={item.id} className="group py-6">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg font-medium tracking-tight text-ink [&::-webkit-details-marker]:hidden">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg font-medium tracking-tight text-fg [&::-webkit-details-marker]:hidden">
                     {item.question}
                     <span
                       aria-hidden="true"
@@ -61,14 +61,14 @@ export default async function FaqPage() {
                       </svg>
                     </span>
                   </summary>
-                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-soft">
+                  <p className="mt-4 max-w-2xl text-sm leading-relaxed text-fg-soft">
                     {item.answer}
                   </p>
                 </details>
               ))}
             </div>
           ) : (
-            <p className="text-sm text-ink-soft">FAQs are temporarily unavailable.</p>
+            <p className="text-sm text-fg-soft">FAQs are temporarily unavailable.</p>
           )}
         </Container>
       </section>

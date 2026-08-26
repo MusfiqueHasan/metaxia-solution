@@ -14,9 +14,9 @@ interface Fields {
 const emptyFields: Fields = { name: '', email: '', phone: '', message: '' };
 
 const inputClass =
-  'mt-2 w-full rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm text-ink placeholder:text-ink-soft/60 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60';
+  'mt-2 w-full rounded-xl border border-line-strong bg-ink px-4 py-2.5 text-sm text-fg placeholder:text-fg-soft/60 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60';
 
-const labelClass = 'text-sm font-medium text-ink';
+const labelClass = 'text-sm font-medium text-fg';
 
 function toMessages(message: unknown): string[] {
   if (Array.isArray(message)) return message.map(String);
@@ -64,7 +64,7 @@ export function ContactForm() {
 
   if (state === 'sent') {
     return (
-      <div className="rounded-3xl border border-ink/10 bg-surface-alt p-8 lg:p-10" aria-live="polite">
+      <div className="rounded-3xl border border-line bg-ink-raised p-8 lg:p-10" aria-live="polite">
         <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
           <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5">
             <path
@@ -76,10 +76,10 @@ export function ContactForm() {
             />
           </svg>
         </span>
-        <h3 className="mt-6 font-display text-xl font-medium tracking-tight text-ink">
+        <h3 className="mt-6 font-display text-xl font-medium tracking-tight text-fg">
           Message sent.
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+        <p className="mt-3 text-sm leading-relaxed text-fg-soft">
           Thanks for reaching out — a member of our team will reply within one business day.
         </p>
       </div>
@@ -90,7 +90,7 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-3xl border border-ink/10 bg-surface-alt p-8 lg:p-10"
+      className="rounded-3xl border border-line bg-ink-raised p-8 lg:p-10"
     >
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
@@ -132,7 +132,7 @@ export function ContactForm() {
 
       <div className="mt-5">
         <label htmlFor="contact-phone" className={labelClass}>
-          Phone <span className="font-normal text-ink-soft">(optional)</span>
+          Phone <span className="font-normal text-fg-soft">(optional)</span>
         </label>
         <input
           id="contact-phone"
@@ -174,8 +174,8 @@ export function ContactForm() {
 
       <div aria-live="polite" className="mt-5">
         {state === 'error' ? (
-          <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3">
-            <ul className="flex flex-col gap-1 text-sm text-rose-700">
+          <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3">
+            <ul className="flex flex-col gap-1 text-sm text-rose-300">
               {errors.map((message) => (
                 <li key={message}>{message}</li>
               ))}
