@@ -3,6 +3,8 @@ import { getFaq } from '@/lib/api';
 import { PageHero } from '@/components/page-hero';
 import { Container } from '@/components/container';
 import { JsonLd } from '@/components/json-ld';
+import { SectionBackdrop } from '@/components/section-backdrop';
+import { Reveal } from '@/components/motion/reveal';
 
 export const metadata: Metadata = {
   title: 'FAQ',
@@ -39,12 +41,17 @@ export default async function FaqPage() {
         lede="If your question isn't answered here, the fastest way to get a direct answer is to reach out."
       />
 
-      <section className="bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+        <SectionBackdrop glow="left" variant="cube" side="right" />
         <Container>
           {faq.length > 0 ? (
-            <div className="max-w-3xl divide-y divide-line border-y border-line">
-              {faq.map((item) => (
-                <details key={item.id} className="group py-6">
+            <Reveal className="max-w-3xl divide-y divide-line border-y border-line">
+              {faq.map((item, index) => (
+                <details
+                  key={item.id}
+                  className="reveal-rise group py-6"
+                  style={{ ['--reveal-delay' as string]: `${index * 0.06}s` }}
+                >
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg tracking-[-0.01em] text-fg [&::-webkit-details-marker]:hidden">
                     {item.question}
                     <span
@@ -66,7 +73,7 @@ export default async function FaqPage() {
                   </p>
                 </details>
               ))}
-            </div>
+            </Reveal>
           ) : (
             <p className="text-sm text-fg-soft">FAQs are temporarily unavailable.</p>
           )}

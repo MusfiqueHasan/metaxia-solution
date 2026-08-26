@@ -10,6 +10,8 @@ import { Markdown } from '@/components/markdown';
 import { Icon } from '@/components/icon';
 import { ContactCta } from '@/components/home/contact-cta';
 import { JsonLd } from '@/components/json-ld';
+import { SectionBackdrop } from '@/components/section-backdrop';
+import { Reveal } from '@/components/motion/reveal';
 
 export async function generateStaticParams() {
   const services = await getServices();
@@ -80,14 +82,15 @@ export default async function ServiceDetailPage({
       <JsonLd data={breadcrumbJsonLd} />
       <PageHero eyebrow="Service" title={service.title} lede={service.excerpt} />
 
-      <section className="bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+        <SectionBackdrop glow="left" variant="orbs" />
         <Container>
-          <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-20">
-            <div className="max-w-3xl">
+          <Reveal className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-20">
+            <div className="reveal-rise max-w-3xl">
               <Markdown body={service.body} />
             </div>
 
-            <aside className="order-first lg:order-none">
+            <aside className="reveal-scale order-first lg:order-none" style={{ ['--reveal-delay' as string]: '0.15s' }}>
               <div className="rounded-3xl border border-line bg-ink-raised p-8 lg:sticky lg:top-28">
                 <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-line bg-ink text-accent">
                   <Icon name={service.icon} className="h-5 w-5" />
@@ -131,12 +134,13 @@ export default async function ServiceDetailPage({
                 </div>
               </div>
             </aside>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
       {otherServices.length > 0 ? (
-        <section className="bg-ink-raised py-24 lg:py-28">
+        <section className="grain relative overflow-clip bg-ink-raised py-24 lg:py-28">
+          <SectionBackdrop glow="center" variant="plain" />
           <Container>
             <div className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-accent">
               <span className="inline-block h-px w-6 bg-accent" aria-hidden="true" />

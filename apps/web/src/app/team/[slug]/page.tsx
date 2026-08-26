@@ -6,6 +6,9 @@ import { site } from '@/lib/site';
 import { Container } from '@/components/container';
 import { ContactCta } from '@/components/home/contact-cta';
 import { JsonLd } from '@/components/json-ld';
+import { Starfield } from '@/components/motion/starfield';
+import { SplitWords } from '@/components/motion/split-words';
+import { Reveal } from '@/components/motion/reveal';
 
 export async function generateStaticParams() {
   const team = await getTeam();
@@ -58,9 +61,10 @@ export default async function TeamMemberPage({
   };
 
   return (
-    <main>
+    <main className="grain relative overflow-hidden bg-ink">
+      <Starfield />
       <JsonLd data={breadcrumbJsonLd} />
-      <section className="relative overflow-hidden bg-ink text-white">
+      <section className="relative border-b border-line text-white">
         <Container className="flex flex-col items-start gap-6 pt-36 pb-20 lg:pt-44 lg:pb-24">
           <span className="flex h-20 w-20 items-center justify-center rounded-full bg-accent-soft font-display text-2xl text-accent">
             {initials(member.name)}
@@ -74,7 +78,7 @@ export default async function TeamMemberPage({
         </Container>
       </section>
 
-      <section className="bg-ink py-24 lg:py-28">
+      <section className="relative py-24 lg:py-28">
         <Container>
           <div className="max-w-3xl space-y-5">
             {bioParagraphs.map((paragraph, index) => (

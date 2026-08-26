@@ -4,6 +4,8 @@ import { getTeam } from '@/lib/api';
 import { initials } from '@/lib/format';
 import { PageHero } from '@/components/page-hero';
 import { Container } from '@/components/container';
+import { SectionBackdrop } from '@/components/section-backdrop';
+import { Reveal } from '@/components/motion/reveal';
 
 export const metadata: Metadata = {
   title: 'Team',
@@ -26,15 +28,17 @@ export default async function TeamPage() {
         lede="A small team of engineers, designers, and strategists who scope, build, and stay accountable for what ships."
       />
 
-      <section className="bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+        <SectionBackdrop glow="center" variant="orbs" />
         <Container>
           {team.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {team.map((member) => (
+            <Reveal className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {team.map((member, index) => (
                 <Link
                   key={member.slug}
+                  style={{ ['--reveal-delay' as string]: `${index * 0.08}s` }}
                   href={`/team/${member.slug}`}
-                  className="group flex flex-col items-start gap-5 rounded-3xl border border-line bg-ink-raised p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
+                  className="reveal-scale group flex flex-col items-start gap-5 rounded-3xl border border-line bg-ink-raised p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
                 >
                   <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft font-display text-lg text-accent">
                     {initials(member.name)}
@@ -47,7 +51,7 @@ export default async function TeamPage() {
                   </div>
                 </Link>
               ))}
-            </div>
+            </Reveal>
           ) : (
             <p className="text-sm text-fg-soft">Team profiles are temporarily unavailable.</p>
           )}

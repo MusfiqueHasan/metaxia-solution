@@ -4,6 +4,8 @@ import { Container } from '@/components/container';
 import { SectionHeading } from '@/components/section-heading';
 import { Icon } from '@/components/icon';
 import { Approach } from '@/components/home/approach';
+import { SectionBackdrop } from '@/components/section-backdrop';
+import { Reveal } from '@/components/motion/reveal';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -54,12 +56,13 @@ export default function AboutPage() {
         lede="We started Metaxia because too many enterprise builds ended at launch. We stay for the decade after."
       />
 
-      <section className="bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+        <SectionBackdrop glow="right" variant="ring" side="right" />
         <Container>
           <div className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]">
             <SectionHeading eyebrow="Our Story" title="Founded on a simple complaint" />
-            <div className="space-y-6 text-base leading-relaxed text-fg-soft">
-              <p>
+            <Reveal className="space-y-6 text-base leading-relaxed text-fg-soft">
+              <p className="reveal-rise">
                 Metaxia Solutions was founded by engineers who kept watching the same thing
                 happen: a vendor would ship an ambitious system, collect the final invoice, and
                 disappear before anyone found out whether it actually worked under real load. We
@@ -78,34 +81,40 @@ export default function AboutPage() {
                 the people who build it, and large enough to carry an enterprise engagement from
                 first workshop to production and beyond.
               </p>
-            </div>
+            </Reveal>
           </div>
 
-          <div className="mt-16 grid grid-cols-2 gap-10 border-y border-line py-10 sm:grid-cols-4 sm:divide-x sm:divide-line">
-            {stats.map((stat) => (
-              <div key={stat.label} className="sm:px-8 sm:first:pl-0">
+          <Reveal className="mt-16 grid grid-cols-2 gap-10 border-y border-line py-10 sm:grid-cols-4 sm:divide-x sm:divide-line">
+            {stats.map((stat, index) => (
+              <div
+                key={stat.label}
+                className="reveal-rise sm:px-8 sm:first:pl-0"
+                style={{ ['--reveal-delay' as string]: `${index * 0.1}s` }}
+              >
                 <span className="font-display text-4xl tabular-nums text-fg">
                   {stat.value}
                 </span>
                 <p className="mt-2 text-sm text-fg-soft">{stat.label}</p>
               </div>
             ))}
-          </div>
+          </Reveal>
         </Container>
       </section>
 
-      <section className="bg-ink-raised py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink-raised py-24 lg:py-28">
+        <SectionBackdrop glow="left" variant="floor" />
         <Container>
           <SectionHeading
             eyebrow="What We Value"
             title="The principles behind every engagement"
           />
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2">
-            {values.map((value) => (
+          <Reveal className="mt-14 grid gap-6 sm:grid-cols-2">
+            {values.map((value, index) => (
               <div
                 key={value.title}
-                className="flex items-start gap-6 rounded-3xl border border-line bg-ink p-8"
+                className="reveal-rise flex items-start gap-6 rounded-3xl border border-line bg-ink p-8"
+                style={{ ['--reveal-delay' as string]: `${index * 0.08}s` }}
               >
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent">
                   <Icon name={value.icon} />
@@ -118,7 +127,7 @@ export default function AboutPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </Container>
       </section>
 

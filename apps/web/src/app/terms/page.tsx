@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { PageHero } from '@/components/page-hero';
 import { Container } from '@/components/container';
+import { SectionBackdrop } from '@/components/section-backdrop';
+import { Reveal } from '@/components/motion/reveal';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
@@ -48,18 +50,23 @@ export default function TermsPage() {
         lede="This is a general, placeholder overview of our terms — it is not a substitute for terms reviewed by counsel."
       />
 
-      <section className="bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+        <SectionBackdrop glow="right" variant="plain" />
         <Container>
-          <div className="max-w-3xl space-y-10">
-            {sections.map((section) => (
-              <div key={section.heading}>
+          <Reveal className="max-w-3xl space-y-10">
+            {sections.map((section, index) => (
+              <div
+                key={section.heading}
+                className="reveal-rise"
+                style={{ ['--reveal-delay' as string]: `${index * 0.06}s` }}
+              >
                 <h2 className="font-display text-2xl tracking-[-0.01em] text-fg">
                   {section.heading}
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-fg-soft">{section.body}</p>
               </div>
             ))}
-          </div>
+          </Reveal>
         </Container>
       </section>
     </main>

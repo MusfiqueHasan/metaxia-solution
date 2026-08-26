@@ -1,6 +1,7 @@
 import { Container } from '@/components/container';
 import { Reveal } from '@/components/motion/reveal';
 import { SplitWords } from '@/components/motion/split-words';
+import { Starfield } from '@/components/motion/starfield';
 
 interface PageHeroProps {
   eyebrow: string;
@@ -8,12 +9,20 @@ interface PageHeroProps {
   lede?: string;
 }
 
+/**
+ * Inner-page opener: starfield + aurora + dot field behind a word-revealed
+ * serif title, with a copper rule drawing in under the lede. Every page that
+ * uses PageHero inherits the full ambient treatment.
+ */
 export function PageHero({ eyebrow, title, lede }: PageHeroProps) {
   return (
-    <section className="relative overflow-hidden border-b border-line bg-ink">
+    <section className="grain relative overflow-clip border-b border-line bg-ink">
+      <Starfield />
+      <div aria-hidden="true" className="bg-dots absolute inset-0" />
+      <div aria-hidden="true" className="aurora aurora--a" />
       <div
         aria-hidden="true"
-        className="absolute -top-32 right-[-12%] h-[26rem] w-[26rem] rounded-full bg-accent/[0.1] blur-[110px]"
+        className="absolute -top-32 right-[-12%] h-[26rem] w-[26rem] rounded-full bg-accent/[0.08] blur-[110px]"
       />
       <Container className="relative pb-20 pt-40 lg:pb-24 lg:pt-48">
         <Reveal>
@@ -22,7 +31,7 @@ export function PageHero({ eyebrow, title, lede }: PageHeroProps) {
             {eyebrow}
           </p>
 
-          <h1 className="mt-7 max-w-4xl font-display text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.02] tracking-[-0.02em] text-fg">
+          <h1 className="mt-7 max-w-4xl font-display text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.02] tracking-[-0.01em] text-fg">
             <SplitWords text={title} from={0.08} />
           </h1>
 
@@ -34,6 +43,12 @@ export function PageHero({ eyebrow, title, lede }: PageHeroProps) {
               {lede}
             </p>
           ) : null}
+
+          <span
+            aria-hidden="true"
+            className="reveal-draw-x mt-10 block h-px w-40 bg-gradient-to-r from-accent to-transparent"
+            style={{ ['--reveal-delay' as string]: '0.5s' }}
+          />
         </Reveal>
       </Container>
     </section>

@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { getPosts } from '@/lib/api';
 import { PageHero } from '@/components/page-hero';
 import { Container } from '@/components/container';
+import { SectionBackdrop } from '@/components/section-backdrop';
+import { Reveal } from '@/components/motion/reveal';
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -35,15 +37,17 @@ export default async function BlogPage() {
         lede="Practical notes on the systems we build, the vendors we evaluate, and the decisions that come up on every engagement."
       />
 
-      <section className="bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+        <SectionBackdrop glow="right" variant="ceiling" />
         <Container>
           {posts.length > 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post) => (
+            <Reveal className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {posts.map((post, index) => (
                 <Link
                   key={post.slug}
+                  style={{ ['--reveal-delay' as string]: `${index * 0.07}s` }}
                   href={`/blog/${post.slug}`}
-                  className="group flex flex-col rounded-3xl border border-line bg-ink-raised p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
+                  className="reveal-rise group flex flex-col rounded-3xl border border-line bg-ink-raised p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
                 >
                   <div className="flex items-center gap-3 text-xs">
                     <span className="rounded-full bg-accent-soft px-3 py-1 font-semibold uppercase tracking-wide text-accent">
@@ -68,7 +72,7 @@ export default async function BlogPage() {
                   </span>
                 </Link>
               ))}
-            </div>
+            </Reveal>
           ) : (
             <p className="text-sm text-fg-soft">Posts are temporarily unavailable.</p>
           )}

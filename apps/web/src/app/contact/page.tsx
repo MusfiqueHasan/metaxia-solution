@@ -4,6 +4,8 @@ import { Container } from '@/components/container';
 import { SectionHeading } from '@/components/section-heading';
 import { Button } from '@/components/button';
 import { ContactForm } from '@/components/contact-form';
+import { SectionBackdrop } from '@/components/section-backdrop';
+import { Reveal } from '@/components/motion/reveal';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -24,9 +26,11 @@ export default function ContactPage() {
         lede="Tell us where you are and where you're headed. A real person on the team reads every message and replies with next steps, not a form letter."
       />
 
-      <section className="bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+        <SectionBackdrop glow="right" variant="sweep" side="right" />
         <Container>
-          <div className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+          <Reveal className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+            <div className="reveal-rise">
             <div>
               <SectionHeading
                 eyebrow="Get In Touch"
@@ -71,12 +75,16 @@ export default function ContactPage() {
               </dl>
             </div>
 
-            <ContactForm />
-          </div>
+            </div>
+            <div className="reveal-rise" style={{ ['--reveal-delay' as string]: '0.15s' }}>
+              <ContactForm />
+            </div>
+          </Reveal>
         </Container>
       </section>
 
-      <section className="border-t border-line bg-ink-raised py-20 lg:py-24">
+      <section className="grain relative overflow-clip border-t border-line bg-ink-raised py-20 lg:py-24">
+        <SectionBackdrop glow="center" variant="plain" />
         <Container className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
           <div>
             <h2 className="font-display text-2xl tracking-[-0.01em] text-fg sm:text-3xl">

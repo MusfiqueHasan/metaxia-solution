@@ -5,6 +5,7 @@ import { PageHero } from '@/components/page-hero';
 import { Container } from '@/components/container';
 import { Reveal } from '@/components/motion/reveal';
 import { Icon, type IconKey } from '@/components/icon';
+import { SectionBackdrop } from '@/components/section-backdrop';
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -27,7 +28,8 @@ export default async function ServicesPage() {
         lede="Engage us for a single capability or the whole system — every practice is staffed by people who ship, not just advise."
       />
 
-      <section className="bg-ink py-24 lg:py-32">
+      <section className="grain relative overflow-clip bg-ink py-24 lg:py-32">
+        <SectionBackdrop glow="right" variant="ceiling" />
         <Container>
           {services.length > 0 ? (
             <Reveal>

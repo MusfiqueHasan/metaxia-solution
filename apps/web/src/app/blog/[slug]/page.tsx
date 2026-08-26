@@ -7,6 +7,9 @@ import { Container } from '@/components/container';
 import { Markdown } from '@/components/markdown';
 import { ContactCta } from '@/components/home/contact-cta';
 import { JsonLd } from '@/components/json-ld';
+import { Starfield } from '@/components/motion/starfield';
+import { SplitWords } from '@/components/motion/split-words';
+import { Reveal } from '@/components/motion/reveal';
 
 export async function generateStaticParams() {
   const posts = await getPosts();
@@ -82,12 +85,14 @@ export default async function BlogPostPage({
   };
 
   return (
-    <main>
+    <main className="grain relative overflow-hidden bg-ink">
+      <Starfield />
       <JsonLd data={articleJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
-      <section className="relative overflow-hidden bg-ink text-white">
+      <section className="relative border-b border-line text-white">
         <Container className="pt-36 pb-20 lg:pt-44 lg:pb-24">
-          <div className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-accent">
+          <Reveal>
+          <div className="reveal-fade flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-accent">
             <span className="inline-block h-px w-6 bg-accent" aria-hidden="true" />
             <span>{post.category}</span>
             <span className="h-1 w-1 rotate-45 bg-accent/50" aria-hidden="true" />
@@ -96,21 +101,24 @@ export default async function BlogPostPage({
             </time>
           </div>
           <h1 className="mt-6 max-w-3xl font-display text-4xl leading-[1.1] tracking-[-0.01em] sm:text-5xl lg:text-6xl">
-            {post.title}
+            <SplitWords text={post.title} from={0.1} />
           </h1>
+          </Reveal>
         </Container>
       </section>
 
-      <section className="bg-ink py-24 lg:py-28">
+      <section className="relative py-24 lg:py-28">
         <Container>
-          <div className="max-w-3xl">
-            <Markdown body={post.body} />
-          </div>
+          <Reveal className="max-w-3xl">
+            <div className="reveal-rise">
+              <Markdown body={post.body} />
+            </div>
+          </Reveal>
         </Container>
       </section>
 
       {morePosts.length > 0 ? (
-        <section className="bg-ink-raised py-24 lg:py-28">
+        <section className="relative border-t border-line py-24 lg:py-28">
           <Container>
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               <span className="h-2 w-2 rotate-45 bg-accent" aria-hidden="true" />
