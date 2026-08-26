@@ -127,7 +127,7 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
       <Reveal className="relative">
         <div
           ref={trackRef}
-          className="reveal-fade strip-scroll mt-12 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-4 pe-6 ps-[calc((100vw-min(72rem,100vw))/2+1.5rem)] lg:pe-8 lg:ps-[calc((100vw-min(72rem,100vw))/2+2rem)]"
+          className="reveal-fade strip-scroll mt-12 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-4 pe-6 ps-[calc((100vw_-_min(72rem,100vw))/2_+_1.5rem)] lg:pe-8 lg:ps-[calc((100vw_-_min(72rem,100vw))/2_+_2rem)]"
         >
           {items.map((item, index) => {
             const domain = item.websiteUrl ? new URL(item.websiteUrl).hostname : null;
