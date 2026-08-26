@@ -2,7 +2,7 @@ interface SectionBackdropProps {
   /** Where the ambient copper glow field sits. */
   glow?: 'left' | 'right' | 'center';
   /** The section's 3D object. Full-bleed, decorative, pointer-events-none. */
-  variant?: 'floor' | 'ceiling' | 'cube' | 'ring' | 'sweep' | 'orbs';
+  variant?: 'floor' | 'ceiling' | 'cube' | 'ring' | 'sweep' | 'orbs' | 'plain';
   /** Which side the 3D object leans toward (cube/ring/sweep). */
   side?: 'left' | 'right';
 }
@@ -37,6 +37,16 @@ export function SectionBackdrop({ glow = 'right', variant = 'orbs', side = 'righ
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 select-none">
       {/* Whole-section dot field */}
       <div className="bg-dots absolute inset-0" />
+
+      {/* Aurora — two light fields traversing the entire section, so the
+          full background moves, not just one corner. The 'plain' variant
+          (marquee) keeps its original quiet dots + glow look. */}
+      {variant !== 'plain' ? (
+        <>
+          <div className="aurora aurora--a" />
+          <div className="aurora aurora--b" />
+        </>
+      ) : null}
 
       {/* Ambient light */}
       <div
