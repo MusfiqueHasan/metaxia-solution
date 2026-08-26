@@ -28,12 +28,12 @@ const steps = [
  */
 export function Approach() {
   return (
-    <section className="blueprint relative border-t border-line bg-ink py-28 lg:py-36">
+    <section className="relative border-t border-line bg-ink py-28 lg:py-36">
       <Container>
         <div className="grid gap-16 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
           <div className="lg:sticky lg:top-32 lg:self-start">
             <SectionHeading
-              eyebrow="How we work"
+              index="03" eyebrow="How we work"
               title="A method that survives contact with production."
               lede="Four stages, in order, every time. The order is the method — each stage earns the next."
             />
@@ -48,7 +48,7 @@ export function Approach() {
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <div>
-                      <h3 className="reveal-rise font-display text-3xl font-medium tracking-tight text-fg lg:text-4xl">
+                      <h3 className="reveal-rise font-display text-3xl tracking-[-0.01em] text-fg lg:text-4xl">
                         {step.title}
                       </h3>
                       <p

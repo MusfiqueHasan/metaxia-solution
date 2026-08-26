@@ -71,7 +71,7 @@ export default async function CaseStudyDetailPage({
           <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-white backdrop-blur">
             {caseStudy.category}
           </span>
-          <h1 className="mt-6 max-w-3xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-6 max-w-3xl font-display text-4xl leading-[1.1] tracking-[-0.01em] sm:text-5xl lg:text-6xl">
             {caseStudy.title}
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80">

@@ -43,7 +43,7 @@ export default function AdminLoginPage() {
         onSubmit={handleSubmit}
         className="w-full max-w-sm rounded-2xl border border-ink/10 bg-surface-alt p-8"
       >
-        <h1 className="font-display text-xl font-medium tracking-tight text-ink">Admin sign in</h1>
+        <h1 className="font-display text-xl tracking-[-0.01em] text-ink">Admin sign in</h1>
         <p className="mt-2 text-sm text-ink-soft">Metaxia Solutions content admin.</p>
 
         <div className="mt-6">

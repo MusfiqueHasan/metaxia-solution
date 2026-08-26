@@ -44,7 +44,7 @@ export default async function CareersPage() {
                   className="group flex flex-col gap-3 py-7 transition-colors hover:bg-accent-soft sm:flex-row sm:items-center sm:justify-between sm:gap-6"
                 >
                   <div>
-                    <h2 className="font-display text-lg font-medium tracking-tight text-fg">
+                    <h2 className="font-display text-lg tracking-[-0.01em] text-fg">
                       {job.title}
                     </h2>
                     <div className="mt-2 flex flex-wrap items-center gap-2">

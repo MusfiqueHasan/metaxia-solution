@@ -40,7 +40,7 @@ export default function AdminInboxPage() {
 
   return (
     <div>
-      <h1 className="font-display text-2xl font-medium tracking-tight text-ink">Inbox</h1>
+      <h1 className="font-display text-2xl tracking-[-0.01em] text-ink">Inbox</h1>
       {error ? <p className="mt-4 text-sm text-rose-600">{error}</p> : null}
 
       <section className="mt-6">

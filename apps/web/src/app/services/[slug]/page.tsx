@@ -142,7 +142,7 @@ export default async function ServiceDetailPage({
               <span className="inline-block h-px w-6 bg-accent" aria-hidden="true" />
               Other Services
             </div>
-            <h2 className="mt-4 font-display text-3xl font-medium tracking-tight text-fg sm:text-4xl">
+            <h2 className="mt-4 font-display text-3xl tracking-[-0.01em] text-fg sm:text-4xl">
               Explore the rest of the practice
             </h2>
 
@@ -157,7 +157,7 @@ export default async function ServiceDetailPage({
                     <Icon name={item.icon} />
                   </span>
                   <div>
-                    <h3 className="font-display text-lg font-medium tracking-tight text-fg">
+                    <h3 className="font-display text-lg tracking-[-0.01em] text-fg">
                       {item.title}
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-fg-soft">{item.excerpt}</p>

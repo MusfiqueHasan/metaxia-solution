@@ -12,7 +12,7 @@ export default function AdminResourceNewPage() {
 
   return (
     <div>
-      <h1 className="font-display text-2xl font-medium tracking-tight text-ink">New {def.label.replace(/s$/, '')}</h1>
+      <h1 className="font-display text-2xl tracking-[-0.01em] text-ink">New {def.label.replace(/s$/, '')}</h1>
       <div className="mt-6">
         <ResourceForm def={def} />
       </div>

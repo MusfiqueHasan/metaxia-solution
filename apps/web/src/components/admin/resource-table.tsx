@@ -46,7 +46,7 @@ export function ResourceTable({ def }: { def: ResourceDef }) {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="font-display text-2xl font-medium tracking-tight text-ink">{def.label}</h1>
+        <h1 className="font-display text-2xl tracking-[-0.01em] text-ink">{def.label}</h1>
         <Link
           href={`/admin/${def.key}/new`}
           className="inline-flex items-center justify-center rounded-full bg-accent px-5 py-2 text-sm font-medium text-white hover:bg-accent-strong"

@@ -11,7 +11,7 @@ function Wordmark({ name }: { name: string }) {
   return (
     <span className="flex shrink-0 items-center gap-3 px-10">
       <span className="h-1.5 w-1.5 rotate-45 bg-fg-soft/40" aria-hidden="true" />
-      <span className="whitespace-nowrap font-display text-lg font-medium tracking-tight text-fg-soft/50 transition-colors duration-300 hover:text-fg">
+      <span className="whitespace-nowrap font-display text-lg tracking-[-0.01em] text-fg-soft/50 transition-colors duration-300 hover:text-fg">
         {name}
       </span>
     </span>

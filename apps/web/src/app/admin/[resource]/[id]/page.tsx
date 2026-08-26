@@ -37,7 +37,7 @@ export default function AdminResourceEditPage() {
 
   return (
     <div>
-      <h1 className="font-display text-2xl font-medium tracking-tight text-ink">Edit {def.label.replace(/s$/, '')}</h1>
+      <h1 className="font-display text-2xl tracking-[-0.01em] text-ink">Edit {def.label.replace(/s$/, '')}</h1>
       <div className="mt-6">
         {row === undefined ? (
           <p className="text-sm text-ink-soft">Loading…</p>

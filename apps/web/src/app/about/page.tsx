@@ -84,7 +84,7 @@ export default function AboutPage() {
           <div className="mt-16 grid grid-cols-2 gap-10 border-y border-line py-10 sm:grid-cols-4 sm:divide-x sm:divide-line">
             {stats.map((stat) => (
               <div key={stat.label} className="sm:px-8 sm:first:pl-0">
-                <span className="font-display text-4xl font-medium tabular-nums text-fg">
+                <span className="font-display text-4xl tabular-nums text-fg">
                   {stat.value}
                 </span>
                 <p className="mt-2 text-sm text-fg-soft">{stat.label}</p>
@@ -111,7 +111,7 @@ export default function AboutPage() {
                   <Icon name={value.icon} />
                 </span>
                 <div>
-                  <h3 className="font-display text-lg font-medium tracking-tight text-fg">
+                  <h3 className="font-display text-lg tracking-[-0.01em] text-fg">
                     {value.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-fg-soft">{value.body}</p>

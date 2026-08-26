@@ -56,7 +56,7 @@ export default async function BlogPage() {
                       {formatDate(post.publishedAt)}
                     </time>
                   </div>
-                  <h2 className="mt-4 font-display text-lg font-medium tracking-tight text-fg">
+                  <h2 className="mt-4 font-display text-lg tracking-[-0.01em] text-fg">
                     {post.title}
                   </h2>
                   <p className="mt-3 text-sm leading-relaxed text-fg-soft">{post.excerpt}</p>

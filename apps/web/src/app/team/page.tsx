@@ -36,11 +36,11 @@ export default async function TeamPage() {
                   href={`/team/${member.slug}`}
                   className="group flex flex-col items-start gap-5 rounded-3xl border border-line bg-ink-raised p-8 transition-colors hover:border-accent/30 hover:bg-accent-soft"
                 >
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft font-display text-lg font-medium text-accent">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-soft font-display text-lg text-accent">
                     {initials(member.name)}
                   </span>
                   <div>
-                    <h2 className="font-display text-lg font-medium tracking-tight text-fg">
+                    <h2 className="font-display text-lg tracking-[-0.01em] text-fg">
                       {member.name}
                     </h2>
                     <p className="mt-1 text-sm text-fg-soft">{member.role}</p>

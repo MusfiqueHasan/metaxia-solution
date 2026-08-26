@@ -45,7 +45,7 @@ export default async function FaqPage() {
             <div className="max-w-3xl divide-y divide-line border-y border-line">
               {faq.map((item) => (
                 <details key={item.id} className="group py-6">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg font-medium tracking-tight text-fg [&::-webkit-details-marker]:hidden">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-lg tracking-[-0.01em] text-fg [&::-webkit-details-marker]:hidden">
                     {item.question}
                     <span
                       aria-hidden="true"

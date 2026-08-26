@@ -7,13 +7,13 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="blueprint relative overflow-hidden border-t border-line bg-ink text-fg">
+    <footer className="relative overflow-hidden border-t border-line bg-ink text-fg">
       <Container className="relative py-20 lg:py-28">
         <div className="grid gap-14 lg:grid-cols-[1.6fr_1fr_1fr_1.4fr]">
           <div>
             <Link
               href="/"
-              className="flex items-center gap-2 font-display text-2xl font-medium tracking-tight"
+              className="flex items-center gap-2 font-display text-2xl tracking-[-0.01em]"
             >
               Metaxia
               <span className="h-1.5 w-1.5 rotate-45 bg-accent" aria-hidden="true" />
@@ -56,7 +56,7 @@ export function SiteFooter() {
         aria-hidden="true"
         className="pointer-events-none select-none overflow-hidden"
       >
-        <p className="-mb-[0.26em] whitespace-nowrap text-center font-display text-[22vw] font-medium leading-none tracking-tight text-fg/[0.045]">
+        <p className="-mb-[0.26em] whitespace-nowrap text-center font-display text-[22vw] leading-none tracking-[-0.01em] text-fg/[0.045]">
           Metaxia
         </p>
       </div>

@@ -1,15 +1,17 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk, Inter, IBM_Plex_Mono } from 'next/font/google';
+import { Instrument_Serif, Inter, IBM_Plex_Mono } from 'next/font/google';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
-import { CursorBeacon } from '@/components/motion/cursor-beacon';
+import { CustomCursor } from '@/components/motion/custom-cursor';
 import { JsonLd } from '@/components/json-ld';
 import { site } from '@/lib/site';
 import './globals.css';
 
-const spaceGrotesk = Space_Grotesk({
+const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif',
   display: 'swap',
 });
 
@@ -56,11 +58,11 @@ const websiteJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${instrumentSerif.variable} ${inter.variable} ${plexMono.variable}`}>
       <body>
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={websiteJsonLd} />
-        <CursorBeacon />
+        <CustomCursor />
         <SiteHeader />
         {children}
         <SiteFooter />

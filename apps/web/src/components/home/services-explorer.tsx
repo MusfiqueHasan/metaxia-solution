@@ -32,7 +32,7 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
-            eyebrow="What we do"
+            index="01" eyebrow="What we do"
             title="Six disciplines. One accountable team."
           />
           <Reveal className="hidden lg:block">
@@ -56,6 +56,7 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
                   >
                     <Link
                       href={`/services/${service.slug}`}
+                      data-cursor="Open"
                       onPointerEnter={() => setActive(index)}
                       onFocus={() => setActive(index)}
                       className="group flex items-baseline gap-5 py-6 transition-colors duration-300 lg:py-7"
@@ -69,7 +70,7 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
                       </span>
                       <span className="flex-1">
                         <span
-                          className={`font-display text-2xl font-medium tracking-tight transition-colors duration-300 sm:text-3xl ${
+                          className={`font-display text-2xl tracking-[-0.01em] transition-colors duration-300 sm:text-3xl ${
                             isActive ? 'text-fg' : 'text-fg-soft group-hover:text-fg'
                           }`}
                         >
@@ -128,7 +129,7 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
                       </span>
                     </div>
                     <div>
-                      <p className="font-display text-2xl font-medium tracking-tight text-fg">
+                      <p className="font-display text-2xl tracking-[-0.01em] text-fg">
                         {service.title}
                       </p>
                       <p className="mt-3 max-w-sm text-sm leading-relaxed text-fg-soft">

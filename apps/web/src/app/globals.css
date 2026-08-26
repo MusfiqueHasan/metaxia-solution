@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  /* Dark canvas — marketing surfaces */
-  --color-ink: #070a12;
-  --color-ink-raised: #0d1220;
-  --color-fg: #eef0f8;
-  --color-fg-soft: #99a1b3;
-  --color-line: rgba(238, 240, 248, 0.08);
-  --color-line-strong: rgba(238, 240, 248, 0.16);
+  /* Dark canvas — deep observatory black with a warm paper foreground */
+  --color-ink: #05070f;
+  --color-ink-raised: #0b0e1a;
+  --color-fg: #f2f1ec;
+  --color-fg-soft: #9b9c9f;
+  --color-line: rgba(242, 241, 236, 0.08);
+  --color-line-strong: rgba(242, 241, 236, 0.16);
 
   /* Light surfaces — admin + forms on paper */
   --color-surface: #f7f8fb;
@@ -15,11 +15,11 @@
   --color-ink-soft: #4b5163;
 
   /* Brand accent — electric indigo, lifted for dark backgrounds */
-  --color-accent: #5e56f5;
-  --color-accent-soft: rgba(94, 86, 245, 0.14);
-  --color-accent-strong: color-mix(in srgb, var(--color-accent) 82%, white);
+  --color-accent: #6d64ff;
+  --color-accent-soft: rgba(109, 100, 255, 0.14);
+  --color-accent-strong: color-mix(in srgb, var(--color-accent) 78%, white);
 
-  --font-display: var(--font-space-grotesk);
+  --font-display: var(--font-instrument-serif);
   --font-body: var(--font-inter);
   --font-mono: var(--font-plex-mono);
 
@@ -31,6 +31,12 @@ body {
   background: var(--color-ink);
   color: var(--color-fg);
   font-family: var(--font-body);
+}
+
+/* Instrument Serif ships one weight; synthetic bolding ruins it. */
+.font-display {
+  font-weight: 400;
+  font-synthesis-weight: none;
 }
 
 ::selection {
@@ -45,50 +51,94 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
-/* Signature: the beacon.                                              */
-/* A fine blueprint grid lives on every dark panel, but stays almost   */
-/* invisible until the cursor's light passes over it. The grid is the  */
-/* company's subject — systems — and the light is attention.           */
+/* Film grain — a static, near-invisible texture that keeps large dark */
+/* fields from reading as flat vector black.                           */
 /* ------------------------------------------------------------------ */
 
-.blueprint {
-  position: relative;
-}
-
-.blueprint::before {
+.grain::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image:
-    linear-gradient(var(--color-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
-  background-size: 56px 56px;
-  opacity: 0.35;
-  -webkit-mask-image: radial-gradient(
-    420px circle at var(--beacon-x, 50%) var(--beacon-y, 20%),
-    black 0%,
-    rgba(0, 0, 0, 0.35) 45%,
-    transparent 78%
-  );
-  mask-image: radial-gradient(
-    420px circle at var(--beacon-x, 50%) var(--beacon-y, 20%),
-    black 0%,
-    rgba(0, 0, 0, 0.35) 45%,
-    transparent 78%
-  );
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.03 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-.beacon-light {
+/* ------------------------------------------------------------------ */
+/* Custom cursor — dot + trailing ring + contextual label chip.        */
+/* Activated only when .has-custom-cursor is set (fine pointer, no    */
+/* reduced motion). The label text comes from data-cursor attributes.  */
+/* ------------------------------------------------------------------ */
+
+.has-custom-cursor,
+.has-custom-cursor a,
+.has-custom-cursor button,
+.has-custom-cursor summary,
+.has-custom-cursor [data-cursor] {
+  cursor: none;
+}
+
+.cursor-dot,
+.cursor-ring {
   position: fixed;
-  inset: 0;
-  z-index: 5;
+  top: 0;
+  left: 0;
+  z-index: 90;
   pointer-events: none;
-  background: radial-gradient(
-    560px circle at var(--beacon-px, -600px) var(--beacon-py, -600px),
-    rgba(94, 86, 245, 0.07),
-    transparent 70%
-  );
+  opacity: 0;
+  will-change: transform;
+}
+
+.cursor-dot.is-on,
+.cursor-ring.is-on {
+  opacity: 1;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 999px;
+  background: var(--color-fg);
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border-radius: 999px;
+  border: 1px solid var(--color-line-strong);
+  transition:
+    width 0.35s var(--ease-out-expo),
+    height 0.35s var(--ease-out-expo),
+    margin 0.35s var(--ease-out-expo),
+    border-color 0.35s var(--ease-out-expo),
+    background-color 0.35s var(--ease-out-expo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-ring .cursor-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.cursor-ring.has-label {
+  width: 72px;
+  height: 72px;
+  margin: -36px 0 0 -36px;
+  background: var(--color-fg);
+  border-color: var(--color-fg);
+}
+
+.cursor-ring.has-label .cursor-label {
+  opacity: 1;
 }
 
 /* ------------------------------------------------------------------ */
@@ -256,7 +306,8 @@ a:hover .link-rule {
     transform: none !important;
   }
 
-  .beacon-light {
+  .cursor-dot,
+  .cursor-ring {
     display: none;
   }
 }

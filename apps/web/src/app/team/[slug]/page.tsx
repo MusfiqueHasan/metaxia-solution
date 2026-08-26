@@ -60,13 +60,13 @@ export default async function TeamMemberPage({
   return (
     <main>
       <JsonLd data={breadcrumbJsonLd} />
-      <section className="blueprint relative overflow-hidden bg-ink text-white">
+      <section className="relative overflow-hidden bg-ink text-white">
         <Container className="flex flex-col items-start gap-6 pt-36 pb-20 lg:pt-44 lg:pb-24">
-          <span className="flex h-20 w-20 items-center justify-center rounded-full bg-accent-soft font-display text-2xl font-medium text-accent">
+          <span className="flex h-20 w-20 items-center justify-center rounded-full bg-accent-soft font-display text-2xl text-accent">
             {initials(member.name)}
           </span>
           <div>
-            <h1 className="font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl">
+            <h1 className="font-display text-4xl leading-[1.1] tracking-[-0.01em] sm:text-5xl">
               {member.name}
             </h1>
             <p className="mt-3 text-lg text-white/60">{member.role}</p>

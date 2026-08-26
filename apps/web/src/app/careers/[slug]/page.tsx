@@ -83,9 +83,9 @@ export default async function JobDetailPage({
     <main>
       <JsonLd data={jobPostingJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
-      <section className="blueprint relative overflow-hidden bg-ink text-white">
+      <section className="relative overflow-hidden bg-ink text-white">
         <Container className="pt-36 pb-20 lg:pt-44 lg:pb-24">
-          <h1 className="max-w-3xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="max-w-3xl font-display text-4xl leading-[1.1] tracking-[-0.01em] sm:text-5xl lg:text-6xl">
             {job.title}
           </h1>
           <div className="mt-6 flex flex-wrap items-center gap-2">

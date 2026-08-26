@@ -21,7 +21,7 @@ export function AdminSidebar() {
 
   return (
     <aside className="flex w-56 shrink-0 flex-col gap-1 border-r border-ink/10 bg-surface-alt p-4">
-      <Link href="/admin/dashboard" className="mb-4 font-display text-sm font-semibold tracking-tight text-ink">
+      <Link href="/admin/dashboard" className="mb-4 font-display text-sm font-semibold tracking-[-0.01em] text-ink">
         Metaxia Admin
       </Link>
 

@@ -41,7 +41,7 @@ export default async function CaseStudiesPage() {
                     </span>
                   </div>
                   <div className="flex flex-1 flex-col p-8">
-                    <h2 className="font-display text-xl font-medium tracking-tight text-fg">
+                    <h2 className="font-display text-xl tracking-[-0.01em] text-fg">
                       {item.title}
                     </h2>
                     <p className="mt-3 text-sm leading-relaxed text-fg-soft">{item.excerpt}</p>

@@ -76,7 +76,7 @@ export function ContactForm() {
             />
           </svg>
         </span>
-        <h3 className="mt-6 font-display text-xl font-medium tracking-tight text-fg">
+        <h3 className="mt-6 font-display text-xl tracking-[-0.01em] text-fg">
           Message sent.
         </h3>
         <p className="mt-3 text-sm leading-relaxed text-fg-soft">

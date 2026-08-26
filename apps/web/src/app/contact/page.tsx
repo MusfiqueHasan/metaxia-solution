@@ -42,7 +42,7 @@ export default function ContactPage() {
                   <dd className="mt-2">
                     <a
                       href="mailto:hello@metaxia.io"
-                      className="font-display text-xl font-medium tracking-tight text-fg transition-colors hover:text-accent"
+                      className="font-display text-xl tracking-[-0.01em] text-fg transition-colors hover:text-accent"
                     >
                       hello@metaxia.io
                     </a>
@@ -79,7 +79,7 @@ export default function ContactPage() {
       <section className="border-t border-line bg-ink-raised py-20 lg:py-24">
         <Container className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
           <div>
-            <h2 className="font-display text-2xl font-medium tracking-tight text-fg sm:text-3xl">
+            <h2 className="font-display text-2xl tracking-[-0.01em] text-fg sm:text-3xl">
               Have a quick question first?
             </h2>
             <p className="mt-3 max-w-md text-base leading-relaxed text-fg-soft">

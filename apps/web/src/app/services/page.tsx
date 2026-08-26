@@ -49,7 +49,7 @@ export default async function ServicesPage() {
                         <Icon name={service.icon as IconKey} className="h-5 w-5" />
                       </span>
                       <span>
-                        <span className="font-display text-2xl font-medium tracking-tight text-fg transition-colors duration-300 group-hover:text-accent-strong sm:text-3xl">
+                        <span className="font-display text-2xl tracking-[-0.01em] text-fg transition-colors duration-300 group-hover:text-accent-strong sm:text-3xl">
                           {service.title}
                         </span>
                         <span className="mt-2 block max-w-2xl text-sm leading-relaxed text-fg-soft">

@@ -26,7 +26,7 @@ export default function AdminDashboardPage() {
 
   return (
     <div>
-      <h1 className="font-display text-2xl font-medium tracking-tight text-ink">Dashboard</h1>
+      <h1 className="font-display text-2xl tracking-[-0.01em] text-ink">Dashboard</h1>
       <p className="mt-2 text-sm text-ink-soft">Overview of published content.</p>
 
       <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
@@ -37,7 +37,7 @@ export default function AdminDashboardPage() {
             className="rounded-2xl border border-ink/10 bg-surface-alt p-5 transition-colors hover:border-accent/40"
           >
             <p className="text-sm font-medium text-ink-soft">{resource.label}</p>
-            <p className="mt-2 font-display text-3xl font-medium text-ink">
+            <p className="mt-2 font-display text-3xl text-ink">
               {counts[resource.key] ?? '—'}
             </p>
           </Link>

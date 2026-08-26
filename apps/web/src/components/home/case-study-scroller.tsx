@@ -17,7 +17,7 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
     <section className="overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
       <Container className="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading
-          eyebrow="Selected work"
+          index="02" eyebrow="Selected work"
           title="Systems in production, not slideware."
         />
         <Reveal className="hidden lg:block">
@@ -37,6 +37,7 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
             >
               <Link
                 href={`/case-studies/${item.slug}`}
+                data-cursor="View"
                 className="group flex h-[30rem] flex-col justify-between overflow-hidden rounded-3xl border border-line p-8"
                 style={{ background: item.coverGradient }}
               >
@@ -50,7 +51,7 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
                 </div>
 
                 <div className="translate-y-2 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0">
-                  <h3 className="font-display text-3xl font-medium leading-tight tracking-tight text-white">
+                  <h3 className="font-display text-3xl leading-tight tracking-[-0.01em] text-white">
                     {item.title}
                   </h3>
                   <p className="mt-3 line-clamp-2 max-w-xs text-sm leading-relaxed text-white/75">
@@ -77,7 +78,7 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
             href="/case-studies"
             className="flex h-[30rem] w-[60vw] shrink-0 snap-start items-center justify-center rounded-3xl border border-line-strong text-center transition-colors duration-300 hover:border-accent hover:bg-accent/5 sm:w-[18rem]"
           >
-            <span className="font-display text-xl font-medium tracking-tight text-fg">
+            <span className="font-display text-xl tracking-[-0.01em] text-fg">
               All case studies
               <span aria-hidden="true" className="mt-2 block font-mono text-xs text-fg-soft">
                 ({String(items.length).padStart(2, '0')})

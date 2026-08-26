@@ -18,7 +18,7 @@ export function BlogPreview({ posts }: { posts: Post[] }) {
     <section className="border-t border-line bg-ink py-28 lg:py-36">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading eyebrow="Writing" title="Notes from the build." />
+          <SectionHeading index="05" eyebrow="Writing" title="Notes from the build." />
           <Reveal>
             <Link
               href="/blog"
@@ -39,6 +39,7 @@ export function BlogPreview({ posts }: { posts: Post[] }) {
               >
                 <Link
                   href={`/blog/${post.slug}`}
+                  data-cursor="Read"
                   className="group grid gap-2 py-8 sm:grid-cols-[11rem_1fr_auto] sm:items-baseline sm:gap-8"
                 >
                   <span className="font-mono text-xs uppercase tracking-[0.15em] text-fg-soft">
@@ -46,7 +47,7 @@ export function BlogPreview({ posts }: { posts: Post[] }) {
                     <span className="mt-1 block text-accent">{post.category}</span>
                   </span>
                   <span>
-                    <span className="font-display text-2xl font-medium leading-snug tracking-tight text-fg transition-colors duration-300 group-hover:text-accent-strong sm:text-3xl">
+                    <span className="font-display text-2xl leading-snug tracking-[-0.01em] text-fg transition-colors duration-300 group-hover:text-accent-strong sm:text-3xl">
                       {post.title}
                     </span>
                     <span className="mt-2 line-clamp-2 block max-w-xl text-sm leading-relaxed text-fg-soft">

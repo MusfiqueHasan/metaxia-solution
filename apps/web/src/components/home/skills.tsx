@@ -20,7 +20,7 @@ export function Skills() {
     <section className="border-t border-line bg-ink py-28 lg:py-36">
       <Container>
         <SectionHeading
-          eyebrow="Capability index"
+          index="04" eyebrow="Capability index"
           title="Where our depth actually is."
           lede="Self-assessed, argued over quarterly, and honest — a partner should tell you what they're best at."
         />
@@ -34,7 +34,7 @@ export function Skills() {
                 style={{ ['--reveal-delay' as string]: `${index * 0.07}s` }}
               >
                 <dt className="flex items-baseline justify-between gap-4">
-                  <span className="font-display text-xl font-medium tracking-tight text-fg">
+                  <span className="font-display text-xl tracking-[-0.01em] text-fg">
                     {capability.label}
                   </span>
                   <span className="font-mono text-sm tabular-nums text-fg-soft">

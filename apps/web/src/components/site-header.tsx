@@ -46,7 +46,7 @@ export function SiteHeader() {
       <Container className="flex h-[4.5rem] items-center justify-between">
         <Link
           href="/"
-          className="relative z-50 flex items-center gap-2 font-display text-xl font-medium tracking-tight text-fg"
+          className="relative z-50 flex items-center gap-2 font-display text-xl tracking-[-0.01em] text-fg"
         >
           Metaxia
           <span className="h-1.5 w-1.5 rotate-45 bg-accent" aria-hidden="true" />
@@ -129,7 +129,7 @@ export function SiteHeader() {
                 <span className="font-mono text-xs text-fg-soft">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <span className="font-display text-4xl font-medium tracking-tight text-fg transition-colors group-hover:text-accent">
+                <span className="font-display text-4xl tracking-[-0.01em] text-fg transition-colors group-hover:text-accent">
                   {link.label}
                 </span>
               </Link>

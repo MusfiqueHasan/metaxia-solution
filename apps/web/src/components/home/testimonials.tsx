@@ -14,7 +14,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
     <section className="overflow-hidden border-t border-line bg-ink py-28 lg:py-36">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading eyebrow="Client voices" title="What it's like to work with us." />
+          <SectionHeading index="06" eyebrow="Client voices" title="What it's like to work with us." />
           <Reveal className="hidden lg:block">
             <p className="reveal-fade font-mono text-[11px] uppercase tracking-[0.25em] text-fg-soft">
               {String(items.length).padStart(2, '0')} voices · scroll →
@@ -33,7 +33,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
               <span aria-hidden="true" className="font-display text-6xl leading-none text-accent">
                 &ldquo;
               </span>
-              <blockquote className="mt-4 font-display text-2xl font-medium leading-snug tracking-tight text-fg lg:text-3xl">
+              <blockquote className="mt-4 font-display text-2xl leading-snug tracking-[-0.01em] text-fg lg:text-3xl">
                 {item.quote}
               </blockquote>
               <figcaption className="mt-8 flex items-baseline justify-between gap-4">

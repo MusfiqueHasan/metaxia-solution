@@ -4,7 +4,7 @@ export function Markdown({ body }: { body: string }) {
       {body.split(/\n\n+/).map((block, i) => {
         if (block.startsWith('## ')) {
           return (
-            <h2 key={i} className="mt-12 font-display text-2xl font-medium tracking-tight text-fg">
+            <h2 key={i} className="mt-12 font-display text-2xl tracking-[-0.01em] text-fg">
               {block.slice(3)}
             </h2>
           );

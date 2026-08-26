@@ -85,7 +85,7 @@ export default async function BlogPostPage({
     <main>
       <JsonLd data={articleJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
-      <section className="blueprint relative overflow-hidden bg-ink text-white">
+      <section className="relative overflow-hidden bg-ink text-white">
         <Container className="pt-36 pb-20 lg:pt-44 lg:pb-24">
           <div className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.25em] text-accent">
             <span className="inline-block h-px w-6 bg-accent" aria-hidden="true" />
@@ -95,7 +95,7 @@ export default async function BlogPostPage({
               {formatDate(post.publishedAt)}
             </time>
           </div>
-          <h1 className="mt-6 max-w-3xl font-display text-4xl font-medium leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+          <h1 className="mt-6 max-w-3xl font-display text-4xl leading-[1.1] tracking-[-0.01em] sm:text-5xl lg:text-6xl">
             {post.title}
           </h1>
         </Container>
@@ -116,7 +116,7 @@ export default async function BlogPostPage({
               <span className="h-2 w-2 rotate-45 bg-accent" aria-hidden="true" />
               More From the Blog
             </div>
-            <h2 className="mt-4 font-display text-3xl font-medium tracking-tight text-fg sm:text-4xl">
+            <h2 className="mt-4 font-display text-3xl tracking-[-0.01em] text-fg sm:text-4xl">
               Keep reading
             </h2>
 
@@ -134,7 +134,7 @@ export default async function BlogPostPage({
                       {formatDate(item.publishedAt)}
                     </time>
                   </div>
-                  <h3 className="mt-4 font-display text-lg font-medium tracking-tight text-fg">
+                  <h3 className="mt-4 font-display text-lg tracking-[-0.01em] text-fg">
                     {item.title}
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-fg-soft">{item.excerpt}</p>

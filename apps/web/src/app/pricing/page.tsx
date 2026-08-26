@@ -44,13 +44,13 @@ export default async function PricingPage() {
                     </span>
                   ) : null}
 
-                  <h2 className="font-display text-xl font-medium tracking-tight text-fg">
+                  <h2 className="font-display text-xl tracking-[-0.01em] text-fg">
                     {plan.name}
                   </h2>
                   <p className="mt-3 text-sm leading-relaxed text-fg-soft">{plan.description}</p>
 
                   <div className="mt-6 flex items-baseline gap-2">
-                    <span className="font-display text-4xl font-medium tabular-nums text-fg">
+                    <span className="font-display text-4xl tabular-nums text-fg">
                       ${plan.price.toLocaleString('en-US')}
                     </span>
                     <span className="text-sm text-fg-soft">{plan.period}</span>

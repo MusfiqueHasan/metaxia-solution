@@ -10,7 +10,7 @@ interface PageHeroProps {
 
 export function PageHero({ eyebrow, title, lede }: PageHeroProps) {
   return (
-    <section className="blueprint relative overflow-hidden border-b border-line bg-ink">
+    <section className="relative overflow-hidden border-b border-line bg-ink">
       <div
         aria-hidden="true"
         className="absolute -top-32 right-[-12%] h-[26rem] w-[26rem] rounded-full bg-accent/[0.1] blur-[110px]"
@@ -22,7 +22,7 @@ export function PageHero({ eyebrow, title, lede }: PageHeroProps) {
             {eyebrow}
           </p>
 
-          <h1 className="mt-7 max-w-4xl font-display text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[1.02] tracking-[-0.02em] text-fg">
+          <h1 className="mt-7 max-w-4xl font-display text-[clamp(2.5rem,6vw,4.75rem)] leading-[1.02] tracking-[-0.02em] text-fg">
             <SplitWords text={title} from={0.08} />
           </h1>
 

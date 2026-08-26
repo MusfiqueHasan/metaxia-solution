@@ -2,29 +2,35 @@ import { Container } from '@/components/container';
 import { Button } from '@/components/button';
 import { Reveal } from '@/components/motion/reveal';
 import { SplitWords } from '@/components/motion/split-words';
+import { Starfield } from '@/components/motion/starfield';
 
 /**
- * The closing move: the beacon's blueprint grid at full strength, an
- * oversized invitation, and one magnetic action.
+ * The closing move: the starfield returns, an oversized serif invitation
+ * sits centered in it, and one magnetic action.
  */
 export function ContactCta() {
   return (
-    <section className="blueprint relative overflow-hidden border-t border-line bg-ink py-32 lg:py-44">
+    <section className="grain relative overflow-hidden border-t border-line bg-ink py-36 lg:py-48">
+      <Starfield />
       <div
         aria-hidden="true"
-        className="absolute left-1/2 top-1/2 h-[30rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.09] blur-[140px]"
+        className="absolute left-1/2 top-1/2 h-[30rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.08] blur-[140px]"
       />
       <Container className="relative">
-        <Reveal className="flex flex-col items-start gap-10">
-          <p className="reveal-fade font-mono text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
-            Next step
+        <Reveal className="flex flex-col items-center gap-10 text-center">
+          <p className="reveal-fade font-mono text-[11px] font-medium uppercase tracking-[0.32em] text-fg-soft">
+            07 — Next step
           </p>
-          <h2 className="max-w-4xl font-display text-[clamp(2.5rem,6.5vw,5.5rem)] font-medium leading-[1.02] tracking-[-0.02em] text-fg">
-            <SplitWords text="Tell us what your business needs to run on." />
+          <h2 className="max-w-4xl font-display text-[clamp(2.75rem,7vw,6rem)] leading-[1.02] tracking-[-0.01em] text-fg">
+            <SplitWords text="Tell us what your business" />
+            <br />
+            <em className="text-accent-strong">
+              <SplitWords text="needs to run on." from={0.25} />
+            </em>
           </h2>
           <div
-            className="reveal-rise flex flex-wrap items-center gap-6"
-            style={{ ['--reveal-delay' as string]: '0.35s' }}
+            className="reveal-rise flex flex-wrap items-center justify-center gap-6"
+            style={{ ['--reveal-delay' as string]: '0.4s' }}
           >
             <Button href="/contact" size="lg" magnetic>
               Let&rsquo;s Talk
