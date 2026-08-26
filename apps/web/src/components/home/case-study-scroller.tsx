@@ -127,13 +127,17 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
       <Reveal className="relative">
         <div
           ref={trackRef}
-          className="reveal-fade strip-scroll mt-12 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-4 pe-6 ps-[calc((100vw_-_min(72rem,100vw))/2_+_1.5rem)] lg:pe-8 lg:ps-[calc((100vw_-_min(72rem,100vw))/2_+_2rem)]"
+          className="reveal-fade strip-scroll mt-12 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-4 pe-6 lg:pe-8"
+          // Inline so no class-generation step can drop it: start the rail at
+          // exactly the container's left content edge (max-w-6xl + px-8),
+          // flooring at the mobile gutter on narrow screens.
+          style={{ paddingInlineStart: 'max(1.5rem, calc((100vw - 72rem) / 2 + 2rem))' }}
         >
           {items.map((item, index) => {
             const domain = item.websiteUrl ? new URL(item.websiteUrl).hostname : null;
             const year = YEARS[(index + 1) % YEARS.length];
             return (
-              <article key={item.id} className="w-[88vw] shrink-0 snap-start sm:w-[36rem] lg:w-[44rem]">
+              <article key={item.id} className="w-[85vw] shrink-0 snap-start sm:w-[28rem] lg:w-[34rem]">
                 {/* Browser plate */}
                 <div className="group relative overflow-hidden rounded-2xl border border-line-strong bg-ink-raised">
                   <Link
