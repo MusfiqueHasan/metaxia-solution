@@ -13,11 +13,10 @@ export function ServiceMarquee({ services }: { services: Service[] }) {
   return (
     <section className="relative overflow-clip border-y border-line bg-ink py-10" aria-label="Services">
       <SectionBackdrop glow="center" variant="plain" />
-      {/* Lit sphere anchored to the right edge, drifting slowly — the strip
-          clips it to a warm horizon rising behind the scrolling titles. */}
+      {/* Small lit sphere sitting quietly at the strip's right side. */}
       <div
         aria-hidden="true"
-        className="orb-3d drift-slow pointer-events-none absolute -top-1/2 right-[-4%] h-[22rem] w-[22rem]"
+        className="orb-3d drift-slow pointer-events-none absolute right-[4%] top-1/2 h-24 w-24 -translate-y-1/2 lg:h-32 lg:w-32"
       />
       <p className="mb-8 text-center font-mono text-[11px] uppercase tracking-[0.28em] text-fg-soft/70">
         Six disciplines · one accountable team
