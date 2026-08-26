@@ -37,11 +37,13 @@ export function SiteHeader() {
     // overlay menu lives OUTSIDE the pill (a backdrop-filtered element would
     // otherwise become the containing block for the fixed overlay).
     <header className="fixed inset-x-0 top-0 z-50 px-4">
+      {/* Every animated property here interpolates (lengths, radius, colors)
+          — no keyword values like max-w-fit, which snap instead of tween. */}
       <div
-        className={`mx-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`mx-auto flex w-full items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           pill
-            ? 'mt-3 h-14 max-w-fit gap-6 rounded-full border border-line-strong bg-ink/85 px-5 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.8)] backdrop-blur-xl lg:gap-8 lg:px-6'
-            : 'h-[4.5rem] w-full max-w-6xl rounded-none border border-transparent bg-transparent px-2 lg:px-4'
+            ? 'mt-3 h-14 max-w-[46rem] rounded-full border border-line-strong bg-ink/85 px-6 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.8)] backdrop-blur-xl'
+            : 'mt-0 h-[4.5rem] max-w-6xl rounded-[2rem] border border-transparent bg-transparent px-2 shadow-none lg:px-4'
         }`}
       >
         <Link
@@ -55,7 +57,9 @@ export function SiteHeader() {
         </Link>
 
         <nav
-          className={`hidden items-center lg:flex ${pill ? 'gap-6' : 'gap-8'}`}
+          className={`hidden items-center transition-[gap] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] lg:flex ${
+            pill ? 'gap-5' : 'gap-8'
+          }`}
           aria-label="Primary"
         >
           {navLinks.map((link) => {
