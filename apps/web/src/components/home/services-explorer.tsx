@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Service } from '@metaxia/shared';
 import { Container } from '@/components/container';
 import { SectionHeading } from '@/components/section-heading';
@@ -9,40 +9,87 @@ import { Reveal } from '@/components/motion/reveal';
 import { Icon, type IconKey } from '@/components/icon';
 
 const washes = [
-  'radial-gradient(120% 120% at 20% 10%, rgba(94,86,245,0.28), transparent 60%)',
-  'radial-gradient(120% 120% at 80% 15%, rgba(56,189,248,0.22), transparent 60%)',
-  'radial-gradient(120% 120% at 30% 85%, rgba(167,139,250,0.24), transparent 60%)',
-  'radial-gradient(120% 120% at 75% 80%, rgba(94,86,245,0.22), transparent 60%)',
-  'radial-gradient(120% 120% at 15% 50%, rgba(45,212,191,0.18), transparent 60%)',
-  'radial-gradient(120% 120% at 85% 45%, rgba(129,140,248,0.26), transparent 60%)',
+  'radial-gradient(120% 120% at 20% 10%, rgba(229,121,58,0.30), transparent 60%)',
+  'radial-gradient(120% 120% at 80% 15%, rgba(242,160,107,0.22), transparent 60%)',
+  'radial-gradient(120% 120% at 30% 85%, rgba(212,120,90,0.26), transparent 60%)',
+  'radial-gradient(120% 120% at 75% 80%, rgba(229,121,58,0.22), transparent 60%)',
+  'radial-gradient(120% 120% at 15% 50%, rgba(196,142,72,0.22), transparent 60%)',
+  'radial-gradient(120% 120% at 85% 45%, rgba(240,140,90,0.26), transparent 60%)',
 ];
 
+const CYCLE_MS = 3200;
+
 /**
- * The services section is a switchboard, not a card grid: a list of
- * disciplines on the left, and a preview panel that answers the cursor on
- * the right. On touch/small screens the list carries its own excerpts.
+ * The services section is a switchboard: a list of disciplines on the left,
+ * a preview panel on the right. The panel cycles through the services on its
+ * own while the section is on screen; hovering (or focusing) the list takes
+ * manual control and pauses the loop until the pointer leaves.
  */
 export function ServicesExplorer({ services }: { services: Service[] }) {
   const [active, setActive] = useState(0);
-  if (services.length === 0) return null;
-  const current = services[Math.min(active, services.length - 1)];
+  const sectionRef = useRef<HTMLElement>(null);
+  const pausedRef = useRef(false);
+  const count = services.length;
+
+  useEffect(() => {
+    if (count < 2) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const section = sectionRef.current;
+    let visible = false;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        visible = entries[0]?.isIntersecting ?? false;
+      },
+      { threshold: 0.25 },
+    );
+    if (section) observer.observe(section);
+
+    const interval = setInterval(() => {
+      if (visible && !pausedRef.current) {
+        setActive((value) => (value + 1) % count);
+      }
+    }, CYCLE_MS);
+
+    return () => {
+      clearInterval(interval);
+      observer.disconnect();
+    };
+  }, [count]);
+
+  if (count === 0) return null;
 
   return (
-    <section className="relative border-t border-line bg-ink py-28 lg:py-36">
+    <section ref={sectionRef} className="relative border-t border-line bg-ink py-28 lg:py-36">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
-            index="01" eyebrow="What we do"
+            index="01"
+            eyebrow="What we do"
             title="Six disciplines. One accountable team."
           />
           <Reveal className="hidden lg:block">
             <p className="reveal-fade font-mono text-[11px] uppercase tracking-[0.25em] text-fg-soft">
-              {String(services.length).padStart(2, '0')} services
+              {String(count).padStart(2, '0')} services
             </p>
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
+        <div
+          className="mt-16 grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-20"
+          onPointerEnter={() => {
+            pausedRef.current = true;
+          }}
+          onPointerLeave={() => {
+            pausedRef.current = false;
+          }}
+          onFocusCapture={() => {
+            pausedRef.current = true;
+          }}
+          onBlurCapture={() => {
+            pausedRef.current = false;
+          }}
+        >
           {/* The switchboard */}
           <Reveal>
             <ul>
@@ -105,7 +152,7 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
             </ul>
           </Reveal>
 
-          {/* The preview panel — answers the cursor */}
+          {/* The preview panel — cycles on its own, answers the cursor when hovered */}
           <Reveal className="hidden lg:block">
             <div className="reveal-scale sticky top-28">
               <div className="relative min-h-[26rem] overflow-hidden rounded-3xl border border-line bg-ink-raised">
@@ -124,8 +171,7 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
                         <Icon name={service.icon as IconKey} className="h-6 w-6" />
                       </span>
                       <span className="font-mono text-xs text-fg-soft">
-                        {String(index + 1).padStart(2, '0')} /{' '}
-                        {String(services.length).padStart(2, '0')}
+                        {String(index + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
                       </span>
                     </div>
                     <div>
@@ -138,6 +184,18 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
                     </div>
                   </div>
                 ))}
+
+                {/* Cycle progress: one tick per service, the active one fills */}
+                <div className="absolute inset-x-10 bottom-4 flex gap-1.5" aria-hidden="true">
+                  {services.map((service, index) => (
+                    <span
+                      key={service.id}
+                      className={`h-px flex-1 transition-colors duration-500 ${
+                        index === active ? 'bg-accent' : 'bg-line-strong'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </Reveal>
