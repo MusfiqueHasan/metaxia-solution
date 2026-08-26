@@ -17,6 +17,35 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
   return (
     <section className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
       <SectionBackdrop glow="left" variant="floor" />
+
+      {/* Orbital system cresting the section's top-center: three rings with
+          satellites traveling at different speeds around a lit core. The
+          section clips the upper half, so it reads as rising over a horizon. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-44 left-1/2 hidden h-[26rem] w-[26rem] -translate-x-1/2 select-none lg:block"
+      >
+        <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.18] blur-2xl" />
+        <div className="orb-3d absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2" />
+
+        {[
+          { inset: 'inset-0', duration: '14s', direction: 'normal', dot: 'h-2 w-2 bg-accent' },
+          { inset: 'inset-10', duration: '9s', direction: 'reverse', dot: 'h-1.5 w-1.5 bg-accent-strong' },
+          { inset: 'inset-20', duration: '6s', direction: 'normal', dot: 'h-1 w-1 bg-fg/70' },
+        ].map((orbit) => (
+          <div key={orbit.inset} className={`absolute ${orbit.inset}`}>
+            <div className="absolute inset-0 rounded-full border border-line-strong" />
+            <div
+              className="viz-orbit absolute inset-0"
+              style={{ animationDuration: orbit.duration, animationDirection: orbit.direction }}
+            >
+              <span
+                className={`absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-[0_0_10px_var(--color-accent)] ${orbit.dot}`}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
       <Container className="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading
           index="02" eyebrow="Selected work"
