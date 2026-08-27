@@ -360,34 +360,43 @@ The brand site and catalog went live first, with checkout and customer accounts 
 - The team updates products, recipes, and content with zero developer involvement`,
       },
       {
-        slug: 'ecommerce-multi-region-migration',
-        title: 'Multi-Region Cloud Migration for a Growing E-commerce Brand',
-        category: 'Cloud',
+        slug: 'jobsyo',
+        title: 'Jobsyo — AI Job Discovery Across 50+ Platforms',
+        category: 'AI',
         order: 5,
         coverGradient: 'linear-gradient(135deg,#0891b2,#4f46e5)',
-        websiteUrl: 'https://northcart-demo.example.com',
-        previewImage: '/previews/ecommerce-multi-region-migration.svg',
-        excerpt: "We moved a single-region deployment onto a multi-region architecture to survive Black Friday traffic without downtime.",
-        body: `Two Black Fridays in a row had nearly taken the store down. The third one was ten weeks away when we started.
+        websiteUrl: 'https://jobsyo.com/',
+        previewImage: '/projects/jobsyo.png',
+        excerpt:
+          'An AI platform that scans thousands of postings across 50+ job sources and hands candidates a curated feed with 95% match accuracy.',
+        body: `Jobsyo turns job hunting from a search problem into a matching problem: its AI scans thousands of postings across LinkedIn, Facebook, and company career pages, scores each one against a candidate's profile, and serves a curated feed instead of a haystack. Live at jobsyo.com.
 
 ## The challenge
 
-The entire platform ran in one region. Database, cache, checkout — one failure domain, sized for average traffic and prayed over during peaks. The previous two Black Friday sales had produced brownouts, abandoned carts, and an engineering team that spent the biggest revenue day of the year watching dashboards instead of celebrating.
+Job seekers burn weeks paging through boards, and every platform holds a different slice of the market. The brief: scan the postings where they actually live — 50+ platforms — understand each candidate well enough to score fit with real accuracy, and keep applications flowing through the official channels employers trust, not a proxy inbox.
 
 ## What we built
 
-A multi-region active-active architecture on AWS: replicated Postgres with automated failover, region-local caches, and a global load balancer routing customers to the healthiest region. Checkout was made region-agnostic so a regional failure loses capacity, not orders. Everything defined as code, including the failover itself.
+A Next.js platform with an AI matching core, structured as a four-step product: profile, discovery, review, apply.
+
+- Profile builder — resume upload or manual entry, salary and location preferences, work options, and career goals feeding the matcher
+- Multi-platform discovery scanning 2,000+ daily postings across 50+ sources, from LinkedIn to company career pages
+- Compatibility scoring with skills and culture alignment, producing a personalized ranking at 95% match accuracy
+- A curated feed with per-job match breakdowns, skills-gap analysis, and salary and market data
+- Real-time alerts the moment a matching role is posted
+- One-click apply routed through the original platform, with application progress tracking and the official posting preserved
+- A resume-score tool that grades a CV before it goes out
 
 ## The rollout
 
-We load-tested at ten times historical peak before scheduling anything, then cut over during a low-traffic maintenance window with a rehearsed rollback that was never needed. The final pre-season game day deliberately killed a region in production — checkout kept converting.
+Discovery shipped first against a core set of platforms, with the source list growing to 50+ as scanning matured. The match-score breakdowns and resume scoring followed once real feed data proved the ranking, and pricing tiers arrived with the public launch.
 
 ## Results
 
-- A record Black Friday with zero downtime
-- Page responses under 300 ms throughout the peak
-- Infrastructure spend down 18 percent from right-sizing and reserved capacity
-- Regional failure demoted from existential threat to routine game-day drill`,
+- Live in production at jobsyo.com
+- 2,000+ postings scanned daily across 50+ job platforms
+- 95% match accuracy on the curated feed, 2.5x faster discovery than manual search
+- Candidates set up a profile and see their first matches in under five minutes`,
       },
       {
         slug: 'streaming-cost-optimization',

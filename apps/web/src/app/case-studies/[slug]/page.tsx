@@ -112,6 +112,7 @@ const SLUG_STACKS: Record<string, string[]> = {
   smarthrflow: ['Next.js', 'TypeScript', 'NestJS', 'Supabase', 'OpenAI API', 'Vercel'],
   'better-e-mart': ['Next.js', 'TypeScript', 'Express.js', 'MongoDB', 'Cloudflare', 'Vercel'],
   chefnawaz: ['PHP', 'Product database', 'Auth & accounts', 'Custom admin', 'Order tracking'],
+  jobsyo: ['Next.js', 'AI matching', 'Multi-platform scanning', 'Real-time alerts', 'Resume scoring'],
 };
 
 /* Curated gallery per slug: choose the shots and pair them with copy.
