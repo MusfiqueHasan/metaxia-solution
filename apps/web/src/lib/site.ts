@@ -20,5 +20,6 @@ export const footerLinks = {
   resources: [
     { label: 'Blog', href: '/blog' },
     { label: 'Case Studies', href: '/case-studies' },
-    ],
+    { label: 'Contact', href: '/contact' },
+  ],
 };
