@@ -102,52 +102,64 @@ export default async function TeamMemberPage({
       <Starfield />
       <JsonLd data={breadcrumbJsonLd} />
 
-      {/* Header: name + role, then the portrait front and center */}
-      <section className="relative border-b border-line">
-        <Container className="pb-16 pt-36 text-center lg:pt-44">
-          <Reveal>
-            <Link
-              href="/team"
-              className="reveal-fade inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.24em] text-fg-soft transition-colors hover:text-fg"
-            >
-              <span aria-hidden="true">←</span> The team
-            </Link>
-            <h1 className="mt-8 font-display text-[clamp(2.75rem,6vw,5rem)] leading-[1.02] tracking-[-0.01em] text-fg">
-              <SplitWords text={member.name} from={0.1} />
-            </h1>
-            <p className="reveal-rise mt-4 text-lg text-fg-soft" style={{ ['--reveal-delay' as string]: '0.3s' }}>
-              {member.role}
-            </p>
-
-            <div className="reveal-scale relative mx-auto mt-12 w-full max-w-[20rem]" style={{ ['--reveal-delay' as string]: '0.4s' }}>
-              <span
-                aria-hidden="true"
-                className="absolute -bottom-1 -right-1 h-20 w-20 rounded-full bg-accent"
-              />
-              <span
-                className="relative block aspect-square overflow-hidden rounded-full border border-line"
-                style={frame?.circle}
+      {/* Header: name + role on the left, the portrait large on the right,
+          overlapping the section edge like a badge pinned over the fold. */}
+      <section className="relative border-b border-line lg:overflow-visible">
+        <Container className="pb-16 pt-36 lg:pb-0 lg:pt-44">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_auto]">
+            <Reveal className="text-center lg:text-left">
+              <Link
+                href="/team"
+                className="reveal-fade inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.24em] text-fg-soft transition-colors hover:text-fg"
               >
-                {photo ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={photo}
-                    alt={member.name}
-                    className="h-full w-full object-cover"
-                    style={frame?.img}
-                  />
-                ) : (
-                  <span className="flex h-full w-full items-center justify-center bg-accent-soft font-display text-5xl text-accent">
-                    {initials(member.name)}
-                  </span>
-                )}
-              </span>
-            </div>
-          </Reveal>
+                <span aria-hidden="true">←</span> The team
+              </Link>
+              <h1 className="mt-8 font-display text-[clamp(2.75rem,6vw,5.5rem)] leading-[1.02] tracking-[-0.01em] text-fg">
+                <SplitWords text={member.name} from={0.1} />
+              </h1>
+              <p
+                className="reveal-rise mt-4 text-lg text-accent"
+                style={{ ['--reveal-delay' as string]: '0.3s' }}
+              >
+                {member.role}
+              </p>
+            </Reveal>
+
+            <Reveal>
+              <div
+                className="reveal-scale relative mx-auto w-[16rem] sm:w-[20rem] lg:w-[24rem] lg:translate-y-16"
+                style={{ ['--reveal-delay' as string]: '0.25s' }}
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1 -right-1 h-16 w-16 rounded-full bg-accent lg:h-20 lg:w-20"
+                />
+                <span
+                  className="relative block aspect-square overflow-hidden rounded-full border border-line"
+                  style={frame?.circle}
+                >
+                  {photo ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={photo}
+                      alt={member.name}
+                      className="h-full w-full object-cover"
+                      style={frame?.img}
+                    />
+                  ) : (
+                    <span className="flex h-full w-full items-center justify-center bg-accent-soft font-display text-5xl text-accent">
+                      {initials(member.name)}
+                    </span>
+                  )}
+                </span>
+              </div>
+            </Reveal>
+          </div>
         </Container>
       </section>
 
       {/* Biography + experience timeline */}
+      <div className="lg:pt-16" />
       <ProfileSection eyebrow="Biography" title={`About ${member.name.split(' ')[0]}`}>
         <div className="space-y-5">
           {bioParagraphs.map((paragraph, index) => (
