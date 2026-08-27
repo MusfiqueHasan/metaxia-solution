@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getTeam } from '@/lib/api';
+import { getTeam, getServices } from '@/lib/api';
 import { initials } from '@/lib/format';
-import { TEAM_PHOTOS, TEAM_PHOTO_FRAME } from '@/lib/team-meta';
+import { TEAM_PHOTOS, TEAM_PHOTO_FRAME, TEAM_PROFILE, SOCIAL_ICONS } from '@/lib/team-meta';
 import { site } from '@/lib/site';
 import { Container } from '@/components/container';
-import { ContactCta } from '@/components/home/contact-cta';
+import { ContactForm } from '@/components/contact-form';
 import { JsonLd } from '@/components/json-ld';
 import { Starfield } from '@/components/motion/starfield';
 import { SplitWords } from '@/components/motion/split-words';
@@ -39,17 +40,52 @@ export async function generateMetadata({
   };
 }
 
+function ProfileSection({
+  eyebrow,
+  title,
+  children,
+}: {
+  eyebrow: string;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="relative border-t border-line">
+      <Container className="py-14 lg:py-20">
+        <Reveal>
+          <div className="mx-auto max-w-3xl">
+            <p className="reveal-fade flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-accent">
+              <span className="inline-block h-px w-6 bg-accent" aria-hidden="true" />
+              {eyebrow}
+            </p>
+            <h2 className="reveal-rise mt-4 font-display text-3xl tracking-[-0.01em] text-fg sm:text-4xl">
+              {title}
+            </h2>
+            <div className="reveal-rise mt-8" style={{ ['--reveal-delay' as string]: '0.15s' }}>
+              {children}
+            </div>
+          </div>
+        </Reveal>
+      </Container>
+    </section>
+  );
+}
+
 export default async function TeamMemberPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const team = await getTeam();
+  const [team, services] = await Promise.all([getTeam(), getServices()]);
   const member = team.find((item) => item.slug === slug);
   if (!member) notFound();
 
+  const profile = TEAM_PROFILE[member.slug];
+  const photo = TEAM_PHOTOS[member.slug];
+  const frame = TEAM_PHOTO_FRAME[member.slug];
   const bioParagraphs = member.bio.split(/\n\n+/);
+  const relatedServices = services.slice(0, 3);
 
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
@@ -65,61 +101,195 @@ export default async function TeamMemberPage({
     <main className="page-wide grain relative overflow-hidden bg-ink">
       <Starfield />
       <JsonLd data={breadcrumbJsonLd} />
-      <section className="relative border-b border-line text-white">
-        <Container className="flex flex-col items-start gap-6 pt-36 pb-20 lg:pt-44 lg:pb-24">
-          {TEAM_PHOTOS[member.slug] ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <span
-              className="block h-24 w-24 overflow-hidden rounded-full border border-line"
-              style={TEAM_PHOTO_FRAME[member.slug]?.circle}
+
+      {/* Header: name + role, then the portrait front and center */}
+      <section className="relative border-b border-line">
+        <Container className="pb-16 pt-36 text-center lg:pt-44">
+          <Reveal>
+            <Link
+              href="/team"
+              className="reveal-fade inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.24em] text-fg-soft transition-colors hover:text-fg"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={TEAM_PHOTOS[member.slug]}
-                alt={member.name}
-                className="h-full w-full object-cover"
-                style={TEAM_PHOTO_FRAME[member.slug]?.img}
-              />
-            </span>
-          ) : (
-            <span className="flex h-20 w-20 items-center justify-center rounded-full bg-accent-soft font-display text-2xl text-accent">
-              {initials(member.name)}
-            </span>
-          )}
-          <div>
-            <h1 className="font-display text-4xl leading-[1.1] tracking-[-0.01em] sm:text-5xl">
-              {member.name}
+              <span aria-hidden="true">←</span> The team
+            </Link>
+            <h1 className="mt-8 font-display text-[clamp(2.75rem,6vw,5rem)] leading-[1.02] tracking-[-0.01em] text-fg">
+              <SplitWords text={member.name} from={0.1} />
             </h1>
-            <p className="mt-3 text-lg text-white/60">{member.role}</p>
-          </div>
-        </Container>
-      </section>
+            <p className="reveal-rise mt-4 text-lg text-fg-soft" style={{ ['--reveal-delay' as string]: '0.3s' }}>
+              {member.role}
+            </p>
 
-      <section className="relative py-24 lg:py-28">
-        <Container>
-          <div className="max-w-3xl space-y-5">
-            {bioParagraphs.map((paragraph, index) => (
-              <p key={index} className="text-base leading-relaxed text-fg-soft">
-                {paragraph}
-              </p>
-            ))}
-
-            {member.linkedinUrl ? (
-              <a
-                href={member.linkedinUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 pt-2 text-sm font-medium text-accent"
+            <div className="reveal-scale relative mx-auto mt-12 w-full max-w-[20rem]" style={{ ['--reveal-delay' as string]: '0.4s' }}>
+              <span
+                aria-hidden="true"
+                className="absolute -bottom-1 -right-1 h-20 w-20 rounded-full bg-accent"
+              />
+              <span
+                className="relative block aspect-square overflow-hidden rounded-full border border-line"
+                style={frame?.circle}
               >
-                View LinkedIn profile
-                <span aria-hidden="true">→</span>
-              </a>
-            ) : null}
-          </div>
+                {photo ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={photo}
+                    alt={member.name}
+                    className="h-full w-full object-cover"
+                    style={frame?.img}
+                  />
+                ) : (
+                  <span className="flex h-full w-full items-center justify-center bg-accent-soft font-display text-5xl text-accent">
+                    {initials(member.name)}
+                  </span>
+                )}
+              </span>
+            </div>
+          </Reveal>
         </Container>
       </section>
 
-      <ContactCta />
+      {/* Biography + experience timeline */}
+      <ProfileSection eyebrow="Biography" title={`About ${member.name.split(' ')[0]}`}>
+        <div className="space-y-5">
+          {bioParagraphs.map((paragraph, index) => (
+            <p key={index} className="text-[1.0625rem] leading-[1.85] text-fg-soft">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+        {profile ? (
+          <ol className="mt-10 border-t border-line">
+            {profile.experience.map((item) => (
+              <li
+                key={item.role + item.period}
+                className="flex flex-wrap items-baseline justify-between gap-2 border-b border-line py-5"
+              >
+                <span>
+                  <span className="font-display text-xl tracking-[-0.01em] text-fg">{item.role}</span>
+                  <span className="ml-3 text-sm text-fg-soft">{item.org}</span>
+                </span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-fg-soft/70">
+                  {item.period}
+                </span>
+              </li>
+            ))}
+          </ol>
+        ) : null}
+      </ProfileSection>
+
+      {/* Skills */}
+      {profile ? (
+        <ProfileSection eyebrow="Skills" title="Where the depth is">
+          <dl className="space-y-8">
+            {profile.skills.map((skill, index) => (
+              <div key={skill.label}>
+                <dt className="flex items-baseline justify-between gap-4">
+                  <span className="font-display text-lg tracking-[-0.01em] text-fg">{skill.label}</span>
+                  <span className="font-mono text-sm tabular-nums text-fg-soft">
+                    {skill.value}
+                    <span className="text-fg-soft/60">/100</span>
+                  </span>
+                </dt>
+                <dd className="mt-3">
+                  <div
+                    role="progressbar"
+                    aria-valuenow={skill.value}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={skill.label}
+                    className="h-px w-full bg-line-strong"
+                  >
+                    <div
+                      className="meter-fill h-px bg-accent shadow-[0_0_12px_0_var(--color-accent)]"
+                      style={{
+                        ['--meter-value' as string]: skill.value / 100,
+                        ['--reveal-delay' as string]: `${0.2 + index * 0.1}s`,
+                      }}
+                    />
+                  </div>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </ProfileSection>
+      ) : null}
+
+      {/* Services this person leads */}
+      {relatedServices.length > 0 ? (
+        <ProfileSection eyebrow="Practice" title="Services they lead">
+          <div className="flex flex-wrap gap-3">
+            {relatedServices.map((service) => (
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                className="rounded-full border border-line px-5 py-2.5 text-sm text-fg-soft transition-colors duration-300 hover:border-accent hover:text-accent"
+              >
+                {service.title}
+              </Link>
+            ))}
+            <Link
+              href="/case-studies"
+              className="rounded-full border border-accent/50 px-5 py-2.5 text-sm text-accent transition-colors duration-300 hover:bg-accent hover:text-white"
+            >
+              See the shipped work →
+            </Link>
+          </div>
+        </ProfileSection>
+      ) : null}
+
+      {/* In their words + socials */}
+      {profile ? (
+        <section className="relative border-t border-line">
+          <Container className="py-16 text-center lg:py-20">
+            <Reveal className="mx-auto max-w-3xl">
+              <span aria-hidden="true" className="reveal-fade font-display text-6xl leading-none text-accent">
+                &ldquo;
+              </span>
+              <blockquote className="reveal-rise mt-2 font-display text-2xl leading-snug tracking-[-0.01em] text-fg sm:text-3xl">
+                {profile.quote}
+              </blockquote>
+              <p className="reveal-fade mt-6 font-mono text-[11px] uppercase tracking-[0.24em] text-fg-soft">
+                — {member.name}
+              </p>
+
+              <div
+                className="reveal-rise mt-8 flex items-center justify-center gap-3"
+                style={{ ['--reveal-delay' as string]: '0.2s' }}
+              >
+                {SOCIAL_ICONS.map((social) => (
+                  <a
+                    key={social.key}
+                    href={social.key === 'linkedin' && member.linkedinUrl ? member.linkedinUrl : '#'}
+                    aria-label={`${member.name} on ${social.label}`}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-fg-soft transition-colors duration-300 hover:border-accent hover:text-accent"
+                  >
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+                      <path d={social.path} />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            </Reveal>
+          </Container>
+        </section>
+      ) : null}
+
+      {/* Direct line: the contact form, on-page like the reference */}
+      <section className="relative border-t border-line">
+        <Container className="py-16 lg:py-20">
+          <Reveal className="mx-auto max-w-3xl">
+            <p className="reveal-fade flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-accent">
+              <span className="inline-block h-px w-6 bg-accent" aria-hidden="true" />
+              Get in touch
+            </p>
+            <h2 className="reveal-rise mt-4 font-display text-3xl tracking-[-0.01em] text-fg sm:text-4xl">
+              Start a conversation with {member.name.split(' ')[0]}
+            </h2>
+            <div className="reveal-rise mt-8" style={{ ['--reveal-delay' as string]: '0.15s' }}>
+              <ContactForm />
+            </div>
+          </Reveal>
+        </Container>
+      </section>
     </main>
   );
 }
