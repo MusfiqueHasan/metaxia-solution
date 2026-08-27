@@ -6,6 +6,7 @@ import { Icon } from '@/components/icon';
 import { Approach } from '@/components/home/approach';
 import { SectionBackdrop } from '@/components/section-backdrop';
 import { Reveal } from '@/components/motion/reveal';
+import { CountUp } from '@/components/motion/count-up';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -18,10 +19,10 @@ export const metadata: Metadata = {
 };
 
 const stats = [
-  { value: '120+', label: 'Projects shipped' },
-  { value: '9', label: 'Years in business' },
-  { value: '60+', label: 'Clients served' },
-  { value: '35', label: 'People on the team' },
+  { value: 6, suffix: '+', label: 'Projects shipped' },
+  { value: 2, suffix: '+', label: 'Years of experience' },
+  { value: 5, suffix: '+', label: 'Happy clients' },
+  { value: 2, suffix: '', label: 'People on the team' },
 ];
 
 const values = [
@@ -92,7 +93,7 @@ export default function AboutPage() {
                 style={{ ['--reveal-delay' as string]: `${index * 0.1}s` }}
               >
                 <span className="font-display text-4xl tabular-nums text-fg">
-                  {stat.value}
+                  <CountUp value={stat.value} suffix={stat.suffix} />
                 </span>
                 <p className="mt-2 text-sm text-fg-soft">{stat.label}</p>
               </div>
