@@ -399,34 +399,41 @@ Discovery shipped first against a core set of platforms, with the source list gr
 - Candidates set up a profile and see their first matches in under five minutes`,
       },
       {
-        slug: 'streaming-cost-optimization',
-        title: 'Cutting Cloud Costs 42 Percent for a Media Streaming Startup',
-        category: 'Cloud',
+        slug: 'kryzotech-solutions',
+        title: 'Kryzotech Solutions — the Services Arm, Online',
+        category: 'Software',
         order: 6,
         coverGradient: 'linear-gradient(135deg,#f59e0b,#ef4444)',
-        websiteUrl: 'https://streamforge-demo.example.com',
-        previewImage: '/previews/streaming-cost-optimization.svg',
-        excerpt: 'A detailed infrastructure audit uncovered idle resources and inefficient storage tiers, cutting monthly cloud spend nearly in half.',
-        body: `The cloud bill had tripled in a year. Usage hadn't. Nobody had the bandwidth to find out where the money was going.
+        websiteUrl: 'https://solutions.kryzotechbd.com/',
+        previewImage: '/projects/kryzotechbd-web.png',
+        excerpt:
+          'The commercial front for a technology services firm — three practices, a shipped-work portfolio, and a consultation funnel that converts.',
+        body: `Kryzotech Solutions is the services arm of the Kryzotech ecosystem: a firm helping businesses put AI, data science, and custom software to work. The site is its commercial front — practices explained, delivery proven, and a consultation funnel at the end. Live at solutions.kryzotechbd.com.
 
 ## The challenge
 
-A streaming startup's infrastructure spend was compounding faster than its audience. Transcoding fleets sized for launch-day peaks ran around the clock, years-old videos nobody watched sat on premium-tier disks, and the bill arrived as one undifferentiated number no engineering lead could act on.
+The Kryzotech brand had grown a 1,000-plus community around its education arm, but client-services work needed its own home: a site that presents the three practices clearly, proves delivery with real shipped projects rather than claims, publishes the team's thinking, and turns interest into booked consultations.
 
 ## What we built
 
-A full audit of every service, instance, and storage bucket produced a ranked list of waste. We tied transcoding capacity to actual upload volume with auto-scaling, moved cold content to archival storage with lifecycle policies that age media automatically, and introduced a tagging and budgeting system that attributes every dollar to a feature team.
+A services site organized around three practices and the proof behind them.
+
+- Service pillars: Data Science & AI turning raw data into insight and predictive analytics; Web Development for scalable, modern platforms; App Development for cross-platform mobile products
+- A portfolio of shipped work — a social platform for padel players on Next.js, TypeScript, and PostgreSQL; an AI-matching recruitment product on React, Python, and FastAPI; and a financial-services platform on Node.js and Next.js
+- A blog carrying the team's technical writing
+- Consultation booking with a Get Started funnel wired through the site
+- Community and education tie-ins connecting the services arm to the Kryzotech Institution
 
 ## The rollout
 
-Changes shipped in order of savings-per-risk: storage lifecycle first (reversible, immediate), auto-scaling second (canaried against a week of real traffic), reserved-capacity purchases last, once the new baseline was proven stable.
+The services site launched on its own subdomain beside the education platform, sharing the brand but splitting the audience — students on one side, clients on the other. The portfolio grew case by case as projects shipped, and the blog and booking funnel followed.
 
 ## Results
 
-- Monthly cloud costs down 42 percent within the first quarter
-- Transcoding fleet utilization up from 19 percent to 71 percent
-- Spend visible per feature team, with budget alerts leads actually receive
-- Savings redirected into three engineering hires`,
+- Live in production at solutions.kryzotechbd.com
+- 30+ completed projects presented as shipped, named work
+- A 1,000-plus community feeding the services pipeline
+- Consultations booked directly from the site instead of over social inboxes`,
       },
       {
         slug: 'b2b-support-copilot',
