@@ -599,7 +599,7 @@ Vendor evaluation is ultimately a product decision as much as a technical one. T
       {
         slug: 'musfique-hasan',
         name: 'Musfique Hasan',
-        role: 'Founder & CEO',
+        role: 'Founder & CTO',
         bio: 'Musfique founded Metaxia to be the engineering partner he could never hire: one accountable team that scopes honestly, ships weekly, and stays through production. He leads the practice across cloud, product, and AI engagements.',
         linkedinUrl: null,
         order: 1,
@@ -607,7 +607,7 @@ Vendor evaluation is ultimately a product decision as much as a technical one. T
       {
         slug: 'efter-jahan-ema',
         name: 'Efter Jahan Ema',
-        role: 'Co-Founder',
+        role: 'Co-Founder & CEO',
         bio: 'Efter co-founded Metaxia and leads delivery — the full-stack builds behind the case studies, from learning platforms and marketplaces to AI recruitment tools. If it shipped, her hands were on it.',
         linkedinUrl: null,
         order: 2,

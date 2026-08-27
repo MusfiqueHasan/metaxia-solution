@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTeam } from '@/lib/api';
-import { TEAM_PHOTOS } from '@/lib/team-meta';
+import { TEAM_PHOTOS, TEAM_PHOTO_FRAME } from '@/lib/team-meta';
 import { initials } from '@/lib/format';
 import { PageHero } from '@/components/page-hero';
 import { Container } from '@/components/container';
@@ -59,6 +59,7 @@ export default async function TeamPage() {
             <Reveal className="mx-auto grid max-w-4xl gap-16 sm:grid-cols-2 lg:gap-24">
               {team.map((member, index) => {
                 const photo = TEAM_PHOTOS[member.slug];
+                const frame = TEAM_PHOTO_FRAME[member.slug];
                 return (
                   <div
                     key={member.slug}
@@ -95,13 +96,17 @@ export default async function TeamPage() {
                         aria-hidden="true"
                         className="absolute -bottom-1 -right-1 h-20 w-20 scale-50 rounded-full bg-accent opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-100 group-hover:opacity-100 lg:h-24 lg:w-24"
                       />
-                      <span className="relative block aspect-square overflow-hidden rounded-full border border-line">
+                      <span
+                        className="relative block aspect-square overflow-hidden rounded-full border border-line"
+                        style={frame?.circle}
+                      >
                         {photo ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={photo}
                             alt={member.name}
-                            className="h-full w-full object-cover grayscale transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] group-hover:grayscale-0"
+                            className="h-full w-full object-cover grayscale transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:grayscale-0"
+                            style={frame?.img}
                           />
                         ) : (
                           <span className="flex h-full w-full items-center justify-center bg-accent-soft font-display text-5xl text-accent">
