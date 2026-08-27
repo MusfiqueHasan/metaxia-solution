@@ -285,34 +285,41 @@ The platform shipped to production at smarthrflow.com on Vercel, with the assess
 - A new job's application flow configured in about five minutes`,
       },
       {
-        slug: 'design-system-unification',
-        title: 'Unifying a Fragmented Design System Across Five Products',
-        category: 'Design',
+        slug: 'better-e-mart',
+        title: 'Better Emart — a Multi-Vendor Marketplace for Chittagong',
+        category: 'Software',
         order: 3,
         coverGradient: 'linear-gradient(135deg,#a855f7,#f43f5e)',
-        websiteUrl: 'https://fivefold-demo.example.com',
-        previewImage: '/previews/design-system-unification.svg',
-        excerpt: 'We consolidated five inconsistent product UIs into a single token-based design system used by every squad.',
-        body: `Five product teams, five component libraries, one brand — and no two screens that looked like they came from the same company.
+        websiteUrl: 'https://betteremart.com/',
+        previewImage: '/projects/better-e-mart-web.webp',
+        excerpt:
+          'A full e-commerce platform — storefront, vendor dashboard, and admin operations — carrying 1,400+ products across a dozen categories.',
+        body: `Better Emart is a complete e-commerce platform built for Chittagong, Bangladesh: a customer storefront in front, a vendor dashboard for the sellers behind it, and an admin operation running the whole marketplace. Live at betteremart.com.
 
 ## The challenge
 
-Years of team autonomy had produced five diverging UI stacks. The same button existed in five widths, four blues, and three focus behaviors. Every new feature paid a duplication tax, and the design team spent review cycles policing drift instead of designing.
+The brief asked for more than a shop: a modern marketplace that could carry multiple vendors on one platform, keep inventory honest across all of them, take payments securely, and give customers an experience that holds up against the big platforms — search, cart, checkout, and order tracking that just work.
 
 ## What we built
 
-We audited every screen across the suite and extracted a single set of design tokens — color, type, spacing, radius, motion — as the contract between design and code. The core component library was rebuilt in Figma and React side by side, so the thing designers place and the thing engineers import are verifiably the same component.
+A Next.js and TypeScript storefront over an Express.js API with MongoDB, fronted by Cloudflare.
+
+- Product catalog with category and subcategory filtering across 1,400+ listings
+- Cart and secure checkout with order tracking from purchase to delivery
+- Vendor dashboard: add and manage listings with multiple images, track inventory with automatic low-stock alerts, process orders in real time, and read sales reports with full transaction history
+- Admin operation with live counts across the marketplace — products, categories, order states from pending to delivered, purchase orders, stock cost, and shipments
+- Multi-vendor structure so each seller runs their own storefront inside one platform
 
 ## The rollout
 
-Product by product, behind a compatibility layer that let old and new components coexist on the same screen. No team was asked to stop shipping for a rewrite; they adopted components as they touched screens. A weekly drift report kept the long tail visible until it hit zero.
+The storefront and catalog shipped first, with vendor tooling following once real inventory was flowing. Order-state tracking — pending, on the way, delivered — landed with the logistics integration, and the admin overview grew a tile for each operational question the team kept asking.
 
 ## Results
 
-- All five products on one visual language within four months
-- New-component development time down roughly half
-- Design review moved from policing drift to actual design
-- One source of truth for tokens, consumed by both Figma and CI`,
+- Live in production at betteremart.com
+- 1,436 products organized across 12 categories and 35 subcategories
+- Vendors run their own listings, stock, and orders — no central bottleneck
+- Low-stock alerts and order-state tracking replaced manual spreadsheet checks`,
       },
       {
         slug: 'healthtech-onboarding-redesign',

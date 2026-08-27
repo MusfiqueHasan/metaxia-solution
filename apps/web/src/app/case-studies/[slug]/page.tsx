@@ -110,6 +110,7 @@ function galleryImages(slug: string): { src: string; label: string }[] {
 const SLUG_STACKS: Record<string, string[]> = {
   kryzotech: ['TypeScript', 'Node.js', 'MongoDB', 'Redux', 'Socket.io', 'EPS payments'],
   smarthrflow: ['Next.js', 'TypeScript', 'NestJS', 'Supabase', 'OpenAI API', 'Vercel'],
+  'better-e-mart': ['Next.js', 'TypeScript', 'Express.js', 'MongoDB', 'Cloudflare', 'Vercel'],
 };
 
 /* Curated gallery per slug: choose the shots and pair them with copy.
@@ -149,6 +150,21 @@ const SLUG_GALLERY: Record<string, GalleryEntry[]> = {
         'Top-candidate surfacing above the applicant pool',
         'Search, filter, sort, and stage controls inline',
         'Credit-based posting with add-candidate and share actions',
+      ],
+    },
+  ],
+  'better-e-mart': [
+    {
+      src: '/projects/better-e-mart-admin.webp',
+      label: 'management dashboard',
+      text: 'The dashboard answers the operational questions at a glance — live tiles for catalog size, order states, and money in stock — then hands vendors the day-to-day controls.',
+      points: [
+        'Catalog at a glance — products, categories, and subcategories',
+        'Order pipeline — pending, on the way, delivered, plus custom orders',
+        'Purchase orders and total shipments tracked live',
+        'Stock cost rolled up across the marketplace',
+        'Listings with multiple images, edited in place',
+        'Low-stock alerts and real-time order status for every vendor',
       ],
     },
   ],
