@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import type { CaseStudy } from '@metaxia/shared';
 import { getCaseStudies } from '@/lib/api';
+import { caseYear, sortCases } from '@/lib/case-meta';
 import { Container } from '@/components/container';
 import { Reveal } from '@/components/motion/reveal';
 import { SplitWords } from '@/components/motion/split-words';
@@ -34,8 +35,8 @@ const PILLS: Record<string, string[]> = {
   AI: ['RAG', 'Evals', 'Guardrails'],
 };
 
-const extras = (item: CaseStudy, index: number) => ({
-  year: String(2024 + ((index + 1) % 3)),
+const extras = (item: CaseStudy) => ({
+  year: caseYear(item.slug),
   scope: SCOPES[item.category] ?? 'Design · Build · Launch',
   pills: PILLS[item.category] ?? ['B2B', 'Systems', 'Launch'],
 });
@@ -49,7 +50,7 @@ function splitTitle(title: string): [string, string] {
 }
 
 export default async function CaseStudiesPage() {
-  const caseStudies = await getCaseStudies();
+  const caseStudies = sortCases(await getCaseStudies());
 
   const stats = [
     { n: `${String(caseStudies.length).padStart(2, '0')}+`, l: 'Systems shipped' },
@@ -132,7 +133,7 @@ export default async function CaseStudiesPage() {
       <section className="relative">
         {caseStudies.length > 0 ? (
           caseStudies.map((item, index) => {
-            const { year, scope, pills } = extras(item, index);
+            const { year, scope, pills } = extras(item);
             const [lineA, lineB] = splitTitle(item.title);
             const flip = index % 2 === 1;
 

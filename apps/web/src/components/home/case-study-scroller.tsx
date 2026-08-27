@@ -7,8 +7,7 @@ import { Container } from '@/components/container';
 import { Button } from '@/components/button';
 import { Reveal } from '@/components/motion/reveal';
 import { SectionBackdrop } from '@/components/section-backdrop';
-
-const YEARS = ['2025', '2026', '2024'];
+import { caseYear, sortCases } from '@/lib/case-meta';
 
 /**
  * Selected work as a showroom rail: oversized browser-preview plates with
@@ -17,7 +16,7 @@ const YEARS = ['2025', '2026', '2024'];
  * the edge arrows and the 01/08 counter read and drive scrollLeft.
  */
 export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
-  const shown = items.slice(0, 4);
+  const shown = sortCases(items).slice(0, 4);
   const trackRef = useRef<HTMLDivElement>(null);
   const [current, setCurrent] = useState(0);
 
@@ -143,7 +142,7 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
         >
           {shown.map((item, index) => {
             const domain = item.websiteUrl ? new URL(item.websiteUrl).hostname : null;
-            const year = YEARS[(index + 1) % YEARS.length];
+            const year = caseYear(item.slug);
             return (
               <article key={item.id} className="w-[85vw] shrink-0 snap-start sm:w-[28rem] lg:w-[34rem]">
                 {/* Browser plate */}

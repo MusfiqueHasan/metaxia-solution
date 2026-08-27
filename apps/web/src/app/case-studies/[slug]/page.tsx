@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { CaseStudy } from '@metaxia/shared';
 import { getCaseStudies } from '@/lib/api';
+import { caseYear, sortCases } from '@/lib/case-meta';
 import { site } from '@/lib/site';
 import { Container } from '@/components/container';
 import { Button } from '@/components/button';
@@ -188,7 +189,7 @@ export default async function CaseStudyDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const allCaseStudies = (await getCaseStudies()).sort((a, b) => a.order - b.order);
+  const allCaseStudies = sortCases(await getCaseStudies());
   const index = allCaseStudies.findIndex((item) => item.slug === slug);
   const caseStudy: CaseStudy | undefined = index >= 0 ? allCaseStudies[index] : undefined;
   if (!caseStudy) notFound();
@@ -203,7 +204,7 @@ export default async function CaseStudyDetailPage({
   const gallery: GalleryEntry[] = SLUG_GALLERY[caseStudy.slug] ?? galleryImages(caseStudy.slug);
   let sectionNo = 0;
   const nextNo = () => String(++sectionNo).padStart(2, '0');
-  const year = String(2024 + ((index + 1) % 3));
+  const year = caseYear(caseStudy.slug);
 
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
