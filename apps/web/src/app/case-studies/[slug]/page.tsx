@@ -116,6 +116,7 @@ const SLUG_STACKS: Record<string, string[]> = {
   'kryzotech-solutions': ['Data & AI practice', 'Web development', 'App development', 'Portfolio & blog', 'Booking funnel'],
   onlineteened: ['Self-paced LMS', 'DMV certification flow', 'Progress tracking', 'Student admin', 'Reviews & blog'],
   kumira: ['Next.js', 'TypeScript', 'Express.js', 'MongoDB', 'SSLCommerz', 'Custom POS'],
+  'jakaria-finance': ['Next.js', 'Node.js', 'Live market data', 'Chat-first conversion', 'Booking funnel'],
 };
 
 /* Curated gallery per slug: choose the shots and pair them with copy.

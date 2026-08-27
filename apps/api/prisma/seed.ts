@@ -512,6 +512,45 @@ The counter POS shipped first — the jetty queue could not wait on the web — 
 - Tickets from both channels validated by barcode at boarding
 - Refunds, price changes, and booking limits handled by the operator, not a developer`,
       },
+      {
+        slug: 'jakaria-finance',
+        title: 'Jakaria Finance — a Launch Platform for Token Fundraising',
+        category: 'Software',
+        order: 9,
+        coverGradient: 'linear-gradient(135deg,#16a34a,#facc15)',
+        websiteUrl: 'https://www.jakaria.finance/',
+        previewImage: '/projects/jakaria.png',
+        excerpt:
+          'The commercial front for a blockchain fundraising service — ICO launch tooling, live market data, and a consultation funnel built to convert.',
+        body: `Jakaria Finance helps ventures raise capital through token launches instead of equity, and this platform is its storefront: the service suite explained, live market data on the page, the numbers up front, and every path ending in a conversation. Live at jakaria.finance.
+
+## The challenge
+
+Crypto fundraising is a trust-poor market. The platform had to present a serious operation — launch management, dedicated engineering, security audits — with its results and pricing model stated plainly, show live market context rather than static claims, and convert interest through the channels its audience actually uses: WhatsApp, Messenger, and a booked consultation.
+
+## What we built
+
+A marketing and conversion platform for the full service suite, on Next.js and Node.js.
+
+- Service presentation across the offer: ICO launch and management, a dedicated blockchain developer team per project, 20+ digital-marketing teams, security audits, market analysis and advisory, and memecoin launches on decentralized exchanges
+- A results band carrying the platform's own numbers — 127% ROI, 89% growth rate, $2.4M raised, 1,200 investors served
+- Live market data displayed on-page for real-time context
+- The pricing model stated up front: no upfront fee, pay for results, with a seven-day completion commitment
+- A passive-income section built around weekly token launches
+- Testimonials aggregated across LinkedIn, Google, and Trustpilot, plus FAQ and a blog
+- Conversion wiring throughout: WhatsApp and Messenger links and free consultation booking
+
+## The rollout
+
+The service pages and results band launched first, with live market data and the passive-income section following. Blog and FAQ landed with the content push, and the chat-first contact channels replaced a plain form as the primary conversion path.
+
+## Results
+
+- Live in production at jakaria.finance
+- The platform presents $2.4M raised and 1,200 investors served across its launches
+- Consultations booked directly from the site through chat-first channels
+- Market data, testimonials, and pricing terms all on-page — the pitch survives without a call`,
+      },
     ],
   });
 
