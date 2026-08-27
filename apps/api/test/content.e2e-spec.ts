@@ -13,7 +13,7 @@ describe('content (read)', () => {
   afterAll(async () => app.close());
 
   const lists: Array<[string, number]> = [
-    ['/services', 6], ['/case-studies', 9], ['/posts', 6], ['/team', 6],
+    ['/services', 6], ['/case-studies', 6], ['/posts', 6], ['/team', 6],
     ['/jobs', 4], ['/pricing', 3], ['/faq', 8], ['/testimonials', 5],
   ];
   it.each(lists)('GET %s returns %i items', async (path, count) => {

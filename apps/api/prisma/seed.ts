@@ -322,48 +322,10 @@ The storefront and catalog shipped first, with vendor tooling following once rea
 - Low-stock alerts and order-state tracking replaced manual spreadsheet checks`,
       },
       {
-        slug: 'chefnawaz',
-        title: 'Chef Nawaz — a Sauce Brand, Storefront, and Kitchen-Office in One',
-        category: 'Software',
-        order: 4,
-        coverGradient: 'linear-gradient(135deg,#b91c1c,#f59e0b)',
-        websiteUrl: 'https://chefnawaz.com/',
-        previewImage: '/projects/chefnawaz.png',
-        excerpt:
-          'A commercial sauce formulator with 24+ years behind 50+ restaurants — now selling signature sauces direct, with a custom admin running the store.',
-        body: `Chef Nawaz formulates sauces and spice blends for restaurants and food brands. The site gives that expertise a home: a brand storefront selling the signature range, a recipes showcase, and a custom admin that runs the whole operation. Live at chefnawaz.com.
-
-## The challenge
-
-Twenty-four years of formulation work and 50+ restaurant clients lived entirely on reputation and referrals. The brief: one platform that sells the signature sauce range direct to customers, presents the commercial services — formulation, recipe development, batch scaling, menu consulting — to restaurant buyers, and lets the chef's own team run products, orders, and content without calling a developer.
-
-## What we built
-
-A PHP storefront with a product database, user accounts, and a purpose-built admin behind it.
-
-- Storefront with the eight-sauce signature range — burger sauces, mayo variants, and dips — organized by category
-- Recipes section with ratings, a best-sellers carousel, and client testimonials
-- Service pages covering formulation, batch scaling, and restaurant consulting
-- Customer accounts with authentication for ordering
-- Custom admin: products, recipes, categories, orders, users, reviews, contact messages, and settings in one panel
-- Order pipeline with searchable history and status tracking — processing, delivered, cancelled — per order ID
-
-## The rollout
-
-The brand site and catalog went live first, with checkout and customer accounts following. The admin grew module by module — products and recipes, then orders and users, then reviews and the contact inbox — until the team ran everything in-house.
-
-## Results
-
-- Live in production at chefnawaz.com
-- The signature range sells direct, with orders tracked from placement to delivery
-- Reviews and customer messages handled inside the admin — no shared inboxes
-- The team updates products, recipes, and content with zero developer involvement`,
-      },
-      {
         slug: 'jobsyo',
         title: 'Jobsyo — AI Job Discovery Across 50+ Platforms',
         category: 'AI',
-        order: 5,
+        order: 4,
         coverGradient: 'linear-gradient(135deg,#0891b2,#4f46e5)',
         websiteUrl: 'https://jobsyo.com/',
         previewImage: '/projects/jobsyo.png',
@@ -402,7 +364,7 @@ Discovery shipped first against a core set of platforms, with the source list gr
         slug: 'kryzotech-solutions',
         title: 'Kryzotech Solutions — the Services Arm, Online',
         category: 'Software',
-        order: 6,
+        order: 5,
         coverGradient: 'linear-gradient(135deg,#f59e0b,#ef4444)',
         websiteUrl: 'https://solutions.kryzotechbd.com/',
         previewImage: '/projects/kryzotechbd-web.png',
@@ -436,87 +398,10 @@ The services site launched on its own subdomain beside the education platform, s
 - Consultations booked directly from the site instead of over social inboxes`,
       },
       {
-        slug: 'onlineteened',
-        title: 'OnlineTeenEd — DMV-Approved Driver Education, Fully Online',
-        category: 'Software',
-        order: 7,
-        coverGradient: 'linear-gradient(135deg,#8b5cf6,#06b6d4)',
-        websiteUrl: 'https://onlineteened.com/',
-        previewImage: '/projects/onlineteened-web.webp',
-        excerpt:
-          'A California DMV-approved driver-education platform — 15 self-paced lessons, official completion certificates, and an admin tracking every student.',
-        body: `OnlineTeenEd delivers California DMV-approved driver education entirely online, run by Fremont Car Driving School under DMV license #E0628 — teens work toward their permits at their own pace, and the school tracks every student from enrollment to certificate. Live at onlineteened.com.
-
-## The challenge
-
-A licensed driving school needed its classroom on the internet without losing the regulator: the course had to satisfy California DMV standards end to end, serve teens from any device at a flat, honest price, issue the official Certificate of Completion the DMV actually accepts, and give staff one place to see who enrolled, who passed, and with what marks.
-
-## What we built
-
-A self-paced learning platform with a certification flow in front and a school-office admin behind it.
-
-- A 15-lesson curriculum aligned to DMV standards — vehicle systems, traffic laws and the California Vehicle Code, pedestrian safety, alcohol and drug effects, risk perception, and teen driving behaviors
-- Self-paced, mobile-friendly lessons with progress saving and unlimited attempts to pass
-- Flat $24.95 pricing with a free DMV practice test included
-- The official DMV Certificate of Completion flow, mailed to the student for their DMV visit
-- Guidance pages for the permit process and the license pathway, plus a bridge to behind-the-wheel training
-- Live chat support and access to a course trainer
-- Admin panel: students with name, email, phone, and marks; enrollment tracking; passed-student lists; blog, reviews, and contact-request moderation; platform settings behind secure access
-
-## The rollout
-
-The course and certification flow launched first — the part the DMV license depends on — with the admin growing alongside real enrollments: student and passed-student tables, then blog and review moderation, then the contact inbox and settings.
-
-## Results
-
-- Live in production at onlineteened.com under DMV license #E0628
-- Students complete the full requirement online and receive the official certificate by mail
-- Staff see users, passed students, and enrollments at a glance, with per-student marks
-- Ten public student reviews across 2023–2024 backing the program`,
-      },
-      {
-        slug: 'kumira',
-        title: 'Kumira Guptachara — Ferry Ticketing from Jetty to Dashboard',
-        category: 'Software',
-        order: 8,
-        coverGradient: 'linear-gradient(135deg,#0e7490,#38bdf8)',
-        websiteUrl: 'https://kumiraguptachara.com/',
-        previewImage: '/projects/kumira-web.png',
-        excerpt:
-          'A boat-ticketing platform for the Kumira–Sandwip crossing — online booking, a counter POS at the jetty, and an admin tracking every taka.',
-        body: `Kumira Guptachara runs the boat crossing between Kumira and Sandwip, and this platform runs its ticketing: passengers book online, agents sell at the jetty counter with a purpose-built POS, and the operator watches revenue, refunds, and boat utilization from one panel. Live at kumiraguptachara.com.
-
-## The challenge
-
-A working ferry route needed to move off paper: real-time seat availability across boats, secure online payment for passengers, a counter workflow fast enough for a queue at the jetty — including baggage billed by weight and half-fare tickets — and a management view that answers the daily questions: how many passengers, how much money, from which side of the crossing.
-
-## What we built
-
-A Next.js and TypeScript platform over an Express.js API with MongoDB, with payments through a local gateway and a custom POS at the counter.
-
-- Online booking with live seat availability, schedule display, and instant confirmations
-- A counter dashboard for agents: boat type with fares and half-tickets, route and departure time, passenger counts, baggage charged per 20 kg, cash handling, and a live total before booking
-- Instant boarding passes with a custom POS for ticket printing and barcode scanning — separate scanners for counter and online tickets
-- Daily counter and online reports with full transaction history
-- An admin panel with day-at-a-glance tiles — bookings, passengers, revenue, refunds — split per route side, with counter and online tickets toggled separately
-- Operations modules: check-ins, price list, employees, booking limits, and a weather view for the crossing
-
-## The rollout
-
-The counter POS shipped first — the jetty queue could not wait on the web — followed by online booking with gateway payments, then the scanners tying both channels to boarding. The admin grew a tile for each question the operator kept asking, down to refund amounts per route side.
-
-## Results
-
-- Live in production at kumiraguptachara.com
-- A single day at the counter: 67 bookings, 116 passengers, ৳28,200 in revenue — visible on one screen
-- Tickets from both channels validated by barcode at boarding
-- Refunds, price changes, and booking limits handled by the operator, not a developer`,
-      },
-      {
         slug: 'jakaria-finance',
         title: 'Jakaria Finance — a Launch Platform for Token Fundraising',
         category: 'Software',
-        order: 9,
+        order: 6,
         coverGradient: 'linear-gradient(135deg,#16a34a,#facc15)',
         websiteUrl: 'https://www.jakaria.finance/',
         previewImage: '/projects/jakaria.png',

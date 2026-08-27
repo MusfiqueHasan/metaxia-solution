@@ -111,11 +111,8 @@ const SLUG_STACKS: Record<string, string[]> = {
   kryzotech: ['TypeScript', 'Node.js', 'MongoDB', 'Redux', 'Socket.io', 'EPS payments'],
   smarthrflow: ['Next.js', 'TypeScript', 'NestJS', 'Supabase', 'OpenAI API', 'Vercel'],
   'better-e-mart': ['Next.js', 'TypeScript', 'Express.js', 'MongoDB', 'Cloudflare', 'Vercel'],
-  chefnawaz: ['PHP', 'Product database', 'Auth & accounts', 'Custom admin', 'Order tracking'],
   jobsyo: ['Next.js', 'AI matching', 'Multi-platform scanning', 'Real-time alerts', 'Resume scoring'],
   'kryzotech-solutions': ['Data & AI practice', 'Web development', 'App development', 'Portfolio & blog', 'Booking funnel'],
-  onlineteened: ['Self-paced LMS', 'DMV certification flow', 'Progress tracking', 'Student admin', 'Reviews & blog'],
-  kumira: ['Next.js', 'TypeScript', 'Express.js', 'MongoDB', 'SSLCommerz', 'Custom POS'],
   'jakaria-finance': ['Next.js', 'Node.js', 'Live market data', 'Chat-first conversion', 'Booking funnel'],
 };
 
@@ -171,62 +168,6 @@ const SLUG_GALLERY: Record<string, GalleryEntry[]> = {
         'Stock cost rolled up across the marketplace',
         'Listings with multiple images, edited in place',
         'Low-stock alerts and real-time order status for every vendor',
-      ],
-    },
-  ],
-  chefnawaz: [
-    {
-      src: '/projects/chefnawaz-admin.png',
-      label: 'store admin',
-      text: 'The admin opens on the numbers that matter — products, recipes, orders, users — with the recent-order table right below: searchable, per-order status chips, and a module rail covering the whole operation.',
-      points: [
-        'Dashboard tiles — total products, recipes, orders, and users at a glance',
-        'Recent orders — ID, customer, product, amount, and date in one table',
-        'Status tracking per order — processing, delivered, cancelled',
-        'Catalog control — products, recipes, and categories edited in place',
-        'Reviews and contact messages managed inside the panel',
-        'Users and settings round out the operation',
-      ],
-    },
-  ],
-  onlineteened: [
-    {
-      src: '/projects/onlineteened-admin.webp',
-      label: 'school admin',
-      text: 'The admin is the school office: quick stats for total users, passed students, and enrollments up top, with searchable student tables — full name, email, phone, and marks — right below.',
-      points: [
-        'Dashboard tiles — users, passed students, and enrollments at a glance',
-        'Recent passed-student table with per-student marks (%)',
-        'Recent students and enrollment tracking, searchable',
-        'Blog publishing and review moderation in-panel',
-        'Contact requests handled inside the admin',
-        'Platform settings behind secure admin access',
-      ],
-    },
-  ],
-  kumira: [
-    {
-      src: '/projects/kumira-counter.webp',
-      label: 'counter dashboard',
-      text: 'Built for the queue at the jetty: an agent picks the boat, route, and departure, enters passengers, half-tickets, and baggage weight, and sees the total before taking cash — boarding pass printed on the spot.',
-      points: [
-        'Boat type with fares and half-ticket pricing built in',
-        'Kumira–Sandwip route, date, and departure-time selection',
-        'Baggage billed by weight, per 20 kg',
-        'Cash payment with a live total before booking',
-        'Separate counter/online scanners and daily reports in the sidebar',
-      ],
-    },
-    {
-      src: '/projects/kumira-admin.webp',
-      label: 'admin panel',
-      text: 'The operator’s day on one screen: bookings, passengers, revenue, and refunds — each split by route side, with counter and online tickets toggled separately.',
-      points: [
-        'Daily tiles — bookings, passengers, revenue, refunds at a glance',
-        'Per-route breakdown for Kumira and Sandwip sides',
-        'Counter vs online ticket views, one toggle apart',
-        'Check-ins, price list, employees, and booking limits',
-        'A weather module for the crossing itself',
       ],
     },
   ],
