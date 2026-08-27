@@ -138,7 +138,7 @@ export default async function CaseStudiesPage() {
 
             return (
               <article key={item.id} className="border-b border-line last:border-b-0">
-                <Container className="py-20 lg:py-28">
+                <Container className="py-12 lg:py-16">
                   <Reveal>
                     <div
                       className={`grid items-center gap-12 lg:gap-20 ${
@@ -158,7 +158,7 @@ export default async function CaseStudiesPage() {
                           </p>
                         </div>
 
-                        <h2 className="reveal-rise mt-6 font-display text-4xl leading-[1.02] tracking-[-0.01em] text-fg sm:text-5xl lg:text-6xl">
+                        <h2 className="reveal-rise mt-5 font-display text-3xl leading-[1.05] tracking-[-0.01em] text-fg sm:text-4xl lg:text-5xl">
                           {lineA}
                           {lineB ? (
                             <>
@@ -169,7 +169,7 @@ export default async function CaseStudiesPage() {
                         </h2>
 
                         <p
-                          className="reveal-rise mt-6 max-w-xl text-base leading-relaxed text-fg-soft"
+                          className="reveal-rise mt-5 max-w-xl text-sm leading-relaxed text-fg-soft"
                           style={{ ['--reveal-delay' as string]: '0.1s' }}
                         >
                           {item.excerpt}
@@ -245,7 +245,7 @@ export default async function CaseStudiesPage() {
                           className="group relative block overflow-hidden rounded-3xl border border-line"
                         >
                           <div
-                            className="grain relative aspect-[4/3] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
+                            className="grain relative aspect-[16/10] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
                             style={{ background: item.coverGradient }}
                           >
                             {item.previewImage ? (
