@@ -1,4 +1,14 @@
 export function Markdown({ body }: { body: string }) {
+  // Rich-text admin content arrives as HTML (CKEditor); trusted authors only.
+  if (body.trimStart().startsWith('<')) {
+    return (
+      <div
+        className="space-y-5 leading-[1.85] text-fg-soft [&_a]:text-accent [&_a]:underline [&_blockquote]:border-l-2 [&_blockquote]:border-accent [&_blockquote]:pl-5 [&_blockquote]:italic [&_h2]:mt-12 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:tracking-[-0.01em] [&_h2]:text-fg [&_h3]:mt-8 [&_h3]:font-display [&_h3]:text-xl [&_h3]:text-fg [&_li]:my-1.5 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:my-4 [&_strong]:text-fg [&_table]:w-full [&_td]:border [&_td]:border-line [&_td]:px-3 [&_td]:py-2 [&_ul]:list-disc [&_ul]:pl-6"
+        dangerouslySetInnerHTML={{ __html: body }}
+      />
+    );
+  }
+
   return (
     <div className="space-y-5">
       {body.split(/\n\n+/).map((block, i) => {

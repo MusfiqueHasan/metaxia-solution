@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 const SESSION_KEY = 'mx-intro-seen';
 
@@ -14,6 +15,7 @@ const SESSION_KEY = 'mx-intro-seen';
 export function IntroLoader() {
   const ref = useRef<HTMLDivElement>(null);
   const [skip, setSkip] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const node = ref.current;
@@ -37,7 +39,7 @@ export function IntroLoader() {
     return () => clearTimeout(timer);
   }, []);
 
-  if (skip) return null;
+  if (skip || pathname.startsWith('/admin')) return null;
 
   return (
     <div ref={ref} className="intro-overlay" aria-hidden="true">

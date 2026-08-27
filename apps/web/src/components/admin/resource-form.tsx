@@ -1,21 +1,11 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useState, type FormEvent } from 'react';
-import { adminFetch, type FieldDef, type ResourceDef } from '@/lib/admin';
+import { useEffect, useState, type FormEvent } from 'react';
+import { adminFetch, type ResourceDef, type FieldDef } from '@/lib/admin';
+import { Modal, adminInput, adminLabel } from '@/components/admin/ui';
+import { RichText } from '@/components/admin/rich-text';
 
-type FormValue = string | boolean;
-type FormState = Record<string, FormValue>;
-
-interface Row {
-  id: string;
-  [key: string]: unknown;
-}
-
-const inputClass =
-  'mt-1.5 w-full rounded-lg border border-ink/15 bg-surface px-3.5 py-2 text-sm text-ink placeholder:text-ink-soft/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60';
-
-const labelClass = 'block text-sm font-medium text-ink';
+type Row = Record<string, unknown>;
 
 function toIsoStringOrUndefined(value: string): string | undefined {
   if (!value) return undefined;
@@ -23,7 +13,7 @@ function toIsoStringOrUndefined(value: string): string | undefined {
   return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
 }
 
-function isoToDatetimeLocal(value: unknown): string {
+function toDatetimeLocal(value: unknown): string {
   if (typeof value !== 'string' || !value) return '';
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return '';
@@ -31,166 +21,219 @@ function isoToDatetimeLocal(value: unknown): string {
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
 }
 
-function initialFormState(fields: FieldDef[], initial?: Row): FormState {
-  const state: FormState = {};
-  for (const field of fields) {
-    const raw = initial?.[field.name];
-    if (field.kind === 'boolean') {
-      state[field.name] = Boolean(raw);
-    } else if (field.kind === 'list') {
-      state[field.name] = Array.isArray(raw) ? raw.join('\n') : '';
-    } else if (field.kind === 'date') {
-      state[field.name] = isoToDatetimeLocal(raw);
-    } else if (field.kind === 'number') {
-      state[field.name] = raw === undefined || raw === null ? '' : String(raw);
-    } else {
-      state[field.name] = typeof raw === 'string' ? raw : '';
-    }
+function initialValue(field: FieldDef, row?: Row): string | boolean {
+  const raw = row?.[field.name];
+  switch (field.kind) {
+    case 'boolean':
+      return Boolean(raw);
+    case 'list':
+      return Array.isArray(raw) ? raw.join('\n') : '';
+    case 'date':
+      return toDatetimeLocal(raw);
+    case 'number':
+      return raw === undefined || raw === null ? '' : String(raw);
+    default:
+      return typeof raw === 'string' ? raw : '';
   }
-  return state;
 }
 
-function serialize(fields: FieldDef[], state: FormState): Record<string, unknown> {
-  const payload: Record<string, unknown> = {};
-  for (const field of fields) {
-    const value = state[field.name];
-    if (field.kind === 'number') {
-      payload[field.name] = Number(value);
-    } else if (field.kind === 'boolean') {
-      payload[field.name] = Boolean(value);
-    } else if (field.kind === 'list') {
-      payload[field.name] = String(value)
-        .split('\n')
-        .map((line) => line.trim())
-        .filter((line) => line.length > 0);
-    } else if (field.kind === 'date') {
-      const iso = toIsoStringOrUndefined(String(value));
-      if (iso) payload[field.name] = iso;
-    } else {
-      payload[field.name] = value;
-    }
-  }
-  return payload;
-}
-
-export function ResourceForm({ def, initial }: { def: ResourceDef; initial?: Row }) {
-  const router = useRouter();
-  const [state, setState] = useState<FormState>(() => initialFormState(def.fields, initial));
-  const [submitting, setSubmitting] = useState(false);
+/**
+ * Create/edit dialog for any admin resource. Field kinds render the right
+ * control (text, textarea, number, toggle, list-as-lines, datetime, or the
+ * rich-text editor for blog bodies); submit POSTs or PATCHes through the
+ * admin proxy and hands control back to the list.
+ */
+export function ResourceModal({
+  def,
+  row,
+  open,
+  onClose,
+  onSaved,
+}: {
+  def: ResourceDef;
+  row: Row | null;
+  open: boolean;
+  onClose: () => void;
+  onSaved: () => void;
+}) {
+  const isEdit = Boolean(row);
+  const [values, setValues] = useState<Record<string, string | boolean>>({});
+  const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const isEdit = Boolean(initial);
+  useEffect(() => {
+    if (!open) return;
+    const next: Record<string, string | boolean> = {};
+    for (const field of def.fields) next[field.name] = initialValue(field, row ?? undefined);
+    setValues(next);
+    setError(null);
+  }, [open, def, row]);
 
-  function setField(name: string, value: FormValue) {
-    setState((prev) => ({ ...prev, [name]: value }));
-  }
+  const set = (name: string, value: string | boolean) =>
+    setValues((prev) => ({ ...prev, [name]: value }));
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitting(true);
+    setSaving(true);
     setError(null);
-    try {
-      const body = JSON.stringify(serialize(def.fields, state));
-      if (isEdit && initial) {
-        await adminFetch(`${def.apiPath}/${initial.id}`, { method: 'PATCH', body });
-      } else {
-        await adminFetch(def.apiPath, { method: 'POST', body });
+
+    const payload: Record<string, unknown> = {};
+    for (const field of def.fields) {
+      const value = values[field.name];
+      switch (field.kind) {
+        case 'boolean':
+          payload[field.name] = Boolean(value);
+          break;
+        case 'number':
+          payload[field.name] = Number(value || 0);
+          break;
+        case 'list':
+          payload[field.name] = String(value ?? '')
+            .split('\n')
+            .map((line) => line.trim())
+            .filter(Boolean);
+          break;
+        case 'date': {
+          const iso = toIsoStringOrUndefined(String(value ?? ''));
+          if (iso !== undefined) payload[field.name] = iso;
+          break;
+        }
+        default: {
+          const text = String(value ?? '');
+          if (text || !field.optional) payload[field.name] = text;
+        }
       }
-      router.push(`/admin/${def.key}`);
+    }
+
+    try {
+      if (isEdit && row) {
+        await adminFetch(`${def.apiPath}/${row.id as string}`, {
+          method: 'PATCH',
+          body: JSON.stringify(payload),
+        });
+      } else {
+        await adminFetch(def.apiPath, { method: 'POST', body: JSON.stringify(payload) });
+      }
+      onSaved();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Request failed.');
-      setSubmitting(false);
+      setError(err instanceof Error ? err.message : 'Save failed.');
+      setSaving(false);
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-2xl rounded-2xl border border-ink/10 bg-surface-alt p-6">
-      <div className="flex flex-col gap-5">
-        {def.fields.map((field) => (
-          <div key={field.name}>
-            <label htmlFor={field.name} className={labelClass}>
-              {field.label}
-              {field.optional ? <span className="font-normal text-ink-soft"> (optional)</span> : null}
-            </label>
+    <Modal
+      open={open}
+      onClose={onClose}
+      title={isEdit ? `Edit ${def.label.replace(/s$/, '').toLowerCase()}` : `New ${def.label.replace(/s$/, '').toLowerCase()}`}
+      wide
+    >
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="grid gap-5 sm:grid-cols-2">
+          {def.fields.map((field) => {
+            const value = values[field.name];
+            const fullWidth =
+              field.kind === 'textarea' || field.kind === 'richtext' || field.kind === 'list';
 
-            {field.kind === 'textarea' || field.kind === 'list' ? (
-              <textarea
-                id={field.name}
-                rows={field.kind === 'list' ? 5 : 8}
-                value={String(state[field.name] ?? '')}
-                onChange={(e) => setField(field.name, e.target.value)}
-                disabled={submitting}
-                className={`${inputClass} resize-y`}
-                required={!field.optional && field.kind !== 'list'}
-              />
-            ) : field.kind === 'boolean' ? (
-              <input
-                id={field.name}
-                type="checkbox"
-                checked={Boolean(state[field.name])}
-                onChange={(e) => setField(field.name, e.target.checked)}
-                disabled={submitting}
-                className="mt-2 h-4 w-4 rounded border-ink/30 text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-              />
-            ) : field.kind === 'number' ? (
-              <input
-                id={field.name}
-                type="number"
-                value={String(state[field.name] ?? '')}
-                onChange={(e) => setField(field.name, e.target.value)}
-                disabled={submitting}
-                className={inputClass}
-                required={!field.optional}
-              />
-            ) : field.kind === 'date' ? (
-              <>
-                <input
-                  id={field.name}
-                  type="datetime-local"
-                  value={String(state[field.name] ?? '')}
-                  onChange={(e) => setField(field.name, e.target.value)}
-                  disabled={submitting}
-                  className={inputClass}
-                  required={!field.optional}
-                />
-                {field.optional && isEdit ? (
-                  <p className="mt-1.5 text-xs text-ink-soft">Leave blank to keep the current value.</p>
-                ) : null}
-              </>
-            ) : (
-              <input
-                id={field.name}
-                type="text"
-                value={String(state[field.name] ?? '')}
-                onChange={(e) => setField(field.name, e.target.value)}
-                disabled={submitting}
-                className={inputClass}
-                required={!field.optional}
-              />
-            )}
-          </div>
-        ))}
-      </div>
+            return (
+              <div key={field.name} className={fullWidth ? 'sm:col-span-2' : ''}>
+                {field.kind === 'boolean' ? (
+                  <label className="flex cursor-pointer items-center justify-between rounded-xl border border-line-strong bg-ink px-4 py-3">
+                    <span className={adminLabel}>{field.label}</span>
+                    <button
+                      type="button"
+                      role="switch"
+                      aria-checked={Boolean(value)}
+                      onClick={() => set(field.name, !value)}
+                      className={`relative h-6 w-11 rounded-full transition-colors duration-300 ${
+                        value ? 'bg-accent' : 'bg-line-strong'
+                      }`}
+                    >
+                      <span
+                        className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-300 ${
+                          value ? 'translate-x-[22px]' : 'translate-x-0.5'
+                        }`}
+                      />
+                    </button>
+                  </label>
+                ) : (
+                  <>
+                    <label htmlFor={`f-${field.name}`} className={adminLabel}>
+                      {field.label}
+                      {field.optional ? (
+                        <span className="ml-2 normal-case tracking-normal text-fg-soft/60">
+                          optional
+                        </span>
+                      ) : null}
+                    </label>
 
-      {error ? <p className="mt-5 text-sm text-rose-600">{error}</p> : null}
+                    {field.kind === 'richtext' ? (
+                      <div className="mt-2">
+                        <RichText
+                          value={String(value ?? '')}
+                          onChange={(html) => set(field.name, html)}
+                        />
+                      </div>
+                    ) : field.kind === 'textarea' || field.kind === 'list' ? (
+                      <textarea
+                        id={`f-${field.name}`}
+                        rows={field.kind === 'list' ? 4 : 5}
+                        value={String(value ?? '')}
+                        placeholder={field.placeholder}
+                        onChange={(e) => set(field.name, e.target.value)}
+                        className={`mt-2 ${adminInput}`}
+                      />
+                    ) : (
+                      <input
+                        id={`f-${field.name}`}
+                        type={
+                          field.kind === 'number'
+                            ? 'number'
+                            : field.kind === 'date'
+                              ? 'datetime-local'
+                              : 'text'
+                        }
+                        value={String(value ?? '')}
+                        placeholder={field.placeholder}
+                        required={!field.optional && field.kind !== 'date'}
+                        onChange={(e) => set(field.name, e.target.value)}
+                        className={`mt-2 ${adminInput}`}
+                      />
+                    )}
 
-      <div className="mt-7 flex gap-3">
-        <button
-          type="submit"
-          disabled={submitting}
-          className="inline-flex items-center justify-center rounded-full bg-accent px-6 py-2.5 text-sm font-medium text-white hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {submitting ? 'Saving…' : isEdit ? 'Save changes' : 'Create'}
-        </button>
-        <button
-          type="button"
-          onClick={() => router.push(`/admin/${def.key}`)}
-          disabled={submitting}
-          className="inline-flex items-center justify-center rounded-full border border-ink/15 px-6 py-2.5 text-sm font-medium text-ink hover:bg-ink/5 disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          Cancel
-        </button>
-      </div>
-    </form>
+                    {field.kind === 'date' && field.optional && isEdit ? (
+                      <p className="mt-1.5 text-xs text-fg-soft/70">
+                        Leave blank to keep the current value.
+                      </p>
+                    ) : null}
+                  </>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <div aria-live="polite" className="min-h-5">
+          {error ? <p className="text-sm text-rose-400">{error}</p> : null}
+        </div>
+
+        <div className="flex justify-end gap-3 border-t border-line pt-5">
+          <button
+            type="button"
+            onClick={onClose}
+            className="rounded-full border border-line-strong px-5 py-2 text-sm font-medium text-fg transition-colors hover:border-fg/40"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            disabled={saving}
+            className="rounded-full bg-accent px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-strong disabled:opacity-60"
+          >
+            {saving ? 'Saving…' : isEdit ? 'Save changes' : 'Create'}
+          </button>
+        </div>
+      </form>
+    </Modal>
   );
 }

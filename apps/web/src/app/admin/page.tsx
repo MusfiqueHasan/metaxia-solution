@@ -3,10 +3,9 @@
 import { useRouter } from 'next/navigation';
 import { useState, type FormEvent } from 'react';
 import { setToken } from '@/lib/admin';
+import { adminInput, adminLabel, AdminIcon } from '@/components/admin/ui';
+import { Starfield } from '@/components/motion/starfield';
 import type { LoginResponse } from '@metaxia/shared';
-
-const inputClass =
-  'mt-1.5 w-full rounded-lg border border-ink/15 bg-surface px-3.5 py-2 text-sm text-ink placeholder:text-ink-soft/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -38,56 +37,115 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <main className="flex min-h-[70vh] items-center justify-center bg-surface px-4 py-24">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-sm rounded-2xl border border-ink/10 bg-surface-alt p-8"
-      >
-        <h1 className="font-display text-xl tracking-[-0.01em] text-ink">Admin sign in</h1>
-        <p className="mt-2 text-sm text-ink-soft">Metaxia Solutions content admin.</p>
+    <main className="grid min-h-svh lg:grid-cols-[1.1fr_1fr]">
+      {/* Left: the brand side — starfield, drifting sphere, wordmark, pitch */}
+      <section className="grain relative hidden overflow-hidden border-r border-line bg-ink lg:flex lg:flex-col lg:justify-between lg:p-12">
+        <Starfield />
+        <div aria-hidden="true" className="bg-dots absolute inset-0" />
+        <div aria-hidden="true" className="aurora aurora--a" />
+        <div
+          aria-hidden="true"
+          className="orb-3d drift-slow absolute right-[10%] top-[18%] h-48 w-48"
+        />
+        <div
+          aria-hidden="true"
+          className="plane-grid plane-grid--floor"
+        />
 
-        <div className="mt-6">
-          <label htmlFor="email" className="block text-sm font-medium text-ink">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            autoComplete="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            disabled={submitting}
-            className={inputClass}
-          />
+        <p className="relative flex items-center gap-2 font-display text-2xl tracking-tight text-fg">
+          Metaxia
+          <span className="h-1.5 w-1.5 rotate-45 bg-accent" aria-hidden="true" />
+        </p>
+
+        <div className="relative">
+          <p className="font-mono text-[11px] font-medium uppercase tracking-[0.3em] text-accent">
+            Mission control
+          </p>
+          <h1 className="mt-5 max-w-md font-display text-5xl leading-[1.05] tracking-[-0.01em] text-fg">
+            Everything the site shows,{' '}
+            <em className="text-accent-strong">run from here.</em>
+          </h1>
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-fg-soft">
+            Case studies, services, writing, the team, and every inbound message — published to
+            the live site within a minute of saving.
+          </p>
         </div>
 
-        <div className="mt-4">
-          <label htmlFor="password" className="block text-sm font-medium text-ink">
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            autoComplete="current-password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+        <p className="relative font-mono text-[10px] uppercase tracking-[0.24em] text-fg-soft/60">
+          Metaxia Solutions · content operations
+        </p>
+      </section>
+
+      {/* Right: the sign-in */}
+      <section className="flex items-center justify-center bg-ink px-6 py-16">
+        <form onSubmit={handleSubmit} className="w-full max-w-sm" noValidate>
+          <p className="flex items-center gap-2 font-display text-xl tracking-tight text-fg lg:hidden">
+            Metaxia <span className="h-1.5 w-1.5 rotate-45 bg-accent" aria-hidden="true" />
+          </p>
+
+          <h2 className="mt-8 font-display text-3xl tracking-[-0.01em] text-fg lg:mt-0">
+            Sign in
+          </h2>
+          <p className="mt-2 text-sm text-fg-soft">Use your admin credentials to continue.</p>
+
+          <div className="mt-8 space-y-5">
+            <div>
+              <label htmlFor="email" className={adminLabel}>
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                autoComplete="email"
+                required
+                placeholder="you@metaxia.io"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={submitting}
+                className={`mt-2 ${adminInput}`}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password" className={adminLabel}>
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                autoComplete="current-password"
+                required
+                placeholder="••••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                disabled={submitting}
+                className={`mt-2 ${adminInput}`}
+              />
+            </div>
+          </div>
+
+          <div aria-live="polite" className="mt-4 min-h-5">
+            {error ? (
+              <p className="flex items-center gap-2 text-sm text-rose-400">
+                <AdminIcon name="warning" className="h-4 w-4" /> {error}
+              </p>
+            ) : null}
+          </div>
+
+          <button
+            type="submit"
             disabled={submitting}
-            className={inputClass}
-          />
-        </div>
+            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {submitting ? 'Signing in…' : 'Sign in'}
+            <span aria-hidden="true">→</span>
+          </button>
 
-        {error ? <p className="mt-4 text-sm text-rose-600">{error}</p> : null}
-
-        <button
-          type="submit"
-          disabled={submitting}
-          className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-2.5 text-sm font-medium text-white hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {submitting ? 'Signing in…' : 'Sign in'}
-        </button>
-      </form>
+          <p className="mt-6 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft/60">
+            Authorized staff only
+          </p>
+        </form>
+      </section>
     </main>
   );
 }

@@ -1,10 +1,15 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Container } from '@/components/container';
 import { NewsletterForm } from '@/components/newsletter-form';
 import { site, footerLinks } from '@/lib/site';
 
 export function SiteFooter() {
+  const pathname = usePathname();
   const year = new Date().getFullYear();
+  if (pathname.startsWith('/admin')) return null;
 
   return (
     <footer className="relative overflow-hidden border-t border-line bg-ink text-fg">

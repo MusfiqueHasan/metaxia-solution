@@ -11,7 +11,6 @@ export function SiteHeader() {
   const [raised, setRaised] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const onAdmin = pathname.startsWith('/admin');
 
   useEffect(() => {
     const onScroll = () => setRaised(window.scrollY > 40);
@@ -29,7 +28,10 @@ export function SiteHeader() {
     };
   }, [open]);
 
-  const pill = (raised || onAdmin) && !open;
+  const pill = raised && !open;
+
+  // The admin panel runs its own chrome.
+  if (pathname.startsWith('/admin')) return null;
 
   return (
     // The header morphs: full-width and transparent at the top of the page,
