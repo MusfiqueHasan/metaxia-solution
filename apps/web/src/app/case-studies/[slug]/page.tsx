@@ -111,6 +111,25 @@ const SLUG_STACKS: Record<string, string[]> = {
   kryzotech: ['TypeScript', 'Node.js', 'MongoDB', 'Redux', 'Socket.io', 'EPS payments'],
 };
 
+/* Curated gallery per slug: choose the shots and pair them with copy.
+   Slugs without an entry fall back to every <slug>-* file in
+   public/projects, captioned from the filename. */
+interface GalleryEntry {
+  src: string;
+  label: string;
+  text?: string;
+}
+
+const SLUG_GALLERY: Record<string, GalleryEntry[]> = {
+  kryzotech: [
+    {
+      src: '/projects/kryzotech-admin.webp',
+      label: 'admin dashboard',
+      text: 'One operations surface runs the entire platform. The dashboard opens on enrollment and revenue analytics, then hands staff the day-to-day controls: expense tracking, course and cohort management, blog publishing, and user administration — so a schedule change, a new cohort, or a refund never needs an engineer.',
+    },
+  ],
+};
+
 /* Presentational dummy facts, deterministic per category (no schema change). */
 const TIMELINES = ['8 weeks', '12 weeks', '6 weeks', '10 weeks'];
 const STACKS: Record<string, string[]> = {
@@ -138,7 +157,7 @@ export default async function CaseStudyDetailPage({
   const timeline = TIMELINES[index % TIMELINES.length];
   const stack =
     SLUG_STACKS[caseStudy.slug] ?? STACKS[caseStudy.category] ?? ['TypeScript', 'Postgres', 'CI/CD'];
-  const gallery = galleryImages(caseStudy.slug);
+  const gallery: GalleryEntry[] = SLUG_GALLERY[caseStudy.slug] ?? galleryImages(caseStudy.slug);
   let sectionNo = 0;
   const nextNo = () => String(++sectionNo).padStart(2, '0');
   const year = String(2024 + ((index + 1) % 3));
@@ -260,7 +279,7 @@ export default async function CaseStudyDetailPage({
       {/* Website preview — the live site's hero, framed */}
       {caseStudy.previewImage ? (
         <section className="relative">
-          <Container className="py-16 lg:py-24">
+          <Container className="py-10 lg:py-14">
             <Reveal>
               <a
                 href={caseStudy.websiteUrl ?? `/case-studies/${caseStudy.slug}`}
@@ -325,22 +344,34 @@ export default async function CaseStudyDetailPage({
         <CaseSection n={nextNo()} title="Inside the product">
           <div className={`grid gap-6 ${gallery.length > 1 ? 'lg:grid-cols-2' : ''}`}>
             {gallery.map((image, i) => (
-              <figure
+              <div
                 key={image.src}
-                className="reveal-scale group overflow-hidden rounded-2xl border border-line-strong bg-ink-raised"
-                style={{ ['--reveal-delay' as string]: `${0.1 + i * 0.12}s` }}
+                className={image.text ? 'grid items-center gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]' : ''}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={image.src}
-                  alt={`${caseStudy.title} — ${image.label}`}
-                  loading="lazy"
-                  className="w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
-                />
-                <figcaption className="border-t border-line px-5 py-3 font-mono text-[10px] uppercase tracking-[0.22em] text-fg-soft">
-                  {image.label}
-                </figcaption>
-              </figure>
+                <figure
+                  className="reveal-scale group overflow-hidden rounded-2xl border border-line-strong bg-ink-raised"
+                  style={{ ['--reveal-delay' as string]: `${0.1 + i * 0.12}s` }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={image.src}
+                    alt={`${caseStudy.title} — ${image.label}`}
+                    loading="lazy"
+                    className="w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
+                  />
+                  <figcaption className="border-t border-line px-5 py-3 font-mono text-[10px] uppercase tracking-[0.22em] text-fg-soft">
+                    {image.label}
+                  </figcaption>
+                </figure>
+                {image.text ? (
+                  <div className="reveal-rise" style={{ ['--reveal-delay' as string]: '0.25s' }}>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
+                      {image.label}
+                    </p>
+                    <p className="mt-4 text-[1.0625rem] leading-[1.8] text-fg-soft">{image.text}</p>
+                  </div>
+                ) : null}
+              </div>
             ))}
           </div>
         </CaseSection>
@@ -389,7 +420,7 @@ export default async function CaseStudyDetailPage({
 
       {/* Closing: build-something-similar band + next case */}
       <section className="relative border-t border-line">
-        <Container className="py-24 text-center lg:py-32">
+        <Container className="py-20 text-center lg:py-24">
           <Reveal className="flex flex-col items-center gap-8">
             <p className="reveal-fade font-mono text-[11px] uppercase tracking-[0.3em] text-fg-soft">
               Building something similar?
@@ -429,10 +460,10 @@ export default async function CaseStudyDetailPage({
 function CaseSection({ n, title, children }: { n: string; title: string; children: React.ReactNode }) {
   return (
     <section className="relative">
-      <Container className="py-16 lg:py-24">
+      <Container className="py-10 lg:py-14">
         <Reveal threshold={0.3}>
           {/* Rule that draws itself across as the section arrives */}
-          <span aria-hidden="true" className="reveal-draw-x mb-14 block h-px w-full bg-line-strong" />
+          <span aria-hidden="true" className="reveal-draw-x mb-10 block h-px w-full bg-line-strong" />
 
           <div className="grid gap-8 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-16">
             <div className="relative lg:pl-6">
