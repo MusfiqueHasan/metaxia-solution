@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTeam } from '@/lib/api';
 import { initials } from '@/lib/format';
+import { TEAM_PHOTOS } from '@/lib/team-meta';
 import { site } from '@/lib/site';
 import { Container } from '@/components/container';
 import { ContactCta } from '@/components/home/contact-cta';
@@ -66,9 +67,18 @@ export default async function TeamMemberPage({
       <JsonLd data={breadcrumbJsonLd} />
       <section className="relative border-b border-line text-white">
         <Container className="flex flex-col items-start gap-6 pt-36 pb-20 lg:pt-44 lg:pb-24">
-          <span className="flex h-20 w-20 items-center justify-center rounded-full bg-accent-soft font-display text-2xl text-accent">
-            {initials(member.name)}
-          </span>
+          {TEAM_PHOTOS[member.slug] ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={TEAM_PHOTOS[member.slug]}
+              alt={member.name}
+              className="h-24 w-24 rounded-full border border-line object-cover"
+            />
+          ) : (
+            <span className="flex h-20 w-20 items-center justify-center rounded-full bg-accent-soft font-display text-2xl text-accent">
+              {initials(member.name)}
+            </span>
+          )}
           <div>
             <h1 className="font-display text-4xl leading-[1.1] tracking-[-0.01em] sm:text-5xl">
               {member.name}
