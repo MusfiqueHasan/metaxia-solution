@@ -210,34 +210,41 @@ Buy links, spin AI content at volume, or chase algorithm loopholes with a shelf 
   await db.caseStudy.createMany({
     data: [
       {
-        slug: 'fintech-ledger-modernization',
-        title: 'Modernizing a Multi-Currency Ledger for a Fintech Scale-up',
+        slug: 'kryzotech',
+        title: 'Kryzotech — a Learning Ecosystem for AI & Data Skills',
         category: 'Software',
         order: 1,
         coverGradient: 'linear-gradient(135deg,#0ea5e9,#6366f1)',
-        websiteUrl: 'https://ledgerline-demo.example.com',
-        previewImage: '/previews/fintech-ledger-modernization.svg',
-        excerpt: 'We replaced a decade-old batch ledger with an event-sourced platform that now settles transactions in real time.',
-        body: `A payments scale-up was running its entire business on a ledger designed a decade earlier for a fraction of the volume — and one currency.
+        websiteUrl: 'https://www.kryzotechbd.com/',
+        previewImage: '/projects/kryzotech-web.webp',
+        excerpt:
+          'A full education platform for Bangladesh — bootcamps, trainer profiles, local EPS payments, and a real-time admin operation behind it all.',
+        body: `Kryzotech is a complete learning ecosystem for AI, data science, and professional-skills training — course marketplace in front, a real-time operations dashboard behind it, live at kryzotechbd.com.
 
 ## The challenge
 
-The ledger ran nightly batch jobs that delayed reconciliation by up to 18 hours, and multi-currency support had been retrofitted so many times that finance treated certain reports as unreliable by default. Every new market the company entered made the batch window longer. Engineering wanted to rebuild; finance couldn't afford a single day of broken books during the transition.
+A growing training brand needed to sell cohort-based bootcamps online, not just list them. That meant enrollment with seat limits, secure checkout through EPS — the local payment rail its students actually use — live notifications when seats move or schedules change, and staff tooling for the daily grind of running courses. Off-the-shelf LMS products handled none of the local-payment or operations reality.
 
 ## What we built
 
-We re-architected the system around event sourcing and CQRS. Every financial event is now an immutable record, and balances across 12 currencies are projections that can be rebuilt from the log at any time. Read models serve the finance team's real-time views; the write path clears individual transactions in under 200 milliseconds.
+A TypeScript platform, end to end: a Node.js API over MongoDB, Redux-managed state on the client, and Socket.io pushing live updates to every connected browser.
+
+- Course marketplace with dedicated AI and data-science tracks, cohort schedules, and seat availability
+- Enrollment flow with secure EPS checkout — payments complete in-country, no manual reconciliation
+- Trainer profiles connecting each cohort to the person actually teaching it
+- Real-time updates over Socket.io: seat counts, announcements, and schedule changes land instantly
+- A full admin dashboard: overview analytics, expense tracking, course management, blog publishing, and user administration in one place
 
 ## The rollout
 
-The new ledger ran in parallel with the legacy system for six weeks, with automated reconciliation comparing every balance across both systems nightly. Discrepancies — there were 14, all traced to legacy rounding bugs — were resolved before cutover, not after. The final switch was a configuration change, rehearsed twice.
+The marketplace shipped first with a limited course set while payments ran shadow tests against the EPS integration. Admin modules followed one at a time — courses, then blog, then expenses and user management — so staff adopted each tool as it landed instead of relearning everything at once.
 
 ## Results
 
-- Transaction processing time down from minutes to under 200 ms
-- Month-end close finishing three days faster
-- 12 currencies with a single, provable source of truth
-- 40 million transactions a month since launch, zero unplanned outages`,
+- Live in production at kryzotechbd.com, carrying cohort enrollments end to end
+- EPS checkout completes local payments without a manual reconciliation step
+- Seat counts and announcements update in real time across every open session
+- Daily operations — courses, blog, expenses, users — run from one dashboard with zero engineering involvement`,
       },
       {
         slug: 'logistics-marketplace-rebuild',

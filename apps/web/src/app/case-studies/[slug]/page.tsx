@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { readdirSync } from 'fs';
+import path from 'path';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { CaseStudy } from '@metaxia/shared';
@@ -86,6 +88,29 @@ const bullets = (blocks: string[]) =>
 
 const prose = (blocks: string[]) => blocks.filter((block) => !block.startsWith('- '));
 
+/** Screenshots dropped into public/projects as `<slug>-*.png|jpg|webp`. */
+function galleryImages(slug: string): { src: string; label: string }[] {
+  try {
+    return readdirSync(path.join(process.cwd(), 'public', 'projects'))
+      .filter((f) => f.startsWith(`${slug}-`) && /\.(png|jpe?g|webp)$/i.test(f))
+      .sort()
+      .map((f) => ({
+        src: `/projects/${f}`,
+        label: f
+          .replace(`${slug}-`, '')
+          .replace(/\.(png|jpe?g|webp)$/i, '')
+          .replace(/[-_]/g, ' '),
+      }));
+  } catch {
+    return [];
+  }
+}
+
+/* Per-project stack pills; falls back to the category defaults below. */
+const SLUG_STACKS: Record<string, string[]> = {
+  kryzotech: ['TypeScript', 'Node.js', 'MongoDB', 'Redux', 'Socket.io', 'EPS payments'],
+};
+
 /* Presentational dummy facts, deterministic per category (no schema change). */
 const TIMELINES = ['8 weeks', '12 weeks', '6 weeks', '10 weeks'];
 const STACKS: Record<string, string[]> = {
@@ -111,7 +136,11 @@ export default async function CaseStudyDetailPage({
   const builtBullets = bullets(sections.built);
   const resultBullets = bullets(sections.results);
   const timeline = TIMELINES[index % TIMELINES.length];
-  const stack = STACKS[caseStudy.category] ?? ['TypeScript', 'Postgres', 'CI/CD'];
+  const stack =
+    SLUG_STACKS[caseStudy.slug] ?? STACKS[caseStudy.category] ?? ['TypeScript', 'Postgres', 'CI/CD'];
+  const gallery = galleryImages(caseStudy.slug);
+  let sectionNo = 0;
+  const nextNo = () => String(++sectionNo).padStart(2, '0');
   const year = String(2024 + ((index + 1) % 3));
 
   const breadcrumbJsonLd = {
@@ -259,7 +288,7 @@ export default async function CaseStudyDetailPage({
       ) : null}
 
       {/* (01) The challenge */}
-      <CaseSection n="01" title="The challenge">
+      <CaseSection n={nextNo()} title="The challenge">
         {sections.intro ? (
           <p className="font-display text-2xl leading-snug tracking-[-0.01em] text-fg sm:text-3xl">
             {sections.intro}
@@ -273,7 +302,7 @@ export default async function CaseStudyDetailPage({
       </CaseSection>
 
       {/* (02) What Metaxia built */}
-      <CaseSection n="02" title="What Metaxia built">
+      <CaseSection n={nextNo()} title="What Metaxia built">
         {prose(sections.built).map((block, i) => (
           <p key={i} className="max-w-2xl text-[1.0625rem] leading-[1.85] text-fg-soft">
             {block}
@@ -291,8 +320,34 @@ export default async function CaseStudyDetailPage({
         ) : null}
       </CaseSection>
 
+      {/* Product gallery — screenshots from public/projects, when present */}
+      {gallery.length > 0 ? (
+        <CaseSection n={nextNo()} title="Inside the product">
+          <div className={`grid gap-6 ${gallery.length > 1 ? 'lg:grid-cols-2' : ''}`}>
+            {gallery.map((image, i) => (
+              <figure
+                key={image.src}
+                className="reveal-scale group overflow-hidden rounded-2xl border border-line-strong bg-ink-raised"
+                style={{ ['--reveal-delay' as string]: `${0.1 + i * 0.12}s` }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={image.src}
+                  alt={`${caseStudy.title} — ${image.label}`}
+                  loading="lazy"
+                  className="w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
+                />
+                <figcaption className="border-t border-line px-5 py-3 font-mono text-[10px] uppercase tracking-[0.22em] text-fg-soft">
+                  {image.label}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </CaseSection>
+      ) : null}
+
       {/* (03) Delivery */}
-      <CaseSection n="03" title="Delivery">
+      <CaseSection n={nextNo()} title="Delivery">
         {prose(sections.rollout).map((block, i) => (
           <p key={i} className="max-w-2xl text-[1.0625rem] leading-[1.85] text-fg-soft">
             {block}
@@ -312,7 +367,7 @@ export default async function CaseStudyDetailPage({
 
       {/* (04) What changed — results as stat cards */}
       {resultBullets.length > 0 ? (
-        <CaseSection n="04" title="What changed">
+        <CaseSection n={nextNo()} title="What changed">
           <div className="grid gap-5 sm:grid-cols-2">
             {resultBullets.map((item, i) => (
               <div
