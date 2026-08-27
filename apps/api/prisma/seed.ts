@@ -247,34 +247,42 @@ The marketplace shipped first with a limited course set while payments ran shado
 - Daily operations — courses, blog, expenses, users — run from one dashboard with zero engineering involvement`,
       },
       {
-        slug: 'logistics-marketplace-rebuild',
-        title: 'Rebuilding a Logistics Marketplace on a Modern Stack',
-        category: 'Software',
+        slug: 'smarthrflow',
+        title: 'SmartHRFlow — AI Recruitment from Resume to Offer',
+        category: 'AI',
         order: 2,
         coverGradient: 'linear-gradient(135deg,#f97316,#ec4899)',
-        websiteUrl: 'https://freightmatch-demo.example.com',
-        previewImage: '/previews/logistics-marketplace-rebuild.svg',
-        excerpt: 'A legacy PHP monolith was replaced with a modular TypeScript platform, cutting page load times by 70 percent.',
-        body: `A freight-matching marketplace had outgrown the PHP monolith it was founded on — and peak shipping season kept proving it.
+        websiteUrl: 'https://smarthrflow.com/',
+        previewImage: '/projects/smarthrflow-web.png',
+        excerpt:
+          'An AI hiring platform that parses resumes at 98% accuracy, scores every candidate, and runs the whole pipeline from application to offer.',
+        body: `SmartHRFlow is an AI-powered recruitment platform that takes the manual grind out of hiring — resumes parsed and scored the moment they arrive, assessments that resist cheating, and a pipeline view that carries every candidate from application to offer. Live at smarthrflow.com.
 
 ## The challenge
 
-Deploys took hours and required a maintenance window nobody wanted to schedule. Outages clustered exactly when the business could least afford them: peak season, when carriers and shippers were both online. A manual QA pass took two days per release, so releases happened monthly and each one carried a month of risk.
+HR teams were losing their weeks to screening: reading resumes in a dozen formats, re-keying candidate details, chasing applicants over email one at a time, and defending shortlists built on gut feel. The brief was blunt — cut the manual workload dramatically, keep the evaluation fair, and make setting up a new job's hiring flow a minutes-long task rather than a project.
 
 ## What we built
 
-We split the platform into a set of well-bounded TypeScript services behind a GraphQL gateway — matching, pricing, carrier onboarding, and billing each own their data and deploy independently. An automated end-to-end suite replaced the manual QA process, and the strangler-fig migration meant features moved one at a time while the monolith kept serving everything not yet migrated.
+A Next.js and TypeScript front end over a NestJS API, with Supabase as the data layer and the OpenAI API doing the reading.
+
+- Resume parsing at 98% accuracy across formats, extracting skills and experience into structured profiles
+- Intelligent skill matching with automated ranking and a bias-aware evaluation flow, each candidate scored against the role
+- A stage pipeline — applications, shortlist, HR interview, technical interview, offer, hired — with live counts per stage
+- Custom skill assessments: multiple question formats, custom scoring, and anti-manipulation safeguards
+- Bulk candidate outreach with reusable templates and delivery/engagement tracking
+- Drag-and-drop application form builder, mobile-optimized, with a new job's flow live in about five minutes
 
 ## The rollout
 
-The business never paused. Each migrated feature ran behind a flag with traffic ramped gradually, and the monolith shrank release by release over five months until it was serving only static pages — then nothing.
+The platform shipped to production at smarthrflow.com on Vercel, with the assessment and bulk-email modules following the core parsing pipeline. A v2 interface is already in preview, iterating on the recruiter dashboard without interrupting live hiring.
 
 ## Results
 
-- Average page load down from 4.2 s to 1.1 s
-- Monthly releases became several per week
-- Two-day manual QA replaced by a 25-minute automated suite
-- Carrier onboarding, previously a two-week manual process, now largely self-serve`,
+- Recruitment steps reduced by 60 percent end to end
+- 98 percent parsing accuracy across resume formats
+- Screening time cut by roughly 60 percent with AI ranking
+- A new job's application flow configured in about five minutes`,
       },
       {
         slug: 'design-system-unification',

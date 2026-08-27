@@ -109,6 +109,7 @@ function galleryImages(slug: string): { src: string; label: string }[] {
 /* Per-project stack pills; falls back to the category defaults below. */
 const SLUG_STACKS: Record<string, string[]> = {
   kryzotech: ['TypeScript', 'Node.js', 'MongoDB', 'Redux', 'Socket.io', 'EPS payments'],
+  smarthrflow: ['Next.js', 'TypeScript', 'NestJS', 'Supabase', 'OpenAI API', 'Vercel'],
 };
 
 /* Curated gallery per slug: choose the shots and pair them with copy.
@@ -134,6 +135,20 @@ const SLUG_GALLERY: Record<string, GalleryEntry[]> = {
         'Blog & Posts — tutorials, announcements, and the student feed',
         'Users, Enrollments & Management — students, payments, controls',
         'Website content — trainers, reviews, and partners on the public site',
+      ],
+    },
+  ],
+  smarthrflow: [
+    {
+      src: '/projects/smarthrflow-hire.webp',
+      label: 'hiring pipeline',
+      text: 'Every role gets a live pipeline: candidates arrive parsed and scored, then move through named stages with counts at a glance — no spreadsheet shadowing the process.',
+      points: [
+        'Stages from application to hired — shortlist, HR and technical interviews, offer',
+        'Per-candidate AI score against the role, recalculable on demand',
+        'Top-candidate surfacing above the applicant pool',
+        'Search, filter, sort, and stage controls inline',
+        'Credit-based posting with add-candidate and share actions',
       ],
     },
   ],
