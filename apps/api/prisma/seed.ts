@@ -322,34 +322,42 @@ The storefront and catalog shipped first, with vendor tooling following once rea
 - Low-stock alerts and order-state tracking replaced manual spreadsheet checks`,
       },
       {
-        slug: 'healthtech-onboarding-redesign',
-        title: 'Redesigning Patient Onboarding for a Telehealth App',
-        category: 'Design',
+        slug: 'chefnawaz',
+        title: 'Chef Nawaz — a Sauce Brand, Storefront, and Kitchen-Office in One',
+        category: 'Software',
         order: 4,
-        coverGradient: 'linear-gradient(135deg,#22c55e,#0ea5e9)',
-        websiteUrl: 'https://carebridge-demo.example.com',
-        previewImage: '/previews/healthtech-onboarding-redesign.svg',
-        excerpt: 'A confusing five-step signup flow was redesigned around patient needs, lifting completion rates by 34 percent.',
-        body: `A telehealth platform was losing patients before they ever saw a clinician — the signup flow was doing the losing.
+        coverGradient: 'linear-gradient(135deg,#b91c1c,#f59e0b)',
+        websiteUrl: 'https://chefnawaz.com/',
+        previewImage: '/projects/chefnawaz.png',
+        excerpt:
+          'A commercial sauce formulator with 24+ years behind 50+ restaurants — now selling signature sauces direct, with a custom admin running the store.',
+        body: `Chef Nawaz formulates sauces and spice blends for restaurants and food brands. The site gives that expertise a home: a brand storefront selling the signature range, a recipes showcase, and a custom admin that runs the whole operation. Live at chefnawaz.com.
 
 ## The challenge
 
-New patients abandoned the five-step onboarding at a rate that alarmed clinical operations. The flow demanded insurance details, full medical history, and identity verification up front — before a patient could even see appointment availability. People seeking care were being handed paperwork instead.
+Twenty-four years of formulation work and 50+ restaurant clients lived entirely on reputation and referrals. The brief: one platform that sells the signature sauce range direct to customers, presents the commercial services — formulation, recipe development, batch scaling, menu consulting — to restaurant buyers, and lets the chef's own team run products, orders, and content without calling a developer.
 
 ## What we built
 
-We ran contextual interviews with recent drop-offs and mapped every friction point against what the platform actually needed at each moment. The redesigned flow asks for exactly three things up front. Insurance verification and medical history moved later in the journey, handled asynchronously while the patient is already booked — access to care stopped being gated on back-office processes.
+A PHP storefront with a product database, user accounts, and a purpose-built admin behind it.
+
+- Storefront with the eight-sauce signature range — burger sauces, mayo variants, and dips — organized by category
+- Recipes section with ratings, a best-sellers carousel, and client testimonials
+- Service pages covering formulation, batch scaling, and restaurant consulting
+- Customer accounts with authentication for ordering
+- Custom admin: products, recipes, categories, orders, users, reviews, contact messages, and settings in one panel
+- Order pipeline with searchable history and status tracking — processing, delivered, cancelled — per order ID
 
 ## The rollout
 
-The new flow went through moderated usability tests, then a phased production rollout with both flows running side by side and assignment randomized. The experiment framework measured completion, time-to-booked, and downstream cancellation rates before the new flow took 100 percent of traffic.
+The brand site and catalog went live first, with checkout and customer accounts following. The admin grew module by module — products and recipes, then orders and users, then reviews and the contact inbox — until the team ran everything in-house.
 
 ## Results
 
-- Onboarding completion up 34 percent in the first month
-- Signup-related support tickets down more than half
-- Median time from landing to booked appointment: under four minutes
-- No increase in downstream cancellations or failed verifications`,
+- Live in production at chefnawaz.com
+- The signature range sells direct, with orders tracked from placement to delivery
+- Reviews and customer messages handled inside the admin — no shared inboxes
+- The team updates products, recipes, and content with zero developer involvement`,
       },
       {
         slug: 'ecommerce-multi-region-migration',

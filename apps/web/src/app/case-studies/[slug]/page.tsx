@@ -111,6 +111,7 @@ const SLUG_STACKS: Record<string, string[]> = {
   kryzotech: ['TypeScript', 'Node.js', 'MongoDB', 'Redux', 'Socket.io', 'EPS payments'],
   smarthrflow: ['Next.js', 'TypeScript', 'NestJS', 'Supabase', 'OpenAI API', 'Vercel'],
   'better-e-mart': ['Next.js', 'TypeScript', 'Express.js', 'MongoDB', 'Cloudflare', 'Vercel'],
+  chefnawaz: ['PHP', 'Product database', 'Auth & accounts', 'Custom admin', 'Order tracking'],
 };
 
 /* Curated gallery per slug: choose the shots and pair them with copy.
@@ -165,6 +166,21 @@ const SLUG_GALLERY: Record<string, GalleryEntry[]> = {
         'Stock cost rolled up across the marketplace',
         'Listings with multiple images, edited in place',
         'Low-stock alerts and real-time order status for every vendor',
+      ],
+    },
+  ],
+  chefnawaz: [
+    {
+      src: '/projects/chefnawaz-admin.png',
+      label: 'store admin',
+      text: 'The admin opens on the numbers that matter — products, recipes, orders, users — with the recent-order table right below: searchable, per-order status chips, and a module rail covering the whole operation.',
+      points: [
+        'Dashboard tiles — total products, recipes, orders, and users at a glance',
+        'Recent orders — ID, customer, product, amount, and date in one table',
+        'Status tracking per order — processing, delivered, cancelled',
+        'Catalog control — products, recipes, and categories edited in place',
+        'Reviews and contact messages managed inside the panel',
+        'Users and settings round out the operation',
       ],
     },
   ],
