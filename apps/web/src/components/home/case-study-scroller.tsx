@@ -132,8 +132,14 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
           className="reveal-fade strip-scroll mt-12 flex snap-x snap-mandatory gap-8 overflow-x-auto pb-4 pe-6 lg:pe-8"
           // Inline so no class-generation step can drop it: start the rail at
           // exactly the container's left content edge (max-w-6xl + px-8),
-          // flooring at the mobile gutter on narrow screens.
-          style={{ paddingInlineStart: 'max(1.5rem, calc((100vw - 72rem) / 2 + 2rem))' }}
+          // flooring at the mobile gutter on narrow screens. scroll-padding
+          // must MATCH the padding — mandatory snapping aligns cards to the
+          // snapport (which ignores padding), so without it the browser
+          // auto-scrolls card 01 flush to the viewport edge on load.
+          style={{
+            paddingInlineStart: 'max(1.5rem, calc((100vw - 72rem) / 2 + 2rem))',
+            scrollPaddingInlineStart: 'max(1.5rem, calc((100vw - 72rem) / 2 + 2rem))',
+          }}
         >
           {shown.map((item, index) => {
             const domain = item.websiteUrl ? new URL(item.websiteUrl).hostname : null;
