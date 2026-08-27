@@ -475,34 +475,42 @@ The course and certification flow launched first — the part the DMV license de
 - Ten public student reviews across 2023–2024 backing the program`,
       },
       {
-        slug: 'insurance-document-intelligence',
-        title: 'Automating Document Intelligence for an Insurance Provider',
-        category: 'AI',
+        slug: 'kumira',
+        title: 'Kumira Guptachara — Ferry Ticketing from Jetty to Dashboard',
+        category: 'Software',
         order: 8,
-        coverGradient: 'linear-gradient(135deg,#ec4899,#f97316)',
-        websiteUrl: 'https://claimsight-demo.example.com',
-        previewImage: '/previews/insurance-document-intelligence.svg',
-        excerpt: 'An AI-powered extraction pipeline now processes claims documents that used to take adjusters hours to review manually.',
-        body: `Adjusters were paid to make judgment calls. They were spending their days transcribing scanned PDFs instead.
+        coverGradient: 'linear-gradient(135deg,#0e7490,#38bdf8)',
+        websiteUrl: 'https://kumiraguptachara.com/',
+        previewImage: '/projects/kumira-web.png',
+        excerpt:
+          'A boat-ticketing platform for the Kumira–Sandwip crossing — online booking, a counter POS at the jetty, and an admin tracking every taka.',
+        body: `Kumira Guptachara runs the boat crossing between Kumira and Sandwip, and this platform runs its ticketing: passengers book online, agents sell at the jetty counter with a purpose-built POS, and the operator watches revenue, refunds, and boat utilization from one panel. Live at kumiraguptachara.com.
 
 ## The challenge
 
-Every claim arrived as a stack of scanned documents — policy numbers, damage estimates, dates — that an adjuster read and re-keyed by hand into the claims system. Twenty-two minutes per document, thousands of documents a month, and a growing backlog that was becoming a customer-satisfaction problem.
+A working ferry route needed to move off paper: real-time seat availability across boats, secure online payment for passengers, a counter workflow fast enough for a queue at the jetty — including baggage billed by weight and half-fare tickets — and a management view that answers the daily questions: how many passengers, how much money, from which side of the crossing.
 
 ## What we built
 
-A document intelligence pipeline combining OCR, layout-aware extraction models, and a validation layer with one strict rule: never guess. Fields extracted below the confidence threshold are flagged for human review with the source region of the document highlighted. Extracted data lands pre-filled in the existing claims software the moment a document arrives — adjusters verify instead of transcribe.
+A Next.js and TypeScript platform over an Express.js API with MongoDB, with payments through a local gateway and a custom POS at the counter.
+
+- Online booking with live seat availability, schedule display, and instant confirmations
+- A counter dashboard for agents: boat type with fares and half-tickets, route and departure time, passenger counts, baggage charged per 20 kg, cash handling, and a live total before booking
+- Instant boarding passes with a custom POS for ticket printing and barcode scanning — separate scanners for counter and online tickets
+- Daily counter and online reports with full transaction history
+- An admin panel with day-at-a-glance tiles — bookings, passengers, revenue, refunds — split per route side, with counter and online tickets toggled separately
+- Operations modules: check-ins, price list, employees, booking limits, and a weather view for the crossing
 
 ## The rollout
 
-The pipeline ran in shadow mode against six months of historical claims, its output scored against what adjusters had actually entered. Field-level accuracy was published internally before go-live, and the confidence threshold was set from that data, not from optimism.
+The counter POS shipped first — the jetty queue could not wait on the web — followed by online booking with gateway payments, then the scanners tying both channels to boarding. The admin grew a tile for each question the operator kept asking, down to refund amounts per route side.
 
 ## Results
 
-- Average document review time down from 22 minutes to under 3
-- 40 percent higher claims volume handled with the same headcount
-- Low-confidence fields flagged for review rather than guessed — every error caught is visible, not silent
-- Backlog cleared within the first six weeks of production use`,
+- Live in production at kumiraguptachara.com
+- A single day at the counter: 67 bookings, 116 passengers, ৳28,200 in revenue — visible on one screen
+- Tickets from both channels validated by barcode at boarding
+- Refunds, price changes, and booking limits handled by the operator, not a developer`,
       },
     ],
   });

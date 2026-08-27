@@ -115,6 +115,7 @@ const SLUG_STACKS: Record<string, string[]> = {
   jobsyo: ['Next.js', 'AI matching', 'Multi-platform scanning', 'Real-time alerts', 'Resume scoring'],
   'kryzotech-solutions': ['Data & AI practice', 'Web development', 'App development', 'Portfolio & blog', 'Booking funnel'],
   onlineteened: ['Self-paced LMS', 'DMV certification flow', 'Progress tracking', 'Student admin', 'Reviews & blog'],
+  kumira: ['Next.js', 'TypeScript', 'Express.js', 'MongoDB', 'SSLCommerz', 'Custom POS'],
 };
 
 /* Curated gallery per slug: choose the shots and pair them with copy.
@@ -199,6 +200,32 @@ const SLUG_GALLERY: Record<string, GalleryEntry[]> = {
         'Blog publishing and review moderation in-panel',
         'Contact requests handled inside the admin',
         'Platform settings behind secure admin access',
+      ],
+    },
+  ],
+  kumira: [
+    {
+      src: '/projects/kumira-counter.webp',
+      label: 'counter dashboard',
+      text: 'Built for the queue at the jetty: an agent picks the boat, route, and departure, enters passengers, half-tickets, and baggage weight, and sees the total before taking cash — boarding pass printed on the spot.',
+      points: [
+        'Boat type with fares and half-ticket pricing built in',
+        'Kumira–Sandwip route, date, and departure-time selection',
+        'Baggage billed by weight, per 20 kg',
+        'Cash payment with a live total before booking',
+        'Separate counter/online scanners and daily reports in the sidebar',
+      ],
+    },
+    {
+      src: '/projects/kumira-admin.webp',
+      label: 'admin panel',
+      text: 'The operator’s day on one screen: bookings, passengers, revenue, and refunds — each split by route side, with counter and online tickets toggled separately.',
+      points: [
+        'Daily tiles — bookings, passengers, revenue, refunds at a glance',
+        'Per-route breakdown for Kumira and Sandwip sides',
+        'Counter vs online ticket views, one toggle apart',
+        'Check-ins, price list, employees, and booking limits',
+        'A weather module for the crossing itself',
       ],
     },
   ],
