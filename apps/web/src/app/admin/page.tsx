@@ -39,7 +39,7 @@ export default function AdminLoginPage() {
   return (
     <main className="grid min-h-svh lg:grid-cols-[1.1fr_1fr]">
       {/* Left: the brand side — starfield, drifting sphere, wordmark, pitch */}
-      <section className="grain relative hidden overflow-hidden border-r border-line bg-ink lg:flex lg:flex-col lg:justify-between lg:p-12">
+      <section className="grain relative hidden overflow-hidden border-r border-line bg-[#0b1220] lg:flex lg:flex-col lg:justify-between lg:p-12">
         <Starfield />
         <div aria-hidden="true" className="bg-dots absolute inset-0" />
         <div aria-hidden="true" className="aurora aurora--a" />
@@ -52,7 +52,7 @@ export default function AdminLoginPage() {
           className="plane-grid plane-grid--floor"
         />
 
-        <p className="relative flex items-center gap-2 font-display text-2xl tracking-tight text-fg">
+        <p className="relative flex items-center gap-2 font-display text-2xl tracking-tight text-white">
           Metaxia
           <span className="h-1.5 w-1.5 rotate-45 bg-accent" aria-hidden="true" />
         </p>
@@ -61,17 +61,17 @@ export default function AdminLoginPage() {
           <p className="font-mono text-[11px] font-medium uppercase tracking-[0.3em] text-accent">
             Mission control
           </p>
-          <h1 className="mt-5 max-w-md font-display text-5xl leading-[1.05] tracking-[-0.01em] text-fg">
+          <h1 className="mt-5 max-w-md font-display text-5xl leading-[1.05] tracking-[-0.01em] text-white">
             Everything the site shows,{' '}
-            <em className="text-accent-strong">run from here.</em>
+            <em className="text-sky-300">run from here.</em>
           </h1>
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-fg-soft">
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-400">
             Case studies, services, writing, the team, and every inbound message — published to
             the live site within a minute of saving.
           </p>
         </div>
 
-        <p className="relative font-mono text-[10px] uppercase tracking-[0.24em] text-fg-soft/60">
+        <p className="relative font-mono text-[10px] uppercase tracking-[0.24em] text-slate-500">
           Metaxia Solutions · content operations
         </p>
       </section>
@@ -135,7 +135,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-medium text-white shadow-sm transition-colors hover:bg-accent-strong disabled:cursor-not-allowed disabled:opacity-60"
           >
             {submitting ? 'Signing in…' : 'Sign in'}
             <span aria-hidden="true">→</span>

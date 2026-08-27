@@ -76,7 +76,7 @@ function ImageField({
 
   return (
     <div className="mt-2 flex items-start gap-4">
-      <div className="flex h-20 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-line-strong bg-ink">
+      <div className="flex h-20 w-28 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-line bg-ink">
         {value ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={value} alt="" className="h-full w-full object-cover" />
@@ -96,7 +96,7 @@ function ImageField({
           className={adminInput}
         />
         <div className="mt-2 flex items-center gap-3">
-          <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-line-strong px-4 py-1.5 text-xs font-medium text-fg transition-colors hover:border-accent hover:text-accent">
+          <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-line-strong bg-ink-raised px-3.5 py-1.5 text-xs font-medium text-fg transition-colors hover:border-accent hover:text-accent">
             <AdminIcon name="plus" className="h-3 w-3" />
             {uploading ? 'Uploading…' : 'Upload image'}
             <input
@@ -321,14 +321,14 @@ export function ResourceModal({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full border border-line-strong px-5 py-2 text-sm font-medium text-fg transition-colors hover:border-fg/40"
+            className="rounded-lg border border-line-strong bg-ink-raised px-4 py-2 text-sm font-medium text-fg transition-colors hover:bg-ink"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={saving}
-            className="rounded-full bg-accent px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-accent-strong disabled:opacity-60"
+            className="rounded-lg bg-accent px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-accent-strong disabled:opacity-60"
           >
             {saving ? 'Saving…' : isEdit ? 'Save changes' : 'Create'}
           </button>

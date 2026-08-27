@@ -775,23 +775,25 @@ a:hover .link-rule {
 }
 
 /* ------------------------------------------------------------------ */
-/* Admin theme: a lifted, softer take on the site palette — brighter   */
-/* surfaces, stronger lines, ambient color so the panel feels lively.  */
+/* Admin theme — white-first with a globe-blue accent. Clean SaaS      */
+/* surfaces: cloud page, white cards, slate text, soft shadows.        */
 /* ------------------------------------------------------------------ */
 
 .admin-theme {
-  --color-ink: #111827;
-  --color-ink-raised: #1c2536;
-  --color-line: rgba(238, 240, 248, 0.12);
-  --color-line-strong: rgba(238, 240, 248, 0.22);
-  --color-fg-soft: #aab2c5;
-  background:
-    radial-gradient(60rem 30rem at 85% -10%, rgba(229, 121, 58, 0.10), transparent 60%),
-    radial-gradient(50rem 30rem at -10% 110%, rgba(94, 140, 245, 0.08), transparent 60%),
-    #111827;
+  --color-ink: #f6f8fb;
+  --color-ink-raised: #ffffff;
+  --color-fg: #0f172a;
+  --color-fg-soft: #64748b;
+  --color-line: rgba(15, 23, 42, 0.08);
+  --color-line-strong: rgba(15, 23, 42, 0.14);
+  --color-accent: #2563eb;
+  --color-accent-soft: rgba(37, 99, 235, 0.09);
+  --color-accent-strong: #1d4ed8;
+  background: #f6f8fb;
 }
 
 .admin-theme .admin-card {
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
   transition:
     transform 0.3s var(--ease-out-expo),
     border-color 0.3s ease,
@@ -800,24 +802,27 @@ a:hover .link-rule {
 
 .admin-theme .admin-card:hover {
   transform: translateY(-2px);
+  box-shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.18);
+}
+
+/* Dark variant, one toggle away. */
+.admin-theme.admin-dark {
+  --color-ink: #0b1220;
+  --color-ink-raised: #141d2e;
+  --color-fg: #e6eaf2;
+  --color-fg-soft: #8f9bb0;
+  --color-line: rgba(230, 234, 242, 0.09);
+  --color-line-strong: rgba(230, 234, 242, 0.18);
+  --color-accent: #3b82f6;
+  --color-accent-soft: rgba(59, 130, 246, 0.14);
+  --color-accent-strong: #60a5fa;
+  background: #0b1220;
+}
+
+.admin-theme.admin-dark .admin-card {
+  box-shadow: none;
+}
+
+.admin-theme.admin-dark .admin-card:hover {
   box-shadow: 0 12px 40px -18px rgba(0, 0, 0, 0.6);
-}
-
-/* Admin light theme — same token contract, daylight values. */
-.admin-theme.admin-light {
-  --color-ink: #f3f5fa;
-  --color-ink-raised: #ffffff;
-  --color-fg: #151b2b;
-  --color-fg-soft: #5b6274;
-  --color-line: rgba(21, 27, 43, 0.08);
-  --color-line-strong: rgba(21, 27, 43, 0.16);
-  --color-accent-strong: color-mix(in srgb, var(--color-accent) 82%, black);
-  background:
-    radial-gradient(60rem 30rem at 85% -10%, rgba(229, 121, 58, 0.08), transparent 60%),
-    radial-gradient(50rem 30rem at -10% 110%, rgba(94, 140, 245, 0.07), transparent 60%),
-    #f3f5fa;
-}
-
-.admin-theme.admin-light .admin-card:hover {
-  box-shadow: 0 12px 36px -18px rgba(21, 27, 43, 0.25);
 }

@@ -48,7 +48,7 @@ export function AdminIcon({ name, className = 'h-4 w-4' }: { name: string; class
 /* ------------------------------------------------------------------ */
 
 export const adminInput =
-  'w-full rounded-xl border border-line-strong bg-ink px-4 py-2.5 text-sm text-fg placeholder:text-fg-soft/50 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60';
+  'w-full rounded-lg border border-line-strong bg-ink-raised px-3.5 py-2.5 text-sm text-fg shadow-[0_1px_2px_rgba(15,23,42,0.04)] placeholder:text-fg-soft/60 transition-[border-color,box-shadow] focus:border-accent focus:shadow-[0_0_0_3px_var(--color-accent-soft)] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60';
 
 export const adminLabel =
   'font-mono text-[10px] font-medium uppercase tracking-[0.22em] text-fg-soft';
@@ -96,10 +96,10 @@ export function Modal({
         type="button"
         aria-label="Close"
         onClick={onClose}
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-slate-950/45 backdrop-blur-sm"
       />
       <div
-        className={`relative flex max-h-[88vh] w-full flex-col overflow-hidden rounded-2xl border border-line-strong bg-ink-raised shadow-[0_24px_80px_-24px_rgba(0,0,0,0.9)] ${
+        className={`relative flex max-h-[88vh] w-full flex-col overflow-hidden rounded-2xl border border-line-strong bg-ink-raised shadow-[0_24px_80px_-24px_rgba(15,23,42,0.45)] ${
           wide ? 'max-w-3xl' : 'max-w-lg'
         }`}
       >
@@ -154,7 +154,7 @@ export function ConfirmModal({
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-full border border-line-strong px-5 py-2 text-sm font-medium text-fg transition-colors hover:border-fg/40"
+          className="rounded-lg border border-line-strong bg-ink-raised px-4 py-2 text-sm font-medium text-fg transition-colors hover:bg-ink"
         >
           Cancel
         </button>
@@ -162,7 +162,7 @@ export function ConfirmModal({
           type="button"
           onClick={onConfirm}
           disabled={busy}
-          className="rounded-full bg-rose-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-rose-400 disabled:opacity-60"
+          className="rounded-lg bg-rose-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-rose-500 disabled:opacity-60"
         >
           {busy ? 'Deleting…' : 'Delete'}
         </button>
