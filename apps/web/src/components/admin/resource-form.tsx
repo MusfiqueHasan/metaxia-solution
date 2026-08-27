@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState, type FormEvent } from 'react';
-import { adminFetch, type ResourceDef, type FieldDef } from '@/lib/admin';
-import { Modal, adminInput, adminLabel } from '@/components/admin/ui';
+import { adminFetch, getToken, type ResourceDef, type FieldDef } from '@/lib/admin';
+import { Modal, AdminIcon, adminInput, adminLabel } from '@/components/admin/ui';
 import { RichText } from '@/components/admin/rich-text';
 
 type Row = Record<string, unknown>;
@@ -35,6 +35,96 @@ function initialValue(field: FieldDef, row?: Row): string | boolean {
     default:
       return typeof raw === 'string' ? raw : '';
   }
+}
+
+/** Image field: current path, live thumbnail, and a real file upload. */
+function ImageField({
+  id,
+  value,
+  placeholder,
+  onChange,
+}: {
+  id: string;
+  value: string;
+  placeholder?: string;
+  onChange: (path: string) => void;
+}) {
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+
+  async function handleFile(file: File) {
+    setUploading(true);
+    setUploadError(null);
+    try {
+      const body = new FormData();
+      body.append('file', file);
+      const token = getToken();
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        headers: token ? { authorization: `Bearer ${token}` } : undefined,
+        body,
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.message ?? 'Upload failed.');
+      onChange(data.url as string);
+    } catch (err) {
+      setUploadError(err instanceof Error ? err.message : 'Upload failed.');
+    } finally {
+      setUploading(false);
+    }
+  }
+
+  return (
+    <div className="mt-2 flex items-start gap-4">
+      <div className="flex h-20 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-line-strong bg-ink">
+        {value ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={value} alt="" className="h-full w-full object-cover" />
+        ) : (
+          <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-fg-soft/50">
+            No image
+          </span>
+        )}
+      </div>
+      <div className="min-w-0 flex-1">
+        <input
+          id={id}
+          type="text"
+          value={value}
+          placeholder={placeholder}
+          onChange={(e) => onChange(e.target.value)}
+          className={adminInput}
+        />
+        <div className="mt-2 flex items-center gap-3">
+          <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-line-strong px-4 py-1.5 text-xs font-medium text-fg transition-colors hover:border-accent hover:text-accent">
+            <AdminIcon name="plus" className="h-3 w-3" />
+            {uploading ? 'Uploading…' : 'Upload image'}
+            <input
+              type="file"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              className="sr-only"
+              disabled={uploading}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) void handleFile(file);
+                e.target.value = '';
+              }}
+            />
+          </label>
+          {value ? (
+            <button
+              type="button"
+              onClick={() => onChange('')}
+              className="text-xs text-fg-soft transition-colors hover:text-rose-400"
+            >
+              Remove
+            </button>
+          ) : null}
+        </div>
+        {uploadError ? <p className="mt-1.5 text-xs text-rose-400">{uploadError}</p> : null}
+      </div>
+    </div>
+  );
 }
 
 /**
@@ -133,7 +223,10 @@ export function ResourceModal({
           {def.fields.map((field) => {
             const value = values[field.name];
             const fullWidth =
-              field.kind === 'textarea' || field.kind === 'richtext' || field.kind === 'list';
+              field.kind === 'textarea' ||
+              field.kind === 'richtext' ||
+              field.kind === 'list' ||
+              field.kind === 'image';
 
             return (
               <div key={field.name} className={fullWidth ? 'sm:col-span-2' : ''}>
@@ -167,7 +260,14 @@ export function ResourceModal({
                       ) : null}
                     </label>
 
-                    {field.kind === 'richtext' ? (
+                    {field.kind === 'image' ? (
+                      <ImageField
+                        id={`f-${field.name}`}
+                        value={String(value ?? '')}
+                        placeholder={field.placeholder}
+                        onChange={(path) => set(field.name, path)}
+                      />
+                    ) : field.kind === 'richtext' ? (
                       <div className="mt-2">
                         <RichText
                           value={String(value ?? '')}

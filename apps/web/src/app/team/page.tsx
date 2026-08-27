@@ -58,7 +58,7 @@ export default async function TeamPage() {
           {team.length > 0 ? (
             <Reveal className="mx-auto grid max-w-4xl gap-16 sm:grid-cols-2 lg:gap-24">
               {team.map((member, index) => {
-                const photo = TEAM_PHOTOS[member.slug];
+                const photo = member.photoUrl ?? TEAM_PHOTOS[member.slug];
                 const frame = TEAM_PHOTO_FRAME[member.slug];
                 return (
                   <div

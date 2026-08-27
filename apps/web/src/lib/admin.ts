@@ -29,7 +29,7 @@ export async function adminFetch<T>(path: string, init: RequestInit = {}): Promi
 export interface FieldDef {
   name: string;
   label: string;
-  kind: 'text' | 'textarea' | 'number' | 'boolean' | 'list' | 'date' | 'richtext';
+  kind: 'text' | 'textarea' | 'number' | 'boolean' | 'list' | 'date' | 'richtext' | 'image';
   optional?: boolean;
   placeholder?: string;
 }
@@ -73,7 +73,7 @@ export const RESOURCES: ResourceDef[] = [
       { name: 'body', label: 'Body (markdown)', kind: 'textarea', placeholder: 'Full body — markdown supported (## headings, - bullets)' },
       { name: 'coverGradient', label: 'Cover gradient', kind: 'text', placeholder: 'linear-gradient(135deg,#0ea5e9,#6366f1)' },
       { name: 'websiteUrl', label: 'Website URL', kind: 'text', optional: true, placeholder: 'https://client-site.com' },
-      { name: 'previewImage', label: 'Preview image path', kind: 'text', optional: true, placeholder: '/projects/slug-web.webp' },
+      { name: 'previewImage', label: 'Preview image', kind: 'image', optional: true, placeholder: '/projects/slug-web.webp' },
       { name: 'order', label: 'Order', kind: 'number', placeholder: '1' },
     ],
   },
@@ -103,6 +103,7 @@ export const RESOURCES: ResourceDef[] = [
       { name: 'slug', label: 'Slug', kind: 'text', placeholder: 'kebab-case-url-slug' },
       { name: 'role', label: 'Role', kind: 'text', placeholder: 'e.g. Co-Founder & CEO' },
       { name: 'bio', label: 'Bio', kind: 'textarea', placeholder: 'Two or three sentences about this person' },
+      { name: 'photoUrl', label: 'Photo', kind: 'image', optional: true, placeholder: '/projects/name.jpg' },
       { name: 'linkedinUrl', label: 'LinkedIn URL', kind: 'text', optional: true, placeholder: 'https://linkedin.com/in/…' },
       { name: 'order', label: 'Order', kind: 'number', placeholder: '1' },
     ],

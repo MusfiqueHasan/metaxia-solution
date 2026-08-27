@@ -5,6 +5,17 @@ import { useEffect, useState } from 'react';
 import { adminFetch, useRequireAuth, RESOURCES } from '@/lib/admin';
 import { AdminIcon } from '@/components/admin/ui';
 
+const CHIP_HUES = [
+  'bg-violet-500/15 text-violet-300',
+  'bg-sky-500/15 text-sky-300',
+  'bg-amber-500/15 text-amber-300',
+  'bg-emerald-500/15 text-emerald-300',
+  'bg-rose-500/15 text-rose-300',
+  'bg-cyan-500/15 text-cyan-300',
+  'bg-fuchsia-500/15 text-fuchsia-300',
+  'bg-lime-500/15 text-lime-300',
+];
+
 export default function AdminDashboardPage() {
   useRequireAuth();
   const [counts, setCounts] = useState<Record<string, number | null>>({});
@@ -35,14 +46,16 @@ export default function AdminDashboardPage() {
       </p>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {RESOURCES.map((resource) => (
+        {RESOURCES.map((resource, index) => (
           <Link
             key={resource.key}
             href={`/admin/${resource.key}`}
-            className="group rounded-2xl border border-line bg-ink-raised/50 p-5 transition-colors hover:border-accent/40"
+            className="admin-card group rounded-2xl border border-line bg-ink-raised/50 p-5 hover:border-accent/40"
           >
             <div className="flex items-center justify-between">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent">
+              <span
+                className={`flex h-10 w-10 items-center justify-center rounded-xl ${CHIP_HUES[index % CHIP_HUES.length]}`}
+              >
                 <AdminIcon name={resource.key} className="h-4.5 w-4.5" />
               </span>
               <span
@@ -63,7 +76,7 @@ export default function AdminDashboardPage() {
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <Link
           href="/admin/inbox"
-          className="group flex items-center justify-between rounded-2xl border border-line bg-ink-raised/50 p-5 transition-colors hover:border-accent/40"
+          className="admin-card group flex items-center justify-between rounded-2xl border border-line bg-ink-raised/50 p-5 hover:border-accent/40"
         >
           <div className="flex items-center gap-4">
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent">
@@ -85,7 +98,7 @@ export default function AdminDashboardPage() {
           href="/"
           target="_blank"
           rel="noreferrer"
-          className="group flex items-center justify-between rounded-2xl border border-line bg-ink-raised/50 p-5 transition-colors hover:border-accent/40"
+          className="admin-card group flex items-center justify-between rounded-2xl border border-line bg-ink-raised/50 p-5 hover:border-accent/40"
         >
           <div className="flex items-center gap-4">
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent">

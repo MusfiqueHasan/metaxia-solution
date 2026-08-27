@@ -47,6 +47,7 @@ export class CreateTeamMemberDto {
   @IsString() @IsNotEmpty() name: string;
   @IsString() @IsNotEmpty() role: string;
   @IsString() @IsNotEmpty() bio: string;
+  @IsOptional() @IsString() photoUrl?: string;
   @IsOptional() @IsString() linkedinUrl?: string;
   @IsInt() order: number;
 }

@@ -82,7 +82,7 @@ export default async function TeamMemberPage({
   if (!member) notFound();
 
   const profile = TEAM_PROFILE[member.slug];
-  const photo = TEAM_PHOTOS[member.slug];
+  const photo = member.photoUrl ?? TEAM_PHOTOS[member.slug];
   const frame = TEAM_PHOTO_FRAME[member.slug];
   const bioParagraphs = member.bio.split(/\n\n+/);
   const relatedServices = services.slice(0, 3);

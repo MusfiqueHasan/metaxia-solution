@@ -773,3 +773,32 @@ a:hover .link-rule {
 .admin-ck .ck-placeholder::before {
   color: rgba(155, 156, 159, 0.5) !important;
 }
+
+/* ------------------------------------------------------------------ */
+/* Admin theme: a lifted, softer take on the site palette — brighter   */
+/* surfaces, stronger lines, ambient color so the panel feels lively.  */
+/* ------------------------------------------------------------------ */
+
+.admin-theme {
+  --color-ink: #111827;
+  --color-ink-raised: #1c2536;
+  --color-line: rgba(238, 240, 248, 0.12);
+  --color-line-strong: rgba(238, 240, 248, 0.22);
+  --color-fg-soft: #aab2c5;
+  background:
+    radial-gradient(60rem 30rem at 85% -10%, rgba(229, 121, 58, 0.10), transparent 60%),
+    radial-gradient(50rem 30rem at -10% 110%, rgba(94, 140, 245, 0.08), transparent 60%),
+    #111827;
+}
+
+.admin-theme .admin-card {
+  transition:
+    transform 0.3s var(--ease-out-expo),
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.admin-theme .admin-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px -18px rgba(0, 0, 0, 0.6);
+}

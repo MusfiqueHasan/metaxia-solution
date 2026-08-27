@@ -52,6 +52,7 @@ model TeamMember {
   name        String
   role        String
   bio         String
+  photoUrl    String?
   linkedinUrl String?
   order       Int      @default(0)
   createdAt   DateTime @default(now())

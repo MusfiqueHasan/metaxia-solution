@@ -21,6 +21,8 @@ const Editor = dynamic(
           data={value}
           onChange={(_event, editor) => onChange(editor.getData())}
           config={{
+            // Free open-source tier; a commercial deployment needs a paid key.
+            licenseKey: 'GPL',
             toolbar: [
               'heading',
               '|',
