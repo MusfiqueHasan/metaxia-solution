@@ -2,12 +2,43 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { RESOURCES, clearToken } from '@/lib/admin';
 import { AdminIcon } from '@/components/admin/ui';
+
+const THEME_KEY = 'mx-admin-theme';
+
+function applyTheme(light: boolean) {
+  document.querySelector('.admin-shell')?.classList.toggle('admin-light', light);
+}
 
 export function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const [light, setLight] = useState(false);
+
+  // Restore the stored preference once the shell exists.
+  useEffect(() => {
+    let stored = false;
+    try {
+      stored = localStorage.getItem(THEME_KEY) === 'light';
+    } catch {
+      /* storage unavailable */
+    }
+    setLight(stored);
+    applyTheme(stored);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !light;
+    setLight(next);
+    applyTheme(next);
+    try {
+      localStorage.setItem(THEME_KEY, next ? 'light' : 'dark');
+    } catch {
+      /* storage unavailable */
+    }
+  };
 
   // The login route runs chrome-free.
   if (pathname === '/admin') return null;
@@ -58,6 +89,9 @@ export function AdminSidebar() {
       </nav>
 
       <div className="space-y-0.5 border-t border-line px-3 py-4">
+        <button type="button" onClick={toggleTheme} className={`w-full ${linkClass(false)}`}>
+          <AdminIcon name={light ? 'moon' : 'sun'} /> {light ? 'Dark theme' : 'Light theme'}
+        </button>
         <Link href="/" className={linkClass(false)}>
           <AdminIcon name="eye" /> View website
         </Link>
