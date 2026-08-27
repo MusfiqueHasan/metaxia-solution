@@ -443,7 +443,7 @@ export default async function CaseStudyDetailPage({
       {/* Product gallery — screenshots from public/projects, when present */}
       {gallery.length > 0 ? (
         <CaseSection n={nextNo()} title="Inside the product">
-          <div className={`grid gap-6 ${gallery.length > 1 ? 'lg:grid-cols-2' : ''}`}>
+          <div className="flex flex-col gap-14">
             {gallery.map((image, i) => (
               <div key={image.src} className={image.text ? 'flex flex-col gap-10' : ''}>
                 {image.text ? (
