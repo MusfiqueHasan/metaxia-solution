@@ -114,6 +114,7 @@ const SLUG_STACKS: Record<string, string[]> = {
   chefnawaz: ['PHP', 'Product database', 'Auth & accounts', 'Custom admin', 'Order tracking'],
   jobsyo: ['Next.js', 'AI matching', 'Multi-platform scanning', 'Real-time alerts', 'Resume scoring'],
   'kryzotech-solutions': ['Data & AI practice', 'Web development', 'App development', 'Portfolio & blog', 'Booking funnel'],
+  onlineteened: ['Self-paced LMS', 'DMV certification flow', 'Progress tracking', 'Student admin', 'Reviews & blog'],
 };
 
 /* Curated gallery per slug: choose the shots and pair them with copy.
@@ -183,6 +184,21 @@ const SLUG_GALLERY: Record<string, GalleryEntry[]> = {
         'Catalog control — products, recipes, and categories edited in place',
         'Reviews and contact messages managed inside the panel',
         'Users and settings round out the operation',
+      ],
+    },
+  ],
+  onlineteened: [
+    {
+      src: '/projects/onlineteened-admin.webp',
+      label: 'school admin',
+      text: 'The admin is the school office: quick stats for total users, passed students, and enrollments up top, with searchable student tables — full name, email, phone, and marks — right below.',
+      points: [
+        'Dashboard tiles — users, passed students, and enrollments at a glance',
+        'Recent passed-student table with per-student marks (%)',
+        'Recent students and enrollment tracking, searchable',
+        'Blog publishing and review moderation in-panel',
+        'Contact requests handled inside the admin',
+        'Platform settings behind secure admin access',
       ],
     },
   ],

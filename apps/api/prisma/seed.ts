@@ -436,34 +436,43 @@ The services site launched on its own subdomain beside the education platform, s
 - Consultations booked directly from the site instead of over social inboxes`,
       },
       {
-        slug: 'b2b-support-copilot',
-        title: 'Building an AI Support Copilot for a B2B SaaS Platform',
-        category: 'AI',
+        slug: 'onlineteened',
+        title: 'OnlineTeenEd — DMV-Approved Driver Education, Fully Online',
+        category: 'Software',
         order: 7,
         coverGradient: 'linear-gradient(135deg,#8b5cf6,#06b6d4)',
-        websiteUrl: 'https://helpgrid-demo.example.com',
-        previewImage: '/previews/b2b-support-copilot.svg',
-        excerpt: 'A retrieval-augmented assistant now resolves a third of support tickets before they reach a human agent.',
-        body: `The support queue was full of questions the documentation already answered — the team just couldn't search it fast enough at ticket volume.
+        websiteUrl: 'https://onlineteened.com/',
+        previewImage: '/projects/onlineteened-web.webp',
+        excerpt:
+          'A California DMV-approved driver-education platform — 15 self-paced lessons, official completion certificates, and an admin tracking every student.',
+        body: `OnlineTeenEd delivers California DMV-approved driver education entirely online, run by Fremont Car Driving School under DMV license #E0628 — teens work toward their permits at their own pace, and the school tracks every student from enrollment to certificate. Live at onlineteened.com.
 
 ## The challenge
 
-Agents at a B2B SaaS platform spent most of each shift re-answering the same questions, hunting through the same handful of documentation pages. Headcount scaled linearly with customers; morale went the other direction. Leadership wanted AI in the loop but refused to let a hallucinated answer reach a paying customer.
+A licensed driving school needed its classroom on the internet without losing the regulator: the course had to satisfy California DMV standards end to end, serve teens from any device at a flat, honest price, issue the official Certificate of Completion the DMV actually accepts, and give staff one place to see who enrolled, who passed, and with what marks.
 
 ## What we built
 
-A retrieval-augmented copilot indexing the knowledge base, past resolved tickets, and the product changelog. For every incoming ticket it drafts a response grounded in retrieved sources, cited inline for agent review. Confidence scoring is the safety valve: uncertain answers route straight to a human with the retrieval context attached, so even a "miss" saves the agent the search.
+A self-paced learning platform with a certification flow in front and a school-office admin behind it.
+
+- A 15-lesson curriculum aligned to DMV standards — vehicle systems, traffic laws and the California Vehicle Code, pedestrian safety, alcohol and drug effects, risk perception, and teen driving behaviors
+- Self-paced, mobile-friendly lessons with progress saving and unlimited attempts to pass
+- Flat $24.95 pricing with a free DMV practice test included
+- The official DMV Certificate of Completion flow, mailed to the student for their DMV visit
+- Guidance pages for the permit process and the license pathway, plus a bridge to behind-the-wheel training
+- Live chat support and access to a course trainer
+- Admin panel: students with name, email, phone, and marks; enrollment tracking; passed-student lists; blog, reviews, and contact-request moderation; platform settings behind secure access
 
 ## The rollout
 
-Two weeks in shadow mode drafting silently against live tickets while agents graded outputs. The grades tuned retrieval and thresholds before the copilot wrote a single customer-visible word. Evaluation dashboards let the support team adjust prompts and retrieval settings without engineering involvement.
+The course and certification flow launched first — the part the DMV license depends on — with the admin growing alongside real enrollments: student and passed-student tables, then blog and review moderation, then the contact inbox and settings.
 
 ## Results
 
-- 31 percent of incoming tickets fully resolved by the copilot within two months
-- Average handling time on remaining tickets down nearly a third
-- Zero hallucinated answers reaching customers, by design of the confidence gate
-- Support team tunes the system themselves — no standing engineering dependency`,
+- Live in production at onlineteened.com under DMV license #E0628
+- Students complete the full requirement online and receive the official certificate by mail
+- Staff see users, passed students, and enrollments at a glance, with per-student marks
+- Ten public student reviews across 2023–2024 backing the program`,
       },
       {
         slug: 'insurance-document-intelligence',
