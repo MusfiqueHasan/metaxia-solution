@@ -118,14 +118,23 @@ interface GalleryEntry {
   src: string;
   label: string;
   text?: string;
+  points?: string[];
 }
 
 const SLUG_GALLERY: Record<string, GalleryEntry[]> = {
   kryzotech: [
     {
       src: '/projects/kryzotech-admin.webp',
-      label: 'admin dashboard',
-      text: 'One operations surface runs the entire platform. The dashboard opens on enrollment and revenue analytics, then hands staff the day-to-day controls: expense tracking, course and cohort management, blog publishing, and user administration — so a schedule change, a new cohort, or a refund never needs an engineer.',
+      label: 'admin workspace',
+      text: 'The whole learning platform runs from one workspace: the overview lands on live counts for active courses, workshops, blog posts, and enrollments, with quick actions into every module.',
+      points: [
+        'Overview — snapshot of courses, workshops, blog, and enrollments',
+        'Analytics & Expenses — sales, costs, and per-course P&L',
+        'Courses, Categories & Workshops — build and organize the catalog',
+        'Blog & Posts — tutorials, announcements, and the student feed',
+        'Users, Enrollments & Management — students, payments, controls',
+        'Website content — trainers, reviews, and partners on the public site',
+      ],
     },
   ],
 };
@@ -368,7 +377,20 @@ export default async function CaseStudyDetailPage({
                     <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
                       {image.label}
                     </p>
-                    <p className="mt-4 text-[1.0625rem] leading-[1.8] text-fg-soft">{image.text}</p>
+                    <p className="mt-4 text-base leading-[1.75] text-fg-soft">{image.text}</p>
+                    {image.points ? (
+                      <ul className="mt-5 space-y-2.5">
+                        {image.points.map((point) => (
+                          <li key={point} className="flex items-start gap-3 text-sm leading-relaxed text-fg-soft">
+                            <span
+                              aria-hidden="true"
+                              className="mt-[0.5em] h-1.5 w-1.5 shrink-0 rotate-45 bg-accent"
+                            />
+                            {point}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
                   </div>
                 ) : null}
               </div>
