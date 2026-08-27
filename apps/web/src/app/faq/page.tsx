@@ -33,7 +33,7 @@ export default async function FaqPage() {
   };
 
   return (
-    <main>
+    <main className="page-wide">
       <JsonLd data={faqJsonLd} />
       <PageHero
         eyebrow="FAQ"

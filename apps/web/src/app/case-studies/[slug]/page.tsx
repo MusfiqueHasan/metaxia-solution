@@ -208,7 +208,7 @@ export default async function CaseStudyDetailPage({
   ] as { k: string; v: string; href?: string }[];
 
   return (
-    <main className="grain relative overflow-hidden bg-ink">
+    <main className="page-wide grain relative overflow-hidden bg-ink">
       <Starfield />
       <JsonLd data={breadcrumbJsonLd} />
 

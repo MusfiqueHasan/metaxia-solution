@@ -60,7 +60,7 @@ export default async function CaseStudiesPage() {
   return (
     // One continuous observatory backdrop: the hero's starfield + grain run
     // behind every case row, not just the opening section.
-    <main className="grain relative overflow-hidden bg-ink">
+    <main className="page-wide grain relative overflow-hidden bg-ink">
       <Starfield />
       {/* Hero — same ambient treatment as the other page heroes: its own
           dense starfield (with meteors), dot field, aurora, and glow. */}

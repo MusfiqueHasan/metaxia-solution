@@ -21,7 +21,7 @@ export default async function TeamPage() {
   const team = (await getTeam()).sort((a, b) => a.order - b.order);
 
   return (
-    <main>
+    <main className="page-wide">
       <PageHero
         eyebrow="Our Team"
         title="The people behind the work."

@@ -49,7 +49,7 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <main>
+    <main className="page-wide">
       <PageHero
         eyebrow="About Metaxia"
         title="A technology partner built to outlast the project."

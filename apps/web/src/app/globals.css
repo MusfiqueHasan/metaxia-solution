@@ -33,6 +33,12 @@ body {
   font-family: var(--font-body);
 }
 
+/* Inner pages run 1rem wider per side than the landing page, lining their
+   content up with the header's resting logo/CTA edges. */
+.page-wide {
+  --container-w: 74rem;
+}
+
 /* Instrument Serif ships one weight; synthetic bolding ruins it. */
 .font-display {
   font-weight: 400;

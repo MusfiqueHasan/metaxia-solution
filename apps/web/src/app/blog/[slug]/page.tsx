@@ -85,7 +85,7 @@ export default async function BlogPostPage({
   };
 
   return (
-    <main className="grain relative overflow-hidden bg-ink">
+    <main className="page-wide grain relative overflow-hidden bg-ink">
       <Starfield />
       <JsonLd data={articleJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />

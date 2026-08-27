@@ -43,7 +43,7 @@ const sections = [
 
 export default function TermsPage() {
   return (
-    <main>
+    <main className="page-wide">
       <PageHero
         eyebrow="Legal"
         title="Terms of Service"

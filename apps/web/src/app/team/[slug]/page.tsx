@@ -61,7 +61,7 @@ export default async function TeamMemberPage({
   };
 
   return (
-    <main className="grain relative overflow-hidden bg-ink">
+    <main className="page-wide grain relative overflow-hidden bg-ink">
       <Starfield />
       <JsonLd data={breadcrumbJsonLd} />
       <section className="relative border-b border-line text-white">

@@ -21,7 +21,7 @@ export default async function ServicesPage() {
   const services = await getServices();
 
   return (
-    <main>
+    <main className="page-wide">
       <PageHero
         eyebrow="Services"
         title="Six practice areas, one accountable team."

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main>
+    <main className="page-wide">
       <PageHero
         eyebrow="Contact"
         title="Let's talk about what you're building."

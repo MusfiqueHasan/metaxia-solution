@@ -30,7 +30,7 @@ export default async function BlogPage() {
   );
 
   return (
-    <main>
+    <main className="page-wide">
       <PageHero
         eyebrow="Field Notes"
         title="Writing from the team."

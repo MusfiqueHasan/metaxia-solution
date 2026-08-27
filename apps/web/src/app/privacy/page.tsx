@@ -43,7 +43,7 @@ const sections = [
 
 export default function PrivacyPage() {
   return (
-    <main>
+    <main className="page-wide">
       <PageHero
         eyebrow="Legal"
         title="Privacy Policy"

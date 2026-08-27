@@ -77,7 +77,7 @@ export default async function ServiceDetailPage({
   };
 
   return (
-    <main>
+    <main className="page-wide">
       <JsonLd data={serviceJsonLd} />
       <JsonLd data={breadcrumbJsonLd} />
       <PageHero eyebrow="Service" title={service.title} lede={service.excerpt} />
