@@ -353,33 +353,15 @@ export default async function CaseStudyDetailPage({
         <CaseSection n={nextNo()} title="Inside the product">
           <div className={`grid gap-6 ${gallery.length > 1 ? 'lg:grid-cols-2' : ''}`}>
             {gallery.map((image, i) => (
-              <div
-                key={image.src}
-                className={image.text ? 'grid items-center gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]' : ''}
-              >
-                <figure
-                  className="reveal-scale group overflow-hidden rounded-2xl border border-line-strong bg-ink-raised"
-                  style={{ ['--reveal-delay' as string]: `${0.1 + i * 0.12}s` }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={image.src}
-                    alt={`${caseStudy.title} — ${image.label}`}
-                    loading="lazy"
-                    className="w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
-                  />
-                  <figcaption className="border-t border-line px-5 py-3 font-mono text-[10px] uppercase tracking-[0.22em] text-fg-soft">
-                    {image.label}
-                  </figcaption>
-                </figure>
+              <div key={image.src} className={image.text ? 'flex flex-col gap-10' : ''}>
                 {image.text ? (
-                  <div className="reveal-rise" style={{ ['--reveal-delay' as string]: '0.25s' }}>
+                  <div className="reveal-rise" style={{ ['--reveal-delay' as string]: '0.1s' }}>
                     <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
                       {image.label}
                     </p>
-                    <p className="mt-4 text-base leading-[1.75] text-fg-soft">{image.text}</p>
+                    <p className="mt-4 max-w-2xl text-base leading-[1.75] text-fg-soft">{image.text}</p>
                     {image.points ? (
-                      <ul className="mt-5 space-y-2.5">
+                      <ul className="mt-5 grid gap-x-10 gap-y-2.5 sm:grid-cols-2">
                         {image.points.map((point) => (
                           <li key={point} className="flex items-start gap-3 text-sm leading-relaxed text-fg-soft">
                             <span
@@ -393,6 +375,21 @@ export default async function CaseStudyDetailPage({
                     ) : null}
                   </div>
                 ) : null}
+                <figure
+                  className="reveal-scale group overflow-hidden rounded-2xl border border-line-strong bg-ink-raised"
+                  style={{ ['--reveal-delay' as string]: `${0.25 + i * 0.12}s` }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={image.src}
+                    alt={`${caseStudy.title} — ${image.label}`}
+                    loading="lazy"
+                    className="w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
+                  />
+                  <figcaption className="border-t border-line px-5 py-3 font-mono text-[10px] uppercase tracking-[0.22em] text-fg-soft">
+                    {image.label}
+                  </figcaption>
+                </figure>
               </div>
             ))}
           </div>
