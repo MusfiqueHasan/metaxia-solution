@@ -780,20 +780,20 @@ a:hover .link-rule {
 /* ------------------------------------------------------------------ */
 
 .admin-theme {
-  --color-ink: #f6f8fb;
+  --color-ink: #faf7f2;
   --color-ink-raised: #ffffff;
-  --color-fg: #0f172a;
-  --color-fg-soft: #64748b;
-  --color-line: rgba(15, 23, 42, 0.08);
-  --color-line-strong: rgba(15, 23, 42, 0.14);
-  --color-accent: #2563eb;
-  --color-accent-soft: rgba(37, 99, 235, 0.09);
-  --color-accent-strong: #1d4ed8;
-  background: #f6f8fb;
+  --color-fg: #1c1917;
+  --color-fg-soft: #78716c;
+  --color-line: rgba(28, 25, 23, 0.08);
+  --color-line-strong: rgba(28, 25, 23, 0.15);
+  --color-accent: #d97a2e;
+  --color-accent-soft: rgba(217, 122, 46, 0.1);
+  --color-accent-strong: #b95f1d;
+  background: #faf7f2;
 }
 
 .admin-theme .admin-card {
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 1px 2px rgba(28, 25, 23, 0.05);
   transition:
     transform 0.3s var(--ease-out-expo),
     border-color 0.3s ease,
@@ -802,49 +802,21 @@ a:hover .link-rule {
 
 .admin-theme .admin-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.18);
+  box-shadow: 0 10px 30px -12px rgba(120, 72, 28, 0.16);
 }
 
-/* Dark variant, one toggle away. */
-.admin-theme.admin-dark {
-  --color-ink: #0b1220;
-  --color-ink-raised: #141d2e;
-  --color-fg: #e6eaf2;
-  --color-fg-soft: #8f9bb0;
-  --color-line: rgba(230, 234, 242, 0.09);
-  --color-line-strong: rgba(230, 234, 242, 0.18);
-  --color-accent: #3b82f6;
-  --color-accent-soft: rgba(59, 130, 246, 0.14);
-  --color-accent-strong: #60a5fa;
-  background: #0b1220;
-}
 
-.admin-theme.admin-dark .admin-card {
-  box-shadow: none;
-}
-
-.admin-theme.admin-dark .admin-card:hover {
-  box-shadow: 0 12px 40px -18px rgba(0, 0, 0, 0.6);
-}
-
-/* Admin gradient accents */
+/* Admin gradient accents — the site's copper, leaning gold */
 .admin-gradient {
-  background-image: linear-gradient(135deg, #2563eb, #6366f1);
+  background-image: linear-gradient(135deg, #d97a2e, #f0b35e);
 }
 
 .admin-glow {
-  box-shadow: 0 6px 20px -6px rgba(37, 99, 235, 0.45);
-}
-
-.admin-theme.admin-dark .admin-glow {
-  box-shadow: 0 6px 24px -6px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 6px 20px -6px rgba(217, 122, 46, 0.45);
 }
 
 /* Floating panel shadow for the pill sidebar/header */
 .admin-float {
-  box-shadow: 0 8px 30px -12px rgba(15, 23, 42, 0.14);
+  box-shadow: 0 8px 30px -12px rgba(87, 60, 34, 0.15);
 }
 
-.admin-theme.admin-dark .admin-float {
-  box-shadow: 0 10px 34px -14px rgba(0, 0, 0, 0.6);
-}

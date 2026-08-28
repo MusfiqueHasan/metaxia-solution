@@ -71,7 +71,7 @@ export const RESOURCES: ResourceDef[] = [
       { name: 'category', label: 'Category', kind: 'text', placeholder: 'e.g. Software, AI, Design' },
       { name: 'excerpt', label: 'Excerpt', kind: 'textarea', placeholder: 'One or two sentences shown on cards and lists' },
       { name: 'body', label: 'Body (markdown)', kind: 'textarea', placeholder: 'Full body — markdown supported (## headings, - bullets)' },
-      { name: 'coverGradient', label: 'Cover gradient', kind: 'text', placeholder: 'linear-gradient(135deg,#0ea5e9,#6366f1)' },
+      { name: 'coverGradient', label: 'Cover gradient', kind: 'text', placeholder: 'linear-gradient(135deg,#e5793a,#f0b35e)' },
       { name: 'websiteUrl', label: 'Website URL', kind: 'text', optional: true, placeholder: 'https://client-site.com' },
       { name: 'previewImage', label: 'Preview image', kind: 'image', optional: true, placeholder: '/projects/slug-web.webp' },
       { name: 'order', label: 'Order', kind: 'number', placeholder: '1' },

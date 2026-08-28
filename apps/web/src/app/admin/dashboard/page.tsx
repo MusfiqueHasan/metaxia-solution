@@ -6,14 +6,14 @@ import { adminFetch, useRequireAuth, RESOURCES } from '@/lib/admin';
 import { AdminIcon } from '@/components/admin/ui';
 
 const CHIP_HUES = [
-  'bg-violet-500/12 text-violet-500',
-  'bg-sky-500/12 text-sky-500',
-  'bg-amber-500/12 text-amber-500',
-  'bg-emerald-500/12 text-emerald-500',
+  'bg-orange-500/12 text-orange-600',
+  'bg-amber-500/12 text-amber-600',
   'bg-rose-500/12 text-rose-500',
-  'bg-cyan-500/12 text-cyan-500',
+  'bg-emerald-500/12 text-emerald-600',
+  'bg-violet-500/12 text-violet-500',
+  'bg-teal-500/12 text-teal-600',
   'bg-fuchsia-500/12 text-fuchsia-500',
-  'bg-lime-500/12 text-lime-500',
+  'bg-yellow-500/12 text-yellow-600',
 ];
 
 export default function AdminDashboardPage() {
