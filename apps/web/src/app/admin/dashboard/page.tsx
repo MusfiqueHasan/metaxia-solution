@@ -113,37 +113,8 @@ export default function AdminDashboardPage() {
         Content overview · live site updates within a minute of saving
       </p>
 
-      {/* Stat cards */}
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {RESOURCES.map((resource, index) => (
-          <Link
-            key={resource.key}
-            href={`/admin/${resource.key}`}
-            className="admin-card admin-float group rounded-3xl border border-line bg-ink-raised p-5 hover:border-accent/40"
-          >
-            <div className="flex items-center justify-between">
-              <span
-                className={`flex h-10 w-10 items-center justify-center rounded-2xl ${CHIP_HUES[index % CHIP_HUES.length]}`}
-              >
-                <AdminIcon name={resource.key} className="h-4.5 w-4.5" />
-              </span>
-              <span
-                aria-hidden="true"
-                className="text-fg-soft/50 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-accent"
-              >
-                →
-              </span>
-            </div>
-            <p className="mt-5 font-display text-4xl tabular-nums text-fg">
-              {counts[resource.key] ?? '—'}
-            </p>
-            <p className="mt-1 text-sm text-fg-soft">{resource.label}</p>
-          </Link>
-        ))}
-      </div>
-
       {/* Charts */}
-      <div className="mt-4 grid gap-4 lg:grid-cols-3">
+      <div className="mt-8 grid gap-4 lg:grid-cols-3">
         <section className="admin-float rounded-3xl border border-line bg-ink-raised p-6 lg:col-span-2">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <div>
@@ -239,6 +210,34 @@ export default function AdminDashboardPage() {
             </span>
           </a>
         </div>
+      </div>
+      {/* Stat cards */}
+      <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {RESOURCES.map((resource, index) => (
+          <Link
+            key={resource.key}
+            href={`/admin/${resource.key}`}
+            className="admin-card admin-float group rounded-3xl border border-line bg-ink-raised p-5 hover:border-accent/40"
+          >
+            <div className="flex items-center justify-between">
+              <span
+                className={`flex h-10 w-10 items-center justify-center rounded-2xl ${CHIP_HUES[index % CHIP_HUES.length]}`}
+              >
+                <AdminIcon name={resource.key} className="h-4.5 w-4.5" />
+              </span>
+              <span
+                aria-hidden="true"
+                className="text-fg-soft/50 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-accent"
+              >
+                →
+              </span>
+            </div>
+            <p className="mt-5 font-display text-4xl tabular-nums text-fg">
+              {counts[resource.key] ?? '—'}
+            </p>
+            <p className="mt-1 text-sm text-fg-soft">{resource.label}</p>
+          </Link>
+        ))}
       </div>
     </div>
   );
