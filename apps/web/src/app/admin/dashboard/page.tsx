@@ -297,9 +297,12 @@ export default function AdminDashboardPage() {
           </a>
         </div>
       </div>
-      {/* Stat cards */}
+      {/* Primary stat cards — the four headline resources; the rest live in
+          the Content-by-type bars above */}
       <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {RESOURCES.map((resource, index) => (
+        {RESOURCES.filter((resource) =>
+          ['services', 'case-studies', 'posts', 'team'].includes(resource.key),
+        ).map((resource, index) => (
           <Link
             key={resource.key}
             href={`/admin/${resource.key}`}
