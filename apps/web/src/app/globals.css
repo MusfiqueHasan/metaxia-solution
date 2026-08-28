@@ -815,6 +815,51 @@ a:hover .link-rule {
   box-shadow: 0 6px 20px -6px rgba(217, 122, 46, 0.45);
 }
 
+/* Login entrance: staggered rise, .admin-rise + inline animation-delay */
+@keyframes admin-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.admin-rise {
+  animation: admin-rise 0.8s var(--ease-out-expo) both;
+}
+
+/* A light sweep that crosses the button on hover */
+.admin-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.35) 50%, transparent 65%);
+  transform: translateX(-120%);
+  transition: transform 0.7s var(--ease-out-expo);
+}
+
+.admin-shine:hover::after {
+  transform: translateX(120%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-rise {
+    animation: none;
+  }
+
+  .admin-shine::after {
+    display: none;
+  }
+}
+
 /* Floating panel shadow for the pill sidebar/header */
 .admin-float {
   box-shadow: 0 8px 30px -12px rgba(87, 60, 34, 0.15);
