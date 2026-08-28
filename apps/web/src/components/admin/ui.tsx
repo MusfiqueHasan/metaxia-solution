@@ -99,7 +99,7 @@ export function Modal({
         className="absolute inset-0 bg-slate-950/45 backdrop-blur-sm"
       />
       <div
-        className={`relative flex max-h-[88vh] w-full flex-col overflow-hidden rounded-2xl border border-line-strong bg-ink-raised shadow-[0_24px_80px_-24px_rgba(15,23,42,0.45)] ${
+        className={`relative flex max-h-[88vh] w-full flex-col overflow-hidden rounded-3xl border border-line bg-ink-raised shadow-[0_24px_80px_-24px_rgba(15,23,42,0.45)] ${
           wide ? 'max-w-3xl' : 'max-w-lg'
         }`}
       >
@@ -154,7 +154,7 @@ export function ConfirmModal({
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg border border-line-strong bg-ink-raised px-4 py-2 text-sm font-medium text-fg transition-colors hover:bg-ink"
+          className="rounded-full border border-line-strong bg-ink-raised px-5 py-2 text-sm font-medium text-fg transition-colors hover:bg-ink"
         >
           Cancel
         </button>
@@ -162,7 +162,7 @@ export function ConfirmModal({
           type="button"
           onClick={onConfirm}
           disabled={busy}
-          className="rounded-lg bg-rose-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-rose-500 disabled:opacity-60"
+          className="rounded-full bg-rose-600 px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-rose-500 disabled:opacity-60"
         >
           {busy ? 'Deleting…' : 'Delete'}
         </button>

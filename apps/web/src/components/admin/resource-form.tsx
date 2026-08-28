@@ -321,14 +321,14 @@ export function ResourceModal({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg border border-line-strong bg-ink-raised px-4 py-2 text-sm font-medium text-fg transition-colors hover:bg-ink"
+            className="rounded-full border border-line-strong bg-ink-raised px-5 py-2 text-sm font-medium text-fg transition-colors hover:bg-ink"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={saving}
-            className="rounded-lg bg-accent px-5 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-accent-strong disabled:opacity-60"
+            className="admin-gradient admin-glow rounded-full px-6 py-2 text-sm font-medium text-white transition-transform hover:-translate-y-0.5 disabled:opacity-60"
           >
             {saving ? 'Saving…' : isEdit ? 'Save changes' : 'Create'}
           </button>

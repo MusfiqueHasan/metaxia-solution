@@ -50,11 +50,11 @@ export default function AdminDashboardPage() {
           <Link
             key={resource.key}
             href={`/admin/${resource.key}`}
-            className="admin-card group rounded-2xl border border-line bg-ink-raised/50 p-5 hover:border-accent/40"
+            className="admin-card admin-float group rounded-3xl border border-line bg-ink-raised p-5 hover:border-accent/40"
           >
             <div className="flex items-center justify-between">
               <span
-                className={`flex h-10 w-10 items-center justify-center rounded-xl ${CHIP_HUES[index % CHIP_HUES.length]}`}
+                className={`flex h-10 w-10 items-center justify-center rounded-2xl ${CHIP_HUES[index % CHIP_HUES.length]}`}
               >
                 <AdminIcon name={resource.key} className="h-4.5 w-4.5" />
               </span>
@@ -76,10 +76,10 @@ export default function AdminDashboardPage() {
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <Link
           href="/admin/inbox"
-          className="admin-card group flex items-center justify-between rounded-2xl border border-line bg-ink-raised/50 p-5 hover:border-accent/40"
+          className="admin-card admin-float group flex items-center justify-between rounded-3xl border border-line bg-ink-raised p-5 hover:border-accent/40"
         >
           <div className="flex items-center gap-4">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent">
+            <span className="admin-gradient admin-glow flex h-10 w-10 items-center justify-center rounded-2xl text-white">
               <AdminIcon name="inbox" className="h-4.5 w-4.5" />
             </span>
             <div>
@@ -98,10 +98,10 @@ export default function AdminDashboardPage() {
           href="/"
           target="_blank"
           rel="noreferrer"
-          className="admin-card group flex items-center justify-between rounded-2xl border border-line bg-ink-raised/50 p-5 hover:border-accent/40"
+          className="admin-card admin-float group flex items-center justify-between rounded-3xl border border-line bg-ink-raised p-5 hover:border-accent/40"
         >
           <div className="flex items-center gap-4">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-accent">
+            <span className="admin-gradient admin-glow flex h-10 w-10 items-center justify-center rounded-2xl text-white">
               <AdminIcon name="eye" className="h-4.5 w-4.5" />
             </span>
             <div>

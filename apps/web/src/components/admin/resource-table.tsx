@@ -96,13 +96,13 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={`Search ${def.label.toLowerCase()}…`}
-              className={`${adminInput} w-56 pl-10`}
+              className={`${adminInput} w-56 !rounded-full pl-10`}
             />
           </div>
           <button
             type="button"
             onClick={() => setCreating(true)}
-            className="inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-accent-strong"
+            className="admin-gradient admin-glow inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-white transition-transform hover:-translate-y-0.5"
           >
             <AdminIcon name="plus" className="h-3.5 w-3.5" /> Add {labelSingular}
           </button>
@@ -116,7 +116,7 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
       ) : null}
 
       {/* Table */}
-      <div className="admin-card mt-6 overflow-hidden rounded-2xl border border-line bg-ink-raised !transform-none">
+      <div className="admin-card admin-float mt-6 overflow-hidden rounded-3xl border border-line bg-ink-raised !transform-none">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
@@ -175,7 +175,7 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
                           onClick={() => setEditing(row)}
                           title="Edit"
                           aria-label={`Edit ${cellText(row[def.columns[0]])}`}
-                          className="flex h-8 w-8 items-center justify-center rounded-lg text-fg-soft transition-colors hover:bg-accent-soft hover:text-accent"
+                          className="flex h-8 w-8 items-center justify-center rounded-full text-fg-soft transition-colors hover:bg-accent-soft hover:text-accent"
                         >
                           <AdminIcon name="edit" className="h-3.5 w-3.5" />
                         </button>
@@ -184,7 +184,7 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
                           onClick={() => setDeleting(row)}
                           title="Delete"
                           aria-label={`Delete ${cellText(row[def.columns[0]])}`}
-                          className="flex h-8 w-8 items-center justify-center rounded-lg text-fg-soft transition-colors hover:bg-rose-500/10 hover:text-rose-500"
+                          className="flex h-8 w-8 items-center justify-center rounded-full text-fg-soft transition-colors hover:bg-rose-500/10 hover:text-rose-500"
                         >
                           <AdminIcon name="trash" className="h-3.5 w-3.5" />
                         </button>
