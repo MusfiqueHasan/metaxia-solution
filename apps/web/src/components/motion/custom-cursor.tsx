@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
 /**
@@ -12,12 +13,14 @@ export function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
+  // The admin panel is a plain tool, not a show — it keeps the native cursor.
+  const isAdmin = usePathname().startsWith('/admin');
 
   useEffect(() => {
     const dot = dotRef.current;
     const ring = ringRef.current;
     const label = labelRef.current;
-    if (!dot || !ring || !label) return;
+    if (!dot || !ring || !label || isAdmin) return;
 
     const finePointer = window.matchMedia('(pointer: fine)').matches;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -81,7 +84,9 @@ export function CustomCursor() {
       cancelAnimationFrame(raf);
       document.documentElement.classList.remove('has-custom-cursor');
     };
-  }, []);
+  }, [isAdmin]);
+
+  if (isAdmin) return null;
 
   return (
     <>
