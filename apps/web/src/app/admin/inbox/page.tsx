@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { adminFetch, useRequireAuth } from '@/lib/admin';
-import { AdminIcon, Pagination, adminInput } from '@/components/admin/ui';
+import { AdminIcon, Pagination, adminInput, avatarHue, initials } from '@/components/admin/ui';
 
 interface ContactSubmission {
   id: string;
@@ -21,29 +21,6 @@ interface NewsletterSubscriber {
 
 const PAGE_SIZE = 8;
 
-const AVATAR_HUES = [
-  'bg-orange-500/15 text-orange-600',
-  'bg-amber-500/15 text-amber-600',
-  'bg-rose-500/15 text-rose-500',
-  'bg-emerald-500/15 text-emerald-600',
-  'bg-violet-500/15 text-violet-500',
-  'bg-teal-500/15 text-teal-600',
-];
-
-function avatarHue(seed: string): string {
-  let hash = 0;
-  for (let i = 0; i < seed.length; i += 1) hash = (hash * 31 + seed.charCodeAt(i)) | 0;
-  return AVATAR_HUES[Math.abs(hash) % AVATAR_HUES.length];
-}
-
-function initials(name: string): string {
-  return name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((word) => word[0]!.toUpperCase())
-    .join('');
-}
 
 function timeAgo(value: string): string {
   const date = new Date(value);

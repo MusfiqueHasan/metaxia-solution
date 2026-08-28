@@ -247,3 +247,28 @@ export function Pagination({
     </div>
   );
 }
+
+/* Shared avatar helpers: stable hue per seed string + display initials. */
+const AVATAR_HUES = [
+  'bg-orange-500/15 text-orange-600',
+  'bg-amber-500/15 text-amber-600',
+  'bg-rose-500/15 text-rose-500',
+  'bg-emerald-500/15 text-emerald-600',
+  'bg-violet-500/15 text-violet-500',
+  'bg-teal-500/15 text-teal-600',
+];
+
+export function avatarHue(seed: string): string {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i += 1) hash = (hash * 31 + seed.charCodeAt(i)) | 0;
+  return AVATAR_HUES[Math.abs(hash) % AVATAR_HUES.length];
+}
+
+export function initials(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((word) => word[0]!.toUpperCase())
+    .join('');
+}

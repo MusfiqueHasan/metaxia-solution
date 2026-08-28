@@ -2,7 +2,14 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { adminFetch, useRequireAuth, type ResourceDef } from '@/lib/admin';
-import { AdminIcon, ConfirmModal, Pagination, adminInput } from '@/components/admin/ui';
+import {
+  AdminIcon,
+  ConfirmModal,
+  Pagination,
+  adminInput,
+  avatarHue,
+  initials,
+} from '@/components/admin/ui';
 import { ResourceModal } from '@/components/admin/resource-form';
 
 type Row = Record<string, unknown> & { id: string };
@@ -22,6 +29,87 @@ function cellText(value: unknown): string {
     });
   }
   return text.length > 64 ? `${text.slice(0, 64)}…` : text;
+}
+
+/** Column-aware cell: lead columns get an avatar tile, slugs a mono chip,
+ *  order numbers a circled badge, booleans a status pill, the rest a soft tag. */
+function CellContent({
+  column,
+  columnIndex,
+  value,
+}: {
+  column: string;
+  columnIndex: number;
+  value: unknown;
+}) {
+  const text = cellText(value);
+
+  if (columnIndex === 0) {
+    return (
+      <div className="flex items-center gap-3">
+        <span
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-mono text-[11px] font-semibold ${avatarHue(text)}`}
+        >
+          {initials(text) || '—'}
+        </span>
+        <span className="font-medium text-fg">{text}</span>
+      </div>
+    );
+  }
+
+  if (typeof value === 'boolean') {
+    return (
+      <span
+        className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ${
+          value ? 'bg-emerald-500/12 text-emerald-600' : 'bg-fg/[0.05] text-fg-soft'
+        }`}
+      >
+        <span
+          aria-hidden="true"
+          className={`h-1.5 w-1.5 rounded-full ${value ? 'bg-emerald-500' : 'bg-fg-soft/50'}`}
+        />
+        {value ? 'Yes' : 'No'}
+      </span>
+    );
+  }
+
+  if (Array.isArray(value)) {
+    return (
+      <span className="inline-flex rounded-full bg-fg/[0.05] px-2.5 py-1 text-xs text-fg-soft">
+        {text}
+      </span>
+    );
+  }
+
+  if (column === 'slug') {
+    return (
+      <code className="rounded-lg border border-line bg-fg/[0.03] px-2 py-1 font-mono text-[11px] text-fg-soft">
+        {text}
+      </code>
+    );
+  }
+
+  if (column === 'order' || typeof value === 'number') {
+    return (
+      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent-soft font-mono text-[11px] font-semibold text-accent-strong">
+        {text}
+      </span>
+    );
+  }
+
+  if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T/.test(value)) {
+    return <span className="whitespace-nowrap text-[13px] text-fg-soft">{text}</span>;
+  }
+
+  if (value === null || value === undefined || text === '—') {
+    return <span className="text-fg-soft/50">—</span>;
+  }
+
+  return (
+    <span className="inline-flex max-w-full items-center truncate rounded-full bg-fg/[0.045] px-2.5 py-1 text-xs text-fg-soft">
+      {text}
+    </span>
+  );
 }
 
 /**
@@ -156,46 +244,55 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
             </thead>
             <tbody>
               {filtered === null ? (
-                [...Array(4)].map((_, index) => (
+                [...Array(5)].map((_, index) => (
                   <tr key={index} className="border-b border-line last:border-b-0">
-                    <td colSpan={def.columns.length + 1} className="px-5 py-4">
-                      <div className="h-4 w-2/3 animate-pulse rounded bg-fg/5" />
+                    <td className="px-5 py-3.5">
+                      <div className="flex items-center gap-3">
+                        <div className="h-9 w-9 animate-pulse rounded-xl bg-fg/5" />
+                        <div className="h-4 w-40 animate-pulse rounded bg-fg/5" />
+                      </div>
+                    </td>
+                    <td colSpan={def.columns.length} className="px-5 py-3.5">
+                      <div className="h-4 w-1/2 animate-pulse rounded bg-fg/5" />
                     </td>
                   </tr>
                 ))
               ) : filtered.length === 0 ? (
                 <tr>
-                  <td
-                    colSpan={def.columns.length + 1}
-                    className="px-5 py-14 text-center text-sm text-fg-soft"
-                  >
-                    {query
-                      ? `Nothing matches “${query}”.`
-                      : `No ${def.label.toLowerCase()} yet — add the first one.`}
+                  <td colSpan={def.columns.length + 1} className="px-6 py-16 text-center">
+                    <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft text-accent">
+                      <AdminIcon name={def.key} className="h-5 w-5" />
+                    </span>
+                    <p className="mt-4 text-sm text-fg-soft">
+                      {query
+                        ? `Nothing matches “${query}”.`
+                        : `No ${def.label.toLowerCase()} yet — add the first one.`}
+                    </p>
                   </td>
                 </tr>
               ) : (
                 paged!.map((row) => (
                   <tr
                     key={row.id}
-                    className="border-b border-line transition-colors odd:bg-[#fbf8f3]/70 last:border-b-0 hover:bg-accent-soft/40"
+                    className="group border-b border-line transition-[background-color,box-shadow] duration-200 odd:bg-[#fbf8f3]/70 last:border-b-0 hover:bg-accent-soft/35 hover:shadow-[inset_3px_0_0_var(--color-accent)]"
                   >
                     {def.columns.map((column, columnIndex) => (
-                      <td
-                        key={column}
-                        className={`px-5 py-4 ${columnIndex === 0 ? 'font-medium text-fg' : 'text-fg-soft'}`}
-                      >
-                        {cellText(row[column])}
+                      <td key={column} className="px-5 py-3.5 align-middle">
+                        <CellContent
+                          column={column}
+                          columnIndex={columnIndex}
+                          value={row[column]}
+                        />
                       </td>
                     ))}
-                    <td className="px-5 py-4">
-                      <div className="flex justify-end gap-2">
+                    <td className="px-5 py-3.5 align-middle">
+                      <div className="flex justify-end gap-2 opacity-45 transition-opacity duration-200 group-hover:opacity-100">
                         <button
                           type="button"
                           onClick={() => setEditing(row)}
                           title="Edit"
                           aria-label={`Edit ${cellText(row[def.columns[0]])}`}
-                          className="flex h-8 w-8 items-center justify-center rounded-full text-fg-soft transition-colors hover:bg-accent-soft hover:text-accent"
+                          className="flex h-8 w-8 items-center justify-center rounded-full border border-line bg-ink-raised text-fg-soft transition-colors hover:border-accent hover:bg-accent-soft hover:text-accent"
                         >
                           <AdminIcon name="edit" className="h-3.5 w-3.5" />
                         </button>
@@ -204,7 +301,7 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
                           onClick={() => setDeleting(row)}
                           title="Delete"
                           aria-label={`Delete ${cellText(row[def.columns[0]])}`}
-                          className="flex h-8 w-8 items-center justify-center rounded-full text-fg-soft transition-colors hover:bg-rose-500/10 hover:text-rose-500"
+                          className="flex h-8 w-8 items-center justify-center rounded-full border border-line bg-ink-raised text-fg-soft transition-colors hover:border-rose-300 hover:bg-rose-500/10 hover:text-rose-500"
                         >
                           <AdminIcon name="trash" className="h-3.5 w-3.5" />
                         </button>
