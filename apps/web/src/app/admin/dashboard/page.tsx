@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { adminFetch, useRequireAuth, RESOURCES } from '@/lib/admin';
-import { AdminIcon } from '@/components/admin/ui';
+import { AdminIcon, avatarHue, initials } from '@/components/admin/ui';
 import { AreaChart, BarList, DonutChart } from '@/components/admin/charts';
 
 const CHIP_HUES = [
@@ -23,6 +23,24 @@ const DAYS = 14;
 
 interface Stamped {
   createdAt: string;
+}
+
+interface Message extends Stamped {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+}
+
+function timeAgo(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  const seconds = Math.max(0, (Date.now() - date.getTime()) / 1000);
+  if (seconds < 60) return 'just now';
+  if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+  if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+  if (seconds < 86400 * 7) return `${Math.floor(seconds / 86400)}d ago`;
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
 /** Bucket timestamps into counts for the trailing N days (oldest first). */
@@ -54,7 +72,7 @@ function dayLabels(days: number): string[] {
 export default function AdminDashboardPage() {
   useRequireAuth();
   const [counts, setCounts] = useState<Record<string, number | null>>({});
-  const [messages, setMessages] = useState<Stamped[] | null>(null);
+  const [messages, setMessages] = useState<Message[] | null>(null);
   const [subscribers, setSubscribers] = useState<Stamped[] | null>(null);
   const [categories, setCategories] = useState<Record<string, number>>({});
 
@@ -74,7 +92,7 @@ export default function AdminDashboardPage() {
         })
         .catch(() => setCounts((prev) => ({ ...prev, [resource.key]: null })));
     }
-    adminFetch<Stamped[]>('/admin/contact-submissions')
+    adminFetch<Message[]>('/admin/contact-submissions')
       .then(setMessages)
       .catch(() => undefined);
     adminFetch<Stamped[]>('/admin/newsletter-subscribers')
@@ -169,44 +187,112 @@ export default function AdminDashboardPage() {
         </section>
 
         <div className="flex flex-col gap-4 lg:col-span-2">
-          <Link
-            href="/admin/inbox"
-            className="admin-card admin-float group flex flex-1 items-center justify-between rounded-3xl border border-line bg-ink-raised p-6 hover:border-accent/40"
-          >
-            <div className="flex items-center gap-4">
-              <span className="admin-gradient admin-glow flex h-11 w-11 items-center justify-center rounded-2xl text-white">
-                <AdminIcon name="inbox" className="h-5 w-5" />
-              </span>
+          {/* Latest messages preview */}
+          <section className="admin-float flex-1 rounded-3xl border border-line bg-ink-raised p-6">
+            <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-fg">Contact messages</p>
-                <p className="text-sm text-fg-soft">
-                  {messages?.length ?? '—'} received · {subscribers?.length ?? '—'} newsletter
-                  subscribers
+                <h2 className="font-display text-xl tracking-tight text-fg">Latest messages</h2>
+                <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft">
+                  {messages?.length ?? '—'} received · {subscribers?.length ?? '—'} subscribers
                 </p>
               </div>
+              <Link
+                href="/admin/inbox"
+                className="flex items-center gap-1.5 rounded-full border border-line px-4 py-1.5 text-[12px] font-medium text-fg-soft transition-colors hover:border-accent hover:text-accent"
+              >
+                Open inbox <span aria-hidden="true">→</span>
+              </Link>
             </div>
-            <span aria-hidden="true" className="text-fg-soft/50 group-hover:text-accent">
-              →
-            </span>
-          </Link>
 
+            <ul className="mt-5 space-y-1">
+              {messages === null ? (
+                [...Array(3)].map((_, index) => (
+                  <li key={index} className="flex items-center gap-3 rounded-2xl px-3 py-2.5">
+                    <div className="h-9 w-9 animate-pulse rounded-full bg-fg/5" />
+                    <div className="h-4 w-1/2 animate-pulse rounded bg-fg/5" />
+                  </li>
+                ))
+              ) : messages.length === 0 ? (
+                <li className="rounded-2xl bg-ink px-4 py-8 text-center text-sm text-fg-soft">
+                  No messages yet — they land here.
+                </li>
+              ) : (
+                [...messages]
+                  .sort(
+                    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+                  )
+                  .slice(0, 3)
+                  .map((item) => (
+                    <li key={item.id}>
+                      <Link
+                        href="/admin/inbox"
+                        className="group flex items-center gap-3.5 rounded-2xl px-3 py-2.5 transition-colors hover:bg-accent-soft/40"
+                      >
+                        <span
+                          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-mono text-[11px] font-semibold ${avatarHue(item.email)}`}
+                        >
+                          {initials(item.name) || '?'}
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-sm font-medium text-fg">
+                            {item.name}
+                          </span>
+                          <span className="block truncate text-[13px] text-fg-soft">
+                            {item.message}
+                          </span>
+                        </span>
+                        <time
+                          dateTime={item.createdAt}
+                          className="shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-fg-soft/70"
+                        >
+                          {timeAgo(item.createdAt)}
+                        </time>
+                      </Link>
+                    </li>
+                  ))
+              )}
+            </ul>
+          </section>
+
+          {/* Live site banner — a slice of the public site's night sky */}
           <a
             href="/"
             target="_blank"
             rel="noreferrer"
-            className="admin-card admin-float group flex flex-1 items-center justify-between rounded-3xl border border-line bg-ink-raised p-6 hover:border-accent/40"
+            className="admin-float group relative flex items-center justify-between gap-4 overflow-hidden rounded-3xl border border-[#1c2030] bg-[#0a0c14] p-6"
           >
-            <div className="flex items-center gap-4">
-              <span className="admin-gradient admin-glow flex h-11 w-11 items-center justify-center rounded-2xl text-white">
-                <AdminIcon name="eye" className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="text-sm font-medium text-fg">View the live site</p>
-                <p className="text-sm text-fg-soft">Opens in a new tab</p>
-              </div>
+            <div aria-hidden="true" className="bg-dots absolute inset-0 opacity-60" />
+            <div
+              aria-hidden="true"
+              className="absolute -right-16 -top-20 h-56 w-56 rounded-full bg-[#e5793a]/25 blur-[70px] transition-transform duration-700 group-hover:scale-125"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute -bottom-24 left-1/4 h-48 w-48 rounded-full bg-[#f0b35e]/15 blur-[70px]"
+            />
+
+            <div className="relative">
+              <p className="flex items-center gap-2 font-display text-2xl tracking-tight text-white">
+                Metaxia
+                <span className="h-1.5 w-1.5 rotate-45 bg-[#e5793a]" aria-hidden="true" />
+              </p>
+              <p className="mt-1.5 flex items-center gap-2 text-[13px] text-slate-400">
+                <span className="relative flex h-2 w-2" aria-hidden="true">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                Live — everything saved here publishes within a minute
+              </p>
             </div>
-            <span aria-hidden="true" className="text-fg-soft/50 group-hover:text-accent">
-              ↗
+
+            <span className="relative flex shrink-0 items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-medium text-[#0a0c14] transition-transform duration-300 group-hover:-translate-y-0.5">
+              Visit site
+              <span
+                aria-hidden="true"
+                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              >
+                ↗
+              </span>
             </span>
           </a>
         </div>
