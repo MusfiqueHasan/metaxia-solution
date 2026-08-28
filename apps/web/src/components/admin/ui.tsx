@@ -205,7 +205,7 @@ export function Pagination({
     'flex h-8 w-8 items-center justify-center rounded-full border border-line text-fg-soft transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-line disabled:hover:text-fg-soft';
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line bg-gradient-to-b from-transparent to-accent-soft/25 px-5 py-3.5">
+    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-5 py-3.5">
       <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft">
         {start}–{end} of {total}
       </p>

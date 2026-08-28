@@ -220,7 +220,7 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-accent/15 bg-gradient-to-b from-accent-soft/60 to-accent-soft/20">
+              <tr className="border-b border-line">
                 {def.columns.map((column, columnIndex) => (
                   <th
                     key={column}
@@ -274,7 +274,7 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
                 paged!.map((row) => (
                   <tr
                     key={row.id}
-                    className="group border-b border-line transition-[background-color,box-shadow] duration-200 odd:bg-[#fbf8f3]/70 last:border-b-0 hover:bg-accent-soft/35 hover:shadow-[inset_3px_0_0_var(--color-accent)]"
+                    className="group border-b border-line transition-[background-color,box-shadow] duration-200 last:border-b-0 hover:bg-accent-soft/35 hover:shadow-[inset_3px_0_0_var(--color-accent)]"
                   >
                     {def.columns.map((column, columnIndex) => (
                       <td key={column} className="px-5 py-3.5 align-middle">
