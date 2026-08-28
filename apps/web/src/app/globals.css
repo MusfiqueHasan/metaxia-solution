@@ -792,6 +792,15 @@ a:hover .link-rule {
   background: #faf7f2;
 }
 
+/* Warm dot grid + soft top wash for the admin canvas (the public .bg-dots
+   uses near-white dots, invisible on this light ground). */
+.admin-dots {
+  background-image: radial-gradient(rgba(120, 72, 28, 0.09) 1px, transparent 1.5px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 75%);
+}
+
 /* Admin form controls carry their own focus treatment (accent border +
    soft ring on the field shell); the global :focus-visible outline would
    draw a second box inside it. */

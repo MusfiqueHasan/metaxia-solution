@@ -2,10 +2,12 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { adminFetch, useRequireAuth, type ResourceDef } from '@/lib/admin';
-import { AdminIcon, ConfirmModal, adminInput } from '@/components/admin/ui';
+import { AdminIcon, ConfirmModal, Pagination, adminInput } from '@/components/admin/ui';
 import { ResourceModal } from '@/components/admin/resource-form';
 
 type Row = Record<string, unknown> & { id: string };
+
+const PAGE_SIZE = 8;
 
 function cellText(value: unknown): string {
   if (value === null || value === undefined) return '—';
@@ -31,6 +33,7 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
   useRequireAuth();
   const [rows, setRows] = useState<Row[] | null>(null);
   const [query, setQuery] = useState('');
+  const [page, setPage] = useState(1);
   const [editing, setEditing] = useState<Row | null>(null);
   const [creating, setCreating] = useState(false);
   const [deleting, setDeleting] = useState<Row | null>(null);
@@ -58,6 +61,12 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
       def.columns.some((column) => String(row[column] ?? '').toLowerCase().includes(q)),
     );
   }, [rows, query, def.columns]);
+
+  // Clamp instead of storing: a shrinking result set (search, delete) can
+  // strand `page` past the last page.
+  const pageCount = filtered ? Math.max(1, Math.ceil(filtered.length / PAGE_SIZE)) : 1;
+  const safePage = Math.min(page, pageCount);
+  const paged = filtered?.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE) ?? null;
 
   async function confirmDelete() {
     if (!deleting) return;
@@ -94,7 +103,10 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
             <input
               type="search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setPage(1);
+              }}
               placeholder={`Search ${def.label.toLowerCase()}…`}
               className={`${adminInput} w-56 !rounded-full pl-10`}
             />
@@ -120,16 +132,24 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-line bg-ink">
-                {def.columns.map((column) => (
+              <tr className="border-b border-accent/15 bg-gradient-to-b from-accent-soft/60 to-accent-soft/20">
+                {def.columns.map((column, columnIndex) => (
                   <th
                     key={column}
-                    className="px-5 py-3.5 font-mono text-[10px] font-medium uppercase tracking-[0.22em] text-fg-soft"
+                    className="px-5 py-4 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-accent-strong/80"
                   >
-                    {column.replace(/([A-Z])/g, ' $1')}
+                    <span className="inline-flex items-center gap-2">
+                      {columnIndex === 0 ? (
+                        <span
+                          aria-hidden="true"
+                          className="h-1 w-1 rotate-45 bg-accent/70"
+                        />
+                      ) : null}
+                      {column.replace(/([A-Z])/g, ' $1')}
+                    </span>
                   </th>
                 ))}
-                <th className="w-28 px-5 py-3.5 text-right font-mono text-[10px] font-medium uppercase tracking-[0.22em] text-fg-soft">
+                <th className="w-28 px-5 py-4 text-right font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-accent-strong/80">
                   Actions
                 </th>
               </tr>
@@ -155,10 +175,10 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
                   </td>
                 </tr>
               ) : (
-                filtered.map((row) => (
+                paged!.map((row) => (
                   <tr
                     key={row.id}
-                    className="border-b border-line transition-colors last:border-b-0 hover:bg-ink"
+                    className="border-b border-line transition-colors odd:bg-[#fbf8f3]/70 last:border-b-0 hover:bg-accent-soft/40"
                   >
                     {def.columns.map((column, columnIndex) => (
                       <td
@@ -196,6 +216,14 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
             </tbody>
           </table>
         </div>
+        {filtered ? (
+          <Pagination
+            page={safePage}
+            total={filtered.length}
+            pageSize={PAGE_SIZE}
+            onPage={setPage}
+          />
+        ) : null}
       </div>
 
       {/* Create / edit */}

@@ -2,12 +2,30 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { RESOURCES, clearToken } from '@/lib/admin';
+import { useEffect, useState } from 'react';
+import { RESOURCES, clearToken, getToken } from '@/lib/admin';
 import { AdminIcon } from '@/components/admin/ui';
+
+/** Best-effort email from the JWT payload; display only, never trusted. */
+function emailFromToken(): string | null {
+  try {
+    const token = getToken();
+    if (!token) return null;
+    const payload = JSON.parse(atob(token.split('.')[1] ?? ''));
+    return typeof payload.email === 'string' ? payload.email : null;
+  } catch {
+    return null;
+  }
+}
 
 export function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
+  const [email, setEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    setEmail(emailFromToken());
+  }, []);
 
   // The login route runs chrome-free.
   if (pathname === '/admin') return null;
@@ -68,11 +86,13 @@ export function AdminSidebar() {
       <div className="border-t border-line p-3">
         <div className="flex items-center gap-3 rounded-2xl border border-line bg-ink px-3 py-2.5">
           <span className="admin-gradient flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-display text-sm text-white">
-            A
+            {(email?.[0] ?? 'A').toUpperCase()}
           </span>
           <span className="min-w-0 flex-1">
             <span className="block truncate text-[13px] font-medium text-fg">Admin</span>
-            <span className="block truncate text-[11px] text-fg-soft">admin@metaxia.io</span>
+            <span className="block truncate text-[11px] text-fg-soft">
+              {email ?? 'Signed in'}
+            </span>
           </span>
           <button
             type="button"

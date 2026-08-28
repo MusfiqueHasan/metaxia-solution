@@ -172,3 +172,78 @@ export function ConfirmModal({
     </Modal>
   );
 }
+
+/**
+ * Windowed pager: range summary on the left, pill page numbers + arrow
+ * buttons on the right. Renders nothing when everything fits on one page.
+ */
+export function Pagination({
+  page,
+  total,
+  pageSize,
+  onPage,
+}: {
+  page: number;
+  total: number;
+  pageSize: number;
+  onPage: (page: number) => void;
+}) {
+  const pages = Math.ceil(total / pageSize);
+  if (pages <= 1) return null;
+
+  const start = (page - 1) * pageSize + 1;
+  const end = Math.min(page * pageSize, total);
+
+  // A window of up to 5 page numbers centered on the current page.
+  const windowStart = Math.max(1, Math.min(page - 2, pages - 4));
+  const numbers = Array.from(
+    { length: Math.min(5, pages) },
+    (_, index) => windowStart + index,
+  );
+
+  const arrow =
+    'flex h-8 w-8 items-center justify-center rounded-full border border-line text-fg-soft transition-colors hover:border-accent hover:text-accent disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-line disabled:hover:text-fg-soft';
+
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line bg-gradient-to-b from-transparent to-accent-soft/25 px-5 py-3.5">
+      <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft">
+        {start}–{end} of {total}
+      </p>
+      <div className="flex items-center gap-1.5">
+        <button
+          type="button"
+          onClick={() => onPage(page - 1)}
+          disabled={page <= 1}
+          aria-label="Previous page"
+          className={arrow}
+        >
+          ←
+        </button>
+        {numbers.map((n) => (
+          <button
+            key={n}
+            type="button"
+            onClick={() => onPage(n)}
+            aria-current={n === page ? 'page' : undefined}
+            className={`h-8 min-w-8 rounded-full px-2 text-[12px] font-medium tabular-nums transition-colors ${
+              n === page
+                ? 'admin-gradient admin-glow text-white'
+                : 'text-fg-soft hover:bg-accent-soft hover:text-accent'
+            }`}
+          >
+            {n}
+          </button>
+        ))}
+        <button
+          type="button"
+          onClick={() => onPage(page + 1)}
+          disabled={page >= pages}
+          aria-label="Next page"
+          className={arrow}
+        >
+          →
+        </button>
+      </div>
+    </div>
+  );
+}
