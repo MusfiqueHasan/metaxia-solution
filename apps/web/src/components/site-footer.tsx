@@ -14,8 +14,8 @@ export function SiteFooter() {
   return (
     <footer className="relative overflow-hidden border-t border-line bg-ink text-fg">
       <Container className="relative py-12 md:py-20 lg:py-28">
-        <div className="grid gap-14 lg:grid-cols-[1.6fr_1fr_1fr_1.4fr]">
-          <div>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-[1.6fr_1fr_1fr_1.4fr] lg:gap-14">
+          <div className="col-span-2 lg:col-span-1">
             <Link
               href="/"
               className="flex items-center gap-2 font-display text-2xl tracking-[-0.01em]"
@@ -32,7 +32,7 @@ export function SiteFooter() {
           <FooterColumn heading="Company" links={footerLinks.company} />
           <FooterColumn heading="Resources" links={footerLinks.resources} />
 
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-fg-soft">
               Newsletter
             </h3>
