@@ -11,7 +11,7 @@ const GROUPS = [
       { name: 'React', note: 'Server components' },
       { name: 'TypeScript', note: 'End to end' },
       { name: 'Tailwind CSS', note: 'Design systems' },
-      { name: 'Flutter', note: 'iOS · Android' },
+      { name: 'React Native', note: 'iOS · Android' },
     ],
   },
   {
