@@ -43,13 +43,15 @@ const SOCIALS = [
 
 export default async function TeamPage() {
   const team = await getTeam();
+  const founders = team.filter((member) => /founder/i.test(member.role));
+  const crew = team.filter((member) => !/founder/i.test(member.role));
 
   return (
     <main className="page-wide">
       <PageHero
         eyebrow="Team"
-        title="The two people behind every engagement."
-        lede="Metaxia stays deliberately small: the founders who scope your project are the ones who build and run it."
+        title="The people behind every engagement."
+        lede="Metaxia stays deliberately small: the founders who scope your project are the ones who build and run it — with a tight crew behind them."
       />
 
       <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
@@ -57,7 +59,7 @@ export default async function TeamPage() {
         <Container>
           {team.length > 0 ? (
             <Reveal className="mx-auto grid max-w-4xl gap-16 sm:grid-cols-2 lg:gap-24">
-              {team.map((member, index) => {
+              {founders.map((member, index) => {
                 const photo = member.photoUrl ?? TEAM_PHOTOS[member.slug];
                 const frame = TEAM_PHOTO_FRAME[member.slug];
                 return (
@@ -156,6 +158,74 @@ export default async function TeamPage() {
           ) : (
             <p className="text-sm text-fg-soft">Team profiles are temporarily unavailable.</p>
           )}
+
+          {/* The crew: smaller portraits so the founders keep the spotlight */}
+          {crew.length > 0 ? (
+            <Reveal className="mt-24 lg:mt-32">
+              <p className="reveal-fade flex items-center justify-center gap-3 text-center font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-fg-soft">
+                <span className="inline-block h-px w-6 self-center bg-line-strong" aria-hidden="true" />
+                And the crew behind them
+                <span className="inline-block h-px w-6 self-center bg-line-strong" aria-hidden="true" />
+              </p>
+
+              <div className="mx-auto mt-14 grid max-w-3xl gap-12 sm:grid-cols-3 lg:gap-14">
+                {crew.map((member, index) => {
+                  const photo = member.photoUrl ?? TEAM_PHOTOS[member.slug];
+                  const frame = TEAM_PHOTO_FRAME[member.slug];
+                  return (
+                    <div
+                      key={member.slug}
+                      className="reveal-rise group flex flex-col items-center text-center"
+                      style={{ ['--reveal-delay' as string]: `${0.1 + index * 0.1}s` }}
+                    >
+                      <span className="relative block w-full max-w-[10rem]">
+                        <span
+                          aria-hidden="true"
+                          className="absolute -bottom-1 -right-1 h-12 w-12 scale-50 rounded-full bg-accent opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-100 group-hover:opacity-100"
+                        />
+                        <span
+                          className="relative block aspect-square overflow-hidden rounded-full border border-line"
+                          style={frame?.circle}
+                        >
+                          {photo ? (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={photo}
+                              alt={member.name}
+                              className="h-full w-full object-cover grayscale transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:grayscale-0"
+                              style={frame?.img}
+                            />
+                          ) : (
+                            <span className="flex h-full w-full items-center justify-center bg-accent-soft text-accent">
+                              <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                className="h-14 w-14"
+                                aria-hidden="true"
+                              >
+                                <circle cx="12" cy="9" r="3.6" stroke="currentColor" strokeWidth="1.4" />
+                                <path
+                                  d="M5 20c1.2-3.4 3.8-5 7-5s5.8 1.6 7 5"
+                                  stroke="currentColor"
+                                  strokeWidth="1.4"
+                                  strokeLinecap="round"
+                                />
+                              </svg>
+                            </span>
+                          )}
+                        </span>
+                      </span>
+
+                      <h3 className="mt-6 font-display text-xl tracking-[-0.01em] text-fg">
+                        {member.name}
+                      </h3>
+                      <p className="mt-1.5 text-[13px] text-fg-soft">{member.role}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </Reveal>
+          ) : null}
         </Container>
       </section>
     </main>
