@@ -141,6 +141,11 @@ export function ResourceManager({ def }: { def: ResourceDef }) {
     void load();
   }, [load]);
 
+  // Dashboard quick-create links land here with ?new=1 to open the modal.
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).has('new')) setCreating(true);
+  }, []);
+
   const filtered = useMemo(() => {
     if (!rows) return null;
     const q = query.trim().toLowerCase();

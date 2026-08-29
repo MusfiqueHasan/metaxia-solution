@@ -72,6 +72,7 @@ function dayLabels(days: number): string[] {
 export default function AdminDashboardPage() {
   useRequireAuth();
   const [counts, setCounts] = useState<Record<string, number | null>>({});
+  const [rowsByKey, setRowsByKey] = useState<Record<string, Array<Record<string, unknown>>>>({});
   const [messages, setMessages] = useState<Message[] | null>(null);
   const [subscribers, setSubscribers] = useState<Stamped[] | null>(null);
   const [categories, setCategories] = useState<Record<string, number>>({});
@@ -81,6 +82,7 @@ export default function AdminDashboardPage() {
       adminFetch<Array<Record<string, unknown>>>(resource.publicPath)
         .then((rows) => {
           setCounts((prev) => ({ ...prev, [resource.key]: rows.length }));
+          setRowsByKey((prev) => ({ ...prev, [resource.key]: rows }));
           if (resource.key === 'posts') {
             const byCategory: Record<string, number> = {};
             for (const row of rows) {
@@ -123,6 +125,24 @@ export default function AdminDashboardPage() {
   }));
 
   const messagesThisWindow = messageSeries.reduce((sum, v) => sum + v, 0);
+
+  // Latest touched content across the main resources, newest first.
+  const recentEdits = useMemo(() => {
+    const KEYS = ['services', 'case-studies', 'posts', 'team'];
+    const items: Array<{ key: string; label: string; title: string; date: string }> = [];
+    for (const resource of RESOURCES) {
+      if (!KEYS.includes(resource.key)) continue;
+      for (const row of rowsByKey[resource.key] ?? []) {
+        const title = row.title ?? row.name;
+        const date = row.updatedAt ?? row.publishedAt ?? row.createdAt;
+        if (typeof title !== 'string' || typeof date !== 'string') continue;
+        items.push({ key: resource.key, label: resource.label, title, date });
+      }
+    }
+    return items
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 6);
+  }, [rowsByKey]);
 
   return (
     <div className="px-6 py-8 lg:px-10">
@@ -297,36 +317,86 @@ export default function AdminDashboardPage() {
           </a>
         </div>
       </div>
-      {/* Primary stat cards — the four headline resources; the rest live in
-          the Content-by-type bars above */}
-      <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {RESOURCES.filter((resource) =>
-          ['services', 'case-studies', 'posts', 'team'].includes(resource.key),
-        ).map((resource, index) => (
-          <Link
-            key={resource.key}
-            href={`/admin/${resource.key}`}
-            className="admin-card admin-float group rounded-3xl border border-line bg-ink-raised p-5 hover:border-accent/40"
-          >
-            <div className="flex items-center justify-between">
-              <span
-                className={`flex h-10 w-10 items-center justify-center rounded-2xl ${CHIP_HUES[index % CHIP_HUES.length]}`}
+      {/* Recently updated + quick create — replaces the stat cards, whose
+          counts already live in the Content-by-type bars */}
+      <div className="mt-4 grid gap-4 lg:grid-cols-3">
+        <section className="admin-float rounded-3xl border border-line bg-ink-raised p-6 lg:col-span-2">
+          <h2 className="font-display text-xl tracking-tight text-fg">Recently updated</h2>
+          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft">
+            The last things anyone touched
+          </p>
+
+          <ol className="relative mt-6 space-y-1 before:absolute before:bottom-4 before:left-[19px] before:top-4 before:w-px before:bg-line">
+            {recentEdits.length === 0
+              ? [...Array(4)].map((_, index) => (
+                  <li key={index} className="flex items-center gap-4 px-1 py-2.5">
+                    <div className="h-9 w-9 animate-pulse rounded-full bg-fg/5" />
+                    <div className="h-4 w-1/2 animate-pulse rounded bg-fg/5" />
+                  </li>
+                ))
+              : recentEdits.map((item, index) => (
+                  <li key={`${item.key}-${item.title}`}>
+                    <Link
+                      href={`/admin/${item.key}`}
+                      className="group relative flex items-center gap-4 rounded-2xl px-1 py-2.5 transition-colors hover:bg-accent-soft/30"
+                    >
+                      <span
+                        className={`relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full ring-4 ring-ink-raised ${CHIP_HUES[index % CHIP_HUES.length]}`}
+                      >
+                        <AdminIcon name={item.key} className="h-4 w-4" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-sm font-medium text-fg">
+                          {item.title}
+                        </span>
+                        <span className="mt-0.5 block font-mono text-[10px] uppercase tracking-[0.18em] text-fg-soft">
+                          {item.label}
+                        </span>
+                      </span>
+                      <time
+                        dateTime={item.date}
+                        className="shrink-0 font-mono text-[10px] uppercase tracking-[0.16em] text-fg-soft/70"
+                      >
+                        {timeAgo(item.date)}
+                      </time>
+                    </Link>
+                  </li>
+                ))}
+          </ol>
+        </section>
+
+        <section className="admin-float rounded-3xl border border-line bg-ink-raised p-6">
+          <h2 className="font-display text-xl tracking-tight text-fg">Quick create</h2>
+          <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft">
+            Straight into a fresh entry
+          </p>
+
+          <div className="mt-5 space-y-2.5">
+            {[
+              { key: 'posts', label: 'New blog post' },
+              { key: 'case-studies', label: 'New case study' },
+              { key: 'services', label: 'New service' },
+              { key: 'team', label: 'New team member' },
+            ].map((action) => (
+              <Link
+                key={action.key}
+                href={`/admin/${action.key}?new=1`}
+                className="group flex items-center gap-3 rounded-2xl border border-dashed border-line-strong px-4 py-3 text-sm font-medium text-fg-soft transition-all hover:border-transparent hover:bg-gradient-to-r hover:from-[#d97a2e] hover:to-[#f0b35e] hover:text-white"
               >
-                <AdminIcon name={resource.key} className="h-4.5 w-4.5" />
-              </span>
-              <span
-                aria-hidden="true"
-                className="text-fg-soft/50 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-accent"
-              >
-                →
-              </span>
-            </div>
-            <p className="mt-5 font-display text-4xl tabular-nums text-fg">
-              {counts[resource.key] ?? '—'}
-            </p>
-            <p className="mt-1 text-sm text-fg-soft">{resource.label}</p>
-          </Link>
-        ))}
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent-soft text-accent transition-colors group-hover:bg-white/20 group-hover:text-white">
+                  <AdminIcon name="plus" className="h-3 w-3" />
+                </span>
+                {action.label}
+                <span
+                  aria-hidden="true"
+                  className="ml-auto opacity-0 transition-opacity group-hover:opacity-100"
+                >
+                  →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   );
