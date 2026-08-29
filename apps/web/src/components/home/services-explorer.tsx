@@ -277,7 +277,7 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
         </div>
 
         <div
-          className="mt-16 grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-20"
+          className="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-[1.15fr_1fr] lg:gap-20"
           onPointerEnter={() => {
             pausedRef.current = true;
           }}
@@ -356,9 +356,9 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
           </Reveal>
 
           {/* The preview panel — cycles on its own, answers the cursor when hovered */}
-          <Reveal className="hidden lg:block">
-            <div className="reveal-scale sticky top-28">
-              <div className="relative min-h-[26rem] overflow-hidden rounded-3xl border border-line bg-ink-raised">
+          <Reveal>
+            <div className="reveal-scale lg:sticky lg:top-28">
+              <div className="relative min-h-[21rem] overflow-hidden rounded-3xl border border-line bg-ink-raised sm:min-h-[24rem] lg:min-h-[26rem]">
                 {services.map((service, index) => {
                   const on = index === active;
                   // Entering elements stagger up; exiting ones vanish instantly
@@ -378,7 +378,7 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
                     <div
                       key={service.id}
                       aria-hidden={!on}
-                      className="absolute inset-0 flex flex-col justify-between p-10 transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                      className="absolute inset-0 flex flex-col justify-between p-6 transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] sm:p-8 lg:p-10"
                       style={{
                         opacity: on ? 1 : 0,
                         background: washes[index % washes.length],
@@ -419,7 +419,7 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
                 })}
 
                 {/* Cycle progress: one tick per service, the active one fills */}
-                <div className="absolute inset-x-10 bottom-4 flex gap-1.5" aria-hidden="true">
+                <div className="absolute inset-x-6 bottom-4 flex gap-1.5 sm:inset-x-8 lg:inset-x-10" aria-hidden="true">
                   {services.map((service, index) => (
                     <span
                       key={service.id}

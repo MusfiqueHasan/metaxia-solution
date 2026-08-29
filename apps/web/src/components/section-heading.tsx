@@ -21,7 +21,7 @@ export function SectionHeading({ eyebrow, title, lede, align = 'left', index }: 
         <span className="inline-block h-px w-6 self-center bg-line-strong" aria-hidden="true" />
         {eyebrow}
       </div>
-      <h2 className="reveal-rise mt-5 font-display text-4xl leading-[1.05] tracking-[-0.01em] text-fg sm:text-5xl">
+      <h2 className="reveal-rise mt-5 font-display text-[1.9rem] leading-[1.08] tracking-[-0.01em] text-fg sm:text-4xl lg:text-5xl">
         {title}
       </h2>
       {lede ? (

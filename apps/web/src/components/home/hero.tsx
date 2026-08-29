@@ -24,6 +24,9 @@ export function Hero({ stats }: HeroProps) {
     const content = contentRef.current;
     if (!content) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // The fade distance assumes the hero ≈ one viewport tall; on phones the
+    // section runs taller, so mid-hero content would ghost out. Desktop only.
+    if (!window.matchMedia('(min-width: 1024px)').matches) return;
 
     let frame = 0;
     const onScroll = () => {
@@ -51,16 +54,16 @@ export function Hero({ stats }: HeroProps) {
       {/* The orb: rising from below the fold like a planet at the horizon. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-[62%] h-[130vmin] w-[130vmin] -translate-x-1/2"
+        className="pointer-events-none absolute bottom-[-45vmin] left-1/2 h-[110vmin] w-[110vmin] -translate-x-1/2 lg:bottom-auto lg:top-[62%] lg:h-[130vmin] lg:w-[130vmin]"
       >
         <div className="absolute inset-0 rounded-full bg-accent/[0.07] blur-[120px]" />
         <ParticleOrb className="h-full w-full" />
       </div>
 
-      <Container className="relative w-full pb-32 pt-40 text-center">
+      <Container className="relative w-full pb-24 pt-36 text-center lg:pb-32 lg:pt-40">
         <div ref={contentRef} style={{ willChange: 'transform, opacity' }}>
           <Reveal>
-            <p className="reveal-fade font-mono text-[11px] font-medium uppercase tracking-[0.32em] text-fg-soft">
+            <p className="reveal-fade px-2 font-mono text-[10px] font-medium uppercase tracking-[0.26em] text-fg-soft sm:text-[11px] sm:tracking-[0.32em]">
               Metaxia — software for the AI era · Dhaka&nbsp;→&nbsp;worldwide
             </p>
 
@@ -73,7 +76,7 @@ export function Hero({ stats }: HeroProps) {
             </h1>
 
             <p
-              className="reveal-rise mx-auto mt-9 max-w-xl text-lg leading-relaxed text-fg-soft"
+              className="reveal-rise mx-auto mt-8 max-w-xl text-base leading-relaxed text-fg-soft sm:mt-9 sm:text-lg"
               style={{ ['--reveal-delay' as string]: '0.55s' }}
             >
               From cloud infrastructure to the software your customers touch every day —
@@ -94,7 +97,7 @@ export function Hero({ stats }: HeroProps) {
 
             {stats.length > 0 ? (
               <div
-                className="reveal-fade mx-auto mt-20 flex max-w-2xl flex-wrap items-start justify-center gap-x-16 gap-y-6 border-t border-line pt-8"
+                className="reveal-fade mx-auto mt-14 flex max-w-2xl flex-wrap items-start justify-center gap-x-10 gap-y-6 border-t border-line pt-8 sm:gap-x-16 lg:mt-20"
                 style={{ ['--reveal-delay' as string]: '0.9s' }}
               >
                 {stats.map((stat) => (

@@ -20,8 +20,8 @@ const variants = {
 } as const;
 
 const sizes = {
-  md: 'px-6 py-3 text-sm',
-  lg: 'px-8 py-4 text-base',
+  md: 'px-5 py-2.5 text-sm sm:px-6 sm:py-3',
+  lg: 'px-6 py-3 text-sm sm:px-8 sm:py-4 sm:text-base',
 } as const;
 
 export function Button({

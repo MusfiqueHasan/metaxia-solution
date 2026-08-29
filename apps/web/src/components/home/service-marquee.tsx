@@ -43,13 +43,13 @@ export function EthosMarquee() {
                   key={`${copy}-${principle}`}
                   href="/about"
                   tabIndex={copy === 1 ? -1 : 0}
-                  className="group flex shrink-0 items-center gap-3 px-10"
+                  className="group flex shrink-0 items-center gap-3 px-7 sm:px-10"
                 >
                   <span
                     className="h-1.5 w-1.5 rotate-45 bg-accent/50 transition-colors duration-300 group-hover:bg-accent"
                     aria-hidden="true"
                   />
-                  <span className="whitespace-nowrap font-display text-2xl tracking-[-0.01em] text-fg-soft/60 transition-colors duration-300 group-hover:text-fg">
+                  <span className="whitespace-nowrap font-display text-xl tracking-[-0.01em] text-fg-soft/60 transition-colors duration-300 group-hover:text-fg sm:text-2xl">
                     {principle}
                   </span>
                 </Link>
