@@ -178,10 +178,28 @@ export default async function TeamPage() {
                       className="reveal-rise group flex flex-col items-center text-center"
                       style={{ ['--reveal-delay' as string]: `${0.1 + index * 0.1}s` }}
                     >
-                      <span className="relative block w-full max-w-[10rem]">
+                      <span className="relative block w-full max-w-[15rem]">
                         <span
                           aria-hidden="true"
-                          className="absolute -bottom-1 -right-1 h-12 w-12 scale-50 rounded-full bg-accent opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-100 group-hover:opacity-100"
+                          className="absolute -right-3 top-4 h-10 w-16 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                          style={{
+                            backgroundImage:
+                              'radial-gradient(rgba(242,241,236,0.5) 1.5px, transparent 2px)',
+                            backgroundSize: '14px 14px',
+                          }}
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="absolute -left-4 bottom-8 h-12 w-10 opacity-0 transition-opacity duration-500 [transition-delay:80ms] group-hover:opacity-100"
+                          style={{
+                            backgroundImage:
+                              'radial-gradient(rgba(242,241,236,0.4) 1.5px, transparent 2px)',
+                            backgroundSize: '14px 14px',
+                          }}
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="absolute -bottom-1 -right-1 h-14 w-14 scale-50 rounded-full bg-accent opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-100 group-hover:opacity-100"
                         />
                         <span
                           className="relative block aspect-square overflow-hidden rounded-full border border-line"

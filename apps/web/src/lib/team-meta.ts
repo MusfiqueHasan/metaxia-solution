@@ -19,6 +19,14 @@ export const TEAM_PHOTO_FRAME: Record<
     circle: { backgroundColor: '#ffffff' },
     img: { transform: 'scale(1.6)', transformOrigin: '50% 14%' },
   },
+  mobassir: {
+    circle: { backgroundColor: '#ffffff' },
+    img: { transform: 'scale(1.2)', transformOrigin: '50% 32%' },
+  },
+  sadat: {
+    circle: { backgroundColor: '#ffffff' },
+    img: { transform: 'scale(1.9)', transformOrigin: '50% 10%' },
+  },
 };
 
 export interface ProfileExperience {
