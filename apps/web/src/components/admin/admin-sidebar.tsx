@@ -18,7 +18,13 @@ function emailFromToken(): string | null {
   }
 }
 
-export function AdminSidebar() {
+export function AdminSidebar({
+  open = false,
+  onClose,
+}: {
+  open?: boolean;
+  onClose?: () => void;
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const [email, setEmail] = useState<string | null>(null);
@@ -30,6 +36,8 @@ export function AdminSidebar() {
   // The login route runs chrome-free.
   if (pathname === '/admin') return null;
 
+  const handleNav = () => onClose?.();
+
   const linkClass = (active: boolean) =>
     `group relative flex items-center gap-3 rounded-full px-4 py-2.5 text-[13px] font-medium transition-all duration-200 ${
       active
@@ -38,7 +46,11 @@ export function AdminSidebar() {
     }`;
 
   return (
-    <aside className="admin-float sticky top-3 flex h-[calc(100svh-1.5rem)] w-60 shrink-0 flex-col rounded-3xl border border-line bg-ink-raised lg:top-4 lg:h-[calc(100svh-2rem)]">
+    <aside
+      className={`admin-float fixed inset-y-3 left-3 z-40 flex w-60 shrink-0 flex-col rounded-3xl border border-line bg-ink-raised transition-transform duration-300 ease-out lg:sticky lg:inset-y-auto lg:top-4 lg:z-auto lg:h-[calc(100svh-2rem)] lg:translate-x-0 lg:transition-none ${
+        open ? 'translate-x-0' : '-translate-x-[110%]'
+      }`}
+    >
       <Link
         href="/admin/dashboard"
         className="flex items-center gap-2.5 border-b border-line px-5 py-4"
@@ -57,7 +69,7 @@ export function AdminSidebar() {
       </Link>
 
       <nav className="flex-1 space-y-0.5 overflow-y-auto px-3 py-4" aria-label="Admin">
-        <Link href="/admin/dashboard" className={linkClass(pathname === '/admin/dashboard')}>
+        <Link href="/admin/dashboard" onClick={handleNav} className={linkClass(pathname === '/admin/dashboard')}>
           <AdminIcon name="dashboard" /> Dashboard
         </Link>
 
@@ -68,7 +80,7 @@ export function AdminSidebar() {
           const href = `/admin/${resource.key}`;
           const active = pathname.startsWith(href);
           return (
-            <Link key={resource.key} href={href} className={linkClass(active)}>
+            <Link key={resource.key} href={href} onClick={handleNav} className={linkClass(active)}>
               <AdminIcon name={resource.key} /> {resource.label}
             </Link>
           );
@@ -77,7 +89,7 @@ export function AdminSidebar() {
         <p className="px-3 pb-1.5 pt-5 font-mono text-[9px] font-medium uppercase tracking-[0.22em] text-fg-soft/70">
           Inbound
         </p>
-        <Link href="/admin/inbox" className={linkClass(pathname === '/admin/inbox')}>
+        <Link href="/admin/inbox" onClick={handleNav} className={linkClass(pathname === '/admin/inbox')}>
           <AdminIcon name="inbox" /> Inbox
         </Link>
       </nav>

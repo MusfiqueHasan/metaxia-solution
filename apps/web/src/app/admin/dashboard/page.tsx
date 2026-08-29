@@ -153,7 +153,7 @@ export default function AdminDashboardPage() {
 
       {/* Charts */}
       <div className="mt-8 grid gap-4 lg:grid-cols-3">
-        <section className="admin-float rounded-3xl border border-line bg-ink-raised p-6 lg:col-span-2">
+        <section className="admin-float min-w-0 rounded-3xl border border-line bg-ink-raised p-6 lg:col-span-2">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <div>
               <h2 className="font-display text-xl tracking-tight text-fg">Inbound activity</h2>
@@ -179,7 +179,7 @@ export default function AdminDashboardPage() {
           </div>
         </section>
 
-        <section className="admin-float rounded-3xl border border-line bg-ink-raised p-6">
+        <section className="admin-float min-w-0 rounded-3xl border border-line bg-ink-raised p-6">
           <h2 className="font-display text-xl tracking-tight text-fg">Posts by category</h2>
           <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft">
             Published writing
@@ -196,7 +196,7 @@ export default function AdminDashboardPage() {
 
       {/* Content mix + quick tiles */}
       <div className="mt-4 grid gap-4 lg:grid-cols-3">
-        <section className="admin-float rounded-3xl border border-line bg-ink-raised p-6">
+        <section className="admin-float min-w-0 rounded-3xl border border-line bg-ink-raised p-6">
           <h2 className="font-display text-xl tracking-tight text-fg">Content by type</h2>
           <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft">
             Everything published to the site
@@ -206,9 +206,9 @@ export default function AdminDashboardPage() {
           </div>
         </section>
 
-        <div className="flex flex-col gap-4 lg:col-span-2">
+        <div className="flex min-w-0 flex-col gap-4 lg:col-span-2">
           {/* Latest messages preview */}
-          <section className="admin-float flex-1 rounded-3xl border border-line bg-ink-raised p-6">
+          <section className="admin-float min-w-0 flex-1 rounded-3xl border border-line bg-ink-raised p-6">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-display text-xl tracking-tight text-fg">Latest messages</h2>
@@ -320,7 +320,7 @@ export default function AdminDashboardPage() {
       {/* Recently updated + quick create — replaces the stat cards, whose
           counts already live in the Content-by-type bars */}
       <div className="mt-4 grid gap-4 lg:grid-cols-3">
-        <section className="admin-float rounded-3xl border border-line bg-ink-raised p-6 lg:col-span-2">
+        <section className="admin-float min-w-0 rounded-3xl border border-line bg-ink-raised p-6 lg:col-span-2">
           <h2 className="font-display text-xl tracking-tight text-fg">Recently updated</h2>
           <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft">
             The last things anyone touched
@@ -365,7 +365,7 @@ export default function AdminDashboardPage() {
           </ol>
         </section>
 
-        <section className="admin-float rounded-3xl border border-line bg-ink-raised p-6">
+        <section className="admin-float min-w-0 rounded-3xl border border-line bg-ink-raised p-6">
           <h2 className="font-display text-xl tracking-tight text-fg">Quick create</h2>
           <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft">
             Straight into a fresh entry

@@ -60,13 +60,14 @@ export default async function ServicesPage() {
                         }`}
                       />
 
-                      {/* Diagram — left on even panels, right on odd */}
+                      {/* Diagram — top strip on small screens; left on even
+                          panels, right on odd from lg up */}
                       <div
-                        className={`relative hidden lg:block ${
-                          diagramLeft ? 'border-r lg:order-1' : 'border-l lg:order-2'
-                        } border-line/60`}
+                        className={`relative h-52 border-b border-line/60 sm:h-60 lg:h-auto lg:border-b-0 ${
+                          diagramLeft ? 'lg:order-1 lg:border-r' : 'lg:order-2 lg:border-l'
+                        }`}
                       >
-                        <div className="absolute inset-0 p-10 xl:p-14">
+                        <div className="absolute inset-0 p-5 sm:p-6 lg:p-10 xl:p-14">
                           <ServiceDiagram slug={service.slug} />
                         </div>
                       </div>

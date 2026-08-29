@@ -138,10 +138,10 @@ export default async function ServiceDetailPage({
             </div>
 
             <div
-              className="reveal-scale relative hidden lg:block"
+              className="reveal-scale relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none"
               style={{ ['--reveal-delay' as string]: '0.25s' }}
             >
-              <div className="relative overflow-clip rounded-[2rem] border border-line bg-ink-raised/50 p-8 xl:p-10">
+              <div className="relative overflow-clip rounded-[2rem] border border-line bg-ink-raised/50 p-6 sm:p-8 xl:p-10">
                 <span
                   aria-hidden="true"
                   className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/10 blur-[70px]"

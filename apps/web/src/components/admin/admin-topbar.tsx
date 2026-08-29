@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AdminIcon } from '@/components/admin/ui';
 
-export function AdminTopbar() {
+export function AdminTopbar({ onMenu }: { onMenu?: () => void }) {
   const pathname = usePathname();
   if (pathname === '/admin') return null;
 
@@ -17,10 +17,22 @@ export function AdminTopbar() {
 
   return (
     <header className="admin-float sticky top-3 z-30 flex h-14 items-center justify-between rounded-full border border-line bg-ink-raised/90 px-6 backdrop-blur lg:top-4">
-      <p className="font-mono text-[10px] font-medium uppercase tracking-[0.24em] text-fg-soft">
-        Admin <span className="mx-1.5 text-fg-soft/50">/</span>
-        <span className="text-fg">{section}</span>
-      </p>
+      <div className="flex min-w-0 items-center gap-3">
+        <button
+          type="button"
+          onClick={onMenu}
+          aria-label="Open menu"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line text-fg-soft transition-colors hover:border-accent hover:text-accent lg:hidden"
+        >
+          <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          </svg>
+        </button>
+        <p className="truncate font-mono text-[10px] font-medium uppercase tracking-[0.24em] text-fg-soft">
+          Admin <span className="mx-1.5 text-fg-soft/50">/</span>
+          <span className="text-fg">{section}</span>
+        </p>
+      </div>
 
       <Link
         href="/"

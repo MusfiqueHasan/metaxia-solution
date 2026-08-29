@@ -62,7 +62,7 @@ export function AreaChart({ series, labels }: { series: AreaSeries[]; labels: st
 
   return (
     <div>
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label="Activity chart">
+      <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto w-full" style={{ maxWidth: '100%' }} preserveAspectRatio="xMidYMid meet" role="img" aria-label="Activity chart">
         <defs>
           <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor={series[0]?.color ?? '#d97a2e'} stopOpacity="0.22" />
