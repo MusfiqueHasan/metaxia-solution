@@ -31,6 +31,22 @@ const CHANNELS = [
     ),
   },
   {
+    label: 'Phone',
+    value: '+880 1312-141184',
+    note: 'Calls and WhatsApp both work',
+    href: 'tel:+8801312141184',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+        <path
+          d="M5 4h4l1.5 4.5-2.2 1.7a13 13 0 0 0 5.5 5.5l1.7-2.2L20 15v4a1.5 1.5 0 0 1-1.6 1.5C10.4 20 4 13.6 3.5 5.6A1.5 1.5 0 0 1 5 4z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+      </svg>
+    ),
+  },
+  {
     label: 'Base',
     value: 'Mirpur, Dhaka, Bangladesh',
     note: 'Working worldwide, async-friendly',
