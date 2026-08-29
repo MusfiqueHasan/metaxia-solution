@@ -6,7 +6,7 @@ import { ServiceMarquee } from '@/components/home/service-marquee';
 import { ServicesExplorer } from '@/components/home/services-explorer';
 import { CaseStudyScroller } from '@/components/home/case-study-scroller';
 import { Approach } from '@/components/home/approach';
-import { Skills } from '@/components/home/skills';
+import { Stack } from '@/components/home/stack';
 import { BlogPreview } from '@/components/home/blog-preview';
 import { ContactCta } from '@/components/home/contact-cta';
 import { ScrollTop } from '@/components/motion/scroll-top';
@@ -39,7 +39,7 @@ export default async function Home() {
       <ServicesExplorer services={services} />
       <CaseStudyScroller items={caseStudies} />
       <Approach />
-      <Skills />
+      <Stack />
       <BlogPreview posts={posts.slice(0, 3)} />
       <ContactCta />
       <ScrollTop />
