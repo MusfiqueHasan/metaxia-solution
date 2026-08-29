@@ -100,6 +100,7 @@ export default async function FaqPage() {
                   {faq.map((item, index) => (
                     <details
                       key={item.id}
+                      open={index === 0}
                       className="reveal-rise group overflow-clip rounded-3xl border border-line bg-ink-raised/50 transition-colors duration-300 open:border-accent/30 open:bg-ink-raised hover:border-accent/30"
                       style={{ ['--reveal-delay' as string]: `${index * 0.05}s` }}
                     >
