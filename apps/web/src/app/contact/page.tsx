@@ -17,6 +17,54 @@ export const metadata: Metadata = {
   },
 };
 
+const CHANNELS = [
+  {
+    label: 'Email',
+    value: 'hello@metaxia.io',
+    note: 'Decks and briefs welcome',
+    href: 'mailto:hello@metaxia.io',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+        <path d="M4 6h16v12H4z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="m4 7.5 8 5.5 8-5.5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Base',
+    value: 'Dhaka, Bangladesh',
+    note: 'Working worldwide, async-friendly',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+        <path
+          d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+        <circle cx="12" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Response time',
+    value: 'Within one business day',
+    note: 'A person replies, not a form letter',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+        <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M12 7.5V12l3 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+];
+
+const NEXT_STEPS = [
+  { title: 'We read it — same day', note: 'Your message lands in a founder inbox, not a queue.' },
+  { title: 'A 30-minute scoping call', note: 'We ask the hard questions early: goals, constraints, budget.' },
+  { title: 'A written plan, free', note: 'Scope, timeline, and price in writing — yours to keep either way.' },
+];
+
 export default function ContactPage() {
   return (
     <main className="page-wide">
@@ -29,53 +77,83 @@ export default function ContactPage() {
       <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
         <SectionBackdrop glow="right" variant="sweep" side="right" />
         <Container>
-          <Reveal className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+          <Reveal className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
             <div className="reveal-rise">
-            <div>
               <SectionHeading
                 eyebrow="Get In Touch"
                 title="Reach us directly"
                 lede="Prefer email or want to send a deck ahead of a call? Use the details below — the form works too."
               />
 
-              <dl className="mt-10 space-y-8 border-t border-line pt-8">
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-fg-soft">
-                    Email
-                  </dt>
-                  <dd className="mt-2">
-                    <a
-                      href="mailto:hello@metaxia.io"
-                      className="font-display text-xl tracking-[-0.01em] text-fg transition-colors hover:text-accent"
-                    >
-                      hello@metaxia.io
-                    </a>
-                  </dd>
-                </div>
+              <p className="mt-8 inline-flex items-center gap-2.5 rounded-full border border-line px-4 py-2 font-mono text-[10px] font-medium uppercase tracking-[0.22em] text-fg-soft">
+                <span className="relative flex h-2 w-2" aria-hidden="true">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                Taking new projects
+              </p>
 
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-fg-soft">
-                    Headquarters
-                  </dt>
-                  <dd className="mt-2 text-base leading-relaxed text-fg-soft">
-                    480 Folsom Street, Suite 700
-                    <br />
-                    San Francisco, CA 94105
-                  </dd>
-                </div>
+              <ul className="mt-8 space-y-3">
+                {CHANNELS.map((channel) => {
+                  const inner = (
+                    <>
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-line bg-ink text-accent transition-colors duration-300 group-hover:border-accent/40">
+                        {channel.icon}
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft/70">
+                          {channel.label}
+                        </span>
+                        <span className="mt-1 block truncate font-display text-lg tracking-[-0.01em] text-fg transition-colors duration-300 group-hover:text-accent-strong">
+                          {channel.value}
+                        </span>
+                        <span className="mt-0.5 block text-[13px] text-fg-soft">{channel.note}</span>
+                      </span>
+                      {channel.href ? (
+                        <span
+                          aria-hidden="true"
+                          className="text-fg-soft/40 transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent"
+                        >
+                          →
+                        </span>
+                      ) : null}
+                    </>
+                  );
+                  const cardClass =
+                    'group flex items-center gap-4 rounded-3xl border border-line bg-ink-raised/50 p-5 transition-colors duration-300 hover:border-accent/30';
+                  return (
+                    <li key={channel.label}>
+                      {channel.href ? (
+                        <a href={channel.href} className={cardClass}>
+                          {inner}
+                        </a>
+                      ) : (
+                        <div className={cardClass}>{inner}</div>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
 
-                <div>
-                  <dt className="text-xs font-semibold uppercase tracking-[0.2em] text-fg-soft">
-                    Response Time
-                  </dt>
-                  <dd className="mt-2 text-base leading-relaxed text-fg-soft">
-                    We reply to every message within one business day, Monday through Friday.
-                  </dd>
-                </div>
-              </dl>
+              {/* What happens after you hit send */}
+              <div className="mt-12">
+                <p className="font-mono text-[10px] font-medium uppercase tracking-[0.26em] text-accent">
+                  What happens next
+                </p>
+                <ol className="relative mt-6 space-y-7 before:absolute before:bottom-3 before:left-[13px] before:top-3 before:w-px before:bg-line">
+                  {NEXT_STEPS.map((step, index) => (
+                    <li key={step.title} className="relative pl-12">
+                      <span className="absolute left-0 top-0 flex h-7 w-7 items-center justify-center rounded-full border border-accent/40 bg-ink font-mono text-[10px] text-accent ring-4 ring-ink">
+                        {index + 1}
+                      </span>
+                      <p className="text-sm font-medium text-fg">{step.title}</p>
+                      <p className="mt-1 text-[13px] leading-relaxed text-fg-soft">{step.note}</p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
             </div>
 
-            </div>
             <div className="reveal-rise" style={{ ['--reveal-delay' as string]: '0.15s' }}>
               <ContactForm />
             </div>
