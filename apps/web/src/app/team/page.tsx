@@ -161,14 +161,14 @@ export default async function TeamPage() {
 
           {/* The crew: smaller portraits so the founders keep the spotlight */}
           {crew.length > 0 ? (
-            <Reveal className="mt-24 lg:mt-32">
+            <Reveal className="mt-14 lg:mt-16">
               <p className="reveal-fade flex items-center justify-center gap-3 text-center font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-fg-soft">
                 <span className="inline-block h-px w-6 self-center bg-line-strong" aria-hidden="true" />
                 And the crew behind them
                 <span className="inline-block h-px w-6 self-center bg-line-strong" aria-hidden="true" />
               </p>
 
-              <div className="mx-auto mt-14 grid max-w-3xl gap-12 sm:grid-cols-3 lg:gap-14">
+              <div className="mx-auto mt-12 grid max-w-4xl gap-12 sm:grid-cols-3 lg:gap-16">
                 {crew.map((member, index) => {
                   const photo = member.photoUrl ?? TEAM_PHOTOS[member.slug];
                   const frame = TEAM_PHOTO_FRAME[member.slug];
@@ -178,7 +178,7 @@ export default async function TeamPage() {
                       className="reveal-rise group flex flex-col items-center text-center"
                       style={{ ['--reveal-delay' as string]: `${0.1 + index * 0.1}s` }}
                     >
-                      <span className="relative block w-full max-w-[15rem]">
+                      <span className="relative block w-full max-w-[17rem]">
                         <span
                           aria-hidden="true"
                           className="absolute -right-3 top-4 h-10 w-16 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
