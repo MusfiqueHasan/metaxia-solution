@@ -116,10 +116,37 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
             <h2 className="reveal-rise max-w-3xl font-display text-5xl leading-[1.02] tracking-[-0.01em] text-fg sm:text-6xl lg:text-7xl">
               Systems we&rsquo;ve designed and shipped
             </h2>
-            <p className="reveal-fade font-mono text-sm tabular-nums text-fg-soft">
-              <span className="text-accent">{String(current + 1).padStart(2, '0')}</span> /{' '}
-              {String(shown.length).padStart(2, '0')}
-            </p>
+            <div className="reveal-fade flex items-center gap-4">
+              <p className="font-mono text-sm tabular-nums text-fg-soft">
+                <span className="text-accent">{String(current + 1).padStart(2, '0')}</span> /{' '}
+                {String(shown.length).padStart(2, '0')}
+              </p>
+              {/* Touch controls — desktop has the edge arrows on the rail */}
+              <div className="flex items-center gap-2 lg:hidden">
+                <button
+                  type="button"
+                  onClick={() => scrollBy(-1)}
+                  disabled={current === 0}
+                  aria-label="Previous project"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-line-strong text-fg-soft transition-colors hover:border-accent hover:text-accent disabled:opacity-35"
+                >
+                  <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5" aria-hidden="true">
+                    <path d="M14 8H3M7 3.5 2.5 8 7 12.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollBy(1)}
+                  disabled={current === shown.length - 1}
+                  aria-label="Next project"
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-line-strong text-fg-soft transition-colors hover:border-accent hover:text-accent disabled:opacity-35"
+                >
+                  <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5" aria-hidden="true">
+                    <path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         </Reveal>
       </Container>
