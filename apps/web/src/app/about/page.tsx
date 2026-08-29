@@ -22,7 +22,7 @@ const stats = [
   { value: 6, suffix: '+', label: 'Projects shipped' },
   { value: 2, suffix: '+', label: 'Years of experience' },
   { value: 5, suffix: '+', label: 'Happy clients' },
-  { value: 2, suffix: '', label: 'People on the team' },
+  { value: 4, suffix: '', label: 'People on the team' },
 ];
 
 const values = [
