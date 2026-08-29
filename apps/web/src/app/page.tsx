@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getServices, getCaseStudies, getPosts } from '@/lib/api';
 import { site } from '@/lib/site';
 import { Hero } from '@/components/home/hero';
-import { ServiceMarquee } from '@/components/home/service-marquee';
+import { EthosMarquee } from '@/components/home/service-marquee';
 import { ServicesExplorer } from '@/components/home/services-explorer';
 import { CaseStudyScroller } from '@/components/home/case-study-scroller';
 import { Approach } from '@/components/home/approach';
@@ -35,7 +35,7 @@ export default async function Home() {
   return (
     <main>
       <Hero stats={stats} />
-      <ServiceMarquee services={services} />
+      <EthosMarquee />
       <ServicesExplorer services={services} />
       <CaseStudyScroller items={caseStudies} />
       <Approach />
