@@ -614,6 +614,33 @@ Vendor evaluation is ultimately a product decision as much as a technical one. T
         linkedinUrl: null,
         order: 2,
       },
+      {
+        slug: 'mobassir',
+        name: 'Mobashshir Al Islam',
+        role: 'Digital Creator & Video Editor',
+        photoUrl: '/projects/mobassir.png',
+        bio: 'Mobassir runs the visual side of Metaxia — brand films, product walkthroughs, and the social cuts that make shipped work travel.',
+        linkedinUrl: null,
+        order: 3,
+      },
+      {
+        slug: 'sadat',
+        name: 'Nazmus Sadat',
+        role: 'Software Engineer',
+        photoUrl: '/projects/sadat.png',
+        bio: 'Sadat builds alongside the founders across the stack — features, fixes, and the tests that keep weekly releases boring.',
+        linkedinUrl: null,
+        order: 4,
+      },
+      {
+        slug: 'marketing-lead',
+        name: 'Announcing soon',
+        role: 'Marketing & Growth Lead',
+        photoUrl: null,
+        bio: 'The newest member of the crew — leading marketing and growth. Full introduction coming soon.',
+        linkedinUrl: null,
+        order: 5,
+      },
     ],
   });
 
