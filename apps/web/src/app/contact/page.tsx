@@ -156,6 +156,37 @@ export default function ContactPage() {
 
             <div className="reveal-rise" style={{ ['--reveal-delay' as string]: '0.15s' }}>
               <ContactForm />
+
+              {/* Fills the column under the form and helps people write a
+                  brief we can act on in one pass. */}
+              <div className="mt-5 rounded-3xl border border-line bg-ink-raised/40 p-7 lg:p-8">
+                <p className="font-mono text-[10px] font-medium uppercase tracking-[0.26em] text-accent">
+                  The best briefs mention
+                </p>
+                <ul className="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                  {[
+                    'The goal, in one sentence',
+                    'A rough timeline or deadline',
+                    'A budget range, even a wide one',
+                    'Links to anything that already exists',
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-[13px] leading-relaxed text-fg-soft"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-[6px] h-1 w-1 shrink-0 rotate-45 bg-accent/60"
+                      />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-5 border-t border-line pt-4 text-[13px] leading-relaxed text-fg-soft/80">
+                  Missing half of these? Send it anyway — shaping the brief together is part of
+                  the first call.
+                </p>
+              </div>
             </div>
           </Reveal>
         </Container>
