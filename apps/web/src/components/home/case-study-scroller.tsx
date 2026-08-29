@@ -116,7 +116,7 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
             <h2 className="reveal-rise max-w-3xl font-display text-5xl leading-[1.02] tracking-[-0.01em] text-fg sm:text-6xl lg:text-7xl">
               Systems we&rsquo;ve designed and shipped
             </h2>
-            <div className="reveal-fade flex items-center gap-4">
+            <div className="reveal-fade flex w-full items-center justify-between gap-4 lg:w-auto">
               <p className="font-mono text-sm tabular-nums text-fg-soft">
                 <span className="text-accent">{String(current + 1).padStart(2, '0')}</span> /{' '}
                 {String(shown.length).padStart(2, '0')}
