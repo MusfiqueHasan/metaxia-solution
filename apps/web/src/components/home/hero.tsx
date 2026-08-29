@@ -61,7 +61,7 @@ export function Hero({ stats }: HeroProps) {
         <div ref={contentRef} style={{ willChange: 'transform, opacity' }}>
           <Reveal>
             <p className="reveal-fade font-mono text-[11px] font-medium uppercase tracking-[0.32em] text-fg-soft">
-              Metaxia — systems &amp; software, London&nbsp;/&nbsp;Dhaka&nbsp;/&nbsp;Remote
+              Metaxia — software for the AI era · Dhaka&nbsp;→&nbsp;worldwide
             </p>
 
             <h1 className="mx-auto mt-10 max-w-5xl font-display text-[clamp(3.25rem,9vw,8rem)] leading-[0.98] tracking-[-0.01em] text-fg">
