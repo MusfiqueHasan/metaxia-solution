@@ -267,16 +267,10 @@ export default async function ServiceDetailPage({
                     </div>
                   ))}
                 </dl>
-                <div className="relative mt-6 space-y-3">
+                <div className="relative mt-6">
                   <Button href="/contact" className="w-full">
                     Scope this work
                   </Button>
-                  <Link
-                    href="/services"
-                    className="flex w-full items-center justify-center gap-2 rounded-full border border-line px-6 py-3 text-sm font-medium text-fg-soft transition-colors hover:border-accent hover:text-accent"
-                  >
-                    ← All services
-                  </Link>
                 </div>
               </div>
             </aside>
