@@ -187,7 +187,7 @@ export function ContactForm() {
             id="contact-message"
             name="message"
             required
-            rows={5}
+            rows={9}
             value={fields.message}
             onChange={(e) => setFields((f) => ({ ...f, message: e.target.value }))}
             disabled={sending}
