@@ -25,7 +25,7 @@ export const TEAM_PHOTO_FRAME: Record<
   },
   sadat: {
     circle: { backgroundColor: '#ffffff' },
-    img: { objectPosition: '50% 0%', transform: 'translateY(-3%) scale(1.25)', transformOrigin: '50% 0%' },
+    img: { objectPosition: '50% 0%', transform: 'translateY(-4%) scale(1.45)', transformOrigin: '50% 0%' },
   },
 };
 
