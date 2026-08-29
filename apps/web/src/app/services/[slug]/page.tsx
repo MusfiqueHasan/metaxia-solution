@@ -100,19 +100,13 @@ export default async function ServiceDetailPage({
             <div>
               <Link
                 href="/services"
-                className="reveal-fade group inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 font-mono text-[10px] font-medium uppercase tracking-[0.22em] text-fg-soft transition-colors hover:border-accent hover:text-accent"
+                className="reveal-fade inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.24em] text-fg-soft transition-colors hover:text-fg"
               >
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-300 group-hover:-translate-x-0.5"
-                >
-                  ←
-                </span>
-                All services
+                <span aria-hidden="true">←</span> All services
               </Link>
 
               <p
-                className="reveal-fade mt-8 flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.3em] text-accent"
+                className="reveal-fade mt-10 flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.3em] text-accent"
                 style={{ ['--reveal-delay' as string]: '0.1s' }}
               >
                 Practice {practiceIndex} / {String(allServices.length).padStart(2, '0')}
@@ -168,71 +162,112 @@ export default async function ServiceDetailPage({
           <Reveal className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-20">
             <div className="reveal-rise max-w-3xl">
               {intro ? (
-                <p className="font-display text-2xl leading-snug tracking-[-0.01em] text-fg sm:text-[1.7rem]">
-                  {intro}
-                </p>
+                <div className="relative border-l-2 border-accent/60 pl-6 sm:pl-8">
+                  <p className="font-mono text-[10px] font-medium uppercase tracking-[0.26em] text-accent">
+                    Overview
+                  </p>
+                  <p className="mt-4 font-display text-2xl leading-snug tracking-[-0.01em] text-fg sm:text-[1.7rem]">
+                    {intro}
+                  </p>
+                </div>
               ) : null}
 
-              <div className={intro ? 'mt-14 space-y-14' : 'space-y-14'}>
-                {sections.length > 0 ? (
-                  sections.map((section, index) => (
-                    <div key={section.heading} className="border-t border-line pt-10">
-                      <div className="flex items-baseline gap-4">
-                        <span className="font-mono text-sm text-accent">
+              {sections.length > 0 ? (
+                <div
+                  className={`relative space-y-16 before:absolute before:bottom-4 before:left-[17px] before:top-4 before:w-px before:bg-line ${
+                    intro ? 'mt-16' : ''
+                  }`}
+                >
+                  {sections.map((section, index) => {
+                    const lines = section.content.split('\n');
+                    const bullets = lines
+                      .map((line) => line.match(/^\s*-\s+(.*)/)?.[1]?.replace(/[*_`]/g, '').trim())
+                      .filter((line): line is string => Boolean(line));
+                    const prose = lines
+                      .filter((line) => !/^\s*-\s+/.test(line))
+                      .join('\n')
+                      .trim();
+
+                    return (
+                      <div key={section.heading} className="relative pl-14 sm:pl-16">
+                        <span className="absolute left-0 top-0 flex h-9 w-9 items-center justify-center rounded-full border border-accent/40 bg-ink font-mono text-[11px] text-accent ring-4 ring-ink">
                           {String(index + 1).padStart(2, '0')}
                         </span>
-                        <h2 className="font-display text-2xl tracking-[-0.01em] text-fg sm:text-3xl">
+                        <h2 className="pt-1 font-display text-2xl tracking-[-0.01em] text-fg sm:text-3xl">
                           {section.heading}
                         </h2>
+
+                        {prose ? (
+                          <div className="mt-5">
+                            <Markdown body={prose} />
+                          </div>
+                        ) : null}
+
+                        {bullets.length > 0 ? (
+                          <ul className={`grid gap-3 sm:grid-cols-2 ${prose ? 'mt-6' : 'mt-6'}`}>
+                            {bullets.map((bullet) => (
+                              <li
+                                key={bullet}
+                                className="flex items-start gap-3 rounded-2xl border border-line bg-ink-raised/40 p-4 text-[13px] leading-relaxed text-fg-soft transition-colors duration-300 hover:border-accent/30 hover:text-fg"
+                              >
+                                <span
+                                  aria-hidden="true"
+                                  className="mt-[6px] h-1 w-1 shrink-0 rotate-45 bg-accent"
+                                />
+                                {bullet}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
                       </div>
-                      <div className="mt-6 pl-0 sm:pl-10">
-                        <Markdown body={section.content} />
-                      </div>
-                    </div>
-                  ))
-                ) : (
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className={intro ? 'mt-14' : ''}>
                   <Markdown body={service.body} />
-                )}
-              </div>
+                </div>
+              )}
             </div>
 
             <aside className="reveal-scale order-first lg:order-none" style={{ ['--reveal-delay' as string]: '0.15s' }}>
-              <div className="rounded-3xl border border-line bg-ink-raised p-8 lg:sticky lg:top-28">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-line bg-ink text-accent">
-                  <Icon name={service.icon} className="h-5 w-5" />
-                </span>
-                <h2 className="mt-6 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-fg-soft">
+              <div className="relative overflow-clip rounded-3xl border border-line bg-ink-raised p-8 lg:sticky lg:top-28">
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-14 -top-14 h-36 w-36 rounded-full bg-accent/10 blur-[60px]"
+                />
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent"
+                />
+                <div className="relative flex items-center justify-between">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent/30 bg-accent-soft text-accent">
+                    <Icon name={service.icon} className="h-5 w-5" />
+                  </span>
+                  <span className="font-mono text-sm tracking-[0.2em] text-fg-soft/50">
+                    {practiceIndex}
+                    <span className="text-fg-soft/30"> / {String(allServices.length).padStart(2, '0')}</span>
+                  </span>
+                </div>
+                <h2 className="relative mt-6 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-fg-soft">
                   At a glance
                 </h2>
-                <dl className="mt-5 space-y-5">
-                  <div>
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft/70">
-                      Practice
-                    </dt>
-                    <dd className="mt-1 text-sm text-fg">
-                      {practiceIndex} / {String(allServices.length).padStart(2, '0')} — {service.title}
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft/70">
-                      Typical engagement
-                    </dt>
-                    <dd className="mt-1 text-sm text-fg">6–16 weeks, weekly releases</dd>
-                  </div>
-                  <div>
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft/70">
-                      Team shape
-                    </dt>
-                    <dd className="mt-1 text-sm text-fg">2–4 engineers + a lead you talk to daily</dd>
-                  </div>
-                  <div>
-                    <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft/70">
-                      Starts with
-                    </dt>
-                    <dd className="mt-1 text-sm text-fg">A scoping call and a written plan — free</dd>
-                  </div>
+                <dl className="relative mt-2 divide-y divide-line">
+                  {[
+                    ['Practice', service.title],
+                    ['Typical engagement', '6–16 weeks, weekly releases'],
+                    ['Team shape', '2–4 engineers + a lead you talk to daily'],
+                    ['Starts with', 'A scoping call and a written plan — free'],
+                  ].map(([term, detail]) => (
+                    <div key={term} className="py-4">
+                      <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-fg-soft/70">
+                        {term}
+                      </dt>
+                      <dd className="mt-1.5 text-sm leading-relaxed text-fg">{detail}</dd>
+                    </div>
+                  ))}
                 </dl>
-                <div className="mt-8 space-y-3">
+                <div className="relative mt-6 space-y-3">
                   <Button href="/contact" className="w-full">
                     Scope this work
                   </Button>
