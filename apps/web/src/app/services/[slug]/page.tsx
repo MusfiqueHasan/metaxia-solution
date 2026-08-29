@@ -156,7 +156,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* The engagement, section by section */}
-      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-14 md:py-24 lg:py-28">
         <SectionBackdrop glow="left" variant="orbs" />
         <Container>
           <Reveal className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-20">
@@ -279,7 +279,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {otherServices.length > 0 ? (
-        <section className="grain relative overflow-clip bg-ink-raised py-24 lg:py-28">
+        <section className="grain relative overflow-clip bg-ink-raised py-14 md:py-24 lg:py-28">
           <SectionBackdrop glow="center" variant="plain" />
           <Container>
             <div className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.28em] text-accent">

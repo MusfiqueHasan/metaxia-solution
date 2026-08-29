@@ -13,7 +13,7 @@ export function SiteFooter() {
 
   return (
     <footer className="relative overflow-hidden border-t border-line bg-ink text-fg">
-      <Container className="relative py-20 lg:py-28">
+      <Container className="relative py-12 md:py-20 lg:py-28">
         <div className="grid gap-14 lg:grid-cols-[1.6fr_1fr_1fr_1.4fr]">
           <div>
             <Link

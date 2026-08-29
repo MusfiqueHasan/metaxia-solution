@@ -28,7 +28,7 @@ export default async function CareersPage() {
         lede="We're a small team working on real client systems, not internal tools nobody uses. Here's what's currently open."
       />
 
-      <section className="bg-ink py-24 lg:py-28">
+      <section className="bg-ink py-14 md:py-24 lg:py-28">
         <Container>
           <div className="max-w-2xl">
             <p className="text-base leading-relaxed text-fg-soft">

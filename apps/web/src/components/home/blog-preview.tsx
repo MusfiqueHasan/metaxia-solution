@@ -16,7 +16,7 @@ export function BlogPreview({ posts }: { posts: Post[] }) {
   if (posts.length === 0) return null;
 
   return (
-    <section className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
+    <section className="grain relative overflow-clip border-t border-line bg-ink py-16 md:py-28 lg:py-36">
       <SectionBackdrop glow="right" variant="cube" side="right" />
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">

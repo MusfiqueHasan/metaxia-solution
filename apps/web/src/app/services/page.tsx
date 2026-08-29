@@ -36,7 +36,7 @@ export default async function ServicesPage() {
         lede="Your users already expect software that thinks. Every engagement below ships with that expectation built in — from the data layer up."
       />
 
-      <section className="grain relative overflow-clip bg-ink py-20 lg:py-24">
+      <section className="grain relative overflow-clip bg-ink py-12 md:py-20 lg:py-24">
         <SectionBackdrop glow="right" variant="ceiling" />
         <Container>
           {ordered.length > 0 ? (

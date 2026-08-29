@@ -10,7 +10,7 @@ import { Starfield } from '@/components/motion/starfield';
  */
 export function ContactCta() {
   return (
-    <section className="grain relative overflow-hidden border-t border-line bg-ink py-36 lg:py-48">
+    <section className="grain relative overflow-hidden border-t border-line bg-ink py-20 md:py-36 lg:py-48">
       <Starfield />
       <div
         aria-hidden="true"

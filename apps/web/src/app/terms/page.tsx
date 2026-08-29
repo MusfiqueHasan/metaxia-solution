@@ -50,7 +50,7 @@ export default function TermsPage() {
         lede="This is a general, placeholder overview of our terms — it is not a substitute for terms reviewed by counsel."
       />
 
-      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-14 md:py-24 lg:py-28">
         <SectionBackdrop glow="right" variant="plain" />
         <Container>
           <Reveal className="max-w-3xl space-y-10">

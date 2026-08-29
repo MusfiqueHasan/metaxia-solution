@@ -90,7 +90,7 @@ export default function ContactPage() {
         lede="Tell us where you are and where you're headed. A real person on the team reads every message and replies with next steps, not a form letter."
       />
 
-      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-14 md:py-24 lg:py-28">
         <SectionBackdrop glow="right" variant="sweep" side="right" />
         <Container>
           <Reveal className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
@@ -208,7 +208,7 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section className="grain relative overflow-clip border-t border-line bg-ink-raised py-20 lg:py-24">
+      <section className="grain relative overflow-clip border-t border-line bg-ink-raised py-12 md:py-20 lg:py-24">
         <SectionBackdrop glow="center" variant="plain" />
         <Container className="flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
           <div>

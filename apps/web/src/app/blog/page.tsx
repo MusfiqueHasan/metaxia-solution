@@ -37,7 +37,7 @@ export default async function BlogPage() {
         lede="Practical notes on the systems we build, the vendors we evaluate, and the decisions that come up on every engagement."
       />
 
-      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-14 md:py-24 lg:py-28">
         <SectionBackdrop glow="right" variant="ceiling" />
         <Container>
           {posts.length > 0 ? (

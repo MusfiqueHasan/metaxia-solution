@@ -51,7 +51,7 @@ export function CaseStudyScroller({ items }: { items: CaseStudy[] }) {
   if (items.length === 0) return null;
 
   return (
-    <section className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
+    <section className="grain relative overflow-clip border-t border-line bg-ink py-16 md:py-28 lg:py-36">
       <SectionBackdrop glow="left" variant="floor" />
 
       {/* Constellation across the section's top: a network of nodes joined

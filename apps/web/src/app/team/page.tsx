@@ -54,7 +54,7 @@ export default async function TeamPage() {
         lede="Metaxia stays deliberately small: the founders who scope your project are the ones who build and run it — with a tight crew behind them."
       />
 
-      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-14 md:py-24 lg:py-28">
         <SectionBackdrop glow="center" variant="orbs" />
         <Container>
           {team.length > 0 ? (

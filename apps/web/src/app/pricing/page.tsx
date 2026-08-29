@@ -28,7 +28,7 @@ export default async function PricingPage() {
         lede="Every plan includes direct access to the engineers on your project. Pick the level of capacity that matches where you are."
       />
 
-      <section className="bg-ink py-24 lg:py-28">
+      <section className="bg-ink py-14 md:py-24 lg:py-28">
         <Container>
           {plans.length > 0 ? (
             <div className="grid gap-6 lg:grid-cols-3">

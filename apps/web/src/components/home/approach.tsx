@@ -64,7 +64,7 @@ export function Approach() {
   return (
     <section
       ref={sectionRef}
-      className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36"
+      className="grain relative overflow-clip border-t border-line bg-ink py-16 md:py-28 lg:py-36"
     >
       <SectionBackdrop glow="right" variant="ring" side="right" />
       <Container>

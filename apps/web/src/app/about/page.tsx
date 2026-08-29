@@ -57,7 +57,7 @@ export default function AboutPage() {
         lede="We started Metaxia because too many enterprise builds ended at launch. We stay for the decade after."
       />
 
-      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-14 md:py-24 lg:py-28">
         <SectionBackdrop glow="right" variant="ring" side="right" />
         <Container>
           <div className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)]">
@@ -102,7 +102,7 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="grain relative overflow-clip bg-ink-raised py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink-raised py-14 md:py-24 lg:py-28">
         <SectionBackdrop glow="left" variant="floor" />
         <Container>
           <SectionHeading

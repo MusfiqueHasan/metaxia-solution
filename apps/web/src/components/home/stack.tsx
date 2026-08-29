@@ -53,7 +53,7 @@ const GROUPS = [
  */
 export function Stack() {
   return (
-    <section className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
+    <section className="grain relative overflow-clip border-t border-line bg-ink py-16 md:py-28 lg:py-36">
       <SectionBackdrop glow="left" variant="sweep" side="right" />
       <Container>
         <SectionHeading

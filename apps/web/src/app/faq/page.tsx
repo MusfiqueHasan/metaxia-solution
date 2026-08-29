@@ -41,7 +41,7 @@ export default async function FaqPage() {
         lede="If your question isn't answered here, the fastest way to get a direct answer is to reach out."
       />
 
-      <section className="grain relative overflow-clip bg-ink py-24 lg:py-28">
+      <section className="grain relative overflow-clip bg-ink py-14 md:py-24 lg:py-28">
         <SectionBackdrop glow="left" variant="cube" side="right" />
         <Container>
           <Reveal className="grid gap-14 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">

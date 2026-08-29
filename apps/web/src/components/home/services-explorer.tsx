@@ -203,7 +203,7 @@ export function ServicesExplorer({ services }: { services: Service[] }) {
   if (count === 0) return null;
 
   return (
-    <section ref={sectionRef} className="grain relative overflow-clip border-t border-line bg-ink py-28 lg:py-36">
+    <section ref={sectionRef} className="grain relative overflow-clip border-t border-line bg-ink py-16 md:py-28 lg:py-36">
       <SectionBackdrop glow="right" variant="ceiling" />
 
       {/* Scroll-driven 3D layer: everything below derives its transform from

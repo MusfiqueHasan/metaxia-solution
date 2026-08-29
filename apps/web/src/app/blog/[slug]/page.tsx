@@ -107,7 +107,7 @@ export default async function BlogPostPage({
         </Container>
       </section>
 
-      <section className="relative py-24 lg:py-28">
+      <section className="relative py-14 md:py-24 lg:py-28">
         <Container>
           <Reveal className="max-w-3xl">
             <div className="reveal-rise">
@@ -118,7 +118,7 @@ export default async function BlogPostPage({
       </section>
 
       {morePosts.length > 0 ? (
-        <section className="relative border-t border-line py-24 lg:py-28">
+        <section className="relative border-t border-line py-14 md:py-24 lg:py-28">
           <Container>
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               <span className="h-2 w-2 rotate-45 bg-accent" aria-hidden="true" />
