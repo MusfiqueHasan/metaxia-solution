@@ -159,7 +159,7 @@ const SLUG_GALLERY: Record<string, GalleryEntry[]> = {
   ],
   'better-e-mart': [
     {
-      src: '/projects/better-e-mart-admin.webp',
+      src: '/projects/better-e-mart-admin.jpeg',
       label: 'management dashboard',
       text: 'The dashboard answers the operational questions at a glance — live tiles for catalog size, order states, and money in stock — then hands vendors the day-to-day controls.',
       points: [
