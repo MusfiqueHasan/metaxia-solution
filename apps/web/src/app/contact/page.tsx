@@ -20,9 +20,9 @@ export const metadata: Metadata = {
 const CHANNELS = [
   {
     label: 'Email',
-    value: 'metaxiasln@gmail.com',
+    value: 'metaxiasolutions@gmail.com',
     note: 'Decks and briefs welcome',
-    href: 'mailto:metaxiasln@gmail.com',
+    href: 'mailto:metaxiasolutions@gmail.com',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
         <path d="M4 6h16v12H4z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
